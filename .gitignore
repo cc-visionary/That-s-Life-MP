@@ -1,0 +1,6 @@
+# ignore files
+MP.iml
+
+# ignore folders
+out/
+.idea/
