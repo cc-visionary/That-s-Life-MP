@@ -1,14 +1,10 @@
 package main;
-import resources.cards.action.ActionCard;
-import resources.players.*;
-import resources.cards.Card;
-
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import resources.cards.*;
 
 public class Main {
     public static void main(String[] args) {
+        Card salaryCard1 = new SalaryCard(10000, 1000);
+        salaryCard1.displayCard();
 
 //        Scanner scanner = new Scanner(System.in);
 //        // asks the user for the number of players (makes sures that the input is only integers {1, 2, 3})

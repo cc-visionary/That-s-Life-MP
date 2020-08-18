@@ -1,10 +1,9 @@
-package resources.cards.blue;
+package resources.cards;
 
-import resources.cards.Card;
 import resources.utilities.StringUtil;
 
 /**
- * Blue Card Class
+ * Action Card Class
  *
  * @author      Christopher G. Lim
  * @version     1.0
@@ -12,20 +11,30 @@ import resources.utilities.StringUtil;
  * @since       Aug 18, 2020
  */
 
-public class BlueCard extends Card {
-    private String name;
-    private String career;
+public class ActionCard extends Card {
+    private String name, actionType, recipient;
     private double amount;
-
-    public BlueCard(String name, String description, String career) {
-        super("Blue Card", description);
-
+    public ActionCard(String name, String description, String actionType, String recipient, double amount) {
+        super("Action Card", description);
         this.name = name;
-        this.career = career;
+        this.actionType = actionType;
+        this.recipient = recipient;
+        this.amount = amount;
+    }
+
+    public void transact() {
+        switch(actionType) {
+            case "PAY":
+                break;
+            case "RECEIVE":
+                break;
+            default:
+                System.out.println("Invalid Code for Action Card Transaction...");
+        }
     }
 
     /**
-     * Returns the name of the Blue Card
+     * Returns the name of the card
      * @return name
      */
     public String getName() {
@@ -33,21 +42,19 @@ public class BlueCard extends Card {
     }
 
     /**
-     * Returns the name of the Career
-     * @return career
+     * Returns the value of the action type (PAY / RECEIVE)
+     * @return actionType
      */
-    public String getCareer() {
-        return career;
+    public String getActionType() {
+        return actionType;
     }
 
     /**
-     * Sets the value of the amount if parameter amount > 0
-     * @param amount
+     * Returns the value of the recipient (SINGLE / ALL / BANK / NONE)
+     * @return recipient
      */
-    public void setAmount(double amount) {
-        if(amount > 0) {
-            this.amount = amount;
-        }
+    public String getRecipient() {
+        return recipient;
     }
 
     /**
@@ -63,7 +70,7 @@ public class BlueCard extends Card {
      * @return None
      */
     public void  displayCard() {
-        final int length = 23, descriptionHeight = 8;
+        final int length = 23, descriptionHeight = 6;
         String[] splittedString = StringUtil.splitStringLength(getDescription(), length).toArray(new String[0]);
 
         System.out.println("╭───────────────────────╮");
@@ -77,6 +84,10 @@ public class BlueCard extends Card {
                 System.out.println("│" + StringUtil.centerString("", length)            + "│");
             }
         }
+        System.out.println("├───────────────────────┤");
+        System.out.println("│" + StringUtil.centerString("Action Type: " + getActionType(), length)            + "│");
+        System.out.println("│" + StringUtil.centerString("Recipient  : " + getRecipient(), length)            + "│");
+        System.out.println("│" + StringUtil.centerString("Amount     : " + getAmount(), length)            + "│");
         System.out.println("╰───────────────────────╯");
     }
 }
