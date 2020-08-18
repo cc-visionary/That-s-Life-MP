@@ -11,8 +11,8 @@ import resources.utilities.StringUtil;
  * @since       Aug 18, 2020
  */
 
-public class SalaryCard extends Card {
-    private double salary, tax;
+final public class SalaryCard extends Card {
+    final private double salary, tax;
     public SalaryCard(double salary, double tax) {
         super("Salary Card", "Salary Card contains salary and tax due.");
 
@@ -38,8 +38,8 @@ public class SalaryCard extends Card {
 
     /**
      * This method displays the card into a 10(max height) x 25(width) unit layout
-     * @return None
      */
+    @Override
     public void  displayCard() {
         final int length = 23, descriptionHeight = 5;
         String[] splittedString = StringUtil.splitStringLength(getDescription(), length).toArray(new String[0]);
@@ -56,7 +56,7 @@ public class SalaryCard extends Card {
         }
         System.out.println("├───────────────────────┤");
         System.out.println("│" + StringUtil.centerString("Salary: " + getSalary(), length)            + "│");
-        System.out.println("│" + StringUtil.centerString("Tax   : " + getTax(), length)            + "│");
+        System.out.println("│" + StringUtil.centerString("Tax: " + getTax(), length)            + "│");
         System.out.println("╰───────────────────────╯");
     }
 }

@@ -11,9 +11,9 @@ import resources.utilities.StringUtil;
  * @since       Aug 18, 2020
  */
 
-public class ActionCard extends Card {
-    private String name, actionType, recipient;
-    private double amount;
+final public class ActionCard extends Card {
+    final private String name, actionType, recipient;
+    final private double amount;
     public ActionCard(String name, String description, String actionType, String recipient, double amount) {
         super("Action Card", description);
         this.name = name;
@@ -67,8 +67,8 @@ public class ActionCard extends Card {
 
     /**
      * This method displays the card into a 14(max height) x 25(width) unit layout
-     * @return None
      */
+    @Override
     public void  displayCard() {
         final int length = 23, descriptionHeight = 6;
         String[] splittedString = StringUtil.splitStringLength(getDescription(), length).toArray(new String[0]);
@@ -86,8 +86,8 @@ public class ActionCard extends Card {
         }
         System.out.println("├───────────────────────┤");
         System.out.println("│" + StringUtil.centerString("Action Type: " + getActionType(), length)            + "│");
-        System.out.println("│" + StringUtil.centerString("Recipient  : " + getRecipient(), length)            + "│");
-        System.out.println("│" + StringUtil.centerString("Amount     : " + getAmount(), length)            + "│");
+        System.out.println("│" + StringUtil.centerString("Recipient: " + getRecipient(), length)            + "│");
+        System.out.println("│" + StringUtil.centerString("Amount: " + getAmount(), length)            + "│");
         System.out.println("╰───────────────────────╯");
     }
 }

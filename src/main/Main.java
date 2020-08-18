@@ -3,9 +3,6 @@ import resources.cards.*;
 
 public class Main {
     public static void main(String[] args) {
-        Card salaryCard1 = new SalaryCard(10000, 1000);
-        salaryCard1.displayCard();
-
 //        Scanner scanner = new Scanner(System.in);
 //        // asks the user for the number of players (makes sures that the input is only integers {1, 2, 3})
 //        int nPlayers = 0;
@@ -36,7 +33,7 @@ public class Main {
 //        System.out.println(Player.getPlayerCount());
     }
 
-    public void initializeActionCards() {
+    public void generateActionCards() {
         // Collect from the Bank
         Card taxRefund = new ActionCard("Tax Refund", "You got a tax refund! Collect from the bank!", "RECEIVE", "BANK", 200);
         Card sellAnItem = new ActionCard("Sell an Item", "You sold an item! Collect from the bank!", "RECEIVE", "BANK", 150);
@@ -53,5 +50,19 @@ public class Main {
         // Collect from Player
         Card fileALawsuit = new ActionCard("File a Lawsuit", "You're lawsuit was successful! You'll receive money from the other player!", "RECEIVE", "SINGLE", 400);
         Card itsYourBirthday = new ActionCard("It's Your Birthday", "Happy Birthday! All the other players gave you money as a gift!", "RECEIVE", "ALL", 200);
+    }
+
+    public void generateCareerCards() {
+        Card lawyer = new CareerCard("Lawyer", "A lawyer who makes law to create order in the world.", 6, true);
+        lawyer.displayCard();
+    }
+
+    public void generateSalaryCards() {
+        Card salaryCard1 = new SalaryCard(10000, 1000);
+        salaryCard1.displayCard();
+    }
+
+    public void generateBlueCards() {
+
     }
 }

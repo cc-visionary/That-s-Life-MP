@@ -61,6 +61,7 @@ public class BlueCard extends Card {
      * This method displays the card into a 14(max height) x 25(width) unit layout
      * @return None
      */
+    @Override
     public void  displayCard() {
         final int length = 23, descriptionHeight = 8;
         String[] splittedString = StringUtil.splitStringLength(getDescription(), length).toArray(new String[0]);
