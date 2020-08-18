@@ -1,6 +1,7 @@
 package main;
+import resources.cards.action.ActionCard;
 import resources.players.*;
-import resources.cards.*;
+import resources.cards.Card;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -8,10 +9,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Card lawsuit = new BlueCard("Lawsuit", "PAY", 10000);
-        lawsuit.displayCard();
 
+//        Scanner scanner = new Scanner(System.in);
 //        // asks the user for the number of players (makes sures that the input is only integers {1, 2, 3})
 //        int nPlayers = 0;
 //        do {
@@ -39,5 +38,24 @@ public class Main {
 //        }
 //
 //        System.out.println(Player.getPlayerCount());
+    }
+
+    public void initializeActionCards() {
+        // Collect from the Bank
+        Card taxRefund = new ActionCard("Tax Refund", "You got a tax refund! Collect from the bank!", "RECEIVE", "BANK", 200);
+        Card sellAnItem = new ActionCard("Sell an Item", "You sold an item! Collect from the bank!", "RECEIVE", "BANK", 150);
+        Card bonusPayday = new ActionCard("Bonus Payday", "You had a bonus payday! Collect from the bank!", "RECEIVE", "BANK", 400);
+        Card setupSchool = new ActionCard("Setup School", "Collect from the bank!", "RECEIVE", "BANK", 1000);
+
+        // Pay the Bank
+        Card buyAnItem = new ActionCard("Buy an Item", "You bought an item! You need to pay the bank!", "PAY","BANK", 400);
+
+        // Pay the Player
+        Card lawsuit = new ActionCard("Lawsuit", "A Lawsuit has been filed on you! Pay the other player!", "PAY", "SINGLE", 200);
+        Card christmasBonus = new ActionCard("Christmas Bonus", "It's Christmas time! Time for you to pay all the other players!", "PAY", "ALL", 100);
+
+        // Collect from Player
+        Card fileALawsuit = new ActionCard("File a Lawsuit", "You're lawsuit was successful! You'll receive money from the other player!", "RECEIVE", "SINGLE", 400);
+        Card itsYourBirthday = new ActionCard("It's Your Birthday", "Happy Birthday! All the other players gave you money as a gift!", "RECEIVE", "ALL", 200);
     }
 }

@@ -1,9 +1,10 @@
-package resources.cards;
+package resources.cards.blue;
 
+import resources.cards.Card;
 import resources.utilities.StringUtil;
 
 /**
- * Abstract Card Class
+ * Blue Card Class
  *
  * @author      Christopher G. Lim
  * @version     1.0
@@ -11,38 +12,54 @@ import resources.utilities.StringUtil;
  * @since       Aug 18, 2020
  */
 
-public abstract class Card {
-    private String type;
-    private String description;
+public class BlueCard extends Card {
+    private String name;
+    private String career;
+    private double amount;
 
-    /**
-     * Constructor assigns the parameter description
-     * to the private variable description
-     * @param description
-     */
-    public Card(String type, String description) {
-        this.type = type;
-        this.description = description;
+    public BlueCard(String name, String description, String career) {
+        super("Blue Card", description);
+
+        this.name = name;
+        this.career = career;
     }
 
     /**
-     * Returns the value of the type
-     * @return type
+     * Returns the name of the Blue Card
+     * @return name
      */
-    public String getType() {
-        return type;
+    public String getName() {
+        return name;
     }
 
     /**
-     * Returns the value of the description
-     * @return description
+     * Returns the name of the Career
+     * @return career
      */
-    public String getDescription() {
-        return description;
+    public String getCareer() {
+        return career;
     }
 
     /**
-     * This method displays the card into a 12(height) x 25(width) unit layout
+     * Sets the value of the amount if parameter amount > 0
+     * @param amount
+     */
+    public void setAmount(double amount) {
+        if(amount > 0) {
+            this.amount = amount;
+        }
+    }
+
+    /**
+     * Returns the value of the amount
+     * @return amount
+     */
+    public double getAmount() {
+        return amount;
+    }
+
+    /**
+     * This method displays the card into a 14(max height) x 25(width) unit layout
      * @return None
      */
     public void  displayCard() {
@@ -51,6 +68,7 @@ public abstract class Card {
 
         System.out.println("╭───────────────────────╮");
         System.out.println("│" + StringUtil.centerString(getType(), length)                  + "│");
+        System.out.println("│" + StringUtil.centerString("(" + getName() + ")", length) + "│");
         System.out.println("├───────────────────────┤");
         for(int i = 0; i < descriptionHeight; i++) {
             if(i < splittedString.length) {
