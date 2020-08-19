@@ -1,5 +1,6 @@
 package main;
 import resources.cards.*;
+import resources.spaces.*;
 
 public class Main {
     public static void main(String[] args) {
