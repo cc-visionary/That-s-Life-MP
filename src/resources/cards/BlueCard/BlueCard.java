@@ -26,8 +26,8 @@ public abstract class BlueCard extends Card {
 
     /**
      * Returns an ArrayList of other Players which has the same career as the card (to be paid to)
-     * @param otherPlayers
-     * @return
+     * @param otherPlayers : Player[]
+     * @return players : ArrayList<Player></Player>
      */
     public ArrayList<Player> playersWithSameCareer(Player[] otherPlayers) {
         ArrayList<Player> players = new ArrayList<Player>();
@@ -43,8 +43,8 @@ public abstract class BlueCard extends Card {
 
     /**
      * Checks whether a Player's Career Card is the same career with the card
-     * @param player
-     * @return
+     * @param player : Player
+     * @return true/false : boolean
      */
     public boolean isSameCareer(Player player) {
         return true;
@@ -53,7 +53,7 @@ public abstract class BlueCard extends Card {
 
     /**
      * Returns the name of the Career
-     * @return career
+     * @return career : String
      */
     public String getCareer() {
         return career;
@@ -63,7 +63,6 @@ public abstract class BlueCard extends Card {
 
     /**
      * This method displays the card into a 14(max height) x 25(width) unit layout
-     * @return None
      */
     @Override
     public void  displayCard() {
