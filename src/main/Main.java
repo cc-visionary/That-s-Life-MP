@@ -1,6 +1,8 @@
 package main;
 import resources.cards.*;
-import resources.spaces.*;
+import resources.cards.ActionCard.ActionCard;
+import resources.cards.CareerCard.CareerCard;
+import resources.cards.SalaryCard.SalaryCard;
 
 public class Main {
     public static void main(String[] args) {
@@ -54,7 +56,7 @@ public class Main {
     }
 
     public void generateCareerCards() {
-        Card lawyer = new CareerCard("Lawyer", "A lawyer who makes law to create order in the world.", 6, true);
+        Card lawyer = new CareerCard("Lawyer", "A lawyer who makes law to create order in the world.", 5, 8, true);
         lawyer.displayCard();
     }
 

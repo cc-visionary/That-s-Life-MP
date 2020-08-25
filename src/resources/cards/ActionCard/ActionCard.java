@@ -1,5 +1,6 @@
-package resources.cards;
+package resources.cards.ActionCard;
 
+import resources.cards.Card;
 import resources.utilities.StringUtil;
 
 /**
@@ -12,33 +13,13 @@ import resources.utilities.StringUtil;
  */
 
 final public class ActionCard extends Card {
-    final private String name, actionType, recipient;
+    final private String actionType, recipient;
     final private double amount;
     public ActionCard(String name, String description, String actionType, String recipient, double amount) {
-        super("Action Card", description);
-        this.name = name;
+        super("Action Card", name, description);
         this.actionType = actionType;
         this.recipient = recipient;
         this.amount = amount;
-    }
-
-    public void transact() {
-        switch(actionType) {
-            case "PAY":
-                break;
-            case "RECEIVE":
-                break;
-            default:
-                System.out.println("Invalid Code for Action Card Transaction...");
-        }
-    }
-
-    /**
-     * Returns the name of the card
-     * @return name
-     */
-    public String getName() {
-        return name;
     }
 
     /**

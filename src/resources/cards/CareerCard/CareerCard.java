@@ -1,34 +1,34 @@
-package resources.cards;
+package resources.cards.CareerCard;
 
+import resources.cards.Card;
 import resources.utilities.StringUtil;
 
 final public class CareerCard extends Card {
-    final private String name;
-    final private int payRaises;
+    final private int minPayRaise, maxPayRaise;
     final private boolean requireCollegeDegree;
 
-    public CareerCard(String name, String description, int payRaises, boolean requireCollegeDegree) {
-        super("Career Card", description);
+    public CareerCard(String name, String description, int minPayRaise, int maxPayRaise, boolean requireCollegeDegree) {
+        super("Career Card", name, description);
 
-        this.name = name;
-        this.payRaises = payRaises;
+        this.minPayRaise = minPayRaise;
+        this.maxPayRaise = maxPayRaise;
         this.requireCollegeDegree = requireCollegeDegree;
     }
 
     /**
-     * Returns the name of the Career
-     * @return name
+     * Returns the value of the Minimum Pay Raise for the Career
+     * @return minPayRaise
      */
-    public String getName() {
-        return name;
+    public int getMinPayRaise() {
+        return minPayRaise;
     }
 
     /**
-     * Returns the number of pay raises
-     * @return payRaises
+     * Returns the value of the Maximum Pay Raise for the Career
+     * @return maxPayRaise
      */
-    public int getPayRaises() {
-        return payRaises;
+    public int getMaxPayRaise() {
+        return maxPayRaise;
     }
 
     /**
@@ -59,7 +59,7 @@ final public class CareerCard extends Card {
             }
         }
         System.out.println("├───────────────────────┤");
-        System.out.println("│" + StringUtil.centerString("Pay Raises: " + getPayRaises(), length) + "│");
+        System.out.println("│" + StringUtil.centerString("Pay Raises: " + getMinPayRaise() + " - " + getMaxPayRaise(), length) + "│");
         System.out.println("│" + StringUtil.centerString("College Degree: " + (isRequireCollegeDegree() ? "Yes" : "No"), length) + "│");
         System.out.println("╰───────────────────────╯");
     }

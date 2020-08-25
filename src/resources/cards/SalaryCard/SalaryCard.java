@@ -1,5 +1,6 @@
-package resources.cards;
+package resources.cards.SalaryCard;
 
+import resources.cards.Card;
 import resources.utilities.StringUtil;
 
 /**

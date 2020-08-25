@@ -1,6 +1,10 @@
-package resources.cards;
+package resources.cards.BlueCard;
 
+import resources.cards.Card;
 import resources.utilities.StringUtil;
+import resources.players.Player;
+
+import java.util.ArrayList;
 
 /**
  * Blue Card Class
@@ -11,24 +15,40 @@ import resources.utilities.StringUtil;
  * @since       Aug 18, 2020
  */
 
-public class BlueCard extends Card {
-    private String name;
+public abstract class BlueCard extends Card {
     private String career;
-    private double amount;
 
     public BlueCard(String name, String description, String career) {
-        super("Blue Card", description);
+        super("Blue Card", name, description);
 
-        this.name = name;
         this.career = career;
     }
 
     /**
-     * Returns the name of the Blue Card
-     * @return name
+     * Returns an ArrayList of other Players which has the same career as the card (to be paid to)
+     * @param otherPlayers
+     * @return
      */
-    public String getName() {
-        return name;
+    public ArrayList<Player> playersWithSameCareer(Player[] otherPlayers) {
+        ArrayList<Player> players = new ArrayList<Player>();
+
+        for(Player player : otherPlayers) {
+            if(isSameCareer(player)) {
+                players.add(player);
+            }
+        }
+
+        return players;
+    }
+
+    /**
+     * Checks whether a Player's Career Card is the same career with the card
+     * @param player
+     * @return
+     */
+    public boolean isSameCareer(Player player) {
+        return true;
+//        return player.getCareerCard().getName() == this.career;
     }
 
     /**
@@ -39,23 +59,7 @@ public class BlueCard extends Card {
         return career;
     }
 
-    /**
-     * Sets the value of the amount if parameter amount > 0
-     * @param amount
-     */
-    public void setAmount(double amount) {
-        if(amount > 0) {
-            this.amount = amount;
-        }
-    }
-
-    /**
-     * Returns the value of the amount
-     * @return amount
-     */
-    public double getAmount() {
-        return amount;
-    }
+    public abstract double getAmount();
 
     /**
      * This method displays the card into a 14(max height) x 25(width) unit layout

@@ -1,5 +1,6 @@
 package resources.cards;
 
+import resources.players.Player;
 import resources.utilities.StringUtil;
 
 /**
@@ -12,17 +13,32 @@ import resources.utilities.StringUtil;
  */
 
 public abstract class Card {
-    private String type;
+    private String type, name;
     private String description;
+    private Player owner;
 
     /**
      * Constructor assigns the parameter description
      * to the private variable description
      * @param description
      */
+    public Card(String type, String name, String description) {
+        this.type = type;
+        this.name = name;
+        this.description = description;
+    }
+
     public Card(String type, String description) {
         this.type = type;
         this.description = description;
+    }
+
+    /**
+     * Sets the owner of the card
+     * @param owner
+     */
+    public void setOwner(Player owner) {
+        this.owner = owner;
     }
 
     /**
@@ -34,11 +50,27 @@ public abstract class Card {
     }
 
     /**
+     * Returns the value of the name
+     * @return name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
      * Returns the value of the description
      * @return description
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * Gets the owner of the card
+     * @return owner
+     */
+    public Player getOwner() {
+        return owner;
     }
 
     /**
