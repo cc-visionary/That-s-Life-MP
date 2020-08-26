@@ -3,6 +3,8 @@ import resources.cards.CareerCard.CareerCard;
 import resources.cards.SalaryCard.SalaryCard;
 import resources.paths.Path;
 
+import java.util.Random;
+
 public class Player {
     private String name;
     private Path path;
@@ -28,10 +30,12 @@ public class Player {
 
     /**
      * Allows the use to roll and dice and generate a random number from 1-6
-     * @return
+     * @return rolledDice : int
      */
     public int rollDice() {
-        return 1;
+        Random dice = new Random();
+        int rolledDice = dice.nextInt(6) + 1;
+        return rolledDice;
     }
 
     /**

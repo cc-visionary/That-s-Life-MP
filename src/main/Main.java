@@ -6,6 +6,10 @@ import resources.cards.SalaryCard.SalaryCard;
 
 public class Main {
     public static void main(String[] args) {
+
+
+//        final String[] careers = {"Lawyer", "Accountant", "Computer Consultant", "Doctor", "Server", "Racecar Driver", "Athlete"};
+
 //        Player p1 = new Player();
 //        Scanner scanner = new Scanner(System.in);
 //        // asks the user for the number of players (makes sures that the input is only integers {1, 2, 3})
