@@ -4,11 +4,16 @@ import resources.players.Player;
 import resources.utilities.StringUtil;
 
 public abstract class Space {
-    private String type = "Space", name;
+    private String type, name;
     private Player player;
 
-    public Space(String name) {
+    public Space(String type, String name) {
+        this.type = type;
         this.name = name;
+    }
+
+    public Space(String type) {
+        this.type = type;
     }
 
     /**
@@ -49,7 +54,7 @@ public abstract class Space {
     public void displaySpace() {
         final int length = 5;
         System.out.println("╭─────╮");
-        System.out.println("│" + StringUtil.centerString(getName().charAt(0), length) + "│");
+        System.out.println("│" + StringUtil.centerString(getType().charAt(0)  + "", length) + "│");
         System.out.println("╰─────╯");
     }
 }
