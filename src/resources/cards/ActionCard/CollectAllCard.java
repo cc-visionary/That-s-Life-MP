@@ -7,7 +7,21 @@ final public class CollectAllCard extends ActionCard {
         super(name, description, amount);
     }
 
-    public void collectFromPlayers(Player player, Player[] otherPlayers) {
+    /**
+     * Does the action of the ActionCard (Collect from All the Players)
+     * @param player
+     * @param otherPlayers
+     */
+    @Override
+    public void doAction(Player player, Player[] otherPlayers) {
+        // deducts the amount of money to all the other players
+        for(Player otherPlayer : otherPlayers) {
+            otherPlayer.payBalance(getAmount());
+        }
 
+        // then gives all those money to the player who drew the card
+        player.addBalance(otherPlayers.length * getAmount());
     }
+
+
 }

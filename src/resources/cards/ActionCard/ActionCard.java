@@ -1,6 +1,7 @@
 package resources.cards.ActionCard;
 
 import resources.cards.Card;
+import resources.players.Player;
 import resources.utilities.StringUtil;
 
 /**
@@ -26,6 +27,8 @@ public abstract class ActionCard extends Card {
     public double getAmount() {
         return amount;
     }
+
+    public abstract void doAction(Player player, Player[] otherPlayers);
 
     /**
      * This method displays the card into a 14(max height) x 25(width) unit layout

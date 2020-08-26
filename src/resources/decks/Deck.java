@@ -1,9 +1,9 @@
 package resources.decks;
 
 import resources.cards.Card;
+import resources.utilities.RandomUtil;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 final public class Deck {
     private String name;
@@ -29,7 +29,7 @@ final public class Deck {
     /**
      * Returns the Card which is on the top of the deck or the card at index 0
      * then removes it from the deck.
-     * @return card : Card
+     * @return the card on the top of the deck
      */
     public Card pickTopCard() {
         if(!isDeckEmpty()) {
@@ -41,16 +41,20 @@ final public class Deck {
     }
 
     /**
-     * Shuffles the cards in the deck
+     * Shuffles the cards in the deck by
+     *  1. Choose a random Card from the Deck.
+     *  2. Add the randomly chosen Card to a temporary ArrayList.
+     *  3. Remove it from the Deck.
+     *  4. Repeat steps 1-3 until the Deck is empty.
+     *  5. Transfer the temporary values into the Deck.
      */
     public void shuffle() {
-        Random randomizer = new Random();
         ArrayList<Card> shuffledDeck = new ArrayList<Card>();
 
         // chooses a random index for a card then add it to shuffledDeck
         while(!isDeckEmpty()) {
-            int random_index = randomizer.nextInt(cards.size());
-            Card card = cards.get(random_index);
+            // `cards.toArray(new Card[0])` converts the ArrayList<Card> into a Card[]
+            Card card = RandomUtil.chooseRandomCard(cards.toArray(new Card[0]));
             shuffledDeck.add(card);
             cards.remove(card);
         }
@@ -62,7 +66,7 @@ final public class Deck {
     }
 
     /**
-     * Displaying the deck (for cheating purposes?)
+     * Displaying the deck (for cheating purposes :P)
      */
     public void displayDeck() {
         for(int i = 0; i < cards.size(); i++) {
@@ -73,7 +77,7 @@ final public class Deck {
 
     /**
      * Checks whether the deck is already empty or not
-     * @return Boolean
+     * @return boolean values (true/false)
      */
     private boolean isDeckEmpty() {
         return cards.size() == 0;

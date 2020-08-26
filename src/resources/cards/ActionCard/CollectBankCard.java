@@ -7,7 +7,14 @@ final public class CollectBankCard extends ActionCard {
         super(name, description, amount);
     }
 
-    public void collectBank(Player player) {
-
+    /**
+     * Does the action of the ActionCard (Collect from Bank)
+     * @param player
+     * @param otherPlayers
+     */
+    @Override
+    public void doAction(Player player, Player[] otherPlayers) {
+        // adds the amount to the balance of the person who drew the card
+        player.addBalance(getAmount());
     }
 }

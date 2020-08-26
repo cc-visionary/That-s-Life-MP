@@ -4,19 +4,21 @@ import java.util.ArrayList;
 
 /**
  * String Utilities Class
+ *   useful tools/classes for formatting Strings
+ *   and other String related tasks
  *
- * @author      Christopher G. Lim
- * @version     1.0
- * @last-edited Aug 18, 2020
- * @since       Aug 18, 2020
+ * @author        Christopher G. Lim
+ * @version       1.0
+ * @last_modified Aug 26, 2020
+ * @since         Aug 18, 2020
  */
 
 public class StringUtil {
     /**
      * Formats the string to place it at the center
      * @param text text to be formatted
-     * @param len maximum length of the whole string
-     * @return
+     * @param len  maximum length of the whole string
+     * @return     the formatted string
      */
     public static String centerString(String text, int len) {
         int whitespace = len - text.length();
@@ -31,11 +33,11 @@ public class StringUtil {
     }
 
     /**
-     * Splits the string into several ArrayList so that
-     * it won't overflow a line
+     * Splits the string into several ArrayList where each string has a length of parameter len
+     * so that it won't overflow a line
      * @param text text to be formatted
-     * @param len maximum length of the whole string/line
-     * @return
+     * @param len  maximum length of the whole string/line
+     * @return     ArrayList of the splitted string
      */
     public static ArrayList<String> splitStringLength(String text, int len) {
         ArrayList<String> splittedString = new ArrayList<String>();
