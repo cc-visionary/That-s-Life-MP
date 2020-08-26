@@ -5,7 +5,7 @@ import resources.paths.Path;
 
 import java.util.Random;
 
-public class Player {
+final public class Player {
     private String name;
     private Path path;
     private SalaryCard salaryCard;

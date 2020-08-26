@@ -5,12 +5,17 @@ import resources.cards.Card;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Deck {
+final public class Deck {
     private String name;
     private ArrayList<Card> cards;
 
-    public Deck() {
+    public Deck(String name) {
+        this.name = name;
         this.cards = new ArrayList<Card>();
+    }
+
+    public String getName() {
+        return name;
     }
 
     /**
@@ -29,11 +34,10 @@ public class Deck {
     public Card pickTopCard() {
         if(!isDeckEmpty()) {
             Card card = cards.get(0); // get the first indexed/top card
-            cards.remove(0); // removes the card that was picked (top card)
+            cards.remove(0);    // removes the card that was picked (top card)
             return card;
-        } else {
-            return null;
         }
+        return null;
     }
 
     /**

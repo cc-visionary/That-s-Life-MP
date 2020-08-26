@@ -12,30 +12,11 @@ import resources.utilities.StringUtil;
  * @since       Aug 18, 2020
  */
 
-final public class ActionCard extends Card {
-    final private String actionType, recipient;
-    final private double amount;
-    public ActionCard(String name, String description, String actionType, String recipient, double amount) {
+public abstract class ActionCard extends Card {
+    private double amount;
+    public ActionCard(String name, String description, double amount) {
         super("Action Card", name, description);
-        this.actionType = actionType;
-        this.recipient = recipient;
         this.amount = amount;
-    }
-
-    /**
-     * Returns the value of the action type (PAY / RECEIVE)
-     * @return actionType
-     */
-    public String getActionType() {
-        return actionType;
-    }
-
-    /**
-     * Returns the value of the recipient (SINGLE / ALL / BANK / NONE)
-     * @return recipient
-     */
-    public String getRecipient() {
-        return recipient;
     }
 
     /**
@@ -66,8 +47,6 @@ final public class ActionCard extends Card {
             }
         }
         System.out.println("├───────────────────────┤");
-        System.out.println("│" + StringUtil.centerString("Action Type: " + getActionType(), length)            + "│");
-        System.out.println("│" + StringUtil.centerString("Recipient: " + getRecipient(), length)            + "│");
         System.out.println("│" + StringUtil.centerString("Amount: " + getAmount(), length)            + "│");
         System.out.println("╰───────────────────────╯");
     }

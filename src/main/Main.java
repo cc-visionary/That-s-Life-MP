@@ -1,12 +1,21 @@
 package main;
-import resources.cards.*;
-import resources.cards.ActionCard.ActionCard;
+
+import resources.players.Player;
+import resources.decks.Deck;
+import resources.cards.Card;
+import resources.cards.ActionCard.*;
 import resources.cards.CareerCard.CareerCard;
 import resources.cards.SalaryCard.SalaryCard;
+import resources.cards.BlueCard.*;
+import resources.paths.Path;
+import resources.spaces.Space;
+import resources.spaces.OrangeSpace.OrangeSpace;
+import resources.spaces.BlueSpace.BlueSpace;
+import resources.spaces.GreenSpace.*;
+import resources.spaces.MagentaSpace.*;
 
 public class Main {
     public static void main(String[] args) {
-
 
 //        final String[] careers = {"Lawyer", "Accountant", "Computer Consultant", "Doctor", "Server", "Racecar Driver", "Athlete"};
 
@@ -41,23 +50,34 @@ public class Main {
 //        System.out.println(Player.getPlayerCount());
     }
 
-    public void generateActionCards() {
+    public Deck generateOrangeDeck() {
         // Collect from the Bank
-        Card taxRefund = new ActionCard("Tax Refund", "You got a tax refund! Collect from the bank!", "RECEIVE", "BANK", 200);
-        Card sellAnItem = new ActionCard("Sell an Item", "You sold an item! Collect from the bank!", "RECEIVE", "BANK", 150);
-        Card bonusPayday = new ActionCard("Bonus Payday", "You had a bonus payday! Collect from the bank!", "RECEIVE", "BANK", 400);
-        Card setupSchool = new ActionCard("Setup School", "Collect from the bank!", "RECEIVE", "BANK", 1000);
+        Card taxRefund = new CollectBankCard("Tax Refund", "You got a tax refund! Collect from the bank!", 00);
+        Card sellAnItem = new CollectBankCard("Sell an Item", "You sold an item! Collect from the bank!", 150);
+        Card bonusPayday = new CollectBankCard("Bonus Payday", "You had a bonus payday! Collect from the bank!", 400);
+        Card setupSchool = new CollectBankCard("Setup School", "The school you setup was successful! Collect from the bank!", 1000);
+        Card writeABook = new CollectBankCard("Write a Book", "The book you wrote became a best-seller! Collect from  the Bank!", 1000);
 
         // Pay the Bank
-        Card buyAnItem = new ActionCard("Buy an Item", "You bought an item! You need to pay the bank!", "PAY","BANK", 400);
+        Card buyAnItem = new PayBankCard("Buy an Item", "You bought an item! You need to pay the bank!", 400);
+        Card visitAPlace = new PayBankCard("Visit a Place", "You visited a place! You need to pay the bank!", 200);
+        Card hiking = new PayBankCard("Hiking", "You went hiking! You enjoyed it, but now it's time to pay the bank!", 100);
+        Card watchAShow = new PayBankCard("Watch a Show", "You watched a show! You need to pay the bank!", 125);
+        Card trafficViolation = new PayBankCard("Traffic Violation", "You crossed the while it was red on the traffic light. You need to pay the bank!", 100);
 
         // Pay the Player
-        Card lawsuit = new ActionCard("Lawsuit", "A Lawsuit has been filed on you! Pay the other player!", "PAY", "SINGLE", 200);
-        Card christmasBonus = new ActionCard("Christmas Bonus", "It's Christmas time! Time for you to pay all the other players!", "PAY", "ALL", 100);
+        Card lawsuit = new PayPlayerCard("Lawsuit", "A Lawsuit has been filed on you! Pay the other player!", 200);
+        Card christmasBonus = new PayAllCard("Christmas Bonus", "It's Christmas time! Time for you to pay all the other players!", 100);
 
         // Collect from Players
-        Card fileALawsuit = new ActionCard("File a Lawsuit", "You're lawsuit was successful! You'll receive money from the other player!", "RECEIVE", "SINGLE", 400);
-        Card itsYourBirthday = new ActionCard("It's Your Birthday", "Happy Birthday! All the other players gave you money as a gift!", "RECEIVE", "ALL", 200);
+        Card fileALawsuit = new CollectPlayerCard("File a Lawsuit", "You're lawsuit was successful! You'll receive money from the other player!", 400);
+        Card itsYourBirthday = new CollectAllCard("It's Your Birthday", "Happy Birthday! All the other players gave you money as a gift!", 200);
+
+        Deck orangeDeck = new Deck("Orange Deck");
+
+        Card[] actionCards = {};
+
+        return orangeDeck;
     }
 
     public void generateCareerCards() {
