@@ -1,40 +1,46 @@
 package resources.spaces;
 
+import resources.players.Player;
 import resources.utilities.StringUtil;
 
-public class Space {
-    private String type, user;
+public abstract class Space {
+    private String type = "Space", name;
+    private Player player;
 
-    public Space(String type) {
-        this.type = type;
+    public Space(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Set a player to the current space
+     * @param player
+     */
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    /**
+     * Get the player currently in the space
+     * @return player : Player
+     */
+    public Player getPlayer() {
+        return player;
     }
 
     /**
      * Returns the value of the type
-     * @return type
+     * @return type : String
      */
     public String getType() {
         return type;
     }
 
     /**
-     * Set the value of the user
-     * @param user
+     * Returns the value of the name
+     * @return name : String
      */
-    public void setUser(String user) {
-        if (user.equals("P1") || user.equals("P2") || user.equals("P3")) {
-            this.user = user;
-        } else {
-            System.out.println("Invalid USER ID.");
-        }
-    }
-
-    /**
-     * Returns the value of the user ID
-     * @return user
-     */
-    public String getUser() {
-        return user;
+    public String getName() {
+        return name;
     }
 
     /**
@@ -42,9 +48,8 @@ public class Space {
      */
     public void displaySpace() {
         final int length = 5;
-        final String user = getUser() != null ? "(" + getUser() + ")" : "";
         System.out.println("╭─────╮");
-        System.out.println("│" + StringUtil.centerString(getType().charAt(0) + user, length) + "│");
+        System.out.println("│" + StringUtil.centerString(getName().charAt(0), length) + "│");
         System.out.println("╰─────╯");
     }
 }

@@ -6,6 +6,7 @@ import resources.cards.SalaryCard.SalaryCard;
 
 public class Main {
     public static void main(String[] args) {
+//        Player p1 = new Player();
 //        Scanner scanner = new Scanner(System.in);
 //        // asks the user for the number of players (makes sures that the input is only integers {1, 2, 3})
 //        int nPlayers = 0;
@@ -50,7 +51,7 @@ public class Main {
         Card lawsuit = new ActionCard("Lawsuit", "A Lawsuit has been filed on you! Pay the other player!", "PAY", "SINGLE", 200);
         Card christmasBonus = new ActionCard("Christmas Bonus", "It's Christmas time! Time for you to pay all the other players!", "PAY", "ALL", 100);
 
-        // Collect from Player
+        // Collect from Players
         Card fileALawsuit = new ActionCard("File a Lawsuit", "You're lawsuit was successful! You'll receive money from the other player!", "RECEIVE", "SINGLE", 400);
         Card itsYourBirthday = new ActionCard("It's Your Birthday", "Happy Birthday! All the other players gave you money as a gift!", "RECEIVE", "ALL", 200);
     }

@@ -2,7 +2,31 @@ package resources.paths;
 import resources.spaces.Space;
 
 public class Path {
-    private String name = "Path";
+    private String type = "Path", name;
     private Space spaces[];
-    private int location;
+
+    public Path(String name, Space[] spaces) {
+        this.name = name;
+        this.spaces = spaces;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public Space[] getSpaces() {
+        return spaces;
+    }
+
+    public boolean hasReachedJunction() {
+        return true;
+    }
+
+    public void displayPath() {
+
+    }
 }

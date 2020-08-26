@@ -23,8 +23,6 @@ public class Player {
     public Player(String name, Path path) {
         this.name = name;
         this.path = path;
-        this.careerCard = careerCard;
-        this.salaryCard = salaryCard;
         this.playerCount++;
     }
 
