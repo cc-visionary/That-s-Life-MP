@@ -15,18 +15,21 @@ import main.utilities.StringUtil;
 final public class SalaryCard extends Card {
     private double salary, tax;
     private int payRaise = 0;
-    public SalaryCard(double salary, double tax) {
+    public SalaryCard(double salary) {
         super("Salary Card", "Salary Card contains salary and tax due.");
 
         this.salary = salary;
-        this.tax = tax;
+        this.tax = salary * 0.1; // the tax due is 10% of the salary
     }
 
     /**
-     * Increments the Pay Raise
+     * Increases the salary by a parameter amount and increments the payraise
+     * @param amount amount to increase the salary
      */
-    public void addPayRaise() {
-        this.payRaise++;
+    public void increaseSalary(double amount) {
+        salary += amount;
+        tax = salary * 0.1; // the tax due is 10% of the salary
+        payRaise++;
     }
 
     /**
@@ -34,7 +37,7 @@ final public class SalaryCard extends Card {
      * @return salary
      */
     public double getSalary() {
-        return salary * (getPayRaise() + 1);
+        return salary;
     }
 
     /**
@@ -42,7 +45,7 @@ final public class SalaryCard extends Card {
      * @return tax
      */
     public double getTax() {
-        return tax * (getPayRaise() + 1);
+        return tax;
     }
 
     /**

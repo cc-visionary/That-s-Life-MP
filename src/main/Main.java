@@ -1,21 +1,19 @@
 package main;
 
 import main.decks.Deck;
-import main.cards.Card;
-import main.cards.ActionCard.*;
-import main.cards.CareerCard.CareerCard;
-import main.cards.SalaryCard.SalaryCard;
-import main.utilities.RandomUtil;
 
 public class Main {
     public static void main(String[] args) {
-//        Deck orangeDeck = generateOrangeDeck();
+//        Deck orangeDeck = Generator.generateOrangeDeck();
 //        orangeDeck.pickTopCard().displayCard();
 
 //        Deck careerDeck = Generator.generateCareerDeck();
+//        careerDeck.pickTopCard().displayCard();
 
+//        Deck salaryDeck = Generator.generateSalaryDeck();
+//        salaryDeck.pickTopCard().displayCard();
 
-//        final String[] careers = {"Lawyer", "Accountant", "Computer Consultant", "Doctor", "Server", "Racecar Driver", "Athlete"};
+//        Deck blueDeck = Generator.generateBlueDeck();
 
 //        Player p1 = new Player();
 //        Scanner scanner = new Scanner(System.in);
