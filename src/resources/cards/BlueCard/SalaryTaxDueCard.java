@@ -1,17 +1,19 @@
 package resources.cards.BlueCard;
 
+import resources.players.Player;
+
 final public class SalaryTaxDueCard extends BlueCard {
      public SalaryTaxDueCard(String career) {
          super("Salary Tax Due", "The player pays the tax due for his current salary.", career);
      }
 
     /**
-     * Returns the value to be paid by the player
-     * @return amount
+     * Returns the salary tax due of the player
+     * @param player the player who drew the card
+     * @return amount to be paid by the player
      */
     @Override
-    public double getAmount() {
-         return 0;
-//        return getOwner().;
+    public double getAmount(Player player) {
+         return player.getSalaryCard().getTax();
     }
 }

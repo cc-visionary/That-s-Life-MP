@@ -1,5 +1,7 @@
 package resources.cards.BlueCard;
 
+import resources.players.Player;
+
 final public class LawsuitCard extends BlueCard {
     final private int multiplier;
 
@@ -10,10 +12,11 @@ final public class LawsuitCard extends BlueCard {
 
     /**
      * Returns the value to be paid by the player
-     * @return amount
+     * @param player the player who drew the card
+     * @return multiplier * 10000
      */
     @Override
-    public double getAmount() {
+    public double getAmount(Player player) {
         return this.multiplier * 10000;
     }
 }

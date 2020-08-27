@@ -29,7 +29,7 @@ public abstract class BlueCard extends Card {
      * @param otherPlayers : Player[]
      * @return players : ArrayList<Player></Player>
      */
-    public ArrayList<Player> playersWithSameCareer(Player[] otherPlayers) {
+    private ArrayList<Player> playersWithSameCareer(Player[] otherPlayers) {
         ArrayList<Player> players = new ArrayList<Player>();
 
         for(Player player : otherPlayers) {
@@ -46,9 +46,8 @@ public abstract class BlueCard extends Card {
      * @param player : Player
      * @return true/false : boolean
      */
-    public boolean isSameCareer(Player player) {
-        return true;
-//        return player.getCareerCard().getName() == this.career;
+    private boolean isSameCareer(Player player) {
+        return player.getCareerCard().getName() == this.career;
     }
 
     /**
@@ -59,7 +58,36 @@ public abstract class BlueCard extends Card {
         return career;
     }
 
-    public abstract double getAmount();
+    /**
+     * Activates the card by checking if the player who drew the card
+     * has the same career with the card. If yes, player receives $15000.
+     * If not, player pays the other players with that career / bank.
+     *
+     * @param player
+     * @param otherPlayers
+     */
+    public void activate(Player player, Player[] otherPlayers) {
+        if(isSameCareer(player)) { // player receives 15000
+            player.addBalance(15000);
+            System.out.println(player.getName() + " receives $15000");
+        } else {
+            double amountToBePayed = getAmount(player);
+
+            Player[] playersWithSameCareer = playersWithSameCareer(otherPlayers).toArray(new Player[0]);
+            if(playersWithSameCareer.length > 0) { // player pays all the players with the same career
+                for(Player otherPlayer : playersWithSameCareer) {
+                    player.payBalance(amountToBePayed);
+                    otherPlayer.addBalance(amountToBePayed);
+                    System.out.println(player.getName() + " paid $" + amountToBePayed + " to " + otherPlayer.getName());
+                }
+            } else { // player pays the bank
+                player.payBalance(amountToBePayed);
+                System.out.println(player.getName() + " paid $" + amountToBePayed + " to the bank.");
+            }
+        }
+    }
+
+    public abstract double getAmount(Player player);
 
     /**
      * This method displays the card into a 14(max height) x 25(width) unit layout

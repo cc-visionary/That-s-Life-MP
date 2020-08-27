@@ -1,5 +1,7 @@
 package resources.cards.BlueCard;
 
+import resources.players.Player;
+
 final public class WorldCupCard extends BlueCard {
     final private int numOfPlayers;
 
@@ -11,10 +13,11 @@ final public class WorldCupCard extends BlueCard {
 
     /**
      * Returns the value to be paid by the player
-     * @return amount
+     * @param player the player who drew the card
+     * @return number of players * 5000
      */
     @Override
-    public double getAmount() {
+    public double getAmount(Player player) {
         return this.numOfPlayers * 5000;
     }
 }

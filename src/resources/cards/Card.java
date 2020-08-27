@@ -15,7 +15,6 @@ import resources.utilities.StringUtil;
 public abstract class Card {
     private String type, name;
     private String description;
-    private Player owner;
 
     /**
      * Constructor assigns the parameter description
@@ -31,14 +30,6 @@ public abstract class Card {
     public Card(String type, String description) {
         this.type = type;
         this.description = description;
-    }
-
-    /**
-     * Sets the owner of the card
-     * @param owner
-     */
-    public void setOwner(Player owner) {
-        this.owner = owner;
     }
 
     /**
@@ -63,14 +54,6 @@ public abstract class Card {
      */
     public String getDescription() {
         return description;
-    }
-
-    /**
-     * Gets the owner of the card
-     * @return owner
-     */
-    public Player getOwner() {
-        return owner;
     }
 
     /**

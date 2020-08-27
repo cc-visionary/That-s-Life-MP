@@ -8,12 +8,13 @@ import resources.utilities.StringUtil;
  *
  * @author      Christopher G. Lim
  * @version     1.0
- * @last-edited Aug 18, 2020
+ * @last_modified Aug 27, 2020
  * @since       Aug 18, 2020
  */
 
 final public class SalaryCard extends Card {
-    final private double salary, tax;
+    private double salary, tax;
+    private int payRaise = 0;
     public SalaryCard(double salary, double tax) {
         super("Salary Card", "Salary Card contains salary and tax due.");
 
@@ -22,11 +23,18 @@ final public class SalaryCard extends Card {
     }
 
     /**
+     * Increments the Pay Raise
+     */
+    public void addPayRaise() {
+        this.payRaise++;
+    }
+
+    /**
      * Returns the value of the salary
      * @return salary
      */
     public double getSalary() {
-        return salary;
+        return salary * (getPayRaise() + 1);
     }
 
     /**
@@ -34,7 +42,15 @@ final public class SalaryCard extends Card {
      * @return tax
      */
     public double getTax() {
-        return tax;
+        return tax * (getPayRaise() + 1);
+    }
+
+    /**
+     * Returns the amount of pay raise
+     * @return the number of pay raise which was done
+     */
+    public int getPayRaise() {
+        return payRaise;
     }
 
     /**
@@ -56,8 +72,9 @@ final public class SalaryCard extends Card {
             }
         }
         System.out.println("├───────────────────────┤");
-        System.out.println("│" + StringUtil.centerString("Salary: " + getSalary(), length)            + "│");
+        System.out.println("│" + StringUtil.centerString("Salary: " + getSalary(), length)      + "│");
         System.out.println("│" + StringUtil.centerString("Tax: " + getTax(), length)            + "│");
+        System.out.println("│" + StringUtil.centerString("Pay Raise: " + getPayRaise(), length) + "│");
         System.out.println("╰───────────────────────╯");
     }
 }

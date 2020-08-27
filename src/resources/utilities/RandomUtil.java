@@ -13,7 +13,7 @@ import java.util.Random;
  * @author        Christopher G. Lim
  * @version       1.0
  * @last_modified Aug 26, 2020
- * @since         Aug 18, 2020
+ * @since         Aug 26, 2020
  */
 
 public class RandomUtil {
