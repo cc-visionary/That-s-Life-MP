@@ -22,14 +22,23 @@ public class StringUtil {
      */
     public static String centerString(String text, int len) {
         int whitespace = len - text.length();
-        int left = whitespace / 2;
-        int right = whitespace / 2;
+        int left = whitespace / 2;  // divide the remaining white space for
+        int right = whitespace / 2; // the left and right
 
         // if allowance whitespaces are odd,
         // increment right by 1
         if(whitespace % 2 == 1) right++;
 
-        return String.format("%"+left+"s%s%"+right+"s", "",text,"");
+        // if text.length > than len
+        if(whitespace < 0) {
+            return text;
+        }
+
+        String leftSpace = "", rightSpace = "";
+        for(int i = 0; i < left; i++) leftSpace += " ";
+        for(int i = 0; i < right; i++) rightSpace += " ";
+
+        return leftSpace + text + rightSpace;
     }
 
     /**

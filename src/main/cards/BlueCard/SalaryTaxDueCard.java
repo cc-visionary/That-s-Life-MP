@@ -1,6 +1,7 @@
 package main.cards.BlueCard;
 
 import main.players.Player;
+import main.utilities.StringUtil;
 
 final public class SalaryTaxDueCard extends BlueCard {
      public SalaryTaxDueCard(String career) {

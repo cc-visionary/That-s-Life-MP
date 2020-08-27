@@ -1,6 +1,7 @@
 package main.cards.BlueCard;
 
 import main.players.Player;
+import main.utilities.StringUtil;
 
 final public class WorldCupCard extends BlueCard {
     final private int numOfPlayers;

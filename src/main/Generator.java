@@ -1,21 +1,34 @@
 package main;
 
 import main.cards.ActionCard.*;
+import main.cards.BlueCard.*;
 import main.cards.Card;
 import main.cards.CareerCard.CareerCard;
 import main.cards.SalaryCard.SalaryCard;
 import main.decks.Deck;
 import main.utilities.RandomUtil;
 
+/**
+ * Generator Class
+ *   consists of Generators for Decks, Paths, ...
+ *
+ * @author        Christopher G. Lim
+ * @version       1.0
+ * @last_modified Aug 27, 2020
+ * @since         Aug 27, 2020
+ */
+
 public class Generator {
     /**
-     * Generates the Deck for Orange Space
-     * @return the generated Deck for Orange Space
+     * Generates a Deck for Orange Space composed of ActionCards
+     * @return the generated and shuffled Deck for Orange Space
+     * @see Deck
+     * @see ActionCard
      */
     public static Deck generateOrangeDeck() {
         // Collect from the Bank (40% - 20 cards)
         Card[] collectBankCards = {
-                new CollectBankCard("Tax Refund", "You got a tax refund! Collect from the bank!", 00),
+                new CollectBankCard("Tax Refund", "You got a tax refund! Collect from the bank!", 100),
                 new CollectBankCard("Sell an Item", "You sold an item! Collect from the bank!", 150),
                 new CollectBankCard("Bonus Payday", "You had a bonus payday! Collect from the bank!", 400),
                 new CollectBankCard("Setup School", "The school you setup was successful! Collect from the bank!", 1000),
@@ -53,18 +66,23 @@ public class Generator {
         // randomly choose from any of Collect from Player Bank Cards
         for(int i = 0; i < 5; i++) orangeDeck.addCard(RandomUtil.chooseRandomCard(collectPlayerCards));
 
-//        orangeDeck.displayDeck();
         orangeDeck.shuffle();
-//        orangeDeck.displayDeck();
 
         return orangeDeck;
     }
 
+    /**
+     * Generates a Deck composed of CareerCard to let the users
+     * draw a random career from a Deck
+     * @return the generated and shuffled CareerDeck which consists of Career Cards
+     * @see Deck
+     * @see CareerCard
+     */
     public static Deck generateCareerDeck() {
         Card[] careers = {
                 new CareerCard("Lawyer", "A lawyer who makes law to create order in the world.", 5, 8, true),
                 new CareerCard("Accountant", "", 4, 7, true),
-                new CareerCard("Computer Consultant", "", 3, 7, true),
+                new CareerCard("Comp. Consultant", "", 3, 7, true),
                 new CareerCard("Doctor", "", 5, 8, true),
                 new CareerCard("Server", "", 1, 4, false),
                 new CareerCard("Racecar Driver", "Broom Broom!", 2, 8, false),
@@ -76,13 +94,18 @@ public class Generator {
             careerDeck.addCard(career);
         }
 
-//        careerDeck.displayDeck();
         careerDeck.shuffle();
-//        careerDeck.displayDeck();
 
         return careerDeck;
     }
 
+    /**
+     * Generates Salary Deck which consists of Salary Cards
+     * with different salary value which is a multiple of 10000
+     * @return the generated and shuffled Deck which consists of SalaryCard
+     * @see Deck
+     * @see SalaryCard
+     */
     public static Deck generateSalaryDeck() {
         Card[] salaryCards = {
                 new SalaryCard(10000),
@@ -103,16 +126,58 @@ public class Generator {
             salaryDeck.addCard(salaryCard);
         }
 
-//        salaryDeck.displayDeck();
         salaryDeck.shuffle();
-//        salaryDeck.displayDeck();
 
         return salaryDeck;
     }
 
-    public static Deck generateBlueDeck() {
+    /**
+     * Generates a Deck to be used when picking a Blue Card whenever you land on Blue Space
+     * @param numberOfPlayers the number of players currently in the game (to be passed unto WorldCupCard)
+     * @return the generated and shuffled Deck for Blue Space
+     * @see Deck
+     * @see BlueCard
+     */
+    public static Deck generateBlueDeck(int numberOfPlayers) {
+        String[] careers =  {
+                "Lawyer", "Accountant", "Comp. Consultant", "Doctor", "Server", "Racecar Driver", "Athlete"
+        };
 
         Deck blueDeck = new Deck("Blue Deck");
+
+        for(int i = 0; i < 50; i++) {
+            int randomNumber = RandomUtil.chooseRandomNumber(1, 7);
+            String career = careers[i % 7];
+            switch(randomNumber) {
+                case 1:
+                    blueDeck.addCard(new LawsuitCard(career, RandomUtil.chooseRandomNumber(1, 4)));
+                    break;
+                case 2:
+                    blueDeck.addCard(new SalaryTaxDueCard(career));
+                    break;
+                case 3:
+                    blueDeck.addCard(new TipTheServerCard(career));
+                    break;
+                case 4:
+                    blueDeck.addCard(new SkiAccidentCard(career));
+                    break;
+                case 5:
+                    blueDeck.addCard(new ComputerRepairCard(career));
+                    break;
+                case 6:
+                    blueDeck.addCard(new WorldCupCard(career, numberOfPlayers));
+                    break;
+                case 7:
+                    blueDeck.addCard(new F1RaceCard(career));
+                    break;
+                default:
+                    // if value wasn't in the intended values (which is improbable)
+                    // just continue/proceed to next loop without incrementing i
+                    continue;
+            }
+        }
+
+        blueDeck.shuffle();
 
         return blueDeck;
     }

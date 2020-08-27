@@ -19,7 +19,7 @@ public abstract class BlueCard extends Card {
     private String career;
 
     public BlueCard(String name, String description, String career) {
-        super("Blue Card", name, description);
+        super("Blue Card", name, "If player's Career is not the same with the Card's, " + description);
 
         this.career = career;
     }
@@ -108,6 +108,8 @@ public abstract class BlueCard extends Card {
                 System.out.println("│" + StringUtil.centerString("", length)            + "│");
             }
         }
+        System.out.println("├───────────────────────┤");
+        System.out.println("│" + StringUtil.centerString("Career: " + getCareer(), length) + "│");
         System.out.println("╰───────────────────────╯");
     }
 }

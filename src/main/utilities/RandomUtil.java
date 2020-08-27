@@ -49,6 +49,6 @@ public class RandomUtil {
      */
     public static int chooseRandomNumber(int lowerBound, int upperBound) {
         Random randomizer = new Random();
-        return randomizer.nextInt(upperBound) + lowerBound;
+        return randomizer.nextInt(upperBound - lowerBound + 1) + lowerBound;
     }
 }

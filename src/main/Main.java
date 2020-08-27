@@ -13,7 +13,8 @@ public class Main {
 //        Deck salaryDeck = Generator.generateSalaryDeck();
 //        salaryDeck.pickTopCard().displayCard();
 
-//        Deck blueDeck = Generator.generateBlueDeck();
+//        Deck blueDeck = Generator.generateBlueDeck(2);
+//        blueDeck.pickTopCard().displayCard();
 
 //        Player p1 = new Player();
 //        Scanner scanner = new Scanner(System.in);

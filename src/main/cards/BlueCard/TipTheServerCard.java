@@ -2,6 +2,7 @@ package main.cards.BlueCard;
 
 import main.players.Player;
 import main.utilities.RandomUtil;
+import main.utilities.StringUtil;
 
 final public class TipTheServerCard extends BlueCard {
     public TipTheServerCard(String career) {

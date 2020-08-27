@@ -2,6 +2,7 @@ package main.cards.BlueCard;
 
 import main.players.Player;
 import main.utilities.RandomUtil;
+import main.utilities.StringUtil;
 
 final public class ComputerRepairCard extends BlueCard {
     public ComputerRepairCard(String career) {
