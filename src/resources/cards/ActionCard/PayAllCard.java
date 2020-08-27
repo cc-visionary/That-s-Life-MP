@@ -13,7 +13,7 @@ final public class PayAllCard extends ActionCard {
      * @param otherPlayers
      */
     @Override
-    public void doAction(Player player, Player[] otherPlayers) {
+    public void activate(Player player, Player[] otherPlayers) {
         // deducts the number of players * amount from the player who drew the card's balance
         player.payBalance(otherPlayers.length * getAmount());
 

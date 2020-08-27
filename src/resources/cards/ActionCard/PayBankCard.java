@@ -13,7 +13,7 @@ final public class PayBankCard extends ActionCard {
      * @param otherPlayers
      */
     @Override
-    public void doAction(Player player, Player[] otherPlayers) {
+    public void activate(Player player, Player[] otherPlayers) {
         // deducts the amount indicated on the card to the player's balance
         player.payBalance(getAmount());
     }

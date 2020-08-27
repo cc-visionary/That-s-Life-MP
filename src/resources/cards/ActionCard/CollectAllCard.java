@@ -13,7 +13,7 @@ final public class CollectAllCard extends ActionCard {
      * @param otherPlayers
      */
     @Override
-    public void doAction(Player player, Player[] otherPlayers) {
+    public void activate(Player player, Player[] otherPlayers) {
         // deducts the amount of money to all the other players
         for(Player otherPlayer : otherPlayers) {
             otherPlayer.payBalance(getAmount());

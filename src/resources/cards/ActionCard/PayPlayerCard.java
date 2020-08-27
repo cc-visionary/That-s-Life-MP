@@ -10,7 +10,7 @@ final public class PayPlayerCard extends ActionCard {
     }
 
     @Override
-    public void doAction(Player player, Player[] otherPlayers) {
+    public void activate(Player player, Player[] otherPlayers) {
         Player recipient = choosePlayer(otherPlayers);
 
         // deducts from the player who drew the card

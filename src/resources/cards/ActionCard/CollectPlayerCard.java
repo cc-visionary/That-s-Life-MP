@@ -15,7 +15,7 @@ final public class CollectPlayerCard extends ActionCard {
      * @param otherPlayers
      */
     @Override
-    public void doAction(Player player, Player[] otherPlayers) {
+    public void activate(Player player, Player[] otherPlayers) {
         Player recipient = choosePlayer(otherPlayers);
 
         // deducts the amount from balance of the chosen player

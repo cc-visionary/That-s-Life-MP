@@ -13,7 +13,7 @@ final public class CollectBankCard extends ActionCard {
      * @param otherPlayers
      */
     @Override
-    public void doAction(Player player, Player[] otherPlayers) {
+    public void activate(Player player, Player[] otherPlayers) {
         // adds the amount to the balance of the person who drew the card
         player.addBalance(getAmount());
     }
