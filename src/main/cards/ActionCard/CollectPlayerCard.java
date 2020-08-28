@@ -1,8 +1,7 @@
 package main.cards.ActionCard;
 
 import main.players.Player;
-
-import java.util.Scanner;
+import main.utilities.InputUtil;
 
 final public class CollectPlayerCard extends ActionCard {
     public CollectPlayerCard(String name, String description, double amount) {
@@ -23,6 +22,8 @@ final public class CollectPlayerCard extends ActionCard {
 
         // transfers the amount to the balance of one who drew the card
         player.addBalance(getAmount());
+
+        System.out.println(player.getName() + " received $" + getAmount() + " from " + recipient.getName());
     }
 
     /**
@@ -31,13 +32,11 @@ final public class CollectPlayerCard extends ActionCard {
      * @return chosenPlayer
      */
     public Player choosePlayer(Player[] players) {
-        Scanner scanner = new Scanner(System.in);
         Player chosenPlayer;
         int choice;
 
         // if more than 1 other player exists, let the player who drew the card choose between them
         if(players.length > 1) {
-
             // loops and outputs the list of other players to choose from
             System.out.println("Other Players:");
             for(int i = 1; i <= players.length; i++) {
@@ -45,10 +44,8 @@ final public class CollectPlayerCard extends ActionCard {
             }
 
             // accepts only inputs of 1-# of players
-            System.out.print("Choose the player to collect from: ");
-            do {
-                choice = scanner.nextInt();
-            } while(choice < 1 || choice > players.length);
+            choice = InputUtil.scanInt("Choose the player to collect for: ", 1, players.length);
+
             chosenPlayer = players[choice - 1];
         } else { // if not, set the default chosen player as the other player indexed at 0
             chosenPlayer = players[0];

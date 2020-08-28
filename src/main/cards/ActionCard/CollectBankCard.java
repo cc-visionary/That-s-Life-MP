@@ -16,5 +16,7 @@ final public class CollectBankCard extends ActionCard {
     public void activate(Player player, Player[] otherPlayers) {
         // adds the amount to the balance of the person who drew the card
         player.addBalance(getAmount());
+
+        System.out.println(player.getName() + " received $" + getAmount() + " from the bank");
     }
 }

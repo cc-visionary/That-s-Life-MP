@@ -21,6 +21,8 @@ final public class CollectAllCard extends ActionCard {
 
         // then gives all those money to the player who drew the card
         player.addBalance(otherPlayers.length * getAmount());
+
+        System.out.println(player.getName() + " received $" + getAmount() + " from all the other players. ($" + otherPlayers.length * getAmount() + ")");
     }
 
 

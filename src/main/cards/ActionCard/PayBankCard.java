@@ -16,5 +16,7 @@ final public class PayBankCard extends ActionCard {
     public void activate(Player player, Player[] otherPlayers) {
         // deducts the amount indicated on the card to the player's balance
         player.payBalance(getAmount());
+
+        System.out.println(player.getName() + " paid $" + getAmount() + " to the bank");
     }
 }

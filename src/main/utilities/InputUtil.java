@@ -3,9 +3,10 @@ package main.utilities;
 import java.util.Scanner;
 
 /**
- * Scanner Utilities Class
+ * Input Utilities Class
  *   useful tools/functions that can be used for
- *   getting user input may it be an integer, string, etc.
+ *   getting user input may it be an integer, string,
+ *   waiting for enter key, etc.
  *
  * @author        Christopher G. Lim
  * @version       1.0
@@ -13,7 +14,7 @@ import java.util.Scanner;
  * @since         Aug 27, 2020
  */
 
-public class ScannerUtil {
+public class InputUtil {
     /**
      * Use the java.util.Scanner to get an input then verifies
      * if the input by the user is in between the lowerBound
@@ -37,5 +38,11 @@ public class ScannerUtil {
             }
         } while(input < lowerBound || input > upperBound);
         return input;
+    }
+
+    public static void waitForAnyKey() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please press Enter to proceed...");
+        scanner.nextLine();
     }
 }

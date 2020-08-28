@@ -10,6 +10,7 @@ final public class Player {
     private Path path;
     private SalaryCard salaryCard;
     private CareerCard careerCard;
+    private int nthPlayer;
     private boolean canMove = false;
     private double balance = 200000, debt;
     private static int playerCount;
@@ -20,6 +21,7 @@ final public class Player {
         this.careerCard = careerCard;
         this.salaryCard = salaryCard;
         this.playerCount++;
+        this.nthPlayer = this.playerCount;
     }
 
     public Player(String name, CareerCard careerCard, SalaryCard salaryCard) {
@@ -27,11 +29,13 @@ final public class Player {
         this.careerCard = careerCard;
         this.salaryCard = salaryCard;
         this.playerCount++;
+        this.nthPlayer = this.playerCount;
     }
 
     public Player(String name) {
         this.name = name;
         this.playerCount++;
+        this.nthPlayer = this.playerCount;
     }
 
     /**
@@ -132,6 +136,9 @@ final public class Player {
     public static int getPlayerCount() {
         return playerCount;
     }
+    public int getNthPlayer() {
+        return nthPlayer;
+    }
 
     /**
      * Checks whether the player has reached retirement or not
@@ -151,7 +158,7 @@ final public class Player {
      */
     public void displayPlayerStats() {
         System.out.println("--------------------------------------------------");
-        System.out.println("\t Player " + getPlayerCount() + "'s [ " + getName() + " ] Stats");
+        System.out.println("\t Player " + getNthPlayer() + "'s [ " + getName() + " ] Stats");
         System.out.println("--------------------------------------------------");
         System.out.println("\tBalance: " + getBalance());
         System.out.println("\tDebt   : " + getDebt());

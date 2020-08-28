@@ -65,6 +65,10 @@ final public class Deck {
         }
     }
 
+    public boolean hasCard() {
+        return cards.size() > 0;
+    }
+
     /**
      * Displaying the deck (for cheating purposes :P)
      */

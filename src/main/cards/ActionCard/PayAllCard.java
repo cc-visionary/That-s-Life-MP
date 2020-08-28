@@ -21,5 +21,7 @@ final public class PayAllCard extends ActionCard {
         for(Player otherPlayer : otherPlayers) {
             otherPlayer.addBalance(getAmount());
         }
+
+        System.out.println(player.getName() + " paid all the other players $" + getAmount() + " each");
     }
 }
