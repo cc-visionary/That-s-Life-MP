@@ -28,7 +28,7 @@ public class Main {
         }
 
         Deck orangeDeck = Generator.generateOrangeDeck();
-        Deck blueDeck = Generator.generateBlueDeck(nPlayers);
+//        Deck blueDeck = Generator.generateBlueDeck(nPlayers);
     }
 
 
