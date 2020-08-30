@@ -37,12 +37,19 @@ public class Driver {
                 }
             }
 
-            System.out.println(currentPlayer.getName() + "'s turn: ");
+            System.out.println("\n" + currentPlayer.getName() + "'s turn: ");
 
             ActionCard currentCard = (ActionCard) orangeDeck.pickTopCard();
-            currentCard.displayCard();
+            System.out.println(currentPlayer.getName() + " drew -> " + currentCard);
+//            currentCard.displayCard();
+
             currentCard.activate(currentPlayer, otherPlayers.toArray(new Player[0]));
-            currentPlayer.displayPlayerStats();
+
+            // show player info
+            System.out.println("Player Stats:");
+            for(Player player : players) {
+                System.out.println("\t" + player);
+            }
 
             InputUtil.waitForAnyKey();
 

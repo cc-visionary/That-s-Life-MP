@@ -52,4 +52,9 @@ final public class CollectPlayerCard extends ActionCard {
         }
         return chosenPlayer;
     }
+
+    @Override
+    public String toString() {
+        return String.format("ActionCard{name=%s,amount=%.2f,transaction=COLLECT,recipient=PLAYER}", getName(), getAmount());
+    }
 }

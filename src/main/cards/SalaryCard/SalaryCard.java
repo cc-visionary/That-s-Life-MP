@@ -80,4 +80,9 @@ final public class SalaryCard extends Card {
         System.out.println("│" + StringUtil.centerString("Pay Raise: " + getPayRaise(), length) + "│");
         System.out.println("╰───────────────────────╯");
     }
+
+    @Override
+    public String toString() {
+        return String.format("SalaryCard{salary=%.2f,tax=%.2f,payRaise=%d}", salary, tax, payRaise);
+    }
 }

@@ -19,4 +19,9 @@ final public class PayBankCard extends ActionCard {
 
         System.out.println(player.getName() + " paid $" + getAmount() + " to the bank");
     }
+
+    @Override
+    public String toString() {
+        return String.format("ActionCard{name=%s,amount=%.2f,transaction=PAY,recipient=BANK}", getName(), getAmount());
+    }
 }

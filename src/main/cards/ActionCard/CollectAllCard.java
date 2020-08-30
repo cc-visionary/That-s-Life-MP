@@ -25,5 +25,8 @@ final public class CollectAllCard extends ActionCard {
         System.out.println(player.getName() + " received $" + getAmount() + " from all the other players. ($" + otherPlayers.length * getAmount() + ")");
     }
 
-
+    @Override
+    public String toString() {
+        return String.format("ActionCard{name=%s,amount=%.2f,transaction=COLLECT,recipient=ALL}", getName(), getAmount());
+    }
 }

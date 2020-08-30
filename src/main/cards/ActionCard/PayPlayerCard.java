@@ -48,4 +48,9 @@ final public class PayPlayerCard extends ActionCard {
         }
         return chosenPlayer;
     }
+
+    @Override
+    public String toString() {
+        return String.format("ActionCard{name=%s,amount=%.2f,transaction=PAY,recipient=PLAYER}", getName(), getAmount());
+    }
 }

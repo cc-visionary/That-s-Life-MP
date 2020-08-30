@@ -112,4 +112,9 @@ public abstract class BlueCard extends Card {
         System.out.println("│" + StringUtil.centerString("Career: " + getCareer(), length) + "│");
         System.out.println("╰───────────────────────╯");
     }
+
+    @Override
+    public String toString() {
+        return String.format("BlueCard{career=%s}", getCareer());
+    }
 }

@@ -1,17 +1,23 @@
 package main.players;
 import main.cards.CareerCard.CareerCard;
+import main.cards.HouseCard.HouseCard;
 import main.cards.SalaryCard.SalaryCard;
 import main.paths.Path;
 
 import main.utilities.RandomUtil;
+
+import java.util.ArrayList;
 
 final public class Player {
     private String name;
     private Path path;
     private SalaryCard salaryCard;
     private CareerCard careerCard;
+    private ArrayList<HouseCard> houseCards;
     private int nthPlayer;
     private boolean canMove = false;
+    private boolean isMarried = false;
+    private int nBabies = 0;
     private double balance = 200000, debt;
     private static int playerCount;
 
@@ -22,6 +28,7 @@ final public class Player {
         this.salaryCard = salaryCard;
         this.playerCount++;
         this.nthPlayer = this.playerCount;
+        this.houseCards = new ArrayList<HouseCard>();
     }
 
     public Player(String name, CareerCard careerCard, SalaryCard salaryCard) {
@@ -30,12 +37,14 @@ final public class Player {
         this.salaryCard = salaryCard;
         this.playerCount++;
         this.nthPlayer = this.playerCount;
+        this.houseCards = new ArrayList<HouseCard>();
     }
 
     public Player(String name) {
         this.name = name;
         this.playerCount++;
         this.nthPlayer = this.playerCount;
+        this.houseCards = new ArrayList<HouseCard>();
     }
 
     /**
@@ -83,6 +92,14 @@ final public class Player {
      */
     public void addDebt(double amount) {
         this.debt += amount;
+    }
+
+    public void addBaby(int amount) {
+        this.nBabies += amount;
+    }
+
+    public void addHouse(HouseCard houseCard) {
+        this.houseCards.add(houseCard);
     }
 
     /**
@@ -139,6 +156,9 @@ final public class Player {
     public int getNthPlayer() {
         return nthPlayer;
     }
+    public int getNBabies() {
+        return nBabies;
+    }
 
     /**
      * Checks whether the player has reached retirement or not
@@ -163,19 +183,24 @@ final public class Player {
         System.out.println("\tBalance: " + getBalance());
         System.out.println("\tDebt   : " + getDebt());
         if(getSalaryCard() != null) {
-            System.out.println("\tSalary Card:");
-            getSalaryCard().displayCard();
+            System.out.println("\tSalary Card:" + getSalaryCard());
+//            getSalaryCard().displayCard();
         } else {
             System.out.println("\tSalary Card: None");
         }
 
         if(getCareerCard() != null) {
-            System.out.println("\tCareer Card:");
-            getCareerCard().displayCard();
+            System.out.println("\tCareer Card:" + getCareerCard());
+//            getCareerCard().displayCard();
         } else {
             System.out.println("\tCareer Card: None");
         }
         System.out.println("\tCurrent Path: " + (getPath() == null ? "None" : getPath().getName()));
         System.out.println("--------------------------------------------------");
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Player{name=%s,balance=%.2f,debt=%.2f}", name, balance, debt);
     }
 }

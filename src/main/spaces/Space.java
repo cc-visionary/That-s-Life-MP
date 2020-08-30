@@ -57,4 +57,9 @@ public abstract class Space {
         System.out.println("│" + StringUtil.centerString(getType().charAt(0)  + "", length) + "│");
         System.out.println("╰─────╯");
     }
+
+    @Override
+    public String toString() {
+        return String.format("Space{type=%s,name=%s}", type, name);
+    }
 }

@@ -29,4 +29,9 @@ public class Path {
     public void displayPath() {
 
     }
+
+    @Override
+    public String toString() {
+        return String.format("Path{name=%s,nSpaces=%d}", name, spaces.length);
+    }
 }

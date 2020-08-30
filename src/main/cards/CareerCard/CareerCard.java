@@ -56,4 +56,9 @@ final public class CareerCard extends Card {
         System.out.println("│" + StringUtil.centerString("College Degree: " + (isRequireCollegeDegree() ? "Yes" : "No"), length) + "│");
         System.out.println("╰───────────────────────╯");
     }
+
+    @Override
+    public String toString() {
+        return String.format("CareerCard{name=%s,maxPayRaise=%d,collegeRequired=%s}", getName(), getMaxPayRaise(), isRequireCollegeDegree() ? "Yes" : "No");
+    }
 }

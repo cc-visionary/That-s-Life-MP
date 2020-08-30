@@ -86,4 +86,9 @@ final public class Deck {
     private boolean isDeckEmpty() {
         return cards.size() == 0;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Deck{name=%s,nCards=%d}", name, cards.size());
+    }
 }

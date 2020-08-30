@@ -24,4 +24,9 @@ final public class PayAllCard extends ActionCard {
 
         System.out.println(player.getName() + " paid all the other players $" + getAmount() + " each");
     }
+
+    @Override
+    public String toString() {
+        return String.format("ActionCard{name=%s,amount=%.2f,transaction=PAY,recipient=ALL}", getName(), getAmount());
+    }
 }

@@ -75,4 +75,9 @@ public abstract class Card {
         }
         System.out.println("╰───────────────────────╯");
     }
+
+    @Override
+    public String toString() {
+        return String.format("Card{type=%sname=%s}", getType(), getName());
+    }
 }
