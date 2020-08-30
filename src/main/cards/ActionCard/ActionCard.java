@@ -7,12 +7,6 @@ import main.utilities.StringUtil;
 /**
  * Represents the Action Card
  *      inherited by different types of Action Cards
- * @see CollectAllCard
- * @see CollectBankCard
- * @see CollectPlayerCard
- * @see PayAllCard
- * @see PayBankCard
- * @see PayPlayerCard
  *
  * @author      Christopher G. Lim
  * @version     1.1

@@ -13,8 +13,8 @@ final public class CollectBankCard extends ActionCard {
 
     /**
      * Does the action of the ActionCard (Collect from Bank)
-     * @param player
-     * @param otherPlayers
+     * @param player       current Player who drew the card
+     * @param otherPlayers other Players
      */
     @Override
     public void activate(Player player, Player[] otherPlayers) {

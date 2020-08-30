@@ -22,7 +22,7 @@ public abstract class Space {
 
     /**
      * Set a player to the current space
-     * @param player
+     * @param player Player to be assigned
      */
     public void setPlayer(Player player) {
         this.player = player;

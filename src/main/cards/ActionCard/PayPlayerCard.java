@@ -12,6 +12,11 @@ final public class PayPlayerCard extends ActionCard {
         super(name, description, amount);
     }
 
+    /**
+     * Does the action of the ActionCard (Pay to another Player)
+     * @param player       current Player who drew the card
+     * @param otherPlayers other Players
+     */
     @Override
     public void activate(Player player, Player[] otherPlayers) {
         Player recipient = choosePlayer(otherPlayers);
@@ -28,7 +33,7 @@ final public class PayPlayerCard extends ActionCard {
 
     /**
      * Asks the user to choose a player from the other players
-     * @param players - the other players besides the user who draw the card
+     * @param players the other players besides the user who draw the card
      * @return chosenPlayer
      */
     public Player choosePlayer(Player[] players) {

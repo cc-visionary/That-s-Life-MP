@@ -12,9 +12,9 @@ public class InputUtil {
      * Use the java.util.Scanner to get an input then verifies
      * if the input by the user is in between the lowerBound
      * and upperBound, if it is not, ask and ask again.
-     * @param message message to ask
-     * @param lowerBound
-     * @param upperBound
+     * @param message    message to ask
+     * @param lowerBound minimum integer to be accepted
+     * @param upperBound maximum integer to be accepted
      * @return valid input by the user
      */
     public static int scanInt(String message, int lowerBound, int upperBound) {

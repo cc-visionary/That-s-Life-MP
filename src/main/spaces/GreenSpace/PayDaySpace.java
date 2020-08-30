@@ -14,7 +14,7 @@ public class PayDaySpace extends GreenSpace {
 
     /**
      * Gives the Player's salary to his/her balance by through his/her SalaryCard's salary
-     * @param player
+     * @param player Player to give salary to
      */
     public void giveSalary(Player player) {
         player.addBalance(player.getSalaryCard().getSalary());

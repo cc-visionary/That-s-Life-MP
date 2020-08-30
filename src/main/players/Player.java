@@ -107,7 +107,7 @@ final public class Player {
     }
 
     /**
-     * Adds the parameter houseCard to the ArrayList<HouseCard> attribute of the Player
+     * Adds the parameter houseCard to the ArrayList(HouseCard) attribute of the Player
      * @param houseCard newly bought house by the player
      */
     public void addHouse(HouseCard houseCard) {

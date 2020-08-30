@@ -11,11 +11,6 @@ public abstract class Card {
     private String type, name;
     private String description;
 
-    /**
-     * Constructor assigns the parameter description
-     * to the private variable description
-     * @param description
-     */
     public Card(String type, String name, String description) {
         this.type = type;
         this.name = name;
@@ -53,7 +48,6 @@ public abstract class Card {
 
     /**
      * This method displays the card into a 12(height) x 25(width) unit layout
-     * @return None
      */
     public void  displayCard() {
         final int length = 23, descriptionHeight = 8;

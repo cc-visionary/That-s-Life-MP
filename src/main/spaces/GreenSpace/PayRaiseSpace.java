@@ -14,7 +14,7 @@ public class PayRaiseSpace extends GreenSpace {
 
     /**
      * Increases the salary of the parameter Player
-     * @param player
+     * @param player Player whose salary will be raised
      */
     public void raiseSalary(Player player) {
 //        player.getSalaryCard().getSalary();

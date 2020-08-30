@@ -14,8 +14,8 @@ final public class CollectPlayerCard extends ActionCard {
 
     /**
      * Does the action of the ActionCard (Collect from Player)
-     * @param player
-     * @param otherPlayers
+     * @param player       current Player who drew the card
+     * @param otherPlayers other Players
      */
     @Override
     public void activate(Player player, Player[] otherPlayers) {
@@ -32,7 +32,7 @@ final public class CollectPlayerCard extends ActionCard {
 
     /**
      * Asks the user to choose a player from the other players
-     * @param players - the other players besides the user who draw the card
+     * @param players the other players besides the user who draw the card
      * @return chosenPlayer
      */
     public Player choosePlayer(Player[] players) {

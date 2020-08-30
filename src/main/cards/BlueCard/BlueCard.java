@@ -9,13 +9,6 @@ import java.util.ArrayList;
 /**
  * Represents the Blue Card
  *      inherited by different types of Blue Cards
- * @see ComputerRepairCard
- * @see F1RaceCard
- * @see LawsuitCard
- * @see SalaryTaxDueCard
- * @see SkiAccidentCard
- * @see TipTheServerCard
- * @see WorldCupCard
  */
 
 public abstract class BlueCard extends Card {
@@ -66,8 +59,8 @@ public abstract class BlueCard extends Card {
      * has the same career with the card. If yes, player receives $15000.
      * If not, player pays the other players with that career / bank.
      *
-     * @param player
-     * @param otherPlayers
+     * @param player       current Player who drew the card
+     * @param otherPlayers other Players
      */
     public void activate(Player player, Player[] otherPlayers) {
         if(isSameCareer(player)) { // player receives 15000

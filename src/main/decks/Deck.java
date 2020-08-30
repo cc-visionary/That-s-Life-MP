@@ -25,7 +25,7 @@ final public class Deck {
 
     /**
      * Adds a card to the deck
-     * @param card
+     * @param card Card to be added to the Deck
      */
     public void addCard(Card card) {
         cards.add(card);
