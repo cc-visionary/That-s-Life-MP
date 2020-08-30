@@ -4,14 +4,8 @@ import java.util.Scanner;
 
 /**
  * Input Utilities Class
- *   useful tools/functions that can be used for
- *   getting user input may it be an integer, string,
+ *   useful tools/functions that can be used for getting user input may it be an integer, string,
  *   waiting for enter key, etc.
- *
- * @author        Christopher G. Lim
- * @version       1.0
- * @last_modified Aug 27, 2020
- * @since         Aug 27, 2020
  */
 
 public class InputUtil {

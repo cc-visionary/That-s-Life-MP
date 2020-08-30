@@ -7,13 +7,7 @@ import java.util.Random;
 
 /**
  * Random Utilities Class
- *   useful tools/functions that can be used for
- *   generating/returning random values.
- *
- * @author        Christopher G. Lim
- * @version       1.0
- * @last_modified Aug 26, 2020
- * @since         Aug 26, 2020
+ *   useful tools/functions that can be used for generating/returning random values, choosing from an array, etc.
  */
 
 public class RandomUtil {

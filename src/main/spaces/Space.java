@@ -3,6 +3,12 @@ package main.spaces;
 import main.players.Player;
 import main.utilities.StringUtil;
 
+/**
+ * Space Class
+ *      Will be inherited by different types of Spaces which performs
+ *      certain sets of operations to the Player.
+ *
+ */
 public abstract class Space {
     private String type, name;
     private Player player;

@@ -4,13 +4,7 @@ import java.util.ArrayList;
 
 /**
  * String Utilities Class
- *   useful tools/classes for formatting Strings
- *   and other String related tasks
- *
- * @author        Christopher G. Lim
- * @version       1.0
- * @last_modified Aug 26, 2020
- * @since         Aug 18, 2020
+ *   useful tools/classes for formatting Strings and other String related tasks
  */
 
 public class StringUtil {

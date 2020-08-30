@@ -9,7 +9,12 @@ import main.utilities.InputUtil;
 
 import java.util.ArrayList;
 
-public class Driver {
+/**
+ * TestDriver Class
+ *      A Driver Class which represent this Application's Test Script where in
+ *      different classes may be tested to interact each other, etc.
+ */
+public class TestDriver {
     public static void main(String[] args) {
         Deck careerDeck = Generator.generateCareerDeck();
         Deck salaryDeck = Generator.generateSalaryDeck();
@@ -45,17 +50,22 @@ public class Driver {
 
             currentCard.activate(currentPlayer, otherPlayers.toArray(new Player[0]));
 
-            // show player info
+            // show player info and at the same time check if there's a winner
             System.out.println("Player Stats:");
             for(Player player : players) {
                 System.out.println("\t" + player);
+                if(player.getBalance() - player.getDebt() >= 22000) {
+                    System.out.println(player.getName() + " won!");
+                    System.out.println("He reached a total asset of $" + player.getBalance());
+                    break;
+                }
             }
 
             InputUtil.waitForAnyKey();
 
             turn++;
+            // reset the turn to 0
             if(turn == players.size()) turn = 0;
-
         }
     }
 

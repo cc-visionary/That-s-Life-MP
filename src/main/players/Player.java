@@ -8,6 +8,11 @@ import main.utilities.RandomUtil;
 
 import java.util.ArrayList;
 
+/**
+ * Player Class
+ *
+ */
+
 final public class Player {
     private String name;
     private Path path;
@@ -18,7 +23,7 @@ final public class Player {
     private boolean canMove = false;
     private boolean isMarried = false;
     private int nBabies = 0;
-    private double balance = 200000, debt;
+    private double balance = 20000, debt;
     private static int playerCount;
 
     public Player(String name, Path path, CareerCard careerCard, SalaryCard salaryCard) {
@@ -94,10 +99,18 @@ final public class Player {
         this.debt += amount;
     }
 
+    /**
+     * Adds a parameter amount to the nBaby attribute
+     * @param amount amount of babies to be added 1-3(single, twin, triplet)
+     */
     public void addBaby(int amount) {
         this.nBabies += amount;
     }
 
+    /**
+     * Adds the parameter houseCard to the ArrayList<HouseCard> attribute of the Player
+     * @param houseCard newly bought house by the player
+     */
     public void addHouse(HouseCard houseCard) {
         this.houseCards.add(houseCard);
     }

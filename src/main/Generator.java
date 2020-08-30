@@ -10,14 +10,8 @@ import main.utilities.RandomUtil;
 
 /**
  * Generator Class
- *   consists of Generators for Decks, Paths, ...
- *
- * @author        Christopher G. Lim
- * @version       1.0
- * @last_modified Aug 27, 2020
- * @since         Aug 27, 2020
+ *   consists of Generators to produce Decks, Spaces, Paths, etc.
  */
-
 public class Generator {
     /**
      * Generates a Deck for Orange Space composed of ActionCards
