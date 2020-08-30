@@ -3,9 +3,8 @@ package main.utilities;
 import java.util.Scanner;
 
 /**
- * Input Utilities Class
- *   useful tools/functions that can be used for getting user input may it be an integer, string,
- *   waiting for enter key, etc.
+ * useful tools/functions that can be used for getting user input may it be an integer, string,
+ * waiting for enter key, etc.
  */
 
 public class InputUtil {

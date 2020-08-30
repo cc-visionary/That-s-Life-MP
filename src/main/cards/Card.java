@@ -3,12 +3,8 @@ package main.cards;
 import main.utilities.StringUtil;
 
 /**
- * Abstract Card Class
- *
- * @author      Christopher G. Lim
- * @version     1.0
- * @last-edited Aug 18, 2020
- * @since       Aug 18, 2020
+ * Card Class
+ *      To be inherited by all the other Cards
  */
 
 public abstract class Card {

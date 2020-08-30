@@ -4,7 +4,7 @@ import main.decks.Deck;
 import main.spaces.Space;
 
 /**
- * BlueSpace Class
+ * Represents the Blue Space
  *      When a Player lands in this space, he/she simply picks an Blue Card from the Blue Cards Deck.
  */
 public class BlueSpace extends Space {

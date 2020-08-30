@@ -3,7 +3,7 @@ package main.spaces.GreenSpace;
 import main.players.Player;
 
 /**
- * PayRaiseSpace Class
+ * Represents the Pay Day Space
  *      space which allows the Player to increase his/her salary
  */
 

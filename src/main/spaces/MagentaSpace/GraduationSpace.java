@@ -1,7 +1,7 @@
 package main.spaces.MagentaSpace;
 
 /**
- * GraduationSpace Class
+ * Represents the Graduation Space
  *      Lets a Player graduate and choose a Career
  */
 

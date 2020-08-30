@@ -1,6 +1,12 @@
 package main.paths;
 import main.spaces.Space;
 
+/**
+ * Represents the Path
+ *      which stores List of Spaces
+ * @see Space
+ */
+
 public class Path {
     private String type = "Path", name;
     private Space spaces[];

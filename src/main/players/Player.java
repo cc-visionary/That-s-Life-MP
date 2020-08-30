@@ -9,8 +9,7 @@ import main.utilities.RandomUtil;
 import java.util.ArrayList;
 
 /**
- * Player Class
- *
+ * Represents the Player
  */
 
 final public class Player {

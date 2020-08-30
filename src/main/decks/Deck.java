@@ -5,6 +5,11 @@ import main.utilities.RandomUtil;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the Deck
+ *      to store the Cards. Contains methods to manipulate the cards.
+ * @see Card
+ */
 final public class Deck {
     private String name;
     private ArrayList<Card> cards;

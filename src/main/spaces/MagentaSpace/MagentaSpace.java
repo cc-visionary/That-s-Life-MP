@@ -3,7 +3,7 @@ package main.spaces.MagentaSpace;
 import main.spaces.Space;
 
 /**
- * MagentaSpace Class
+ * Represents the Magenta Space
  *      Inherited by all other classes for Magenta Space.
  * @see BuyAHouseSpace
  * @see CollegeCareerChoiceSpace

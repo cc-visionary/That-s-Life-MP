@@ -6,8 +6,7 @@ import main.players.Player;
 import java.util.Random;
 
 /**
- * Random Utilities Class
- *   useful tools/functions that can be used for generating/returning random values, choosing from an array, etc.
+ * useful tools/functions that can be used for generating/returning random values, choosing from an array, etc.
  */
 
 public class RandomUtil {

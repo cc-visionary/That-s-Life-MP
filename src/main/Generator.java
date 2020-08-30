@@ -9,8 +9,7 @@ import main.decks.Deck;
 import main.utilities.RandomUtil;
 
 /**
- * Generator Class
- *   consists of Generators to produce Decks, Spaces, Paths, etc.
+ * consists of Generators to produce Decks, Spaces, Paths, etc.
  */
 public class Generator {
     /**

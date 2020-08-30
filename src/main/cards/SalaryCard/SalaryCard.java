@@ -4,12 +4,8 @@ import main.cards.Card;
 import main.utilities.StringUtil;
 
 /**
- * Salary Card Class
- *
- * @author      Christopher G. Lim
- * @version     1.0
- * @last_modified Aug 27, 2020
- * @since       Aug 18, 2020
+ * SalaryCard Class
+ *      Contains Salary and SalaryTaxDue. Salary can be increased along with SalaryTaxDue.
  */
 
 final public class SalaryCard extends Card {

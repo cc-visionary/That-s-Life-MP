@@ -4,6 +4,10 @@ import main.cards.Card;
 import main.utilities.RandomUtil;
 import main.utilities.StringUtil;
 
+/**
+ * Represents the Career Card
+ */
+
 final public class CareerCard extends Card {
     private int maxPayRaise;
     private boolean requireCollegeDegree;

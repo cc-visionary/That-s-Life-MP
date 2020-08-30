@@ -10,9 +10,8 @@ import main.utilities.InputUtil;
 import java.util.ArrayList;
 
 /**
- * TestDriver Class
- *      A Driver Class which represent this Application's Test Script where in
- *      different classes may be tested to interact each other, etc.
+ * This represents the Application's Test Script where in
+ * different classes may be tested to interact each other, etc.
  */
 public class TestDriver {
     public static void main(String[] args) {

@@ -1,7 +1,7 @@
 package main.spaces.MagentaSpace;
 
 /**
- * BuyAHouseSpace Class
+ * Represents the Buy a House Space
  *      space which allows the Player to have an option whether to buy a house by choosing from the
  *      house Deck or not
  */

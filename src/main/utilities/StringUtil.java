@@ -3,8 +3,7 @@ package main.utilities;
 import java.util.ArrayList;
 
 /**
- * String Utilities Class
- *   useful tools/classes for formatting Strings and other String related tasks
+ * useful tools/classes for formatting Strings and other String related tasks
  */
 
 public class StringUtil {

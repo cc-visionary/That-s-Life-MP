@@ -7,12 +7,7 @@ import main.players.Player;
 import java.util.ArrayList;
 
 /**
- * Blue Card Class
- *
- * @author      Christopher G. Lim
- * @version     1.0
- * @last-edited Aug 18, 2020
- * @since       Aug 18, 2020
+ * Represents the Blue Card
  */
 
 public abstract class BlueCard extends Card {

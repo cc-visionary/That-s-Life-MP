@@ -3,7 +3,7 @@ package main.spaces.GreenSpace;
 import main.spaces.Space;
 
 /**
- * GreenSpace Class
+ * Represents the Green Space
  *      to be inherited by PayRaiseSpace and PayDaySpace
  * @see PayRaiseSpace
  * @see PayDaySpace

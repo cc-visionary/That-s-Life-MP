@@ -2,6 +2,12 @@ package main.cards.HouseCard;
 
 import main.cards.Card;
 
+/**
+ * HouseCard Class
+ *      Contains details about a House which can be bought by the Player in BuyAHouseSpace
+ * @see main.spaces.MagentaSpace.BuyAHouseSpace
+ */
+
 public class HouseCard extends Card {
     private double cost;
     public HouseCard(String name, String description, double cost) {
