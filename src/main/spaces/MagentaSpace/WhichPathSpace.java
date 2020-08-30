@@ -1,7 +1,7 @@
 package main.spaces.MagentaSpace;
 
 /**
- * Represents the Which Path Space
+ * Represents the Magenta Space - Which Path Space
  *      The junction where players can choose to continue the current path or switch to another one
  */
 

@@ -1,7 +1,7 @@
 package main.spaces.MagentaSpace;
 
 /**
- * Represents the Get Married Space
+ * Represents the Magenta Space - Get Married Space
  *      A player marries and depending on the Player's random generated number, he/she pays a certain
  *      amount of money for the wedding gift.
  */

@@ -3,7 +3,7 @@ package main.spaces.GreenSpace;
 import main.players.Player;
 
 /**
- * Represents the Pay Day Space
+ * Represents the Green Space - Pay Day Space
  *      space which allows the Player receive his/her current salary
  */
 

@@ -10,7 +10,7 @@ import main.utilities.InputUtil;
 import java.util.ArrayList;
 
 /**
- * This represents the Application's Test Script where in
+ * Represents the Application's Test Script where in
  * different classes may be tested to interact each other, etc.
  */
 public class TestDriver {
