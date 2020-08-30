@@ -8,6 +8,14 @@ import java.util.ArrayList;
 
 /**
  * Represents the Blue Card
+ *      inherited by different types of Blue Cards
+ * @see ComputerRepairCard
+ * @see F1RaceCard
+ * @see LawsuitCard
+ * @see SalaryTaxDueCard
+ * @see SkiAccidentCard
+ * @see TipTheServerCard
+ * @see WorldCupCard
  */
 
 public abstract class BlueCard extends Card {

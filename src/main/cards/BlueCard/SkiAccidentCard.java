@@ -3,6 +3,10 @@ package main.cards.BlueCard;
 import main.players.Player;
 import main.utilities.StringUtil;
 
+/**
+ * Represents the Blue Card - SkiAccident Card
+ */
+
 final public class SkiAccidentCard extends BlueCard {
     public SkiAccidentCard(String career) {
         super("Ski Accident", "The player pays $10000.", career);

@@ -5,11 +5,17 @@ import main.players.Player;
 import main.utilities.StringUtil;
 
 /**
- * Action Card Class
+ * Represents the Action Card
+ *      inherited by different types of Action Cards
+ * @see CollectAllCard
+ * @see CollectBankCard
+ * @see CollectPlayerCard
+ * @see PayAllCard
+ * @see PayBankCard
+ * @see PayPlayerCard
  *
  * @author      Christopher G. Lim
- * @version     1.0
- * @last-edited Aug 18, 2020
+ * @version     1.1
  * @since       Aug 18, 2020
  */
 

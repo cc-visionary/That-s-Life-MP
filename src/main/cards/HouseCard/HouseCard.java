@@ -3,7 +3,7 @@ package main.cards.HouseCard;
 import main.cards.Card;
 
 /**
- * HouseCard Class
+ * Represents the  House Card
  *      Contains details about a House which can be bought by the Player in BuyAHouseSpace
  * @see main.spaces.MagentaSpace.BuyAHouseSpace
  */

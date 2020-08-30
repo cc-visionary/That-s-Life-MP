@@ -3,6 +3,10 @@ package main.cards.BlueCard;
 import main.players.Player;
 import main.utilities.StringUtil;
 
+/**
+ * Represents the Blue Card - Lawsuit Card
+ */
+
 final public class LawsuitCard extends BlueCard {
     final private int multiplier;
 

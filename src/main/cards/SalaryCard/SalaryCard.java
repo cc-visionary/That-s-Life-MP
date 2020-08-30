@@ -4,7 +4,7 @@ import main.cards.Card;
 import main.utilities.StringUtil;
 
 /**
- * SalaryCard Class
+ * Represents the Salary Card
  *      Contains Salary and SalaryTaxDue. Salary can be increased along with SalaryTaxDue.
  */
 

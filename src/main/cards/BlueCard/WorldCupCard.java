@@ -3,6 +3,10 @@ package main.cards.BlueCard;
 import main.players.Player;
 import main.utilities.StringUtil;
 
+/**
+ * Represents the Blue Card - World Cup Card
+ */
+
 final public class WorldCupCard extends BlueCard {
     final private int numOfPlayers;
 

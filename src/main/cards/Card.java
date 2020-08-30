@@ -3,7 +3,7 @@ package main.cards;
 import main.utilities.StringUtil;
 
 /**
- * Card Class
+ * Represents the Card
  *      To be inherited by all the other Cards
  */
 

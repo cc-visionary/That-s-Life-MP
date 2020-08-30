@@ -2,6 +2,10 @@ package main.cards.ActionCard;
 
 import main.players.Player;
 
+/**
+ * Represents the Action Card which requires a Player to Collect money from All the other Players
+ */
+
 final public class CollectAllCard extends ActionCard {
     public CollectAllCard(String name, String description, double amount) {
         super(name, description, amount);
