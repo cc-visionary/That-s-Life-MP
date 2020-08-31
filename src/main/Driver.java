@@ -1,4 +1,4 @@
-package main.tests;
+package main;
 
 import main.Generator;
 import main.cards.ActionCard.ActionCard;
@@ -11,8 +11,8 @@ import main.utilities.InputUtil;
 import java.util.ArrayList;
 
 /**
- * <h1>Test Script #4 (Requirement #2)</h1>
- * <p>This test script is for simulating a user defined number of players to draw the cards from a Deck
+ * <h1>Driver Class (Requirement #2)</h1>
+ * <p>This Driver Class for simulating a user defined number of players to draw the cards from a Deck
  * consisting of Action Cards(Orange Deck) where the first Player to reach a total asset of $40000
  * ([balance - debt] greater than or equal to 40000) wins.</p>
  *
@@ -34,7 +34,7 @@ import java.util.ArrayList;
  * @since 08/28/2020
  */
 
-public class Test4 {
+public class Driver {
     public static void main(String[] args) {
         final int GOAL = 40000;
         Deck careerDeck = Generator.generateCareerDeck();

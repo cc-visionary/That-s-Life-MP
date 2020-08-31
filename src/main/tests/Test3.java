@@ -29,7 +29,7 @@ import java.util.ArrayList;
  * @see Player
  * @see ActionCard
  *
- * @since 08/30/2020
+ * @since 08/31/2020
  */
 public class Test3 {
     public static void main(String[] args) {
@@ -64,12 +64,19 @@ public class Test3 {
         actionCard.setOtherPlayers(players.toArray(new Player[0]));
 
         // output the player before activating the card
-        System.out.println(players.get(0));
+        System.out.println("\nPlayer Stats:");
+        for(Player player : players) {
+            System.out.println("\t" + player);
+        }
 
         // activate the card
         actionCard.activate();
+        System.out.println("\nACTION CARD ACTIVATED!\n");
 
-        // output the player after activating the card
-        System.out.println(players.get(0));
+        // output the players after activating the card
+        System.out.println("\nPlayer Stats:");
+        for(Player player : players) {
+            System.out.println("\t" + player);
+        }
     }
 }

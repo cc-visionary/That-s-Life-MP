@@ -41,8 +41,9 @@ public class Test2 {
             while(deck.hasCard()) {
                 deck.pickTopCard();
             }
+            System.out.println();
             deck.pickTopCard();
-            System.out.println(deck + "\n");
+            System.out.println("\n" + deck);
         }
     }
 }
