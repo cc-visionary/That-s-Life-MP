@@ -70,7 +70,7 @@ public abstract class Card {
             }
 
             // accepts only inputs of 1-# of players
-            choice = InputUtil.scanInt("Choose the player to pay for: ", 1, getOtherPlayers().length);
+            choice = InputUtil.scanInt("Choose the other player: ", 1, getOtherPlayers().length);
 
             chosenPlayer = getOtherPlayers()[choice - 1];
         } else if(getOtherPlayers().length == 1) { // if not, set the default chosen player as the other player indexed at 0
