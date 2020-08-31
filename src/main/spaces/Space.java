@@ -9,7 +9,6 @@ import main.utilities.StringUtil;
  */
 public abstract class Space {
     private String type, name;
-    private Player player;
 
     public Space(String type, String name) {
         this.type = type;
@@ -18,22 +17,6 @@ public abstract class Space {
 
     public Space(String type) {
         this.type = type;
-    }
-
-    /**
-     * Set a player to the current space
-     * @param player Player to be assigned
-     */
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    /**
-     * Get the player currently in the space
-     * @return player : Player
-     */
-    public Player getPlayer() {
-        return player;
     }
 
     /**

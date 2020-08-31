@@ -5,7 +5,7 @@ import main.utilities.StringUtil;
 
 /**
  * Represents the Salary Card
- *      Contains Salary and SalaryTaxDue. Salary can be increased along with SalaryTaxDue.
+ *      which contains Salary and SalaryTaxDue. Salary can be increased along with SalaryTaxDue.
  */
 
 final public class SalaryCard extends Card {

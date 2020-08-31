@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  * Represents the Card
- *      To be inherited by all the other Cards
+ *      to be inherited by all the other Cards
  */
 
 public abstract class Card {

@@ -5,11 +5,9 @@ import main.players.Player;
 import main.utilities.StringUtil;
 
 /**
- * Represents the Action Card
- *      inherited by different types of Action Cards
+ * Represents the Action Card.
+ *      This is inherited by different types of Action Cards
  *
- * @author      Christopher G. Lim
- * @version     1.1
  * @since       Aug 18, 2020
  */
 

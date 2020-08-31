@@ -7,7 +7,7 @@ import main.spaces.Space;
  * @see Space
  */
 
-public class Path {
+final public class Path {
     private String type = "Path", name;
     private Space spaces[];
 

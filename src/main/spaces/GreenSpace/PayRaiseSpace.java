@@ -4,11 +4,12 @@ import main.players.Player;
 
 /**
  * Represents the Green Space - Pay Day Space
- *      space which allows the Player to increase his/her salary
+ *      which allows the Player to increase his/her salary
  */
 
-public class PayRaiseSpace extends GreenSpace {
-    public PayRaiseSpace() {
+final public class PayRaiseSpace extends GreenSpace {
+    private int salaryRaise;
+    public PayRaiseSpace(double salaryRaise) {
         super("Pay Raise Day");
     }
 
@@ -17,6 +18,6 @@ public class PayRaiseSpace extends GreenSpace {
      * @param player Player whose salary will be raised
      */
     public void raiseSalary(Player player) {
-//        player.getSalaryCard().getSalary();
+        player.getSalaryCard().increaseSalary(salaryRaise);
     }
 }

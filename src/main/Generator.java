@@ -14,39 +14,40 @@ import main.utilities.RandomUtil;
 public class Generator {
     /**
      * Generates a Deck for Orange Space composed of ActionCards
-     * @return the generated and shuffled Deck for Orange Space
+     * @return the generated and shuffled Deck for Orange Space which composed of ActionCards
      * @see Deck
      * @see ActionCard
      */
     public static Deck generateOrangeDeck() {
         // Collect from the Bank (40% - 20 cards)
         Card[] collectBankCards = {
-                new CollectBankCard("Tax Refund", "You got a tax refund! Collect from the bank!", 100),
-                new CollectBankCard("Sell an Item", "You sold an item! Collect from the bank!", 150),
-                new CollectBankCard("Bonus Payday", "You had a bonus payday! Collect from the bank!", 400),
-                new CollectBankCard("Setup School", "The school you setup was successful! Collect from the bank!", 1000),
-                new CollectBankCard("Write a Book", "The book you wrote became a best-seller! Collect from  the Bank!", 1000)
+                new CollectBankCard("Tax Refund", "You got a tax refund! Collect from the bank!", 1000),
+                new CollectBankCard("Tax Refund", "You got a tax refund! Collect from the bank!", 2000),
+                new CollectBankCard("Sell an Item", "You sold an item! Collect from the bank!", 1500),
+                new CollectBankCard("Bonus Payday", "You had a bonus payday! Collect from the bank!", 4000),
+                new CollectBankCard("Setup School", "The school you setup was successful! Collect from the bank!", 4500),
+                new CollectBankCard("Write a Book", "The book you wrote became a best-seller! Collect from  the Bank!", 5000)
         };
 
         // Pay the Bank (40% - 20 cards)
         Card[] payBankCards = {
-                new PayBankCard("Buy an Item", "You bought an item! You need to pay the bank!", 400),
-                new PayBankCard("Visit a Place", "You visited a place! You need to pay the bank!", 200),
-                new PayBankCard("Hiking", "You went hiking! You enjoyed it, but now it's time to pay the bank!", 100),
-                new PayBankCard("Watch a Show", "You watched a show! You need to pay the bank!", 125),
-                new PayBankCard("Traffic Violation", "You crossed the while it was red on the traffic light. You need to pay the bank!", 100)
+                new PayBankCard("Buy an Item", "You bought an item! You need to pay the bank!", 2000),
+                new PayBankCard("Visit a Place", "You visited a place! You need to pay the bank!", 1000),
+                new PayBankCard("Hiking", "You went hiking! You enjoyed it, but now it's time to pay the bank!", 500),
+                new PayBankCard("Watch a Show", "You watched a show! You need to pay the bank!", 500),
+                new PayBankCard("Traffic Violation", "You crossed the while it was red on the traffic light. You need to pay the bank!", 500)
         };
 
         // Pay the Player (10% - 5 cards)
         Card[] payPlayerCards = {
-                new PayPlayerCard("Lawsuit", "A Lawsuit has been filed on you! Pay the other player!", 200),
-                new PayAllCard("Christmas Bonus", "It's Christmas time! Time for you to pay all the other players!", 100)
+                new PayPlayerCard("Lawsuit", "A Lawsuit has been filed on you! Pay the other player!", 4000),
+                new PayAllCard("Christmas Bonus", "It's Christmas time! Time for you to pay all the other players!", 1000)
         };
 
         // Collect from Players (10% - 5 cards)
         Card[] collectPlayerCards = {
-                new CollectPlayerCard("File a Lawsuit", "You're lawsuit was successful! You'll receive money from the other player!", 400),
-                new CollectAllCard("It's Your Birthday", "Happy Birthday! All the other players gave you money as a gift!", 200)
+                new CollectPlayerCard("File a Lawsuit", "You're lawsuit was successful! You'll receive money from the other player!", 4000),
+                new CollectAllCard("It's Your Birthday", "Happy Birthday! All the other players gave you money as a gift!", 1000)
         };
 
         Deck orangeDeck = new Deck("Orange Deck");
@@ -67,7 +68,7 @@ public class Generator {
     /**
      * Generates a Deck composed of CareerCard to let the users
      * draw a random career from a Deck
-     * @return the generated and shuffled CareerDeck which consists of Career Cards
+     * @return the generated and shuffled Career Deck which consists of Career Cards
      * @see Deck
      * @see CareerCard
      */
@@ -127,7 +128,7 @@ public class Generator {
     /**
      * Generates a Deck to be used when picking a Blue Card whenever you land on Blue Space
      * @param numberOfPlayers the number of players currently in the game (to be passed unto WorldCupCard)
-     * @return the generated and shuffled Deck for Blue Space
+     * @return the generated and shuffled Deck for Blue Space which composed of BlueCards
      * @see Deck
      * @see BlueCard
      */

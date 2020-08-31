@@ -33,7 +33,7 @@ public class InputUtil {
         return input;
     }
 
-    public static void waitForAnyKey() {
+    public static void waitForEnterKey() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please press Enter to proceed...");
         scanner.nextLine();

@@ -4,7 +4,7 @@ import main.spaces.Space;
 
 /**
  * Represents the Magenta Space
- *      Inherited by all other classes for Magenta Space.
+ *      which is inherited by all other classes for Magenta Space.
  */
 
 public abstract class MagentaSpace extends Space {

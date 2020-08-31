@@ -1,18 +1,31 @@
 package main.spaces.BlueSpace;
 
+import main.cards.Card;
 import main.decks.Deck;
 import main.spaces.Space;
 
 /**
  * Represents the Blue Space
- *      When a Player lands in this space, he/she simply picks an Blue Card from the Blue Cards Deck.
+ *      where when a Player lands in this space, he/she simply picks an Blue Card from the Blue Cards Deck
  */
-public class BlueSpace extends Space {
+final public class BlueSpace extends Space {
     public BlueSpace() {
         super("Blue Space");
     }
 
-    public void pickCard(Deck blueDeck) {
-
+    /**
+     * Picks the Top Card from the Blue Deck (composed of BlueCard)
+     * @param blueDeck blue deck to be drawn from
+     * @return         top card from the blue deck
+     */
+    public Card pickCard(Deck blueDeck) {
+        Card pickedCard;
+        if(blueDeck.getName() == "Blue Deck") {
+            pickedCard = blueDeck.pickTopCard();
+        } else {
+            pickedCard = null;
+            System.out.println("An incorrect deck(" + blueDeck.getName() + ") was passed.");
+        }
+        return pickedCard;
     }
 }

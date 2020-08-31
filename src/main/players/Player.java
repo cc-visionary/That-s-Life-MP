@@ -17,10 +17,9 @@ final public class Player {
     private Path path;
     private SalaryCard salaryCard;
     private CareerCard careerCard;
-    private ArrayList<HouseCard> houseCards;
+    private HouseCard houseCard;
     private int nthPlayer;
-    private boolean canMove = false;
-    private boolean isMarried = false;
+    private boolean isMarried = false, hasGraduated = false;
     private int nBabies = 0;
     private double balance = 20000, debt;
     private static int playerCount;
@@ -32,7 +31,6 @@ final public class Player {
         this.salaryCard = salaryCard;
         this.playerCount++;
         this.nthPlayer = this.playerCount;
-        this.houseCards = new ArrayList<HouseCard>();
     }
 
     public Player(String name, CareerCard careerCard, SalaryCard salaryCard) {
@@ -41,14 +39,12 @@ final public class Player {
         this.salaryCard = salaryCard;
         this.playerCount++;
         this.nthPlayer = this.playerCount;
-        this.houseCards = new ArrayList<HouseCard>();
     }
 
     public Player(String name) {
         this.name = name;
         this.playerCount++;
         this.nthPlayer = this.playerCount;
-        this.houseCards = new ArrayList<HouseCard>();
     }
 
     /**
@@ -57,14 +53,6 @@ final public class Player {
      */
     public int rollDice() {
         return RandomUtil.chooseRandomNumber(1, 6);
-    }
-
-    /**
-     * Changes the current path of the object the parameter path
-     * @param path the path to be assigned to the player's path
-     */
-    public void changePath(Path path) {
-        this.path = path;
     }
 
     /**
@@ -110,8 +98,16 @@ final public class Player {
      * Adds the parameter houseCard to the ArrayList(HouseCard) attribute of the Player
      * @param houseCard newly bought house by the player
      */
-    public void addHouse(HouseCard houseCard) {
-        this.houseCards.add(houseCard);
+    public void setHouseCard(HouseCard houseCard) {
+        this.houseCard = houseCard;
+    }
+
+    /**
+     * Changes the current path of the object the parameter path
+     * @param path the path to be assigned to the player's path
+     */
+    public void setPath(Path path) {
+        this.path = path;
     }
 
     /**
@@ -130,6 +126,22 @@ final public class Player {
     public void setCareerCard(CareerCard careerCard) {
         this.careerCard = careerCard;
         this.careerCard.setOwner(this);
+    }
+
+    /**
+     * Assigns a boolean value to isMarried
+     * @param married determines whether a Player is married or not
+     */
+    public void setMarried(boolean married) {
+        isMarried = married;
+    }
+
+    /**
+     * Assigns a boolean value to hasGraduated
+     * @param hasGraduated determines whether a Player is graduated or not
+     */
+    public void setHasGraduated(boolean hasGraduated) {
+        this.hasGraduated = hasGraduated;
     }
 
     /**
@@ -172,6 +184,14 @@ final public class Player {
     }
     public int getNBabies() {
         return nBabies;
+    }
+
+    public boolean isGraduated() {
+        return hasGraduated;
+    }
+
+    public boolean isMarried() {
+        return isMarried;
     }
 
     /**

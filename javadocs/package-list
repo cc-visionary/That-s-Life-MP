@@ -1,0 +1,17 @@
+main
+main.cards
+main.cards.ActionCard
+main.cards.BlueCard
+main.cards.CareerCard
+main.cards.HouseCard
+main.cards.SalaryCard
+main.decks
+main.paths
+main.players
+main.spaces
+main.spaces.BlueSpace
+main.spaces.GreenSpace
+main.spaces.MagentaSpace
+main.spaces.OrangeSpace
+main.tests
+main.utilities

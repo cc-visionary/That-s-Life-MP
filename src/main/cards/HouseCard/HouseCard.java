@@ -4,7 +4,7 @@ import main.cards.Card;
 
 /**
  * Represents the  House Card
- *      Contains details about a House which can be bought by the Player in BuyAHouseSpace
+ *      which contains details about a House which can be bought by the Player in BuyAHouseSpace
  * @see main.spaces.MagentaSpace.BuyAHouseSpace
  */
 

@@ -4,10 +4,10 @@ import main.players.Player;
 
 /**
  * Represents the Green Space - Pay Day Space
- *      space which allows the Player receive his/her current salary
+ *      which allows the Player receive his/her current salary
  */
 
-public class PayDaySpace extends GreenSpace {
+final public class PayDaySpace extends GreenSpace {
     public PayDaySpace() {
         super("Pay Day");
     }

@@ -7,8 +7,8 @@ import main.players.Player;
 import java.util.ArrayList;
 
 /**
- * Represents the Blue Card
- *      inherited by different types of Blue Cards
+ * Represents the Blue Card.
+ *      This is inherited by different types of Blue Cards
  */
 
 public abstract class BlueCard extends Card {
