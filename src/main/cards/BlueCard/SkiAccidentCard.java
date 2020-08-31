@@ -14,11 +14,10 @@ final public class SkiAccidentCard extends BlueCard {
 
     /**
      * Returns the value to be paid by the player
-     * @param player the player who drew the card
      * @return 10000
      */
     @Override
-    public double getAmount(Player player) {
+    public double getAmount() {
         return 10000;
     }
 

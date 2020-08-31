@@ -58,32 +58,29 @@ public abstract class BlueCard extends Card {
      * Activates the card by checking if the player who drew the card
      * has the same career with the card. If yes, player receives $15000.
      * If not, player pays the other players with that career / bank.
-     *
-     * @param player       current Player who drew the card
-     * @param otherPlayers other Players
      */
-    public void activate(Player player, Player[] otherPlayers) {
-        if(isSameCareer(player)) { // player receives 15000
-            player.addBalance(15000);
-            System.out.println(player.getName() + " receives $15000");
+    public void activate() {
+        if(isSameCareer(getOwner())) { // player receives 15000
+            getOwner().addBalance(15000);
+            System.out.println(getOwner().getName() + " receives $15000");
         } else {
-            double amountToBePayed = getAmount(player);
+            double amountToBePayed = getAmount();
 
-            Player[] playersWithSameCareer = playersWithSameCareer(otherPlayers).toArray(new Player[0]);
+            Player[] playersWithSameCareer = playersWithSameCareer(getOtherPlayers()).toArray(new Player[0]);
             if(playersWithSameCareer.length > 0) { // player pays all the players with the same career
                 for(Player otherPlayer : playersWithSameCareer) {
-                    player.payBalance(amountToBePayed);
+                    getOwner().payBalance(amountToBePayed);
                     otherPlayer.addBalance(amountToBePayed);
-                    System.out.println(player.getName() + " paid $" + amountToBePayed + " to " + otherPlayer.getName());
+                    System.out.println(getOwner().getName() + " paid $" + amountToBePayed + " to " + otherPlayer.getName());
                 }
             } else { // player pays the bank
-                player.payBalance(amountToBePayed);
-                System.out.println(player.getName() + " paid $" + amountToBePayed + " to the bank.");
+                getOwner().payBalance(amountToBePayed);
+                System.out.println(getOwner().getName() + " paid $" + amountToBePayed + " to the bank.");
             }
         }
     }
 
-    public abstract double getAmount(Player player);
+    public abstract double getAmount();
 
     /**
      * This method displays the card into a 14(max height) x 25(width) unit layout
@@ -111,6 +108,6 @@ public abstract class BlueCard extends Card {
 
     @Override
     public String toString() {
-        return String.format("BlueCard{career=%s}", getCareer());
+        return String.format("BlueCard{name=%s,career=%s}", getName(), getCareer());
     }
 }

@@ -14,11 +14,10 @@ final public class F1RaceCard extends BlueCard {
 
     /**
      * Returns 10% of the player who drew the card's current salary
-     * @param player player who drew the card
      * @return 10% of the salary of the player
      */
     @Override
-    public double getAmount(Player player) {
-        return player.getSalaryCard().getSalary() * 0.1;
+    public double getAmount() {
+        return getOwner().getSalaryCard().getSalary() * 0.1;
     }
 }

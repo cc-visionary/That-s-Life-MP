@@ -15,11 +15,10 @@ final public class ComputerRepairCard extends BlueCard {
 
     /**
      * Returns the 5000 if the generatedNumber is even and 10000 if odd
-     * @param player the player who drew the card
      * @return amount to be paid by the player
      */
     @Override
-    public double getAmount(Player player) {
+    public double getAmount() {
         int generatedNumber = RandomUtil.chooseRandomNumber(1, 10);
         if(generatedNumber % 2 == 0) {
             return 5000;

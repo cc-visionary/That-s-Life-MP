@@ -17,11 +17,10 @@ final public class LawsuitCard extends BlueCard {
 
     /**
      * Returns the value to be paid by the player
-     * @param player the player who drew the card
      * @return multiplier * 10000
      */
     @Override
-    public double getAmount(Player player) {
+    public double getAmount() {
         return this.multiplier * 10000;
     }
 

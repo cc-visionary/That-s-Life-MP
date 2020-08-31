@@ -115,19 +115,21 @@ final public class Player {
     }
 
     /**
-     * Assigns a new Salary Card for the Player
+     * Assigns a new Salary Card for the Player, and assign owner to SalaryCard
      * @param salaryCard SalaryCard to be assigned for the player
      */
     public void setSalaryCard(SalaryCard salaryCard) {
         this.salaryCard = salaryCard;
+        this.salaryCard.setOwner(this);
     }
 
     /**
-     * Assigns a new Career Card for the Player
+     * Assigns a new Career Card for the Player, and assign owner to CareerCard
      * @param careerCard CareerCard to be assigned for the player
      */
     public void setCareerCard(CareerCard careerCard) {
         this.careerCard = careerCard;
+        this.careerCard.setOwner(this);
     }
 
     /**

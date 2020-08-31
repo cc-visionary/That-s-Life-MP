@@ -18,11 +18,10 @@ final public class WorldCupCard extends BlueCard {
 
     /**
      * Returns the value to be paid by the player
-     * @param player the player who drew the card
      * @return number of players * 5000
      */
     @Override
-    public double getAmount(Player player) {
+    public double getAmount() {
         return this.numOfPlayers * 5000;
     }
 }

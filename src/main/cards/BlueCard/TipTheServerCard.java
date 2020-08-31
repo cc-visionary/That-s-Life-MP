@@ -15,11 +15,10 @@ final public class TipTheServerCard extends BlueCard {
 
     /**
      * Returns the random generated number * 1000
-     * @param player the player who drew the card
      * @return the generated number * 1000
      */
     @Override
-    public double getAmount(Player player) {
+    public double getAmount() {
         int generatedNumber = RandomUtil.chooseRandomNumber(1, 15);
         return generatedNumber * 1000;
     }

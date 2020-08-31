@@ -1,5 +1,6 @@
-package main;
+package main.tests;
 
+import main.Generator;
 import main.cards.ActionCard.ActionCard;
 import main.cards.CareerCard.CareerCard;
 import main.cards.SalaryCard.SalaryCard;
@@ -10,12 +11,27 @@ import main.utilities.InputUtil;
 import java.util.ArrayList;
 
 /**
- * Represents the Application's Test Script where in
- * different classes may be tested to interact each other, etc.
+ * Players drawing the Cards Simulation
+ * This test script is for simulating a user defined number of players to draw the cards from a Deck
+ * consisting of Action Cards where the first Player to reach a total asset of $22000 (balance - debt >= 22000) wins.
  *
- * Condition for the Winner: Reach a total asset of $22000 (balance - debt >= 22000)
+ * Tested in this Test Script:
+ *      Generator.generateCareerDeck()
+ *      Generator.generateSalaryDeck()
+ *      Generator.generateOrangeDeck()
+ *      Deck.displayDeck()
+ *      Deck.pickTopCrd()
+ *      Card.setOwner()
+ *      Card.setOtherPlayers()
+ *      Card.activate()
+ *      Player.setSalaryCard()
+ *      Player.setCareerCard()
+ *      Player.getBalance()
+ *      Player.getDebt()
+ *      Player.payBalance()
+ *      Player.addBalance()
  */
-public class TestDriver {
+public class Test1 {
     public static void main(String[] args) {
         Deck careerDeck = Generator.generateCareerDeck();
         Deck salaryDeck = Generator.generateSalaryDeck();
@@ -45,9 +61,10 @@ public class TestDriver {
             System.out.println(currentPlayer.getName() + " drew -> " + currentCard);
 //            currentCard.displayCard();
 
-            // sets the card owner and activates the card
+            // sets the cards owner and tracks the other players
             currentCard.setOwner(currentPlayer);
             currentCard.setOtherPlayers(players.toArray(new Player[0]));
+            // then activates the card
             currentCard.activate();
 
             // show player info and at the same time check if there's a winner
