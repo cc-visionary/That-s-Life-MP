@@ -13,15 +13,13 @@ final public class PayBankCard extends ActionCard {
 
     /**
      * Does the action of the ActionCard (Pay to the Bank)
-     * @param player       current Player who drew the card
-     * @param otherPlayers other Players
      */
     @Override
-    public void activate(Player player, Player[] otherPlayers) {
+    public void activate() {
         // deducts the amount indicated on the card to the player's balance
-        player.payBalance(getAmount());
+        getOwner().payBalance(getAmount());
 
-        System.out.println(player.getName() + " paid $" + getAmount() + " to the bank");
+        System.out.println(getOwner().getName() + " paid $" + getAmount() + " to the bank");
     }
 
     @Override

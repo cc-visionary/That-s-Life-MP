@@ -13,15 +13,13 @@ final public class CollectBankCard extends ActionCard {
 
     /**
      * Does the action of the ActionCard (Collect from Bank)
-     * @param player       current Player who drew the card
-     * @param otherPlayers other Players
      */
     @Override
-    public void activate(Player player, Player[] otherPlayers) {
+    public void activate() {
         // adds the amount to the balance of the person who drew the card
-        player.addBalance(getAmount());
+        getOwner().addBalance(getAmount());
 
-        System.out.println(player.getName() + " received $" + getAmount() + " from the bank");
+        System.out.println(getOwner().getName() + " received $" + getAmount() + " from the bank");
     }
 
     @Override

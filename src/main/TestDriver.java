@@ -12,6 +12,8 @@ import java.util.ArrayList;
 /**
  * Represents the Application's Test Script where in
  * different classes may be tested to interact each other, etc.
+ *
+ * Condition for the Winner: Reach a total asset of $22000 (balance - debt >= 22000)
  */
 public class TestDriver {
     public static void main(String[] args) {
@@ -29,25 +31,24 @@ public class TestDriver {
         }
 
         Deck orangeDeck = Generator.generateOrangeDeck();
+        System.out.println(orangeDeck);
+        orangeDeck.displayDeck();
         int turn = 0;
 //        Deck blueDeck = Generator.generateBlueDeck(nPlayers);
         while(orangeDeck.hasCard()) {
             Player currentPlayer = players.get(turn);
-            ArrayList<Player> otherPlayers = new ArrayList<Player>();
-
-            for(Player player : players) {
-                if(!player.equals(currentPlayer)) {
-                    otherPlayers.add(player);
-                }
-            }
 
             System.out.println("\n" + currentPlayer.getName() + "'s turn: ");
 
+            // picks the top card and assigns it to the currentPlayer
             ActionCard currentCard = (ActionCard) orangeDeck.pickTopCard();
             System.out.println(currentPlayer.getName() + " drew -> " + currentCard);
 //            currentCard.displayCard();
 
-            currentCard.activate(currentPlayer, otherPlayers.toArray(new Player[0]));
+            // sets the card owner and activates the card
+            currentCard.setOwner(currentPlayer);
+            currentCard.setOtherPlayers(players.toArray(new Player[0]));
+            currentCard.activate();
 
             // show player info and at the same time check if there's a winner
             System.out.println("Player Stats:");
@@ -59,6 +60,7 @@ public class TestDriver {
                     break;
                 }
             }
+            System.out.println(orangeDeck);
 
             InputUtil.waitForAnyKey();
 

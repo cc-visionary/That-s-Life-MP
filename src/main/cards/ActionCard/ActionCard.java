@@ -28,7 +28,7 @@ public abstract class ActionCard extends Card {
         return amount;
     }
 
-    public abstract void activate(Player player, Player[] otherPlayers);
+    public abstract void activate();
 
     /**
      * This method displays the card into a 14(max height) x 25(width) unit layout

@@ -13,20 +13,18 @@ final public class CollectAllCard extends ActionCard {
 
     /**
      * Does the action of the ActionCard (Collect from All the Players)
-     * @param player       current Player who drew the card
-     * @param otherPlayers other Players
      */
     @Override
-    public void activate(Player player, Player[] otherPlayers) {
+    public void activate() {
         // deducts the amount of money to all the other players
-        for(Player otherPlayer : otherPlayers) {
+        for(Player otherPlayer : getOtherPlayers()) {
             otherPlayer.payBalance(getAmount());
         }
 
         // then gives all those money to the player who drew the card
-        player.addBalance(otherPlayers.length * getAmount());
+        getOwner().addBalance(getOtherPlayers().length * getAmount());
 
-        System.out.println(player.getName() + " received $" + getAmount() + " from all the other players. ($" + otherPlayers.length * getAmount() + ")");
+        System.out.println(getOwner().getName() + " received $" + getAmount() + " from all the other players. ($" + getOtherPlayers().length * getAmount() + ")");
     }
 
     @Override

@@ -13,20 +13,18 @@ final public class PayAllCard extends ActionCard {
 
     /**
      * Does the action of the ActionCard (Pay to All the Players)
-     * @param player       current Player who drew the card
-     * @param otherPlayers other Players
      */
     @Override
-    public void activate(Player player, Player[] otherPlayers) {
+    public void activate() {
         // deducts the number of players * amount from the player who drew the card's balance
-        player.payBalance(otherPlayers.length * getAmount());
+        getOwner().payBalance(getOtherPlayers().length * getAmount());
 
         // then gives it to all the other players seperately
-        for(Player otherPlayer : otherPlayers) {
+        for(Player otherPlayer : getOtherPlayers()) {
             otherPlayer.addBalance(getAmount());
         }
 
-        System.out.println(player.getName() + " paid all the other players $" + getAmount() + " each");
+        System.out.println(getOwner().getName() + " paid $" + getAmount() + " to all the other players($" + getOtherPlayers().length * getAmount() + ")");
     }
 
     @Override

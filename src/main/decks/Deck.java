@@ -4,6 +4,7 @@ import main.cards.Card;
 import main.utilities.RandomUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Represents the Deck
@@ -46,28 +47,10 @@ final public class Deck {
     }
 
     /**
-     * Shuffles the cards in the deck by
-     *  1. Choose a random Card from the Deck.
-     *  2. Add the randomly chosen Card to a temporary ArrayList.
-     *  3. Remove it from the Deck.
-     *  4. Repeat steps 1-3 until the Deck is empty.
-     *  5. Transfer the temporary values into the Deck.
+     * Shuffles the cards in the deck by using Collections.shuffle()
      */
     public void shuffle() {
-        ArrayList<Card> shuffledDeck = new ArrayList<Card>();
-
-        // chooses a random index for a card then add it to shuffledDeck
-        while(!isDeckEmpty()) {
-            // `cards.toArray(new Card[0])` converts the ArrayList<Card> into a Card[]
-            Card card = RandomUtil.chooseRandomCard(cards.toArray(new Card[0]));
-            shuffledDeck.add(card);
-            cards.remove(card);
-        }
-
-        // adds all the shuffled deck back to the card
-        for(Card card : shuffledDeck) {
-            cards.add(card);
-        }
+        Collections.shuffle(cards);
     }
 
     public boolean hasCard() {
@@ -80,7 +63,7 @@ final public class Deck {
     public void displayDeck() {
         for(int i = 0; i < cards.size(); i++) {
             Card card = cards.get(i);
-            System.out.println((i + 1) + " | " + card.getType() + " | " + card.getName());
+            System.out.println(card);
         }
     }
 
