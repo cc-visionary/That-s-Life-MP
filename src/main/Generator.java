@@ -190,9 +190,14 @@ public class Generator {
         return blueDeck;
     }
 
+    /**
+     * Generate the HouseDeck composed of House Card
+     * @return generated House Deck
+     */
     public static Deck generateHouseDeck() {
         Deck houseDeck = new Deck("House Deck");
 
+        // add house cards to the Deck
         houseDeck.addCard(new HouseCard("Mansion", "", 50000));
         houseDeck.addCard(new HouseCard("Penthouse", "", 25000));
         houseDeck.addCard(new HouseCard("Condomenium", "", 10000));
@@ -202,7 +207,7 @@ public class Generator {
     }
 
     /**
-     * <p>Generates the Board (of Paths)</p>
+     * <p>Generates the Board (of Paths). A path can be generated with left and right nodes (path1 and path2) or none.</p>
      * <p>Note: the Path has to be generated from the End of the Board to the Start</p>
      * <a href="https://app.lucidchart.com/invitations/accept/151b81a7-1b87-4ad8-8a07-25f41bef561c">Link to UML</a>
      * @return array with length 2 where index 0 = Starting Career Path, index 1 = Starting College Path
@@ -244,8 +249,8 @@ public class Generator {
 
     /**
      * Generates a Career Path
-     * @param path1 path1 to be passed unto the Career Path
-     * @param path2 path2 to be passed unto the Career Path
+     * @param path1 path1/left node to be passed unto the Career Path
+     * @param path2 path2/right node to be passed unto the Career Path
      * @return career path that was generated
      */
     public static Path generateCareerPath(Path path1, Path path2) {
@@ -265,14 +270,15 @@ public class Generator {
 
     /**
      * Generates a College Path
-     * @param path1 path1 to be passed unto the College Path
-     * @param path2 path2 to be passed unto the College Path
+     * @param path1 path1/left node to be passed unto the College Path
+     * @param path2 path2/right node to be passed unto the College Path
      * @return generated College Path
      */
     public static Path generateCollegePath(Path path1, Path path2) {
         collegePathCount++;
         int nSpaces = RandomUtil.chooseRandomNumber(20, 30);
         ArrayList<Space> spaces = new ArrayList<Space>();
+        // adds Orange Spaces
         for(int i = 0; i < nSpaces - 2; i++) {
             spaces.add(new OrangeSpace());
         }
@@ -283,8 +289,8 @@ public class Generator {
 
     /**
      * Generates a Change a Career Path
-     * @param path1 path1 to be passed unto the Change a Career Path
-     * @param path2 path2 to be passed unto the Change a Career Path
+     * @param path1 path1/left node to be passed unto the Change a Career Path
+     * @param path2 path2/right node to be passed unto the Change a Career Path
      * @return generated Change a Career Path
      */
     public static Path generateChangeCareerPath(Path path1, Path path2) {
@@ -292,9 +298,9 @@ public class Generator {
         int nSpaces = RandomUtil.chooseRandomNumber(20, 30);
         boolean hasCareerSpace, hasOrangeSpace, hasPayDaySpace, hasPayRaiseSpace, hasBlueSpace, hasJunction;
         ArrayList<Space> spaces = new ArrayList<Space>();
-        spaces.add(new CollegeCareerChoiceSpace());
+        // generate the spaces randomly
         for(int i = 0; i < nSpaces - 3; i++) {
-            switch(RandomUtil.chooseRandomNumber(1, 3)) {
+            switch(RandomUtil.chooseRandomNumber(1, 5)) {
                 case 1:
                     spaces.add(new OrangeSpace());
                     break;
@@ -303,6 +309,12 @@ public class Generator {
                     break;
                 case 3:
                     spaces.add(new PayRaiseSpace(RandomUtil.chooseRandomNumber(1, 10) * 500));
+                    break;
+                case 4:
+                    spaces.add(new CollegeCareerChoiceSpace());
+                    break;
+                case 5:
+                    spaces.add(new BlueSpace());
                     break;
             }
         }
@@ -315,15 +327,14 @@ public class Generator {
 //            } else if(space.getType() == "Blue Space") hasBlueSpace = true;
 //            else if(space.getType() == "Orange Space") hasOrangeSpace = true;
 //        }
-        spaces.add(new BlueSpace());
         spaces.add(new WhichPathSpace());
         return new Path("Change Career Path", "ccp" + changeChareerPathCount, spaces.toArray(new Space[0]), path1, path2);
     }
 
     /**
      * Generates a Start a Family Path
-     * @param path1 path1 to be passed unto the Start a Family Path
-     * @param path2 path2 to be passed unto the Start a Family Path
+     * @param path1 path1/left node to be passed unto the Start a Family Path
+     * @param path2 path2/right node to be passed unto the Start a Family Path
      * @return generated Start a Family Path
      */
     public static Path generateStartAFamilyPath(Path path1, Path path2) {
@@ -331,6 +342,7 @@ public class Generator {
         int nSpaces = RandomUtil.chooseRandomNumber(20, 30);
         boolean hasMarried = false, hasBuyAHouse = false, hasBaby = false, hasBlue = false;
         ArrayList<Space> spaces = new ArrayList<Space>();
+        // generate the spaces randomly
         for(int i = 0; i < nSpaces - 1; i++) {
             switch(RandomUtil.chooseRandomNumber(1, 5)) {
                 case 1:

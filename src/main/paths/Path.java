@@ -5,8 +5,7 @@ import main.spaces.Space;
 import java.util.ArrayList;
 
 /**
- * Represents the Path
- *      which stores List of Spaces
+ * Represents the Path which stores List of Spaces and its connecting Paths path1(left node), and path2(right node)
  * @see Space
  */
 
@@ -61,6 +60,14 @@ final public class Path {
     }
 
     /**
+     * Gets the Junction located at the last space
+     * @return the Which Path space
+     */
+    public Space getJunction() {
+        return spaces[getNSpaces() - 1];
+    }
+
+    /**
      * Add a player to the list of the players of the Path
      * @param player the player to be added
      */
@@ -82,6 +89,6 @@ final public class Path {
 
     @Override
     public String toString() {
-        return String.format("Path{name=%s,uniqueName=%s,nSpaces=%d,path1=%s,path2=%s}", name, uniqueName, spaces.length, path1, path2);
+        return String.format("Path{name=%s,uniqueName=%s,nSpaces=%d}", getName(), getUniqueName(), getNSpaces());
     }
 }

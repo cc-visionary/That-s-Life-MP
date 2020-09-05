@@ -18,9 +18,9 @@ import java.util.ArrayList;
  * <h1>Sequence</h1>
  * <ol>
  *     <li>Generate CareerDeck and SalaryDeck</li>
- *     <li>Generate Players and assign the top CareerCard and SalaryCard of both CareerDeck and SalaryDeck</li>
  *     <li>Generate OrangeDeck (composed of ActionCards), BlueDeck (composed of BlueCard), and HouseDeck (composed of HouseCards)</li>
- *     <li>Generate Board</li>
+ *     <li>Generate Board, returning the 2 starting Paths Career Path and College Path</li>
+ *     <li>Generate Players let them choose their starting Path</li>
  *     <li>Let Players take turns to roll a dice to cross the board</li>
  * </ol>
  *
@@ -34,13 +34,6 @@ public class Test6 {
         // asks the user for the number of players (makes sures that the input is only integers {1, 2, 3})
         int nPlayers = InputUtil.scanInt("Enter number of Players: ", 1, 3);
         boolean hasWinner = false;
-
-        ArrayList<Player> players = new ArrayList<Player>();
-        for(int i = 0; i < nPlayers; i++) {
-            CareerCard careerCard = (CareerCard) careerDeck.pickTopCard();
-            SalaryCard salaryCard = (SalaryCard) salaryDeck.pickTopCard();
-            players.add(new Player("P" + (i + 1), careerCard, salaryCard));
-        }
 
         Deck orangeDeck = Generator.generateOrangeDeck();
         System.out.println(orangeDeck);
@@ -58,6 +51,33 @@ public class Test6 {
         Path careerPath = startingPaths[0];
         Path collegePath = startingPaths[1];
 
+        ArrayList<Player> players = new ArrayList<Player>();
+        for(int i = 0; i < nPlayers; i++) {
+            System.out.println("Choose Starting Path for " + "P" + (i + 1) + ":");
+            System.out.println("\t[1] Career Path");
+            System.out.println("\t[2] College Path");
+            int choice = InputUtil.scanInt("Choice: ", 1, 2);
+            switch(choice) {
+                case 1:
+                    CareerCard careerCard = (CareerCard) careerDeck.pickTopCard();
+                    SalaryCard salaryCard = (SalaryCard) salaryDeck.pickTopCard();
+                    players.add(new Player("P" + (i + 1), careerPath, careerCard, salaryCard));
+                    break;
+                case 2:
+                    players.add(new Player("P" + (i + 1), collegePath));
+                    break;
+            }
+        }
 
+        int turn = 0;
+        while(true) {
+            Player currentPlayer = players.get(turn);
+
+            currentPlayer.chooseMove();
+
+            for(Player player : players) System.out.println(player);
+            turn++;
+            if(turn == nPlayers) turn = 0;
+        }
     }
 }

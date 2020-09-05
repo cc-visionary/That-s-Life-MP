@@ -1,9 +1,11 @@
 package main.players;
+import com.sun.xml.internal.bind.util.Which;
 import main.cards.CareerCard.CareerCard;
 import main.cards.HouseCard.HouseCard;
 import main.cards.SalaryCard.SalaryCard;
 import main.paths.Path;
 
+import main.spaces.MagentaSpace.WhichPathSpace;
 import main.spaces.Space;
 import main.utilities.InputUtil;
 import main.utilities.RandomUtil;
@@ -25,12 +27,12 @@ final public class Player {
     private HouseCard houseCard;
     private boolean isMarried = false, hasGraduated = false, isRetired = false;
     private int nBabies = 0;
-    private double balance = 20000, debt;
+    private double balance = 200000, debt;
     private int nBankLoan = 0;
 
-    public Player(String name, Path path, CareerCard careerCard, SalaryCard salaryCard) {
+    public Player(String name, Path careerPath, CareerCard careerCard, SalaryCard salaryCard) {
         this.name = name;
-        this.path = path;
+        this.path = careerPath;
         this.careerCard = careerCard;
         this.salaryCard = salaryCard;
         this.playerCount++;
@@ -45,34 +47,45 @@ final public class Player {
         this.nthPlayer = this.playerCount;
     }
 
-    public Player(String name) {
+    public Player(String name, Path collegePath) {
         this.name = name;
+        this.path = collegePath;
         this.playerCount++;
         this.nthPlayer = this.playerCount;
+        bankLoan();
+        bankLoan();
     }
 
+    /**
+     * Allows the Player to choose a move
+     */
     public void chooseMove() {
-        int maxChoice = 2;
-        System.out.println("Choose your move:");
-        System.out.println("\t[1] Roll Dice");
-        System.out.println("\t[2] View Stats");
-        if(this.debt > 0) {
-            System.out.println("\t[3] Pay Debt (" + this.debt + ")");
-            maxChoice++;
-        }
-        int choice = InputUtil.scanInt("Move:", 1, maxChoice);
-        switch(choice) {
-            case 1:
-                rollDice();
-                break;
-            case 2:
-                displayPlayerStats();
-                break;
-            case 3:
-                // Each payment is a multiple of 25000
-                break;
-            default:
-                System.out.println("Invalid move... (" + choice + ")");
+        boolean turnEnded = false;
+        System.out.println(getName() + "'s turn");
+        while(!turnEnded) {
+            int maxChoice = 2;
+            System.out.println("Choose your move:");
+            System.out.println("\t[1] Roll Dice");
+            System.out.println("\t[2] View Stats");
+            if(this.debt > 0) {
+                System.out.println("\t[3] Pay Debt (" + this.debt + ")");
+                maxChoice++;
+            }
+            int choice = InputUtil.scanInt("Move:", 1, maxChoice);
+            switch(choice) {
+                case 1:
+                    rollDice();
+                    turnEnded = true;
+                    break;
+                case 2:
+                    displayPlayerStats();
+                    break;
+                case 3:
+                    // Each payment is a multiple of 25000
+                    break;
+                default:
+                    System.out.println("Invalid move... (" + choice + ")");
+            }
         }
     }
 
@@ -83,11 +96,21 @@ final public class Player {
      */
     public void rollDice() {
         int dice = RandomUtil.chooseRandomNumber(1, 10);
+        boolean endOfPath = false;
 
-        for(int i = 0; i < dice; i++) {
+        for(int i = 0; i < dice && !endOfPath; i++) {
             addLocation();
             Space currSpace = getPath().getSpaces()[location];
-            currSpace.displaySpace();
+            System.out.println(currSpace.getType() + " - " + currSpace.getName());
+            if(currSpace.getName() == "Which Path") {
+                endOfPath = true;
+            }
+        }
+
+        if(endOfPath) {
+            Path chosenPath = ((WhichPathSpace) getPath().getJunction()).choosePath(getPath());
+            setPath(chosenPath);
+            rollDice();
         }
     }
 
@@ -124,7 +147,7 @@ final public class Player {
      * Lets the user loan from the bank
      */
     public void bankLoan() {
-        System.out.println("Player loaned $20000 from the bank!");
+        System.out.println(getName() + " loaned $20000 from the bank!");
         this.debt += 20000;
         this.nBankLoan++;
     }
@@ -287,22 +310,15 @@ final public class Player {
         System.out.println("--------------------------------------------------");
         System.out.println("\tBalance: " + getBalance());
         System.out.println("\tDebt   : " + getDebt());
-        if(getSalaryCard() != null) {
-            System.out.println("\tSalary Card:" + getSalaryCard());
-        } else {
-            System.out.println("\tSalary Card: None");
-        }
-        if(getCareerCard() != null) {
-            System.out.println("\tCareer Card:" + getCareerCard());
-        } else {
-            System.out.println("\tCareer Card: None");
-        }
-        if(getHouseCard() != null) {
-            System.out.println("\tCareer Card:" + getCareerCard());
-        } else {
-            System.out.println("\tCareer Card: None");
-        }
+        System.out.println("\tSalary Card:" + (getSalaryCard() == null ? "None" : getSalaryCard()));
+        System.out.println("\tCareer Card:" + (getCareerCard() == null ? "None" : getCareerCard()));
+        System.out.println("\tHouse Card:" + (getHouseCard() == null ? "None" : getHouseCard()));
         System.out.println("\tCurrent Path: " + (getPath() == null ? "None" : getPath().getName()));
+        System.out.println("\tLocation: " + getLocation());
+        System.out.println("\tNumber of Babies: " + getNBabies());
+        System.out.println("\tMarried: " + (isMarried() ? "Yes" : "No"));
+        System.out.println("\tGraduated: " + (isGraduated() ? "Yes" : "No"));
+        System.out.println("\tRetired: " + (isRetired() ? "Yes" : "No"));
         System.out.println("--------------------------------------------------");
     }
 

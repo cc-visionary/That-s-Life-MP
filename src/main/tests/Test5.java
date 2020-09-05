@@ -11,11 +11,11 @@ import main.paths.Path;
  * <ol>
  *     <li>Generate the Board</li>
  *     <li>Seperately assign the 2 starting paths to their respective variables</li>
- *     <li>Traverse both Career Path and College Path</li>
- *     <li>Print both</li>
+ *     <li>Apply Pre-Order Traversal in both Career Path and College Path</li>
  * </ol>
  *
- * <p>This proves that the Board generation works.</p>
+ * <p>This proves that the Board generation works and the path produced is the same with the
+ * <a href="https://app.lucidchart.com/invitations/accept/151b81a7-1b87-4ad8-8a07-25f41bef561c">Path Schema</a>.</p>
  */
 public class Test5 {
     public static void main(String[] args) {
@@ -23,11 +23,17 @@ public class Test5 {
         Path careerPath = startingPaths[0];
         Path collegePath = startingPaths[1];
 
-        Path currPath = careerPath;
-        do {
+        System.out.println("Pre-order Traversal for Career Path");
+        preorderTraversal(careerPath);
+        System.out.println("\nPre-order Traversal for College Path");
+        preorderTraversal(collegePath);
+    }
 
-        } while(currPath.getPath1() != null || currPath.getPath2() != null);
-        System.out.println(careerPath);
-        System.out.println(collegePath);
+    public static void preorderTraversal(Path path) {
+        if(path != null) {
+            System.out.println(path.getUniqueName());
+            preorderTraversal(path.getPath1());
+            preorderTraversal(path.getPath2());
+        }
     }
 }
