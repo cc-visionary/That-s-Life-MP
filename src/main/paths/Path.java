@@ -1,5 +1,8 @@
 package main.paths;
+import main.players.Player;
 import main.spaces.Space;
+
+import java.util.ArrayList;
 
 /**
  * Represents the Path
@@ -8,12 +11,30 @@ import main.spaces.Space;
  */
 
 final public class Path {
-    private String type = "Path", name;
+    private static int pathCount = 0;
+    private String type = "Path", name, uniqueName;
     private Space spaces[];
+    private ArrayList<Player> players;
+    private Path path1, path2;
 
-    public Path(String name, Space[] spaces) {
+    public Path(String name, Space[] spaces, Path path1, Path path2) {
+        this.uniqueName = name + " - " + pathCount;
         this.name = name;
         this.spaces = spaces;
+        this.path1 = path1;
+        this.path2 = path2;
+        this.players = new ArrayList<Player>();
+    }
+
+    public Path(String name, Space[] spaces) {
+        this.uniqueName = name + " - " + pathCount;
+        this.name = name;
+        this.spaces = spaces;
+        this.players = new ArrayList<Player>();
+    }
+
+    public String getUniqueName() {
+        return uniqueName;
     }
 
     public String getName() {
@@ -28,6 +49,41 @@ final public class Path {
         return spaces;
     }
 
+    public Path getPath1() {
+        return path1;
+    }
+
+    public Path getPath2() {
+        return path2;
+    }
+
+    public int getNSpaces() {
+        return spaces.length;
+    }
+
+    public int getPathCount() {
+        return pathCount;
+    }
+
+    /**
+     * Add a player to the list of the players of the Path
+     * @param player the player to be added
+     */
+    public void addPlayer(Player player) {
+        this.players.add(player);
+    }
+
+    /**
+     * Removes a player from the list of the players of the Path
+     * @param player the player to be removed
+     */
+    public void removePlayer(Player player) {
+        this.players.remove(player);
+    }
+
+    /**
+     * @return a boolean true or false which determine whether a user has reached a junction or not
+     */
     public boolean hasReachedJunction() {
         return true;
     }

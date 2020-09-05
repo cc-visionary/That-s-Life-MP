@@ -6,6 +6,7 @@ import main.cards.Card;
 import main.cards.CareerCard.CareerCard;
 import main.cards.SalaryCard.SalaryCard;
 import main.decks.Deck;
+import main.paths.Path;
 import main.utilities.RandomUtil;
 
 /**
@@ -174,5 +175,9 @@ public class Generator {
         blueDeck.shuffle();
 
         return blueDeck;
+    }
+
+    public static void generatePath() {
+//        Path path = new Path();
     }
 }

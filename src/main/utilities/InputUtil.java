@@ -33,6 +33,22 @@ public class InputUtil {
         return input;
     }
 
+    public static double scanDouble(String message, double lowerBound, double upperBound) {
+        Scanner scanner = new Scanner(System.in);
+        double input = lowerBound - 1;
+        do {
+            System.out.print(message);
+            if (scanner.hasNextDouble()) // only accept integer inputs, and denies string inputs
+                input = scanner.nextDouble();
+            else {
+                System.out.println("Invalid input. Please enter a number from " + lowerBound + " to " + upperBound + "...\n");
+                scanner.next();
+                continue;
+            }
+        } while(input < lowerBound || input > upperBound);
+        return input;
+    }
+
     public static void waitForEnterKey() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please press Enter to proceed...");

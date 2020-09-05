@@ -4,6 +4,8 @@ import main.cards.HouseCard.HouseCard;
 import main.cards.SalaryCard.SalaryCard;
 import main.paths.Path;
 
+import main.spaces.Space;
+import main.utilities.InputUtil;
 import main.utilities.RandomUtil;
 
 import java.util.ArrayList;
@@ -13,16 +15,18 @@ import java.util.ArrayList;
  */
 
 final public class Player {
+    private static int playerCount;
+    private int nthPlayer;
     private String name;
     private Path path;
+    private int location = 0;
     private SalaryCard salaryCard;
     private CareerCard careerCard;
     private HouseCard houseCard;
-    private int nthPlayer;
-    private boolean isMarried = false, hasGraduated = false;
+    private boolean isMarried = false, hasGraduated = false, isRetired = false;
     private int nBabies = 0;
     private double balance = 20000, debt;
-    private static int playerCount;
+    private int nBankLoan = 0;
 
     public Player(String name, Path path, CareerCard careerCard, SalaryCard salaryCard) {
         this.name = name;
@@ -47,12 +51,44 @@ final public class Player {
         this.nthPlayer = this.playerCount;
     }
 
+    public void chooseMove() {
+        int maxChoice = 2;
+        System.out.println("Choose your move:");
+        System.out.println("\t[1] Roll Dice");
+        System.out.println("\t[2] View Stats");
+        if(this.debt > 0) {
+            System.out.println("\t[3] Pay Debt (" + this.debt + ")");
+            maxChoice++;
+        }
+        int choice = InputUtil.scanInt("Move:", 1, maxChoice);
+        switch(choice) {
+            case 1:
+                rollDice();
+                break;
+            case 2:
+                displayPlayerStats();
+                break;
+            case 3:
+                // Each payment is a multiple of 25000
+                break;
+            default:
+                System.out.println("Invalid move... (" + choice + ")");
+        }
+    }
+
     /**
      * Allows the use to roll and dice and generate a random number from 1-6
+     * Moves the player  by the number of spaces
      * @return the rolled dice/randomly generated number (1-6)
      */
-    public int rollDice() {
-        return RandomUtil.chooseRandomNumber(1, 6);
+    public void rollDice() {
+        int dice = RandomUtil.chooseRandomNumber(1, 6);
+
+        for(int i = 0; i < dice; i++) {
+            addLocation();
+            Space currSpace = getPath().getSpaces()[location];
+            currSpace.displaySpace();
+        }
     }
 
     /**
@@ -71,19 +107,26 @@ final public class Player {
     public void payBalance(double amount) {
         if(amount > this.balance) {
             System.out.printf("The balance to be paid is greater than %s's current balance.\n", name);
-            addDebt(amount - this.balance); // add to debt from the bank
-            this.balance = 0;
-        } else {
-            this.balance -= amount;
+            bankLoan(); // add to debt from the bank
         }
+        this.balance -= amount;
     }
 
     /**
-     * Adds a parameter amount to the debt
-     * @param amount amount to be added
+     * Increments the location of the player
+     * This determines the Player's location on the Path
      */
-    public void addDebt(double amount) {
-        this.debt += amount;
+    public void addLocation() {
+        this.location++;
+    }
+
+    /**
+     * Lets the user loan from the bank
+     */
+    public void bankLoan() {
+        System.out.println("Player loaned $20000 from the bank!");
+        this.debt += 20000;
+        this.nBankLoan++;
     }
 
     /**
@@ -107,7 +150,12 @@ final public class Player {
      * @param path the path to be assigned to the player's path
      */
     public void setPath(Path path) {
+        if(this.path != null) {
+            this.path.removePlayer(this);
+        }
         this.path = path;
+        this.path.addPlayer(this);
+        this.location = 0;
     }
 
     /**
@@ -129,19 +177,27 @@ final public class Player {
     }
 
     /**
-     * Assigns a boolean value to isMarried
-     * @param married determines whether a Player is married or not
+     * Changes the value of whether the Player is married or not
+     * @param isMarried determines whether a Player is married or not
      */
-    public void setMarried(boolean married) {
-        isMarried = married;
+    public void setIsMarried(boolean isMarried) {
+        this.isMarried = isMarried;
     }
 
     /**
-     * Assigns a boolean value to hasGraduated
+     * Changes the value of whether the Player has graduated or not
      * @param hasGraduated determines whether a Player is graduated or not
      */
     public void setHasGraduated(boolean hasGraduated) {
         this.hasGraduated = hasGraduated;
+    }
+
+    /**
+     * Changes the value of whether the Player is retired or not
+     * @param isRetired value to be set to isRetired
+     */
+    public void setIsRetired(boolean isRetired) {
+        this.isRetired = isRetired;
     }
 
     /**
@@ -157,6 +213,7 @@ final public class Player {
     public void removeCareerCard() {
         this.careerCard = null;
     }
+
 
     public String getName() {
         return name;
@@ -176,6 +233,9 @@ final public class Player {
     public CareerCard getCareerCard() {
         return this.careerCard;
     }
+    public HouseCard getHouseCard() {
+        return houseCard;
+    }
     public static int getPlayerCount() {
         return playerCount;
     }
@@ -185,6 +245,13 @@ final public class Player {
     public int getNBabies() {
         return nBabies;
     }
+    public int getLocation() {
+        return location;
+    }
+
+    public int getNBankLoan() {
+        return nBankLoan;
+    }
 
     public boolean isGraduated() {
         return hasGraduated;
@@ -192,6 +259,10 @@ final public class Player {
 
     public boolean isMarried() {
         return isMarried;
+    }
+
+    public boolean isRetired() {
+        return isRetired;
     }
 
     /**
@@ -218,14 +289,16 @@ final public class Player {
         System.out.println("\tDebt   : " + getDebt());
         if(getSalaryCard() != null) {
             System.out.println("\tSalary Card:" + getSalaryCard());
-//            getSalaryCard().displayCard();
         } else {
             System.out.println("\tSalary Card: None");
         }
-
         if(getCareerCard() != null) {
             System.out.println("\tCareer Card:" + getCareerCard());
-//            getCareerCard().displayCard();
+        } else {
+            System.out.println("\tCareer Card: None");
+        }
+        if(getHouseCard() != null) {
+            System.out.println("\tCareer Card:" + getCareerCard());
         } else {
             System.out.println("\tCareer Card: None");
         }

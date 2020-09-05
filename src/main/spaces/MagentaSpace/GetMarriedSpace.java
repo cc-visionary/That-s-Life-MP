@@ -15,20 +15,28 @@ final public class GetMarriedSpace extends MagentaSpace {
     }
 
     /**
-     * If player is unmarried, let the Player marry and let the Player pay the wedding gift.
-     * @param player Player who landed in the Space
+     * If player is unmarried, let the Player marry and let the Player receive a wedding gift from all the other Players.
+     * @param player Player who landed in the Space, and will receive the wedding gift from all the other players.
+     * @param otherPlayers other players who will pay the player for the wedding gift.
      */
-    public void getMarried(Player player) {
+    public void getMarried(Player player, Player[] otherPlayers) {
         if(!player.isMarried()) {
-            int generatedNumber = RandomUtil.chooseRandomNumber(1, 100);
+            int generatedNumber = RandomUtil.chooseRandomNumber(1, 100), amount;
             if(generatedNumber % 2 == 0) {
-                player.payBalance(10000);
+                amount = 10000;
                 System.out.println("The generated number is " + generatedNumber + "(even) you pay $10000 for the wedding gift.");
             } else {
-                player.payBalance(5000);
+                amount = 5000;
                 System.out.println("The generated number is " + generatedNumber + "(odd) you pay $5000 for the wedding gift.");
             }
-            player.setMarried(true);
+            // reduces the amount from the balance of the other players
+            for(Player otherPlayer : otherPlayers) {
+                otherPlayer.payBalance(amount);
+            }
+
+            // adds those amount to the balance of the Player who landed on the space
+            player.addBalance(amount * otherPlayers.length);
+            player.setIsMarried(true);
         } else {
             System.out.println(player.getName() + " is already married! Nothing happens.");
         }
