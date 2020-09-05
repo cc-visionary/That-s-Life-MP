@@ -11,24 +11,23 @@ import java.util.ArrayList;
  */
 
 final public class Path {
-    private static int pathCount = 0;
     private String type = "Path", name, uniqueName;
     private Space spaces[];
     private ArrayList<Player> players;
     private Path path1, path2;
 
-    public Path(String name, Space[] spaces, Path path1, Path path2) {
-        this.uniqueName = name + " - " + pathCount;
+    public Path(String name, String uniqueName, Space[] spaces, Path path1, Path path2) {
         this.name = name;
+        this.uniqueName = uniqueName;
         this.spaces = spaces;
         this.path1 = path1;
         this.path2 = path2;
         this.players = new ArrayList<Player>();
     }
 
-    public Path(String name, Space[] spaces) {
-        this.uniqueName = name + " - " + pathCount;
+    public Path(String name, String uniqueName, Space[] spaces) {
         this.name = name;
+        this.uniqueName = uniqueName;
         this.spaces = spaces;
         this.players = new ArrayList<Player>();
     }
@@ -61,10 +60,6 @@ final public class Path {
         return spaces.length;
     }
 
-    public int getPathCount() {
-        return pathCount;
-    }
-
     /**
      * Add a player to the list of the players of the Path
      * @param player the player to be added
@@ -87,6 +82,6 @@ final public class Path {
 
     @Override
     public String toString() {
-        return String.format("Path{name=%s,nSpaces=%d,path1=%s,path2=%s}", name, spaces.length, path1, path2);
+        return String.format("Path{name=%s,uniqueName=%s,nSpaces=%d,path1=%s,path2=%s}", name, uniqueName, spaces.length, path1, path2);
     }
 }

@@ -4,6 +4,7 @@ import main.cards.ActionCard.*;
 import main.cards.BlueCard.*;
 import main.cards.Card;
 import main.cards.CareerCard.CareerCard;
+import main.cards.HouseCard.HouseCard;
 import main.cards.SalaryCard.SalaryCard;
 import main.decks.Deck;
 import main.paths.Path;
@@ -12,6 +13,7 @@ import main.spaces.GreenSpace.PayDaySpace;
 import main.spaces.GreenSpace.PayRaiseSpace;
 import main.spaces.MagentaSpace.*;
 import main.spaces.OrangeSpace.OrangeSpace;
+import main.spaces.RetirementSpace.RetirementSpace;
 import main.spaces.Space;
 import main.utilities.RandomUtil;
 
@@ -22,6 +24,8 @@ import java.util.Random;
  * consists of Generators to produce Decks, Spaces, Paths, etc.
  */
 public class Generator {
+    private static int careerPathCount = 0, collegePathCount = 0, changeChareerPathCount = 0, startAFamilyPathCount = 0;
+
     /**
      * Generates a Deck for Orange Space composed of ActionCards
      * @return the generated and shuffled Deck for Orange Space which composed of ActionCards
@@ -186,20 +190,67 @@ public class Generator {
         return blueDeck;
     }
 
-    public static Path generateCareerPath(int nSpaces) {
-        ArrayList<Space> spaces = new ArrayList<Space>();
-        int randomNumber = RandomUtil.chooseRandomNumber(0, nSpaces - 2);
-        for(int i = 0; i < nSpaces - 1; i++) {
-            // if random number matches the index, add a GetMarriedSpace
-            if(randomNumber == i) spaces.add(new GetMarriedSpace());
-            // else add an OrangeSpace
-            else spaces.add(new OrangeSpace());
-        }
-        spaces.add(new WhichPathSpace());
-        return new Path("Career Path", spaces.toArray(new Space[0]));
+    public static Deck generateHouseDeck() {
+        Deck houseDeck = new Deck("House Deck");
+
+        houseDeck.addCard(new HouseCard("Mansion", "", 50000));
+        houseDeck.addCard(new HouseCard("Penthouse", "", 25000));
+        houseDeck.addCard(new HouseCard("Condomenium", "", 10000));
+        houseDeck.addCard(new HouseCard("Normal House", "", 5000));
+
+        return houseDeck;
     }
 
-    public static Path generateCareerPath(int nSpaces, Path path1, Path path2) {
+    /**
+     * <p>Generates the Board (of Paths)</p>
+     * <p>Note: the Path has to be generated from the End of the Board to the Start</p>
+     * <a href="https://app.lucidchart.com/invitations/accept/151b81a7-1b87-4ad8-8a07-25f41bef561c">Link to UML</a>
+     * @return array with length 2 where index 0 = Starting Career Path, index 1 = Starting College Path
+     */
+    public static Path[] generateBoard() {
+        // depth 6
+        Path rp = generateRetirementPath();
+
+        // depth 5
+        Path cap1 = generateCareerPath(rp, null);
+        Path safp1 = generateStartAFamilyPath(rp, null);
+        Path safp2 = generateStartAFamilyPath(rp, null);
+
+        // depth 4
+        Path safp3 = generateStartAFamilyPath(cap1, safp1);
+        Path cap2 = generateCareerPath(safp2, null);
+        Path ccp1 = generateChangeCareerPath(safp2, null);
+
+        // depth 3
+        Path cap3 = generateCareerPath(safp3, null);
+        Path ccp2 = generateChangeCareerPath(safp3, cap2);
+        Path cap4 = generateCareerPath(cap2, ccp1);
+
+        // depth 2
+        Path ccp3 = generateChangeCareerPath(cap3, null);
+        Path cap5 = generateCareerPath(cap3, ccp2);
+        Path cap6 = generateCareerPath(ccp2, cap4);
+        Path ccp4 = generateChangeCareerPath(cap4, null);
+
+        // depth 1
+        Path cap7 = generateCareerPath(ccp3, cap5);
+        Path cop1 = generateCollegePath(cap5, null);
+        Path cap8 = generateCareerPath(cap6, ccp4);
+
+        // depth 0
+        Path startingPaths[] = {generateCareerPath(cap7, cop1), generateCollegePath(cap8, null)};
+        return startingPaths;
+    }
+
+    /**
+     * Generates a Career Path
+     * @param path1 path1 to be passed unto the Career Path
+     * @param path2 path2 to be passed unto the Career Path
+     * @return career path that was generated
+     */
+    public static Path generateCareerPath(Path path1, Path path2) {
+        careerPathCount++;
+        int nSpaces = RandomUtil.chooseRandomNumber(20, 35);
         ArrayList<Space> spaces = new ArrayList<Space>();
         int randomNumber = RandomUtil.chooseRandomNumber(0, nSpaces - 2);
         for(int i = 0; i < nSpaces - 1; i++) {
@@ -209,51 +260,36 @@ public class Generator {
             else spaces.add(new OrangeSpace());
         }
         spaces.add(new WhichPathSpace());
-        return new Path("Career Path", spaces.toArray(new Space[0]), path1, path2);
+        return new Path("Career Path", "cap" + careerPathCount, spaces.toArray(new Space[0]), path1, path2);
     }
 
-    public static Path generateCollegePath(int nSpaces) {
+    /**
+     * Generates a College Path
+     * @param path1 path1 to be passed unto the College Path
+     * @param path2 path2 to be passed unto the College Path
+     * @return generated College Path
+     */
+    public static Path generateCollegePath(Path path1, Path path2) {
+        collegePathCount++;
+        int nSpaces = RandomUtil.chooseRandomNumber(20, 30);
         ArrayList<Space> spaces = new ArrayList<Space>();
         for(int i = 0; i < nSpaces - 2; i++) {
             spaces.add(new OrangeSpace());
         }
         spaces.add(new CollegeCareerChoiceSpace());
         spaces.add(new WhichPathSpace());
-        return new Path("College Path", spaces.toArray(new Space[0]));
+        return new Path("College Path", "cop" + collegePathCount, spaces.toArray(new Space[0]), path1, path2);
     }
 
-    public static Path generateCollegePath(int nSpaces, Path path1, Path path2) {
-        ArrayList<Space> spaces = new ArrayList<Space>();
-        for(int i = 0; i < nSpaces - 2; i++) {
-            spaces.add(new OrangeSpace());
-        }
-        spaces.add(new CollegeCareerChoiceSpace());
-        spaces.add(new WhichPathSpace());
-        return new Path("College Path", spaces.toArray(new Space[0]), path1, path2);
-    }
-
-    public static Path generateChangeCareerPath(int nSpaces) {
-        ArrayList<Space> spaces = new ArrayList<Space>();
-        spaces.add(new CollegeCareerChoiceSpace());
-        for(int i = 0; i < nSpaces - 3; i++) {
-            switch(RandomUtil.chooseRandomNumber(1, 3)) {
-                case 1:
-                    spaces.add(new OrangeSpace());
-                    break;
-                case 2:
-                    spaces.add(new PayDaySpace());
-                    break;
-                case 3:
-                    spaces.add(new PayRaiseSpace(RandomUtil.chooseRandomNumber(1, 10) * 500));
-                    break;
-            }
-        }
-        spaces.add(new BlueSpace());
-        spaces.add(new WhichPathSpace());
-        return new Path("Change Career Path", spaces.toArray(new Space[0]));
-    }
-
-    public static Path generateChangeCareerPath(int nSpaces, Path path1, Path path2) {
+    /**
+     * Generates a Change a Career Path
+     * @param path1 path1 to be passed unto the Change a Career Path
+     * @param path2 path2 to be passed unto the Change a Career Path
+     * @return generated Change a Career Path
+     */
+    public static Path generateChangeCareerPath(Path path1, Path path2) {
+        changeChareerPathCount++;
+        int nSpaces = RandomUtil.chooseRandomNumber(20, 30);
         boolean hasCareerSpace, hasOrangeSpace, hasPayDaySpace, hasPayRaiseSpace, hasBlueSpace, hasJunction;
         ArrayList<Space> spaces = new ArrayList<Space>();
         spaces.add(new CollegeCareerChoiceSpace());
@@ -281,10 +317,18 @@ public class Generator {
 //        }
         spaces.add(new BlueSpace());
         spaces.add(new WhichPathSpace());
-        return new Path("Change Career Path", spaces.toArray(new Space[0]), path1, path2);
+        return new Path("Change Career Path", "ccp" + changeChareerPathCount, spaces.toArray(new Space[0]), path1, path2);
     }
 
-    public static Path generateStartAFamilyPath(int nSpaces) {
+    /**
+     * Generates a Start a Family Path
+     * @param path1 path1 to be passed unto the Start a Family Path
+     * @param path2 path2 to be passed unto the Start a Family Path
+     * @return generated Start a Family Path
+     */
+    public static Path generateStartAFamilyPath(Path path1, Path path2) {
+        startAFamilyPathCount++;
+        int nSpaces = RandomUtil.chooseRandomNumber(20, 30);
         boolean hasMarried = false, hasBuyAHouse = false, hasBaby = false, hasBlue = false;
         ArrayList<Space> spaces = new ArrayList<Space>();
         for(int i = 0; i < nSpaces - 1; i++) {
@@ -319,48 +363,16 @@ public class Generator {
             }
         }
         spaces.add(new WhichPathSpace());
-        return new Path("Start a Family Path", spaces.toArray(new Space[0]));
+        return new Path("Start a Family Path", "safp" + startAFamilyPathCount, spaces.toArray(new Space[0]), path1, path2);
     }
 
-    public static Path generateStartAFamilyPath(int nSpaces, Path path1, Path path2) {
-        boolean hasMarried = false, hasBuyAHouse = false, hasBaby = false, hasBlue = false;
+    public static Path generateRetirementPath() {
+        int nSpaces = RandomUtil.chooseRandomNumber(10, 40);
         ArrayList<Space> spaces = new ArrayList<Space>();
         for(int i = 0; i < nSpaces - 1; i++) {
-            switch(RandomUtil.chooseRandomNumber(1, 5)) {
-                case 1:
-                    if(!hasMarried) {
-                        spaces.add(new GetMarriedSpace());
-                        hasMarried = true;
-                        break;
-                    }
-                case 2:
-                    if(!hasBuyAHouse) {
-                        spaces.add(new BuyAHouseSpace());
-                        hasBuyAHouse = true;
-                        break;
-                    }
-                case 3:
-                    if(!hasBaby) {
-                        spaces.add(new HaveBabySpace(RandomUtil.chooseRandomNumber(1, 3)));
-                        hasBaby = true;
-                        break;
-                    }
-                case 4:
-                    if(!hasBlue) {
-                        spaces.add(new BlueSpace());
-                        hasBlue = true;
-                        break;
-                    }
-                case 5:
-                    spaces.add(new OrangeSpace());
-                    break;
-            }
+            spaces.add(new OrangeSpace());
         }
-        spaces.add(new WhichPathSpace());
-        return new Path("Start a Family Path", spaces.toArray(new Space[0]), path1, path2);
+        spaces.add(new RetirementSpace());
+        return new Path("Retirement Path", "rp", spaces.toArray(new Space[0]));
     }
-
-//    public static Path generateLastPath() {
-//        return new Path("")
-//    }
 }
