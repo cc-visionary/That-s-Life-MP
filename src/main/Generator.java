@@ -7,7 +7,16 @@ import main.cards.CareerCard.CareerCard;
 import main.cards.SalaryCard.SalaryCard;
 import main.decks.Deck;
 import main.paths.Path;
+import main.spaces.BlueSpace.BlueSpace;
+import main.spaces.GreenSpace.PayDaySpace;
+import main.spaces.GreenSpace.PayRaiseSpace;
+import main.spaces.MagentaSpace.*;
+import main.spaces.OrangeSpace.OrangeSpace;
+import main.spaces.Space;
 import main.utilities.RandomUtil;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * consists of Generators to produce Decks, Spaces, Paths, etc.
@@ -177,7 +186,181 @@ public class Generator {
         return blueDeck;
     }
 
-    public static void generatePath() {
-//        Path path = new Path();
+    public static Path generateCareerPath(int nSpaces) {
+        ArrayList<Space> spaces = new ArrayList<Space>();
+        int randomNumber = RandomUtil.chooseRandomNumber(0, nSpaces - 2);
+        for(int i = 0; i < nSpaces - 1; i++) {
+            // if random number matches the index, add a GetMarriedSpace
+            if(randomNumber == i) spaces.add(new GetMarriedSpace());
+            // else add an OrangeSpace
+            else spaces.add(new OrangeSpace());
+        }
+        spaces.add(new WhichPathSpace());
+        return new Path("Career Path", spaces.toArray(new Space[0]));
     }
+
+    public static Path generateCareerPath(int nSpaces, Path path1, Path path2) {
+        ArrayList<Space> spaces = new ArrayList<Space>();
+        int randomNumber = RandomUtil.chooseRandomNumber(0, nSpaces - 2);
+        for(int i = 0; i < nSpaces - 1; i++) {
+            // if random number matches the index, add a GetMarriedSpace
+            if(randomNumber == i) spaces.add(new GetMarriedSpace());
+                // else add an OrangeSpace
+            else spaces.add(new OrangeSpace());
+        }
+        spaces.add(new WhichPathSpace());
+        return new Path("Career Path", spaces.toArray(new Space[0]), path1, path2);
+    }
+
+    public static Path generateCollegePath(int nSpaces) {
+        ArrayList<Space> spaces = new ArrayList<Space>();
+        for(int i = 0; i < nSpaces - 2; i++) {
+            spaces.add(new OrangeSpace());
+        }
+        spaces.add(new CollegeCareerChoiceSpace());
+        spaces.add(new WhichPathSpace());
+        return new Path("College Path", spaces.toArray(new Space[0]));
+    }
+
+    public static Path generateCollegePath(int nSpaces, Path path1, Path path2) {
+        ArrayList<Space> spaces = new ArrayList<Space>();
+        for(int i = 0; i < nSpaces - 2; i++) {
+            spaces.add(new OrangeSpace());
+        }
+        spaces.add(new CollegeCareerChoiceSpace());
+        spaces.add(new WhichPathSpace());
+        return new Path("College Path", spaces.toArray(new Space[0]), path1, path2);
+    }
+
+    public static Path generateChangeCareerPath(int nSpaces) {
+        ArrayList<Space> spaces = new ArrayList<Space>();
+        spaces.add(new CollegeCareerChoiceSpace());
+        for(int i = 0; i < nSpaces - 3; i++) {
+            switch(RandomUtil.chooseRandomNumber(1, 3)) {
+                case 1:
+                    spaces.add(new OrangeSpace());
+                    break;
+                case 2:
+                    spaces.add(new PayDaySpace());
+                    break;
+                case 3:
+                    spaces.add(new PayRaiseSpace(RandomUtil.chooseRandomNumber(1, 10) * 500));
+                    break;
+            }
+        }
+        spaces.add(new BlueSpace());
+        spaces.add(new WhichPathSpace());
+        return new Path("Change Career Path", spaces.toArray(new Space[0]));
+    }
+
+    public static Path generateChangeCareerPath(int nSpaces, Path path1, Path path2) {
+        boolean hasCareerSpace, hasOrangeSpace, hasPayDaySpace, hasPayRaiseSpace, hasBlueSpace, hasJunction;
+        ArrayList<Space> spaces = new ArrayList<Space>();
+        spaces.add(new CollegeCareerChoiceSpace());
+        for(int i = 0; i < nSpaces - 3; i++) {
+            switch(RandomUtil.chooseRandomNumber(1, 3)) {
+                case 1:
+                    spaces.add(new OrangeSpace());
+                    break;
+                case 2:
+                    spaces.add(new PayDaySpace());
+                    break;
+                case 3:
+                    spaces.add(new PayRaiseSpace(RandomUtil.chooseRandomNumber(1, 10) * 500));
+                    break;
+            }
+        }
+//        for(Space space : spaces) {
+//            if(space.getType() == "Magenta Space") {
+//                if(space.getName() == "Which Path Space") hasJunction = true;
+//            } else if(space.getType() == "Green Space") {
+//                if(space.getName() == "Pay Day Space") hasPayDaySpace = true;
+//                else if(space.getName() == "Pay Raise Space") hasPayRaiseSpace = true;
+//            } else if(space.getType() == "Blue Space") hasBlueSpace = true;
+//            else if(space.getType() == "Orange Space") hasOrangeSpace = true;
+//        }
+        spaces.add(new BlueSpace());
+        spaces.add(new WhichPathSpace());
+        return new Path("Change Career Path", spaces.toArray(new Space[0]), path1, path2);
+    }
+
+    public static Path generateStartAFamilyPath(int nSpaces) {
+        boolean hasMarried = false, hasBuyAHouse = false, hasBaby = false, hasBlue = false;
+        ArrayList<Space> spaces = new ArrayList<Space>();
+        for(int i = 0; i < nSpaces - 1; i++) {
+            switch(RandomUtil.chooseRandomNumber(1, 5)) {
+                case 1:
+                    if(!hasMarried) {
+                        spaces.add(new GetMarriedSpace());
+                        hasMarried = true;
+                        break;
+                    }
+                case 2:
+                    if(!hasBuyAHouse) {
+                        spaces.add(new BuyAHouseSpace());
+                        hasBuyAHouse = true;
+                        break;
+                    }
+                case 3:
+                    if(!hasBaby) {
+                        spaces.add(new HaveBabySpace(RandomUtil.chooseRandomNumber(1, 3)));
+                        hasBaby = true;
+                        break;
+                    }
+                case 4:
+                    if(!hasBlue) {
+                        spaces.add(new BlueSpace());
+                        hasBlue = true;
+                        break;
+                    }
+                case 5:
+                    spaces.add(new OrangeSpace());
+                    break;
+            }
+        }
+        spaces.add(new WhichPathSpace());
+        return new Path("Start a Family Path", spaces.toArray(new Space[0]));
+    }
+
+    public static Path generateStartAFamilyPath(int nSpaces, Path path1, Path path2) {
+        boolean hasMarried = false, hasBuyAHouse = false, hasBaby = false, hasBlue = false;
+        ArrayList<Space> spaces = new ArrayList<Space>();
+        for(int i = 0; i < nSpaces - 1; i++) {
+            switch(RandomUtil.chooseRandomNumber(1, 5)) {
+                case 1:
+                    if(!hasMarried) {
+                        spaces.add(new GetMarriedSpace());
+                        hasMarried = true;
+                        break;
+                    }
+                case 2:
+                    if(!hasBuyAHouse) {
+                        spaces.add(new BuyAHouseSpace());
+                        hasBuyAHouse = true;
+                        break;
+                    }
+                case 3:
+                    if(!hasBaby) {
+                        spaces.add(new HaveBabySpace(RandomUtil.chooseRandomNumber(1, 3)));
+                        hasBaby = true;
+                        break;
+                    }
+                case 4:
+                    if(!hasBlue) {
+                        spaces.add(new BlueSpace());
+                        hasBlue = true;
+                        break;
+                    }
+                case 5:
+                    spaces.add(new OrangeSpace());
+                    break;
+            }
+        }
+        spaces.add(new WhichPathSpace());
+        return new Path("Start a Family Path", spaces.toArray(new Space[0]), path1, path2);
+    }
+
+//    public static Path generateLastPath() {
+//        return new Path("")
+//    }
 }

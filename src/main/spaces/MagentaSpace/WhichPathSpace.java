@@ -15,16 +15,20 @@ final public class WhichPathSpace extends MagentaSpace {
     }
 
     /**
-     * Junction where the Player can choose the current Path or a new Path
-     * @param currPath  current path to be chosen
-     * @param otherPath other path to be cosen
+     * Junction where the Player can choose between 2 Paths
+     * @param currPath  current path which is connected to 2 other path and choose from 1 of those
      * @return          path chosen by the Player
      */
-    public Path choosePath(Path currPath, Path otherPath) {
-        System.out.println("Paths to choose from:");
-        System.out.println("\t 1:" + currPath);
-        System.out.println("\t 2:" + otherPath);
-        int choice = InputUtil.scanInt("Enter Path:", 1, 2);
-        return choice == 1 ? currPath : otherPath;
+    public Path choosePath(Path currPath) {
+        // if path 2 is not null, allow the user to choose between the paths
+        if(currPath.getPath2() != null) {
+            System.out.println("Paths to choose from:");
+            System.out.println("\t 1:" + currPath.getPath1());
+            System.out.println("\t 2:" + currPath.getPath2());
+            int choice = InputUtil.scanInt("Enter Path:", 1, 2);
+            return choice == 1 ? currPath.getPath1() : currPath.getPath2();
+        }
+        // if not, automatically return the Path 1;
+        return currPath.getPath1();
     }
 }

@@ -81,19 +81,12 @@ final public class Path {
         this.players.remove(player);
     }
 
-    /**
-     * @return a boolean true or false which determine whether a user has reached a junction or not
-     */
-    public boolean hasReachedJunction() {
-        return true;
-    }
-
     public void displayPath() {
 
     }
 
     @Override
     public String toString() {
-        return String.format("Path{name=%s,nSpaces=%d}", name, spaces.length);
+        return String.format("Path{name=%s,nSpaces=%d,path1=%s,path2=%s}", name, spaces.length, path1, path2);
     }
 }

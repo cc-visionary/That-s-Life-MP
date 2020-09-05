@@ -82,7 +82,7 @@ final public class Player {
      * @return the rolled dice/randomly generated number (1-6)
      */
     public void rollDice() {
-        int dice = RandomUtil.chooseRandomNumber(1, 6);
+        int dice = RandomUtil.chooseRandomNumber(1, 10);
 
         for(int i = 0; i < dice; i++) {
             addLocation();
