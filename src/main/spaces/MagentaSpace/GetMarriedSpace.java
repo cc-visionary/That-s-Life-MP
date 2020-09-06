@@ -1,5 +1,6 @@
 package main.spaces.MagentaSpace;
 
+import main.Constants;
 import main.players.Player;
 import main.utilities.RandomUtil;
 
@@ -11,7 +12,7 @@ import main.utilities.RandomUtil;
 
 final public class GetMarriedSpace extends MagentaSpace {
     public GetMarriedSpace() {
-        super("Get Married");
+        super(Constants.GET_MARRIED);
     }
 
     /**

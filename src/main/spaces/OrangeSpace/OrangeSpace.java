@@ -1,6 +1,7 @@
 package main.spaces.OrangeSpace;
 
-import main.cards.Card;
+import main.Constants;
+import main.cards.ActionCard.ActionCard;
 import main.decks.Deck;
 import main.spaces.Space;
 
@@ -10,7 +11,7 @@ import main.spaces.Space;
  */
 final public class OrangeSpace extends Space {
     public OrangeSpace() {
-        super("Orange Space");
+        super(Constants.ORANGE_SPACE);
     }
 
     /**
@@ -18,10 +19,10 @@ final public class OrangeSpace extends Space {
      * @param orangeDeck orange deck to be drawn from
      * @return           top card from the orange deck
      */
-    public Card pickCard(Deck orangeDeck) {
-        Card pickedCard;
+    public ActionCard pickCard(Deck orangeDeck) {
+        ActionCard pickedCard;
         if(orangeDeck.getName() == "Orange Deck") {
-            pickedCard = orangeDeck.pickTopCard();
+            pickedCard = (ActionCard) orangeDeck.pickTopCard();
         } else {
             pickedCard = null;
             System.out.println("An incorrect deck(" + orangeDeck.getName() + ") was passed.");

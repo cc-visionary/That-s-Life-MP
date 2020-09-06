@@ -1,5 +1,6 @@
 package main.spaces.MagentaSpace;
 
+import main.Constants;
 import main.cards.Card;
 import main.cards.HouseCard.HouseCard;
 import main.decks.Deck;
@@ -13,7 +14,7 @@ import main.utilities.InputUtil;
 
 final public class BuyAHouseSpace extends MagentaSpace {
     public BuyAHouseSpace() {
-        super("Buy a House");
+        super(Constants.BUY_A_HOUSE);
     }
 
     /**

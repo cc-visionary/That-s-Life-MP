@@ -1,5 +1,6 @@
 package main.spaces.GreenSpace;
 
+import main.Constants;
 import main.players.Player;
 
 /**
@@ -9,7 +10,7 @@ import main.players.Player;
 
 final public class PayDaySpace extends GreenSpace {
     public PayDaySpace() {
-        super("Pay Day");
+        super(Constants.PAY_DAY);
     }
 
     /**

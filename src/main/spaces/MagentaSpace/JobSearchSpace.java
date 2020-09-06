@@ -1,5 +1,6 @@
 package main.spaces.MagentaSpace;
 
+import main.Constants;
 import main.cards.CareerCard.CareerCard;
 import main.cards.SalaryCard.SalaryCard;
 import main.decks.Deck;
@@ -11,9 +12,8 @@ import main.utilities.InputUtil;
  */
 final public class JobSearchSpace extends MagentaSpace {
     public JobSearchSpace() {
-        super("Job Search");
+        super(Constants.JOB_SEARCH);
     }
-
 
     /**
      * Draws the top CareerCard then allows the Player to choose whether to keep it or discard it

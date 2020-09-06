@@ -1,5 +1,6 @@
 package main.players;
 import com.sun.xml.internal.bind.util.Which;
+import main.Constants;
 import main.cards.CareerCard.CareerCard;
 import main.cards.HouseCard.HouseCard;
 import main.cards.SalaryCard.SalaryCard;
@@ -27,7 +28,7 @@ final public class Player {
     private HouseCard houseCard;
     private boolean isMarried = false, hasGraduated = false, isRetired = false;
     private int nBabies = 0;
-    private double balance = 200000, debt;
+    private double balance = Constants.STARTING_MONEY, debt;
     private int nBankLoan = 0;
 
     public Player(String name, Path careerPath, CareerCard careerCard, SalaryCard salaryCard) {
@@ -52,14 +53,18 @@ final public class Player {
         this.path = collegePath;
         this.playerCount++;
         this.nthPlayer = this.playerCount;
-        bankLoan();
-        bankLoan();
+        bankLoan(2);
     }
 
     /**
      * Allows the Player to choose a move
+     *
+     * <p>Note: This returns a space only because the player can only end his/her turn
+     *       if and only if the dice was rolled.</p>
+     * @return Space where player has landed.
      */
-    public void chooseMove() {
+    public int chooseMove() {
+        int dice = 0;
         boolean turnEnded = false;
         System.out.println(getName() + "'s turn");
         while(!turnEnded) {
@@ -74,8 +79,8 @@ final public class Player {
             int choice = InputUtil.scanInt("Move:", 1, maxChoice);
             switch(choice) {
                 case 1:
-                    rollDice();
                     turnEnded = true;
+                    dice = rollDice();
                     break;
                 case 2:
                     displayPlayerStats();
@@ -87,31 +92,17 @@ final public class Player {
                     System.out.println("Invalid move... (" + choice + ")");
             }
         }
+
+        return dice;
     }
 
     /**
      * Allows the use to roll and dice and generate a random number from 1-6
      * Moves the player  by the number of spaces
-     * @return the rolled dice/randomly generated number (1-6)
+     * @return the rolled dice/randomly generated number (1-10)
      */
-    public void rollDice() {
-        int dice = RandomUtil.chooseRandomNumber(1, 10);
-        boolean endOfPath = false;
-
-        for(int i = 0; i < dice && !endOfPath; i++) {
-            addLocation();
-            Space currSpace = getPath().getSpaces()[location];
-            System.out.println(currSpace.getType() + " - " + currSpace.getName());
-            if(currSpace.getName() == "Which Path") {
-                endOfPath = true;
-            }
-        }
-
-        if(endOfPath) {
-            Path chosenPath = ((WhichPathSpace) getPath().getJunction()).choosePath(getPath());
-            setPath(chosenPath);
-            rollDice();
-        }
+    public int rollDice() {
+        return RandomUtil.chooseRandomNumber(1, 10);
     }
 
     /**
@@ -130,7 +121,7 @@ final public class Player {
     public void payBalance(double amount) {
         if(amount > this.balance) {
             System.out.printf("The balance to be paid is greater than %s's current balance.\n", name);
-            bankLoan(); // add to debt from the bank
+            bankLoan((int) Math.ceil((amount - getBalance()) / 20000)); // add to debt from the bank
         }
         this.balance -= amount;
     }
@@ -146,10 +137,10 @@ final public class Player {
     /**
      * Lets the user loan from the bank
      */
-    public void bankLoan() {
-        System.out.println(getName() + " loaned $20000 from the bank!");
-        this.debt += 20000;
-        this.nBankLoan++;
+    public void bankLoan(int times) {
+        System.out.println(String.format("%s loaned $%.2f from the bank", getName(), 20000 * times));
+        this.debt += 20000 * times;
+        this.nBankLoan += times;
     }
 
     /**

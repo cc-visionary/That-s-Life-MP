@@ -1,5 +1,6 @@
 package main.spaces.MagentaSpace;
 
+import main.Constants;
 import main.spaces.Space;
 
 /**
@@ -9,6 +10,6 @@ import main.spaces.Space;
 
 public abstract class MagentaSpace extends Space {
     public MagentaSpace(String name) {
-        super("Magenta Space", name);
+        super(Constants.MAGENTA_SPACE, name);
     }
 }

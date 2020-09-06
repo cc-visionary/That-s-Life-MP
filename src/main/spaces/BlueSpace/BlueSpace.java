@@ -1,6 +1,7 @@
 package main.spaces.BlueSpace;
 
-import main.cards.Card;
+import main.Constants;
+import main.cards.BlueCard.BlueCard;
 import main.decks.Deck;
 import main.spaces.Space;
 
@@ -10,7 +11,7 @@ import main.spaces.Space;
  */
 final public class BlueSpace extends Space {
     public BlueSpace() {
-        super("Blue Space");
+        super(Constants.BLUE_SPACE);
     }
 
     /**
@@ -18,10 +19,10 @@ final public class BlueSpace extends Space {
      * @param blueDeck blue deck to be drawn from
      * @return         top card from the blue deck
      */
-    public Card pickCard(Deck blueDeck) {
-        Card pickedCard;
+    public BlueCard pickCard(Deck blueDeck) {
+        BlueCard pickedCard;
         if(blueDeck.getName() == "Blue Deck") {
-            pickedCard = blueDeck.pickTopCard();
+            pickedCard = (BlueCard) blueDeck.pickTopCard();
         } else {
             pickedCard = null;
             System.out.println("An incorrect deck(" + blueDeck.getName() + ") was passed.");

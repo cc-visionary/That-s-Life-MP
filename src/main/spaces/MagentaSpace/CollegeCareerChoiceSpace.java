@@ -1,5 +1,6 @@
 package main.spaces.MagentaSpace;
 
+import main.Constants;
 import main.cards.CareerCard.CareerCard;
 import main.cards.SalaryCard.SalaryCard;
 import main.decks.Deck;
@@ -14,7 +15,7 @@ import main.utilities.InputUtil;
 
 final public class CollegeCareerChoiceSpace extends MagentaSpace {
     public CollegeCareerChoiceSpace() {
-        super("College Career Choice");
+        super(Constants.COLLEGE_CARREER_CHOICE);
     }
 
     public CareerCard chooseCareerCard(Deck careerDeck) {

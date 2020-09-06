@@ -1,5 +1,6 @@
 package main.spaces.RetirementSpace;
 
+import main.Constants;
 import main.players.Player;
 import main.spaces.Space;
 
@@ -8,7 +9,7 @@ import main.spaces.Space;
  */
 public class RetirementSpace extends Space {
     public RetirementSpace() {
-        super("Retirement Space");
+        super(Constants.RETIREMENT_SPACE);
     }
 
     public void retire(Player player) {

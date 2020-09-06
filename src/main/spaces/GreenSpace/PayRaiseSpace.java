@@ -1,5 +1,6 @@
 package main.spaces.GreenSpace;
 
+import main.Constants;
 import main.players.Player;
 
 /**
@@ -10,7 +11,7 @@ import main.players.Player;
 final public class PayRaiseSpace extends GreenSpace {
     private int salaryRaise;
     public PayRaiseSpace(double salaryRaise) {
-        super("Pay Raise Day");
+        super(Constants.PAY_RAISE);
     }
 
     /**

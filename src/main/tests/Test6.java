@@ -24,7 +24,7 @@ import java.util.ArrayList;
  *     <li>Let Players take turns to roll a dice to cross the board</li>
  * </ol>
  *
- * <p>This proves that the Players can move throughout the board and activate spaces they land on.</p>
+ * <p>This proves that the Players can move throughout the board.</p>
  */
 public class Test6 {
     public static void main(String[] args) {
@@ -33,7 +33,6 @@ public class Test6 {
 
         // asks the user for the number of players (makes sures that the input is only integers {1, 2, 3})
         int nPlayers = InputUtil.scanInt("Enter number of Players: ", 1, 3);
-        boolean hasWinner = false;
 
         Deck orangeDeck = Generator.generateOrangeDeck();
         System.out.println(orangeDeck);
@@ -70,14 +69,21 @@ public class Test6 {
         }
 
         int turn = 0;
-        while(true) {
+        boolean hasWinner = false;
+        while(!hasWinner) {
             Player currentPlayer = players.get(turn);
 
             currentPlayer.chooseMove();
 
-            for(Player player : players) System.out.println(player);
+            for(Player player : players) {
+                System.out.println(player);
+                if(player.isRetired()) hasWinner = true;
+            }
             turn++;
             if(turn == nPlayers) turn = 0;
+        }
+        for(Player player : players) {
+            if (player.isRetired()) System.out.println(player.getName() + " won!");
         }
     }
 }

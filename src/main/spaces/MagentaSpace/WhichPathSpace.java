@@ -1,5 +1,6 @@
 package main.spaces.MagentaSpace;
 
+import main.Constants;
 import main.paths.Path;
 import main.players.Player;
 import main.utilities.InputUtil;
@@ -11,7 +12,7 @@ import main.utilities.InputUtil;
 
 final public class WhichPathSpace extends MagentaSpace {
     public WhichPathSpace() {
-        super("Which Path");
+        super(Constants.WHICH_PATH);
     }
 
     /**
