@@ -1,5 +1,6 @@
 package main.cards.BlueCard;
 
+import main.Constants;
 import main.players.Player;
 import main.utilities.RandomUtil;
 import main.utilities.StringUtil;
@@ -9,8 +10,8 @@ import main.utilities.StringUtil;
  */
 
 final public class ComputerRepairCard extends BlueCard {
-    public ComputerRepairCard(String career) {
-        super("Computer Repair", "The player presses for a random number. He pays $5000 if the number is even and $10000 if the number is odd.", career);
+    public ComputerRepairCard() {
+        super("Computer Repair", "The player presses for a random number. He pays $5000 if the number is even and $10000 if the number is odd.", Constants.COMPUTER_CONSULTANT);
     }
 
     /**

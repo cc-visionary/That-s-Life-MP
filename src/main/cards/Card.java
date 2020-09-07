@@ -41,16 +41,20 @@ public abstract class Card {
      * @param players all the players
      */
     public void setOtherPlayers(Player[] players) {
-        ArrayList<Player> otherPlayers = new ArrayList<Player>();
+        if(players != null) {
+            ArrayList<Player> otherPlayers = new ArrayList<Player>();
 
-        // gets the other players besides the owner of the Card
-        for(Player player : players) {
-            if(!player.equals(owner)) {
-                otherPlayers.add(player);
+            // gets the other players besides the owner of the Card
+            for(Player player : players) {
+                if(!player.equals(owner)) {
+                    otherPlayers.add(player);
+                }
             }
-        }
 
-        this.otherPlayers = otherPlayers.toArray(new Player[0]);
+            this.otherPlayers = otherPlayers.toArray(new Player[0]);
+        } else {
+            this.otherPlayers = null;
+        }
     }
 
     /**

@@ -1,5 +1,6 @@
 package main.cards.BlueCard;
 
+import main.Constants;
 import main.players.Player;
 import main.utilities.RandomUtil;
 import main.utilities.StringUtil;
@@ -9,8 +10,8 @@ import main.utilities.StringUtil;
  */
 
 final public class TipTheServerCard extends BlueCard {
-    public TipTheServerCard(String career) {
-        super("Tip the Server", "The player presses a random number then pays the generated number x $1000", career);
+    public TipTheServerCard() {
+        super("Tip the Server", "The player presses a random number then pays the generated number x $1000", Constants.SERVER);
     }
 
     /**

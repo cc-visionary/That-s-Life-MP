@@ -142,23 +142,10 @@ public class Generator {
      * @see SalaryCard
      */
     public static Deck generateSalaryDeck() {
-        Card[] salaryCards = {
-                new SalaryCard(10000),
-                new SalaryCard(5000),
-                new SalaryCard(2500),
-                new SalaryCard(2000),
-                new SalaryCard(1250),
-                new SalaryCard(1000),
-                new SalaryCard(625),
-                new SalaryCard(500),
-                new SalaryCard(400),
-                new SalaryCard(250),
-        };
-
         Deck salaryDeck = new Deck("Salary Deck");
 
-        for(Card salaryCard : salaryCards) {
-            salaryDeck.addCard(salaryCard);
+        for(int i = 0; i < 15; i++) {
+            salaryDeck.addCard(new SalaryCard(RandomUtil.chooseRandomNumber(1, 15) * 10000));
         }
 
         salaryDeck.shuffle();
@@ -174,43 +161,14 @@ public class Generator {
      * @see BlueCard
      */
     public static Deck generateBlueDeck(int numberOfPlayers) {
-        String[] careers =  {
-                "Lawyer", "Accountant", "Comp. Consultant", "Doctor", "Server", "Racecar Driver", "Athlete"
-        };
-
         Deck blueDeck = new Deck("Blue Deck");
-
-        for(int i = 0; i < 50; i++) {
-            int randomNumber = RandomUtil.chooseRandomNumber(1, 7);
-            String career = careers[i % 7];
-            switch(randomNumber) {
-                case 1:
-                    blueDeck.addCard(new LawsuitCard(career, RandomUtil.chooseRandomNumber(1, 4)));
-                    break;
-                case 2:
-                    blueDeck.addCard(new SalaryTaxDueCard(career));
-                    break;
-                case 3:
-                    blueDeck.addCard(new TipTheServerCard(career));
-                    break;
-                case 4:
-                    blueDeck.addCard(new SkiAccidentCard(career));
-                    break;
-                case 5:
-                    blueDeck.addCard(new ComputerRepairCard(career));
-                    break;
-                case 6:
-                    blueDeck.addCard(new WorldCupCard(career, numberOfPlayers));
-                    break;
-                case 7:
-                    blueDeck.addCard(new F1RaceCard(career));
-                    break;
-                default:
-                    // if value wasn't in the intended values (which is improbable)
-                    // just continue/proceed to next loop without incrementing i
-                    continue;
-            }
-        }
+        blueDeck.addCard(new LawsuitCard(RandomUtil.chooseRandomNumber(1, 4)));
+        blueDeck.addCard(new SalaryTaxDueCard());
+        blueDeck.addCard(new TipTheServerCard());
+        blueDeck.addCard(new SkiAccidentCard());
+        blueDeck.addCard(new ComputerRepairCard());
+        blueDeck.addCard(new WorldCupCard(numberOfPlayers));
+        blueDeck.addCard(new F1RaceCard());
 
         blueDeck.shuffle();
 

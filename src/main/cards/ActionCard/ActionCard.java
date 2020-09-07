@@ -1,7 +1,7 @@
 package main.cards.ActionCard;
 
+import main.Constants;
 import main.cards.Card;
-import main.players.Player;
 import main.utilities.StringUtil;
 
 /**
@@ -14,7 +14,7 @@ import main.utilities.StringUtil;
 public abstract class ActionCard extends Card {
     private double amount;
     public ActionCard(String name, String description, double amount) {
-        super("Action Card", name, description);
+        super(Constants.ACTION_CARD, name, description);
         this.amount = amount;
     }
 

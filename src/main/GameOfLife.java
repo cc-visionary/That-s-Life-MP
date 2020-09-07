@@ -106,6 +106,12 @@ public class GameOfLife {
                 blueCard.setOtherPlayers(getOtherPlayers());
                 blueCard.displayCard();
                 blueCard.activate();
+
+                // put the card back to the BlueDeck
+                blueCard.setOwner(null);
+                blueCard.setOtherPlayers(null);
+                getBlueDeck().addCard(blueCard);
+                getBlueDeck().shuffle();
             } else if(space.getType().equals(Constants.ORANGE_SPACE)) {
                 // picks an action card and activate it for all the Players
                 ActionCard actionCard = ((OrangeSpace) space).pickCard(getOrangeDeck());

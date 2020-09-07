@@ -1,5 +1,6 @@
 package main.cards.SalaryCard;
 
+import main.Constants;
 import main.cards.Card;
 import main.utilities.StringUtil;
 
@@ -12,7 +13,7 @@ final public class SalaryCard extends Card {
     private double salary, tax;
     private int payRaise = 0;
     public SalaryCard(double salary) {
-        super("Salary Card", "Salary Card contains salary and tax due.");
+        super(Constants.SALARY_CARD, "Salary Card contains salary and tax due.");
 
         this.salary = salary;
         this.tax = salary * 0.1; // the tax due is 10% of the salary

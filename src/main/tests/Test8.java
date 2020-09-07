@@ -32,18 +32,26 @@ public class Test8 {
         Deck blueDeck = gameOfLife.getBlueDeck();
 
         // draw BlueCards from BlueDeck and activate it until Deck is empty
-        while(blueDeck.hasCard()) {
+        for(int i = 0; i < 20;i ++) {
             BlueCard blueCard = (BlueCard) blueDeck.pickTopCard();
             blueCard.displayCard();
             blueCard.setOwner(gameOfLife.getCurrentPlayer());
             blueCard.setOtherPlayers(gameOfLife.getOtherPlayers());
             blueCard.activate();
+
+            // put the card back to the BlueDeck
+            blueCard.setOwner(null);
+            blueCard.setOtherPlayers(null);
+            blueDeck.addCard(blueCard);
+            blueDeck.shuffle();
+
             gameOfLife.setTurn(gameOfLife.getTurn() + 1);
             gameOfLife.displayStats();
             if(gameOfLife.getTurn() == gameOfLife.getNPlayers()) {
                 gameOfLife.setTurn(0);
                 gameOfLife.setRound(gameOfLife.getRound() + 1);
             }
+            gameOfLife.getBlueDeck().displayDeck();
         }
     }
 

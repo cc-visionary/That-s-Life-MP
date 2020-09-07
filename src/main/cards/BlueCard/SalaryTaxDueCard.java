@@ -1,5 +1,6 @@
 package main.cards.BlueCard;
 
+import main.Constants;
 import main.players.Player;
 import main.utilities.StringUtil;
 
@@ -8,8 +9,8 @@ import main.utilities.StringUtil;
  */
 
 final public class SalaryTaxDueCard extends BlueCard {
-     public SalaryTaxDueCard(String career) {
-         super("Salary Tax Due", "The player pays the tax due for his current salary.", career);
+     public SalaryTaxDueCard() {
+         super("Salary Tax Due", "The player pays the tax due for his current salary.", Constants.ACCOUNTANT);
      }
 
     /**

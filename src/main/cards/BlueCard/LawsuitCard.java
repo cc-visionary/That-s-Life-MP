@@ -1,5 +1,6 @@
 package main.cards.BlueCard;
 
+import main.Constants;
 import main.players.Player;
 import main.utilities.StringUtil;
 
@@ -10,8 +11,8 @@ import main.utilities.StringUtil;
 final public class LawsuitCard extends BlueCard {
     final private int multiplier;
 
-    public LawsuitCard(String career, int multiplier) {
-        super("Lawsuit", "The player pays the amount indicated on the card.", career);
+    public LawsuitCard(int multiplier) {
+        super("Lawsuit", "The player pays the amount indicated on the card.", Constants.LAWYER);
         this.multiplier = multiplier;
     }
 

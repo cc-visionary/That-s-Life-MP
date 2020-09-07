@@ -1,5 +1,6 @@
 package main.cards.BlueCard;
 
+import main.Constants;
 import main.players.Player;
 import main.utilities.StringUtil;
 
@@ -10,8 +11,8 @@ import main.utilities.StringUtil;
 final public class WorldCupCard extends BlueCard {
     final private int numOfPlayers;
 
-    public WorldCupCard(String career, int numOfPlayers) {
-        super("World Cup", "The player pays number of player x $5000", career);
+    public WorldCupCard(int numOfPlayers) {
+        super("World Cup", "The player pays number of player x $5000", Constants.ATHLETE);
 
         this.numOfPlayers = numOfPlayers;
     }

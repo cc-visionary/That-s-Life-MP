@@ -1,5 +1,6 @@
 package main.cards.HouseCard;
 
+import main.Constants;
 import main.cards.Card;
 
 /**
@@ -11,7 +12,7 @@ import main.cards.Card;
 public class HouseCard extends Card {
     private double cost;
     public HouseCard(String name, String description, double cost) {
-        super("House Card", name, description);
+        super(Constants.HOUSE_CARD, name, description);
         this.cost = cost;
     }
 

@@ -1,5 +1,6 @@
 package main.cards.BlueCard;
 
+import main.Constants;
 import main.players.Player;
 import main.utilities.StringUtil;
 
@@ -8,8 +9,8 @@ import main.utilities.StringUtil;
  */
 
 final public class F1RaceCard extends BlueCard {
-    public F1RaceCard(String career) {
-        super("F1 Race", "The Player pays 10% of his current salary", career);
+    public F1RaceCard() {
+        super("F1 Race", "The Player pays 10% of his current salary", Constants.RACECAR_DRIVER);
     }
 
     /**

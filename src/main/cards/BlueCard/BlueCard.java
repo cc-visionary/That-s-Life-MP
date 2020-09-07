@@ -1,5 +1,6 @@
 package main.cards.BlueCard;
 
+import main.Constants;
 import main.cards.Card;
 import main.utilities.StringUtil;
 import main.players.Player;
@@ -15,7 +16,7 @@ public abstract class BlueCard extends Card {
     private String career;
 
     public BlueCard(String name, String description, String career) {
-        super("Blue Card", name, "If player's Career is not the same with the Card's, " + description);
+        super(Constants.BLUE_CARD, name, "If player's Career is not the same with the Card's, " + description);
 
         this.career = career;
     }

@@ -1,5 +1,6 @@
 package main.cards.CareerCard;
 
+import main.Constants;
 import main.cards.Card;
 import main.utilities.RandomUtil;
 import main.utilities.StringUtil;
@@ -13,7 +14,7 @@ final public class CareerCard extends Card {
     private boolean requireCollegeDegree;
 
     public CareerCard(String name, String description, int minPayRaise, int maxPayRaise, boolean requireCollegeDegree) {
-        super("Career Card", name, description);
+        super(Constants.CAREER_CARD, name, description);
 
         // randomly chooses the maxPayRaise from parameters minPayRaise - maxPayRaise
         this.maxPayRaise = RandomUtil.chooseRandomNumber(minPayRaise, maxPayRaise);
