@@ -67,11 +67,6 @@ public class GameOfLife {
         turn++;
 
         if(turn == nPlayers) {
-            for(Player player : players) {
-                if(player.getNBankLoan() > 0) {
-
-                }
-            }
             turn = 0;
             round++;
         }
@@ -89,8 +84,7 @@ public class GameOfLife {
             currentPlayer.addLocation();
             spaceLanded = currentPlayer.getPath().getSpaces()[currentPlayer.getLocation()];
             System.out.println(spaceLanded.getType() + " - " + spaceLanded.getName());
-            if(spaceLanded.getType().equals(Constants.MAGENTA_SPACE) && spaceLanded.getName().equals(Constants.WHICH_PATH)) break;
-            if(spaceLanded.getType().equals(Constants.RETIREMENT_SPACE)) break;
+            if(spaceLanded.getType().equals(Constants.MAGENTA_SPACE) || spaceLanded.getType().equals(Constants.RETIREMENT_SPACE)) break; // if player reaches the Magenta Space stop
         }
 
         handleSpaceLanded(spaceLanded);

@@ -32,7 +32,7 @@ final public class BuyAHouseSpace extends MagentaSpace {
                 n++;
             }
             int choice = InputUtil.scanInt("Enter House:", 1, houseDeck.getCards().length);
-            pickedCard = (HouseCard) houseDeck.getCards()[choice - 1];
+            pickedCard = (HouseCard) houseDeck.pickTopCard(choice - 1);
         } else {
             pickedCard = null;
             System.out.println("An incorrect deck was passed.");

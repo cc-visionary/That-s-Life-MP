@@ -1,7 +1,7 @@
 package main.utilities;
 
 import main.cards.Card;
-import main.players.Player;
+import main.spaces.Space;
 
 import java.util.Random;
 
@@ -23,15 +23,15 @@ public class RandomUtil {
     }
 
     /**
-     * Randomly chooses a Player from the set of players passed through the parameter
-     * @param players an array of Player objects to choose from
-     * @return        the randomly chosen Player
-     * @see           Player
+     * Randomly chooses a Space from the set of spaces passed through the parameter
+     * @param spaces an array of Space objects to choose from
+     * @return        the randomly chosen Space
+     * @see           Space
      */
-    public static Player chooseRandomPlayer(Player[] players) {
+    public static Space chooseRandomSpace(Space[] spaces) {
         Random randomizer = new Random();
-        int random_index = randomizer.nextInt(players.length);
-        return players[random_index];
+        int random_index = randomizer.nextInt(spaces.length);
+        return spaces[random_index];
     }
 
     /**

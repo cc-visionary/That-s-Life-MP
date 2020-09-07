@@ -17,6 +17,7 @@ import main.spaces.OrangeSpace.OrangeSpace;
 import main.spaces.RetirementSpace.RetirementSpace;
 import main.spaces.Space;
 import main.utilities.InputUtil;
+import main.utilities.IntUtil;
 import main.utilities.RandomUtil;
 
 import java.util.ArrayList;
@@ -321,41 +322,43 @@ public class Generator {
      */
     public static Path generateChangeCareerPath(Path path1, Path path2) {
         changeChareerPathCount++;
-        int nSpaces = RandomUtil.chooseRandomNumber(20, 30);
-        boolean hasCareerSpace, hasOrangeSpace, hasPayDaySpace, hasPayRaiseSpace, hasBlueSpace, hasJunction;
+        int nSpaces = RandomUtil.chooseRandomNumber(20, 27);
         ArrayList<Space> spaces = new ArrayList<Space>();
+        Space availableSpaces[] = {
+                new OrangeSpace(),
+                new PayDaySpace(),
+                new PayRaiseSpace(RandomUtil.chooseRandomNumber(1, 10) * 500)
+        };
+
+        // Adds the CareerChoiceSpace as the first space
+        spaces.add(new CollegeCareerChoiceSpace());
+
+        // determines where Blue Space is located
+        int blueSpace = RandomUtil.chooseRandomNumber(0, nSpaces);
+
         // generate the spaces randomly
-        for(int i = 0; i < nSpaces - 3; i++) {
-            switch(RandomUtil.chooseRandomNumber(1, 5)) {
-                case 1:
-                    spaces.add(new OrangeSpace());
-                    break;
-                case 2:
-                    spaces.add(new PayDaySpace());
-                    break;
-                case 3:
-                    spaces.add(new PayRaiseSpace(RandomUtil.chooseRandomNumber(1, 10) * 500));
-                    break;
-                case 4:
-                    spaces.add(new CollegeCareerChoiceSpace());
-                    break;
-                case 5:
-                    spaces.add(new BlueSpace());
-                    break;
-            }
+        for(int i = 0; i < nSpaces - 2; i++) {
+            if(blueSpace == i) spaces.add(new BlueSpace());
+            else spaces.add(RandomUtil.chooseRandomSpace(availableSpaces));
         }
-//        for(Space space : spaces) {
-//            if(space.getType() == "Magenta Space") {
-//                if(space.getName() == "Which Path Space") hasJunction = true;
-//            } else if(space.getType() == "Green Space") {
-//                if(space.getName() == "Pay Day Space") hasPayDaySpace = true;
-//                else if(space.getName() == "Pay Raise Space") hasPayRaiseSpace = true;
-//            } else if(space.getType() == "Blue Space") hasBlueSpace = true;
-//            else if(space.getType() == "Orange Space") hasOrangeSpace = true;
-//        }
+
+        // checks whether all the required spaces exists, if not, add it
+        for(Space availableSpace : availableSpaces) {
+            boolean spaceExists = false;
+            for(Space space : spaces) {
+                if(space.equals(availableSpace)) {
+                    spaceExists = true;
+                    break;
+                }
+            }
+            if(!spaceExists) spaces.add(availableSpace);
+        }
+
         spaces.add(new WhichPathSpace());
         return new Path("Change Career Path", "ccp" + changeChareerPathCount, spaces.toArray(new Space[0]), path1, path2);
     }
+
+
 
     /**
      * Generates a Start a Family Path
@@ -366,40 +369,24 @@ public class Generator {
     public static Path generateStartAFamilyPath(Path path1, Path path2) {
         startAFamilyPathCount++;
         int nSpaces = RandomUtil.chooseRandomNumber(20, 30);
-        boolean hasMarried = false, hasBuyAHouse = false, hasBaby = false, hasBlue = false;
         ArrayList<Space> spaces = new ArrayList<Space>();
+
+        // determines where the respective spaces will be located
+        int ranges[] = IntUtil.splitEqually(4, nSpaces);
+        int getMarriedSpace = RandomUtil.chooseRandomNumber(0, ranges[0]);
+        int buyAHouseSpace = RandomUtil.chooseRandomNumber(ranges[1], ranges[2]);
+        int haveABaby = RandomUtil.chooseRandomNumber(ranges[2], ranges[3]);
+        int blueSpace = RandomUtil.chooseRandomNumber(ranges[3], nSpaces);
+
         // generate the spaces randomly
-        for(int i = 0; i < nSpaces - 1; i++) {
-            switch(RandomUtil.chooseRandomNumber(1, 5)) {
-                case 1:
-                    if(!hasMarried) {
-                        spaces.add(new GetMarriedSpace());
-                        hasMarried = true;
-                        break;
-                    }
-                case 2:
-                    if(!hasBuyAHouse) {
-                        spaces.add(new BuyAHouseSpace());
-                        hasBuyAHouse = true;
-                        break;
-                    }
-                case 3:
-                    if(!hasBaby) {
-                        spaces.add(new HaveBabySpace(RandomUtil.chooseRandomNumber(1, 3)));
-                        hasBaby = true;
-                        break;
-                    }
-                case 4:
-                    if(!hasBlue) {
-                        spaces.add(new BlueSpace());
-                        hasBlue = true;
-                        break;
-                    }
-                case 5:
-                    spaces.add(new OrangeSpace());
-                    break;
-            }
+        for(int i = 0; i < nSpaces - 3; i++) {
+            if(getMarriedSpace == i) spaces.add(new GetMarriedSpace());
+            else if(buyAHouseSpace == i) spaces.add(new BuyAHouseSpace());
+            else if(haveABaby == i) spaces.add(new HaveBabySpace(RandomUtil.chooseRandomNumber(1, 3)));
+            else if(blueSpace == i) spaces.add(new BlueSpace());
+            else spaces.add(new OrangeSpace());
         }
+
         spaces.add(new WhichPathSpace());
         return new Path("Start a Family Path", "safp" + startAFamilyPathCount, spaces.toArray(new Space[0]), path1, path2);
     }
