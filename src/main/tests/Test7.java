@@ -21,6 +21,7 @@ public class Test7 {
         while(!gameOfLife.hasWinner()) {
             gameOfLife.nextPlayer();
         }
+        gameOfLife.endGame();
         gameOfLife.displayWinner();
     }
 }

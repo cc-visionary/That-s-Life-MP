@@ -67,11 +67,20 @@ public class GameOfLife {
         turn++;
 
         if(turn == nPlayers) {
+            for(Player player : players) {
+                if(player.getNBankLoan() > 0) {
+
+                }
+            }
             turn = 0;
             round++;
         }
     }
 
+    /**
+     * The amount of dice rolled by the Player
+     * @param rolledDice
+     */
     public void movePlayer(int rolledDice) {
         Player currentPlayer = getCurrentPlayer();
         Space spaceLanded = null;
@@ -80,6 +89,8 @@ public class GameOfLife {
             currentPlayer.addLocation();
             spaceLanded = currentPlayer.getPath().getSpaces()[currentPlayer.getLocation()];
             System.out.println(spaceLanded.getType() + " - " + spaceLanded.getName());
+            if(spaceLanded.getType().equals(Constants.MAGENTA_SPACE) && spaceLanded.getName().equals(Constants.WHICH_PATH)) break;
+            if(spaceLanded.getType().equals(Constants.RETIREMENT_SPACE)) break;
         }
 
         handleSpaceLanded(spaceLanded);
@@ -91,6 +102,7 @@ public class GameOfLife {
      * @return boolean value true or false to determine whether it comes across a Which Path Space/junction or not
      */
     public void handleSpaceLanded(Space space) {
+        System.out.println(String.format("You landed on %s - %s", space.getType(), space.getName()));
         Player currentPlayer = getCurrentPlayer();
         if(space != null) {
             if(space.getType().equals(Constants.BLUE_SPACE)) {
@@ -194,6 +206,20 @@ public class GameOfLife {
             }
         } else {
             System.out.println("Space is null...");
+        }
+    }
+
+    public void endGame() {
+        for(Player player : getAllPlayers()) {
+            // collect $10000 from the bank for each child
+            player.addBalance(player.getNBabies() * 10000);
+
+            // sell house to the bank
+            player.addBalance(player.getHouseCard().getCost());
+            player.setHouseCard(null);
+
+            // repay all loans to the bank
+            player.payDebt(Constants.ALL);
         }
     }
 

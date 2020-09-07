@@ -85,7 +85,7 @@ final public class Deck {
      */
     public void displayTopCards(int offset) {
         for(int i = 0; i <= offset; i++) {
-            System.out.println(cards.get(i));
+            System.out.println(String.format("\t[%d] %s", i + 1, cards.get(i)));
         }
     }
 

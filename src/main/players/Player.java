@@ -87,6 +87,7 @@ final public class Player {
                     break;
                 case 3:
                     // Each payment is a multiple of 25000
+                    payDebt(Constants.OPTIONAL);
                     break;
                 default:
                     System.out.println("Invalid move... (" + choice + ")");
@@ -102,7 +103,9 @@ final public class Player {
      * @return the rolled dice/randomly generated number (1-10)
      */
     public int rollDice() {
-        return RandomUtil.chooseRandomNumber(1, 10);
+        int rolledDice = RandomUtil.chooseRandomNumber(1, 10);
+        System.out.println(String.format("%s rolled %d!", getName(), rolledDice));
+        return rolledDice;
     }
 
     /**
@@ -135,12 +138,32 @@ final public class Player {
     }
 
     /**
-     * Lets the user loan from the bank
+     * Allows the Player to make a loan from the bank
      */
     public void bankLoan(int times) {
-        System.out.println(String.format("%s loaned $%.2f from the bank", getName(), 20000 * times));
-        this.debt += 20000 * times;
+        System.out.println(String.format("%s loaned $%d + %%d interest = $%d from the bank", getName(), 20000 * times, 5000 * times, 25000 * times));
+        this.debt += 25000 * times;
         this.nBankLoan += times;
+    }
+
+    /**
+     * Allows the Player to pay all of his/her debt
+     */
+    public void payDebt(String method) {
+        if(getNBankLoan() > 0) {
+            if(method.equals(Constants.ALL)) {
+                payBalance(25000 * getNBankLoan());
+                this.debt = 0;
+                this.nBankLoan = 0;
+            } else if(method.equals(Constants.OPTIONAL)) {
+                int times = InputUtil.scanInt(String.format("How much of your debt would you want to Pay? (1-%d)", getNBankLoan()), 1, getNBankLoan());
+                payBalance(25000 * times);
+                this.debt -= 25000 * times;
+                this.nBankLoan -= times;
+            }
+        } else {
+            System.out.println(String.format("%s has no debt...", getName()));
+        }
     }
 
     /**

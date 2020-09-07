@@ -23,9 +23,7 @@ final public class CollegeCareerChoiceSpace extends MagentaSpace {
         if(careerDeck.getName() == "Career Deck") {
             int choice;
             System.out.println("CareersCards to choose from:");
-            for(int i = 0; i < 2; i++) {
-                System.out.println("\t" + (i + 1) + ":" + careerDeck);
-            }
+            careerDeck.displayTopCards(2);
             choice = InputUtil.scanInt("Choose Career Card:", 1, 2);
 
             pickedCard = (CareerCard) careerDeck.pickTopCard(choice - 1);
@@ -41,9 +39,7 @@ final public class CollegeCareerChoiceSpace extends MagentaSpace {
         if(salaryDeck.getName() == "Salary Deck") {
             int choice;
             System.out.println("SalaryCards to choose from:");
-            for(int i = 0; i < 2; i++) {
-                System.out.println("\t" + (i + 1) + ":" + salaryDeck);
-            }
+            salaryDeck.displayTopCards(2);
             choice = InputUtil.scanInt("Choose Salary Card:", 1, 2);
 
             pickedCard = (SalaryCard) salaryDeck.pickTopCard(choice - 1);
