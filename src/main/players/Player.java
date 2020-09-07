@@ -87,7 +87,7 @@ final public class Player {
                     break;
                 case 3:
                     // Each payment is a multiple of 25000
-                    payDebt(Constants.OPTIONAL);
+                    payDebt(Constants.PARTIAL);
                     break;
                 default:
                     System.out.println("Invalid move... (" + choice + ")");
@@ -139,6 +139,7 @@ final public class Player {
 
     /**
      * Allows the Player to make a loan from the bank
+     * @param times the multiplier/number of times for the bank loan
      */
     public void bankLoan(int times) {
         System.out.println(String.format("%s loaned $%d + %d interest = $%d from the bank", getName(), 20000 * times, 5000 * times, 25000 * times));
@@ -148,6 +149,7 @@ final public class Player {
 
     /**
      * Allows the Player to pay all of his/her debt
+     * @param method type of method for paying the debt (ALL/PARTIAL)
      */
     public void payDebt(String method) {
         if(getNBankLoan() > 0) {
@@ -155,7 +157,7 @@ final public class Player {
                 payBalance(25000 * getNBankLoan());
                 this.debt = 0;
                 this.nBankLoan = 0;
-            } else if(method.equals(Constants.OPTIONAL)) {
+            } else if(method.equals(Constants.PARTIAL)) {
                 int times = InputUtil.scanInt(String.format("How much of your debt would you want to Pay? (1-%d)", getNBankLoan()), 1, getNBankLoan());
                 payBalance(25000 * times);
                 this.debt -= 25000 * times;

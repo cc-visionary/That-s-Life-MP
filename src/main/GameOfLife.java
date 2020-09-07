@@ -33,7 +33,7 @@ public class GameOfLife {
 
     /**
      * All of the Game pieces will be Generated in the Board such as the
-     * Cards -> Deck, Paths/Board, and Players.
+     * Deck(containing Card), Paths/Board, and Players.
      */
     public GameOfLife() {
         // generate Decks
@@ -74,7 +74,7 @@ public class GameOfLife {
 
     /**
      * The amount of dice rolled by the Player
-     * @param rolledDice
+     * @param rolledDice dice rolled
      */
     public void movePlayer(int rolledDice) {
         Player currentPlayer = getCurrentPlayer();
@@ -93,7 +93,6 @@ public class GameOfLife {
     /**
      * Handles the Actions to be done on where the space the Player landed
      * @param space space where the currentPlayer landed
-     * @return boolean value true or false to determine whether it comes across a Which Path Space/junction or not
      */
     public void handleSpaceLanded(Space space) {
         System.out.println(String.format("You landed on %s - %s", space.getType(), space.getName()));

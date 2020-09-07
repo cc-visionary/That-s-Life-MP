@@ -12,6 +12,10 @@ public class RetirementSpace extends Space {
         super(Constants.RETIREMENT_SPACE);
     }
 
+    /**
+     * Sets the Player's retirement value to true
+     * @param player player to be retired
+     */
     public void retire(Player player) {
         player.setIsRetired(true);
     }

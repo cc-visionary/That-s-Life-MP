@@ -49,7 +49,7 @@ public class Constants {
 
     // methods
     final public static String ALL = "All";
-    final public static String OPTIONAL = "Optional";
+    final public static String PARTIAL = "Partial";
 
     // Config
     final public static double STARTING_MONEY = 200000;
