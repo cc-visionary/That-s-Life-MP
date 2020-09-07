@@ -141,7 +141,7 @@ final public class Player {
      * Allows the Player to make a loan from the bank
      */
     public void bankLoan(int times) {
-        System.out.println(String.format("%s loaned $%d + %%d interest = $%d from the bank", getName(), 20000 * times, 5000 * times, 25000 * times));
+        System.out.println(String.format("%s loaned $%d + %d interest = $%d from the bank", getName(), 20000 * times, 5000 * times, 25000 * times));
         this.debt += 25000 * times;
         this.nBankLoan += times;
     }

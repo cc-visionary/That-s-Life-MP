@@ -14,6 +14,10 @@ import main.GameOfLife;
  * </ol>
  *
  * <p>This proves that the GameOfLife class works where Players can move throughout the board and activate spaces they land on.</p>
+ *
+ * @see GameOfLife
+ *
+ * @since 09/05/2020
  */
 public class Test7 {
     public static void main(String[] args) {

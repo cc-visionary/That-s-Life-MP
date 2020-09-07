@@ -16,6 +16,11 @@ import main.paths.Path;
  *
  * <p>This proves that the Board generation works and the path produced is the same with the
  * <a href="https://app.lucidchart.com/invitations/accept/151b81a7-1b87-4ad8-8a07-25f41bef561c">Path Schema</a>.</p>
+ *
+ * @see Generator
+ * @see main.players.Player
+ *
+ * @since 09/05/2020
  */
 public class Test5 {
     public static void main(String[] args) {

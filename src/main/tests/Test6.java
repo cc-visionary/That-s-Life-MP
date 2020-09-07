@@ -25,6 +25,11 @@ import java.util.ArrayList;
  * </ol>
  *
  * <p>This proves that the Players can move throughout the board.</p>
+ *
+ * @see Generator
+ * @see Player
+ *
+ * @since 09/05/2020
  */
 public class Test6 {
     public static void main(String[] args) {

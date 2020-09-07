@@ -110,12 +110,14 @@ public class GameOfLife {
                 BlueCard blueCard = ((BlueSpace) space).pickCard(getBlueDeck());
                 blueCard.setOwner(currentPlayer);
                 blueCard.setOtherPlayers(getOtherPlayers());
+                blueCard.displayCard();
                 blueCard.activate();
             } else if(space.getType().equals(Constants.ORANGE_SPACE)) {
                 // picks an action card and activate it for all the Players
                 ActionCard actionCard = ((OrangeSpace) space).pickCard(getOrangeDeck());
                 actionCard.setOwner(currentPlayer);
                 actionCard.setOtherPlayers(getOtherPlayers());
+                actionCard.displayCard();
                 actionCard.activate();
             } else if(space.getType().equals(Constants.GREEN_SPACE)) {
                 if(space.getName().equals(Constants.PAY_DAY)) {
@@ -193,15 +195,19 @@ public class GameOfLife {
                     // then set a new Salary Card for the Player
                     currentPlayer.setSalaryCard(salaryCard);
                 } else if(space.getName().equals(Constants.GET_MARRIED)) {
+                    // Player marries when landing in Get Married Space
                     ((GetMarriedSpace) space).getMarried(getCurrentPlayer(), getOtherPlayers());
                 } else if(space.getName().equals("Have a Baby") || space.getName().equals("Have a Twin") || space.getName().equals("Have a Triplet")) {
+                    // Player haves a baby when landing on Have a Baby Space
                     ((HaveBabySpace) space).haveABaby(getCurrentPlayer());
                 } else if(space.getName().equals(Constants.WHICH_PATH)) {
+                    // this is the junction where Players can choose the next Path
                     Path chosenPath = ((WhichPathSpace) currentPlayer.getPath().getJunction()).choosePath(currentPlayer.getPath());
                     currentPlayer.setPath(chosenPath);
                     movePlayer(currentPlayer.rollDice());
                 }
             } else if(space.getType().equals(Constants.RETIREMENT_SPACE)) {
+                // Space where Player retires
                 getCurrentPlayer().setIsRetired(true);
             }
         } else {
@@ -209,18 +215,34 @@ public class GameOfLife {
         }
     }
 
+    /**
+     * Does all the things needed to be done to each Player when Game ends.
+     * Then display each Player's Stats
+     */
     public void endGame() {
         for(Player player : getAllPlayers()) {
             // collect $10000 from the bank for each child
             player.addBalance(player.getNBabies() * 10000);
 
             // sell house to the bank
-            player.addBalance(player.getHouseCard().getCost());
-            player.setHouseCard(null);
+            if(player.getHouseCard() != null) {
+                player.addBalance(player.getHouseCard().getCost());
+                player.setHouseCard(null);
+            }
 
             // repay all loans to the bank
             player.payDebt(Constants.ALL);
         }
+
+        displayStats();
+    }
+
+    public void setTurn(int turn) {
+        this.turn = turn;
+    }
+
+    public void setRound(int round) {
+        this.round = round;
     }
 
     public Deck getSalaryDeck() {
@@ -304,6 +326,11 @@ public class GameOfLife {
             }
         }
         return false;
+    }
+
+    public void displayStats() {
+        System.out.println("Round #" + getRound() + ":");
+        for(Player player : getAllPlayers()) player.displayPlayerStats();
     }
 
     public void displayWinner() {
