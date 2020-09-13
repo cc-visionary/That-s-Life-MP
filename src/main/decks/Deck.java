@@ -11,7 +11,7 @@ import java.util.Collections;
  *      which stores the Cards and contains methods to manipulate the cards within and outside the Deck.
  * @see Card
  */
-final public class Deck {
+public class Deck {
     private String name;
     private ArrayList<Card> cards;
 
@@ -23,8 +23,11 @@ final public class Deck {
     public String getName() {
         return name;
     }
-    public Card[] getCards() {
-        return cards.toArray(new Card[0]);
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
+    public int getNCards() {
+        return cards.size();
     }
 
     /**
@@ -102,7 +105,7 @@ final public class Deck {
      * Checks whether the deck is already empty or not
      * @return boolean values (true/false)
      */
-    private boolean isDeckEmpty() {
+    public boolean isDeckEmpty() {
         return cards.size() == 0;
     }
 

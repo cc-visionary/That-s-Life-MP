@@ -91,15 +91,17 @@ public class Generator {
                 new CollectAllCard("It's Your Birthday", "Happy Birthday! All the other players gave you money as a gift!", 1000)
         };
 
+        // TODO: Automatically calculate the percentage of each type of ActionCards
         Deck orangeDeck = new Deck("Orange Deck");
+
         // randomly choose from any of Collect from Bank Cards
-        for(int i = 0; i < 20; i++) orangeDeck.addCard(RandomUtil.chooseRandomCard(collectBankCards));
+        for(int i = 0; i < Constants.nCollectBank; i++) orangeDeck.addCard(RandomUtil.chooseRandomCard(collectBankCards));
         // randomly choose from any of Pay to Bank Cards
-        for(int i = 0; i < 20; i++) orangeDeck.addCard(RandomUtil.chooseRandomCard(payBankCards));
+        for(int i = 0; i < Constants.nPayBank; i++) orangeDeck.addCard(RandomUtil.chooseRandomCard(payBankCards));
         // randomly choose from any of Pay to Player Bank Cards
-        for(int i = 0; i < 5; i++) orangeDeck.addCard(RandomUtil.chooseRandomCard(payPlayerCards));
+        for(int i = 0; i < Constants.nPayPlayer; i++) orangeDeck.addCard(RandomUtil.chooseRandomCard(payPlayerCards));
         // randomly choose from any of Collect from Player Bank Cards
-        for(int i = 0; i < 5; i++) orangeDeck.addCard(RandomUtil.chooseRandomCard(collectPlayerCards));
+        for(int i = 0; i < Constants.nCollectPlayer; i++) orangeDeck.addCard(RandomUtil.chooseRandomCard(collectPlayerCards));
 
         orangeDeck.shuffle();
 
@@ -315,8 +317,6 @@ public class Generator {
         spaces.add(new WhichPathSpace());
         return new Path("Change Career Path", "ccp" + changeChareerPathCount, spaces.toArray(new Space[0]), path1, path2);
     }
-
-
 
     /**
      * Generates a Start a Family Path

@@ -31,7 +31,7 @@ final public class BuyAHouseSpace extends MagentaSpace {
                 System.out.println("\t" + n + ":" + (HouseCard) card);
                 n++;
             }
-            int choice = InputUtil.scanInt("Enter House:", 1, houseDeck.getCards().length);
+            int choice = InputUtil.scanInt("Enter House:", 1, houseDeck.getNCards());
             pickedCard = (HouseCard) houseDeck.pickTopCard(choice - 1);
         } else {
             pickedCard = null;

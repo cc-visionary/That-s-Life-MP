@@ -7,6 +7,7 @@ import main.cards.CareerCard.CareerCard;
 import main.cards.HouseCard.HouseCard;
 import main.cards.SalaryCard.SalaryCard;
 import main.decks.Deck;
+import main.decks.DeckWithUsed;
 import main.paths.Path;
 import main.players.Player;
 import main.spaces.BlueSpace.BlueSpace;
@@ -25,7 +26,8 @@ import java.util.ArrayList;
  * attributes needed for the game such as Decks, Paths, Players, etc.</p>
  */
 public class GameOfLife {
-    private Deck careerDeck, salaryDeck, orangeDeck, blueDeck, houseDeck;
+    private Deck careerDeck, salaryDeck, blueDeck, houseDeck;
+    private DeckWithUsed orangeDeck;
     private Path careerPath, collegePath;
     private Player players[];
     private int nPlayers, turn, round;
@@ -39,7 +41,7 @@ public class GameOfLife {
         // generate Decks
         careerDeck = Generator.generateCareerDeck();
         salaryDeck = Generator.generateSalaryDeck();
-        orangeDeck = Generator.generateOrangeDeck();
+        orangeDeck = (DeckWithUsed) Generator.generateOrangeDeck();
         blueDeck = Generator.generateBlueDeck(nPlayers);
         houseDeck = Generator.generateHouseDeck();
 

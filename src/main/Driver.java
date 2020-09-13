@@ -5,6 +5,7 @@ import main.cards.ActionCard.ActionCard;
 import main.cards.CareerCard.CareerCard;
 import main.cards.SalaryCard.SalaryCard;
 import main.decks.Deck;
+import main.decks.DeckWithUsed;
 import main.players.Player;
 import main.utilities.InputUtil;
 
@@ -51,12 +52,12 @@ public class Driver {
             players.add(new Player("P" + (i + 1), careerCard, salaryCard));
         }
 
-        Deck orangeDeck = Generator.generateOrangeDeck();
+        DeckWithUsed orangeDeck = (DeckWithUsed) Generator.generateOrangeDeck();
         System.out.println(orangeDeck);
         orangeDeck.displayDeck();
         int turn = 0;
 //        Deck blueDeck = Generator.generateBlueDeck(nPlayers);
-        while(orangeDeck.hasCard() && !hasWinner) {
+        while(orangeDeck.hasCard()) {
             Player currentPlayer = players.get(turn);
 
             System.out.println("\n" + currentPlayer.getName() + "'s turn: ");
@@ -81,22 +82,27 @@ public class Driver {
                 }
             }
             System.out.println(orangeDeck);
-            if(hasWinner) {
-                System.out.println();
-                // if winner was found, display the winner(s)
-                for(Player player : players) {
-                    if(player.getBalance() - player.getDebt() >= GOAL) {
-                        System.out.println(player.getName() + " won! ($" + player.getBalance() + ")");
-                    }
-                }
-            } else {
-                // if not wait for the Player to press the Enter key
-                InputUtil.waitForEnterKey();
+//            if(hasWinner) {
+//                System.out.println();
+//                // if winner was found, display the winner(s)
+//                for(Player player : players) {
+//                    if(player.getBalance() - player.getDebt() >= GOAL) {
+//                        System.out.println(player.getName() + " won! ($" + player.getBalance() + ")");
+//                    }
+//                }
+//            } else {
+//                // if not wait for the Player to press the Enter key
+//                InputUtil.waitForEnterKey();
+//
+//                turn++;
+//                // reset the turn to 0
+//                if(turn == players.size()) turn = 0;
+//            }
+            InputUtil.waitForEnterKey();
 
-                turn++;
-                // reset the turn to 0
-                if(turn == players.size()) turn = 0;
-            }
+            turn++;
+            // reset the turn to 0
+            if(turn == players.size()) turn = 0;
         }
     }
 }
