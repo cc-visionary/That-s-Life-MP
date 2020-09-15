@@ -59,19 +59,19 @@ public class GUI extends Application {
         gc.setFill(fill);
         gc.setStroke(stroke);
         gc.strokePolygon(new double[]{
-                xPos - RADIUS * 2,
-                xPos,
-                xPos + RADIUS * 2,
-                xPos + RADIUS * 2,
-                xPos,
-                xPos - RADIUS * 2
+                xPos - RADIUS * 2, // top left
+                xPos,              // top center
+                xPos + RADIUS * 2, // top right
+                xPos + RADIUS * 2, // bottom right
+                xPos,              // bottom center
+                xPos - RADIUS * 2  // bottom left
         }, new double[]{
-                yPos - RADIUS,
-                yPos - size,
-                yPos - RADIUS,
-                yPos + RADIUS,
-                yPos + size,
-                yPos + RADIUS
+                yPos - RADIUS, // top left
+                yPos - size,   // top center
+                yPos - RADIUS, // top right
+                yPos + RADIUS, // bottom right
+                yPos + size,   // bottom center
+                yPos + RADIUS  // bottom left
         }, 6);
     }
 
