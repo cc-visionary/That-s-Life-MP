@@ -92,7 +92,6 @@ public class Generator {
                 new CollectAllCard("It's Your Birthday", "Happy Birthday! All the other players gave you money as a gift!", 1000)
         };
 
-        // TODO: Automatically calculate the percentage of each type of ActionCards
         DeckWithUsed orangeDeck = new DeckWithUsed("Orange Deck");
 
         // randomly choose from any of Collect from Bank Cards
@@ -243,7 +242,7 @@ public class Generator {
      */
     public static Path generateCareerPath(Path path1, Path path2) {
         careerPathCount++;
-        int nSpaces = RandomUtil.chooseRandomNumber(20, 35);
+        int nSpaces = Constants.NCAP_SPACE;
         ArrayList<Space> spaces = new ArrayList<Space>();
         int randomNumber = RandomUtil.chooseRandomNumber(0, nSpaces - 2);
         for(int i = 0; i < nSpaces - 1; i++) {
@@ -264,7 +263,7 @@ public class Generator {
      */
     public static Path generateCollegePath(Path path1, Path path2) {
         collegePathCount++;
-        int nSpaces = RandomUtil.chooseRandomNumber(20, 30);
+        int nSpaces = Constants.NCOP_SPACE;
         ArrayList<Space> spaces = new ArrayList<Space>();
         // adds Orange Spaces
         for(int i = 0; i < nSpaces - 2; i++) {
@@ -283,36 +282,40 @@ public class Generator {
      */
     public static Path generateChangeCareerPath(Path path1, Path path2) {
         changeChareerPathCount++;
-        int nSpaces = RandomUtil.chooseRandomNumber(20, 27);
+        int nSpaces = Constants.NCCP_SPACE;
         ArrayList<Space> spaces = new ArrayList<Space>();
-        Space availableSpaces[] = {
-                new OrangeSpace(),
-                new PayDaySpace(),
-                new PayRaiseSpace(RandomUtil.chooseRandomNumber(1, 10) * 500)
-        };
+
+        // determines where the respective spaces will be located
+        // Note: This make sures that each of the spaces to be added are available.
+        int ranges[] = IntUtil.splitEqually(4, nSpaces);
+        int payDaySpace = RandomUtil.chooseRandomNumber(0, ranges[0]);
+        int payRaiseSpace = RandomUtil.chooseRandomNumber(ranges[0], ranges[1]);
+        int orangeSpace = RandomUtil.chooseRandomNumber(ranges[1], ranges[2]);
+        int blueSpace = RandomUtil.chooseRandomNumber(ranges[2], ranges[3]);
 
         // Adds the CareerChoiceSpace as the first space
         spaces.add(new CollegeCareerChoiceSpace());
 
-        // determines where Blue Space is located
-        int blueSpace = RandomUtil.chooseRandomNumber(0, nSpaces);
-
         // generate the spaces randomly
         for(int i = 0; i < nSpaces - 2; i++) {
-            if(blueSpace == i) spaces.add(new BlueSpace());
-            else spaces.add(RandomUtil.chooseRandomSpace(availableSpaces));
-        }
-
-        // checks whether all the required spaces exists, if not, add it
-        for(Space availableSpace : availableSpaces) {
-            boolean spaceExists = false;
-            for(Space space : spaces) {
-                if(space.equals(availableSpace)) {
-                    spaceExists = true;
-                    break;
+            if(payDaySpace == i) spaces.add(new PayDaySpace());
+            else if(payRaiseSpace == i) spaces.add(new PayRaiseSpace(RandomUtil.chooseRandomNumber(1, 10) * 500));
+            else if(orangeSpace == i) spaces.add(new OrangeSpace());
+            else if(blueSpace == i) spaces.add(new BlueSpace());
+            else { // after making sure each is in the Path, choose randomly to fill the Path
+                int random_number = RandomUtil.chooseRandomNumber(1, 3);
+                switch (random_number) {
+                    case 1:
+                        spaces.add(new PayDaySpace());
+                        break;
+                    case 2:
+                        spaces.add(new PayRaiseSpace(RandomUtil.chooseRandomNumber(1, 10) * 500));
+                        break;
+                    case 3:
+                        spaces.add(new OrangeSpace());
+                        break;
                 }
             }
-            if(!spaceExists) spaces.add(availableSpace);
         }
 
         spaces.add(new WhichPathSpace());
@@ -327,7 +330,7 @@ public class Generator {
      */
     public static Path generateStartAFamilyPath(Path path1, Path path2) {
         startAFamilyPathCount++;
-        int nSpaces = RandomUtil.chooseRandomNumber(20, 30);
+        int nSpaces = Constants.NSAFP_SPACE;
         ArrayList<Space> spaces = new ArrayList<Space>();
 
         // determines where the respective spaces will be located
@@ -338,7 +341,7 @@ public class Generator {
         int blueSpace = RandomUtil.chooseRandomNumber(ranges[3], nSpaces);
 
         // generate the spaces randomly
-        for(int i = 0; i < nSpaces - 3; i++) {
+        for(int i = 0; i < nSpaces - 1; i++) {
             if(getMarriedSpace == i) spaces.add(new GetMarriedSpace());
             else if(buyAHouseSpace == i) spaces.add(new BuyAHouseSpace());
             else if(haveABaby == i) spaces.add(new HaveBabySpace(RandomUtil.chooseRandomNumber(1, 3)));
@@ -351,7 +354,7 @@ public class Generator {
     }
 
     public static Path generateRetirementPath() {
-        int nSpaces = RandomUtil.chooseRandomNumber(10, 40);
+        int nSpaces = Constants.NRP_SPACE;
         ArrayList<Space> spaces = new ArrayList<Space>();
         for(int i = 0; i < nSpaces - 1; i++) {
             spaces.add(new OrangeSpace());

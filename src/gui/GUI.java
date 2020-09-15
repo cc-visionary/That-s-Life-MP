@@ -25,27 +25,33 @@ public class GUI extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Game of Life");
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
+//        Button btn = new Button();
+//        btn.setText("Say 'Hello World'");
+//        btn.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                System.out.println("Hello World!");
+//            }
+//        });
 
         Canvas canvas = new Canvas(600, 600);
         GraphicsContext gc = canvas.getGraphicsContext2D();
-
 
 //        drawHexagon(100 + Constants.HEXAGON_SIZE, 100 - Constants.HEXAGON_SIZE - Constants.HEXAGON_SIZE / 2, Constants.HEXAGON_SIZE, gc); // top right
 //        drawHexagon(100 + Constants.HEXAGON_SIZE, 100 + Constants.HEXAGON_SIZE + Constants.HEXAGON_SIZE / 2, Constants.HEXAGON_SIZE, gc); // lower right
         double prevXPos = 100, prevYPos = 100;
         for(int i = 0; i < 10; i++) {
-            drawHexagon(prevXPos + Constants.HEXAGON_SIZE * 2, prevYPos, Constants.HEXAGON_SIZE, gc); // right
-            prevXPos = prevXPos + Constants.HEXAGON_SIZE * 2;
+            prevXPos += Constants.HEXAGON_SIZE * 2;
+            drawHexagon(prevXPos, prevYPos, Constants.HEXAGON_SIZE, gc); // right
         }
-        drawHexagon(prevXPos + Constants.HEXAGON_SIZE, prevYPos - Constants.HEXAGON_SIZE - Constants.HEXAGON_SIZE / 2, Constants.HEXAGON_SIZE, gc);
+        prevXPos += Constants.HEXAGON_SIZE;
+        prevYPos -= Constants.HEXAGON_SIZE + Constants.HEXAGON_SIZE / 2;
+        drawHexagon(prevXPos, prevYPos, Constants.HEXAGON_SIZE, gc);
+
+        for(int i = 0; i < 8; i++) {
+            prevXPos += Constants.HEXAGON_SIZE * 2;
+            drawHexagon(prevXPos, prevYPos, Constants.HEXAGON_SIZE, gc); // right
+        }
 
         StackPane root = new StackPane();
         root.getChildren().add(canvas);
@@ -79,38 +85,38 @@ public class GUI extends Application {
         final double RADIUS = size / 2;
         gc.setStroke(stroke);
         gc.strokePolygon(new double[]{
-                xPos - RADIUS * 2,
-                xPos,
-                xPos + RADIUS * 2,
-                xPos + RADIUS * 2,
-                xPos,
-                xPos - RADIUS * 2
+                xPos - RADIUS * 2, // top left
+                xPos,              // top center
+                xPos + RADIUS * 2, // top right
+                xPos + RADIUS * 2, // bottom right
+                xPos,              // bottom center
+                xPos - RADIUS * 2  // bottom left
         }, new double[]{
-                yPos - RADIUS,
-                yPos - size,
-                yPos - RADIUS,
-                yPos + RADIUS,
-                yPos + size,
-                yPos + RADIUS
+                yPos - RADIUS, // top left
+                yPos - size,   // top center
+                yPos - RADIUS, // top right
+                yPos + RADIUS, // bottom right
+                yPos + size,   // bottom center
+                yPos + RADIUS  // bottom left
         }, 6);
     }
 
     public static void drawHexagon(double xPos, double yPos, double size, GraphicsContext gc) {
         final double RADIUS = size / 2;
         gc.strokePolygon(new double[]{
-                xPos - RADIUS * 2,
-                xPos,
-                xPos + RADIUS * 2,
-                xPos + RADIUS * 2,
-                xPos,
-                xPos - RADIUS * 2
+                xPos - RADIUS * 2, // top left
+                xPos,              // top center
+                xPos + RADIUS * 2, // top right
+                xPos + RADIUS * 2, // bottom right
+                xPos,              // bottom center
+                xPos - RADIUS * 2  // bottom left
         }, new double[]{
-                yPos - RADIUS,
-                yPos - size,
-                yPos - RADIUS,
-                yPos + RADIUS,
-                yPos + size,
-                yPos + RADIUS
+                yPos - RADIUS, // top left
+                yPos - size,   // top center
+                yPos - RADIUS, // top right
+                yPos + RADIUS, // bottom right
+                yPos + size,   // bottom center
+                yPos + RADIUS  // bottom left
         }, 6);
     }
 }

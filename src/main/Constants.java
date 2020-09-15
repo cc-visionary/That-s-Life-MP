@@ -59,7 +59,10 @@ public class Constants {
     final public static int nCollectPlayer = (int) (totalOrangeCard * collectPlayerProportion);
     final public static int nPayPlayer = totalOrangeCard - (nCollectBank + nPayBank + nCollectPlayer);
 
-    // Config
+    // Path Spaces
+    final public static int NCAP_SPACE = 25, NCOP_SPACE = 25, NCCP_SPACE = 25, NSAFP_SPACE = 25, NRP_SPACE = 30;
+
+    // Miscellaneous Config
     final public static double STARTING_MONEY = 200000;
     final public static double HEXAGON_SIZE = 10;
 }

@@ -36,7 +36,7 @@ public class Test5 {
 
     public static void preorderTraversal(Path path) {
         if(path != null) {
-            System.out.println(path.getUniqueName());
+            System.out.println(path.getUniqueName() + " : " + path.getNSpaces() );
             preorderTraversal(path.getPath1());
             preorderTraversal(path.getPath2());
         }
