@@ -10,6 +10,7 @@ public class DeckWithUsed extends Deck {
 
     public DeckWithUsed(String name) {
         super(name);
+        usedCards = new ArrayList<Card>();
     }
 
     public void addUsed(Card card) {
@@ -24,7 +25,7 @@ public class DeckWithUsed extends Deck {
      */
     @Override
     public Card pickTopCard() {
-        if(isDeckEmpty()) { // if deck is empty, add all the used cards to the deck and shuffle
+        if(!hasCard()) { // if deck is empty, add all the used cards to the deck and shuffle
             returnUsedCards();
             System.out.println("All used cards are added back to the deck and shuffled");
         }
@@ -44,7 +45,7 @@ public class DeckWithUsed extends Deck {
      */
     @Override
     public Card pickTopCard(int offset) {
-        if(isDeckEmpty()) { // if deck is empty, add all the used cards to the deck and shuffle
+        if(!hasCard()) { // if deck is empty, add all the used cards to the deck and shuffle
             returnUsedCards();
             System.out.println("All used cards are added back to the deck and shuffled");
         }

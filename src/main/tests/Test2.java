@@ -2,6 +2,7 @@ package main.tests;
 
 import main.Generator;
 import main.decks.Deck;
+import main.decks.DeckWithUsed;
 
 /**
  * <h1>Test Script #2</h1>
@@ -25,7 +26,7 @@ import main.decks.Deck;
  */
 public class Test2 {
     public static void main(String[] args) {
-        Deck orangeDeck = Generator.generateOrangeDeck();
+        DeckWithUsed orangeDeck = Generator.generateOrangeDeck();
         Deck blueDeck = Generator.generateBlueDeck(2);
         Deck careerDeck = Generator.generateCareerDeck();
         Deck salaryDeck = Generator.generateSalaryDeck();

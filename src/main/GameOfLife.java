@@ -41,7 +41,7 @@ public class GameOfLife {
         // generate Decks
         careerDeck = Generator.generateCareerDeck();
         salaryDeck = Generator.generateSalaryDeck();
-        orangeDeck = (DeckWithUsed) Generator.generateOrangeDeck();
+        orangeDeck = Generator.generateOrangeDeck();
         blueDeck = Generator.generateBlueDeck(nPlayers);
         houseDeck = Generator.generateHouseDeck();
 
@@ -51,8 +51,8 @@ public class GameOfLife {
         collegePath = paths[1];
 
         // generate Players
-        players = Generator.generatePlayers(careerDeck, salaryDeck, careerPath, collegePath);
-        this.nPlayers = players.length;
+//        players = Generator.generatePlayers(careerDeck, salaryDeck, careerPath, collegePath);
+//        this.nPlayers = players.length;
 
         turn = 0;
         round = 1;

@@ -7,6 +7,7 @@ import main.cards.CareerCard.CareerCard;
 import main.cards.HouseCard.HouseCard;
 import main.cards.SalaryCard.SalaryCard;
 import main.decks.Deck;
+import main.decks.DeckWithUsed;
 import main.paths.Path;
 import main.players.Player;
 import main.spaces.BlueSpace.BlueSpace;
@@ -59,7 +60,7 @@ public class Generator {
      * @see Deck
      * @see ActionCard
      */
-    public static Deck generateOrangeDeck() {
+    public static DeckWithUsed generateOrangeDeck() {
         // Collect from the Bank (40% - 20 cards)
         Card[] collectBankCards = {
                 new CollectBankCard("Tax Refund", "You got a tax refund! Collect from the bank!", 1000),
@@ -92,7 +93,7 @@ public class Generator {
         };
 
         // TODO: Automatically calculate the percentage of each type of ActionCards
-        Deck orangeDeck = new Deck("Orange Deck");
+        DeckWithUsed orangeDeck = new DeckWithUsed("Orange Deck");
 
         // randomly choose from any of Collect from Bank Cards
         for(int i = 0; i < Constants.nCollectBank; i++) orangeDeck.addCard(RandomUtil.chooseRandomCard(collectBankCards));

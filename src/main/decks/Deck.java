@@ -44,7 +44,7 @@ public class Deck {
      * @return the card on the top of the deck
      */
     public Card pickTopCard() {
-        if(!isDeckEmpty()) {
+        if(hasCard()) {
             Card card = cards.get(0); // get the first indexed/top card
             cards.remove(0);    // removes the card that was picked (top card)
             return card;
@@ -61,7 +61,7 @@ public class Deck {
      * @return the card on the top of the deck with offset
      */
     public Card pickTopCard(int offset) {
-        if(!isDeckEmpty()) {
+        if(hasCard()) {
             Card card = cards.get(offset); // get the first indexed/top card
             cards.remove(offset);    // removes the card that was picked (top card)
             return card;
@@ -99,14 +99,6 @@ public class Deck {
         for(int i = 0; i < cards.size(); i++) {
             System.out.println(i + 1 + ": " + cards.get(i));
         }
-    }
-
-    /**
-     * Checks whether the deck is already empty or not
-     * @return boolean values (true/false)
-     */
-    public boolean isDeckEmpty() {
-        return cards.size() == 0;
     }
 
     @Override
