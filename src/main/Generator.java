@@ -205,17 +205,16 @@ public class Generator {
 
         // depth 5
         Path cap1 = generateCareerPath(rp, null);
-        Path safp1 = generateStartAFamilyPath(rp, null);
         Path safp2 = generateStartAFamilyPath(rp, null);
 
         // depth 4
-        Path safp3 = generateStartAFamilyPath(cap1, safp1);
+        Path safp1 = generateStartAFamilyPath(cap1, null);
         Path cap2 = generateCareerPath(safp2, null);
-        Path ccp1 = generateChangeCareerPath(safp2, null);
+        Path ccp1 = generateChangeCareerPath(safp1, null);
 
         // depth 3
-        Path cap3 = generateCareerPath(safp3, null);
-        Path ccp2 = generateChangeCareerPath(safp3, cap2);
+        Path cap3 = generateCareerPath(safp1, null);
+        Path ccp2 = generateChangeCareerPath(safp1, cap2);
         Path cap4 = generateCareerPath(cap2, ccp1);
 
         // depth 2

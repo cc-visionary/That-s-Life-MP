@@ -3,6 +3,8 @@ package main.tests;
 import main.Generator;
 import main.paths.Path;
 
+import java.util.ArrayList;
+
 /**
  * <h1>Test Script #5</h1>
  * <p>This test script tests whether or not the generation of the Board is working properly or not</p>
