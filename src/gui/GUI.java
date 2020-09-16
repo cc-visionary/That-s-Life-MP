@@ -30,7 +30,7 @@ public class GUI extends Application {
 
         GameOfLife gameOfLife = new GameOfLife();
 
-        Board board = new Board(gameOfLife, 3750, 720);
+        Board board = new Board(gameOfLife, 4500, 720);
 
         StackPane root = new StackPane();
         ScrollPane scrollPane = new ScrollPane(root);

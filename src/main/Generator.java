@@ -205,31 +205,31 @@ public class Generator {
 
         // depth 5
         Path cap1 = generateCareerPath(rp, null);
-        Path safp2 = generateStartAFamilyPath(rp, null);
+        Path safp1 = generateStartAFamilyPath(rp, null);
 
         // depth 4
-        Path safp1 = generateStartAFamilyPath(cap1, null);
-        Path cap2 = generateCareerPath(safp2, null);
-        Path ccp1 = generateChangeCareerPath(safp1, null);
+        Path safp2 = generateStartAFamilyPath(cap1, null);
+        Path cap2 = generateCareerPath(safp1, null);
 
         // depth 3
-        Path cap3 = generateCareerPath(safp1, null);
-        Path ccp2 = generateChangeCareerPath(safp1, cap2);
-        Path cap4 = generateCareerPath(cap2, ccp1);
+        Path cap3 = generateCareerPath(safp2, null);
+        Path ccp1 = generateChangeCareerPath(safp2, cap2);
+        Path cap4 = generateCareerPath(cap2, null);
 
         // depth 2
-        Path ccp3 = generateChangeCareerPath(cap3, null);
-        Path cap5 = generateCareerPath(cap3, ccp2);
-        Path cap6 = generateCareerPath(ccp2, cap4);
-        Path ccp4 = generateChangeCareerPath(cap4, null);
+        Path ccp2 = generateChangeCareerPath(cap3, null);
+        Path cap5 = generateCareerPath(ccp1, cap3);
+        Path ccp3 = generateChangeCareerPath(ccp1, cap4);
+        Path cap6 = generateCareerPath(cap4, null);
 
         // depth 1
-        Path cap7 = generateCareerPath(ccp3, cap5);
+        Path cap7 = generateCareerPath(ccp2, null);
         Path cop1 = generateCollegePath(cap5, null);
-        Path cap8 = generateCareerPath(cap6, ccp4);
+        Path cap8 = generateCareerPath(ccp3, null);
+        Path ccp4 = generateChangeCareerPath(cap6, null);
 
         // depth 0
-        Path startingPaths[] = {generateCareerPath(cap7, cop1), generateCollegePath(cap8, null)};
+        Path startingPaths[] = {generateCareerPath(cap7, cop1), generateCollegePath(cap8, ccp4)};
         return startingPaths;
     }
 
@@ -241,10 +241,9 @@ public class Generator {
      */
     public static Path generateCareerPath(Path path1, Path path2) {
         careerPathCount++;
-        int nSpaces = Constants.NCAP_SPACE;
         ArrayList<Space> spaces = new ArrayList<Space>();
-        int randomNumber = RandomUtil.chooseRandomNumber(0, nSpaces - 2);
-        for(int i = 0; i < nSpaces - 1; i++) {
+        int randomNumber = RandomUtil.chooseRandomNumber(0, Constants.PATH_SPACES - 2);
+        for(int i = 0; i < Constants.PATH_SPACES - 1; i++) {
             // if random number matches the index, add a GetMarriedSpace
             if(randomNumber == i) spaces.add(new GetMarriedSpace());
                 // else add an OrangeSpace
@@ -262,10 +261,9 @@ public class Generator {
      */
     public static Path generateCollegePath(Path path1, Path path2) {
         collegePathCount++;
-        int nSpaces = Constants.NCOP_SPACE;
         ArrayList<Space> spaces = new ArrayList<Space>();
         // adds Orange Spaces
-        for(int i = 0; i < nSpaces - 2; i++) {
+        for(int i = 0; i < Constants.PATH_SPACES - 2; i++) {
             spaces.add(new OrangeSpace());
         }
         spaces.add(new CollegeCareerChoiceSpace());
@@ -281,12 +279,11 @@ public class Generator {
      */
     public static Path generateChangeCareerPath(Path path1, Path path2) {
         changeChareerPathCount++;
-        int nSpaces = Constants.NCCP_SPACE;
         ArrayList<Space> spaces = new ArrayList<Space>();
 
         // determines where the respective spaces will be located
         // Note: This make sures that each of the spaces to be added are available.
-        int ranges[] = IntUtil.splitEqually(4, nSpaces);
+        int ranges[] = IntUtil.splitEqually(4, Constants.PATH_SPACES);
         int payDaySpace = RandomUtil.chooseRandomNumber(0, ranges[0]);
         int payRaiseSpace = RandomUtil.chooseRandomNumber(ranges[0], ranges[1]);
         int orangeSpace = RandomUtil.chooseRandomNumber(ranges[1], ranges[2]);
@@ -296,7 +293,7 @@ public class Generator {
         spaces.add(new CollegeCareerChoiceSpace());
 
         // generate the spaces randomly
-        for(int i = 0; i < nSpaces - 2; i++) {
+        for(int i = 0; i < Constants.PATH_SPACES - 2; i++) {
             if(payDaySpace == i) spaces.add(new PayDaySpace());
             else if(payRaiseSpace == i) spaces.add(new PayRaiseSpace(RandomUtil.chooseRandomNumber(1, 10) * 500));
             else if(orangeSpace == i) spaces.add(new OrangeSpace());
@@ -329,18 +326,17 @@ public class Generator {
      */
     public static Path generateStartAFamilyPath(Path path1, Path path2) {
         startAFamilyPathCount++;
-        int nSpaces = Constants.NSAFP_SPACE;
         ArrayList<Space> spaces = new ArrayList<Space>();
 
         // determines where the respective spaces will be located
-        int ranges[] = IntUtil.splitEqually(4, nSpaces);
+        int ranges[] = IntUtil.splitEqually(4, Constants.PATH_SPACES);
         int getMarriedSpace = RandomUtil.chooseRandomNumber(0, ranges[0]);
         int buyAHouseSpace = RandomUtil.chooseRandomNumber(ranges[1], ranges[2]);
         int haveABaby = RandomUtil.chooseRandomNumber(ranges[2], ranges[3]);
-        int blueSpace = RandomUtil.chooseRandomNumber(ranges[3], nSpaces);
+        int blueSpace = RandomUtil.chooseRandomNumber(ranges[3], Constants.PATH_SPACES);
 
         // generate the spaces randomly
-        for(int i = 0; i < nSpaces - 1; i++) {
+        for(int i = 0; i < Constants.PATH_SPACES - 1; i++) {
             if(getMarriedSpace == i) spaces.add(new GetMarriedSpace());
             else if(buyAHouseSpace == i) spaces.add(new BuyAHouseSpace());
             else if(haveABaby == i) spaces.add(new HaveBabySpace(RandomUtil.chooseRandomNumber(1, 3)));
@@ -353,9 +349,8 @@ public class Generator {
     }
 
     public static Path generateRetirementPath() {
-        int nSpaces = Constants.NRP_SPACE;
         ArrayList<Space> spaces = new ArrayList<Space>();
-        for(int i = 0; i < nSpaces - 1; i++) {
+        for(int i = 0; i < Constants.PATH_SPACES - 1; i++) {
             spaces.add(new OrangeSpace());
         }
         spaces.add(new RetirementSpace());
