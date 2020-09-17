@@ -7,6 +7,7 @@ import main.Constants;
 import main.GameOfLife;
 import main.paths.Path;
 import main.spaces.Space;
+import sun.plugin2.util.ColorUtil;
 
 import java.util.ArrayList;
 
@@ -75,14 +76,6 @@ public class Board extends Canvas {
         // safp1
         Path safp1 = cap2.getPath1();
         drawPath(prevXPos, prevYPos, safp1, gc);
-        System.out.println(cop2.getUniqueName());
-        System.out.println(ccp4.getUniqueName());
-        System.out.println(cap8.getUniqueName());
-        System.out.println(cap6.getUniqueName());
-        System.out.println(ccp3.getUniqueName());
-        System.out.println(ccp1.getUniqueName());
-        System.out.println(cap2.getUniqueName());
-        System.out.println(safp1.getUniqueName());
 
         prevXPos = 0;
         prevYPos = 100 + Constants.HEXAGON_SIZE * 6;
@@ -141,45 +134,18 @@ public class Board extends Canvas {
         // rp
         Path rp = cap1.getPath1();
         drawPath(prevXPos, prevYPos, rp, gc);
-
-        System.out.println(cap9.getUniqueName());
-        System.out.println(cop1.getUniqueName());
-        System.out.println(cap7.getUniqueName());
-        System.out.println(ccp2.getUniqueName());
-        System.out.println(cap5.getUniqueName());
-        System.out.println(cap3.getUniqueName());
-        System.out.println(safp2.getUniqueName());
-        System.out.println(cap1.getUniqueName());
-        System.out.println(rp.getUniqueName());
     }
 
     private void drawPath(double startX, double startY, Path path, GraphicsContext gc) {
         for(Space space : path.getSpaces()) {
+            Color color = Color.BLACK;
             startX += Constants.HEXAGON_SIZE * 2;
-            drawHexagon(path.getUniqueName(), startX, startY, Constants.HEXAGON_SIZE, gc); // right
+            if(space.getType() == Constants.BLUE_SPACE) color = Color.BLUE;
+            else if(space.getType() == Constants.ORANGE_SPACE) color = Color.ORANGE;
+            else if(space.getType() == Constants.GREEN_SPACE) color = Color.GREEN;
+            else if(space.getType() == Constants.MAGENTA_SPACE) color = Color.MAGENTA;
+            drawHexagon(path.getUniqueName(), startX, startY, Constants.HEXAGON_SIZE, color, gc); // right
         }
-    }
-
-    private void drawHexagon(String label, double xPos, double yPos, double size, Color fill, Color stroke, GraphicsContext gc) {
-        final double RADIUS = size / 2;
-        gc.setFill(fill);
-        gc.setStroke(stroke);
-        gc.strokePolygon(new double[]{
-                xPos - RADIUS * 2, // top left
-                xPos,              // top center
-                xPos + RADIUS * 2, // top right
-                xPos + RADIUS * 2, // bottom right
-                xPos,              // bottom center
-                xPos - RADIUS * 2  // bottom left
-        }, new double[]{
-                yPos - RADIUS, // top left
-                yPos - size,   // top center
-                yPos - RADIUS, // top right
-                yPos + RADIUS, // bottom right
-                yPos + size,   // bottom center
-                yPos + RADIUS  // bottom left
-        }, 6);
-        gc.strokeText(label, xPos, yPos);
     }
 
     private void drawHexagon(String label, double xPos, double yPos, double size, Color stroke, GraphicsContext gc) {
@@ -200,28 +166,6 @@ public class Board extends Canvas {
                 yPos + size,   // bottom center
                 yPos + RADIUS  // bottom left
         }, 6);
-        gc.strokeText(label, xPos, yPos);
+        gc.strokeText(label, xPos - 10, yPos);
     }
-
-    private static void drawHexagon(String label, double xPos, double yPos, double size, GraphicsContext gc) {
-        final double RADIUS = size / 2;
-        gc.strokePolygon(new double[]{
-                xPos - RADIUS * 2, // top left
-                xPos,              // top center
-                xPos + RADIUS * 2, // top right
-                xPos + RADIUS * 2, // bottom right
-                xPos,              // bottom center
-                xPos - RADIUS * 2  // bottom left
-        }, new double[]{
-                yPos - RADIUS, // top left
-                yPos - size,   // top center
-                yPos - RADIUS, // top right
-                yPos + RADIUS, // bottom right
-                yPos + size,   // bottom center
-                yPos + RADIUS  // bottom left
-        }, 6);
-        gc.fillText(label, xPos - 10, yPos + 5);
-    }
-
-
 }
