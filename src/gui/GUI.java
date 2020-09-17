@@ -1,10 +1,18 @@
 package gui;
 
 import gui.board.Board;
+import gui.board.ScreenStats;
+import javafx.geometry.Insets;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.stage.Screen;
 import main.Constants;
 import main.GameOfLife;
 
@@ -30,13 +38,16 @@ public class GUI extends Application {
 
         GameOfLife gameOfLife = new GameOfLife();
 
-        Board board = new Board(gameOfLife, Constants.PATH_SPACES * 7 * 2 * Constants.HEXAGON_SIZE, 720);
+        Board board = new Board(gameOfLife, Constants.PATH_SPACES * 7 * 2 * Constants.HEXAGON_SIZE, Screen.getPrimary().getBounds().getMaxY() - 150);
 
+        ScreenStats screenStats = new ScreenStats(gameOfLife);
+
+        ScrollPane scrollPane = new ScrollPane(board);
         StackPane root = new StackPane();
-        ScrollPane scrollPane = new ScrollPane(root);
-        root.getChildren().add(board);
+        root.getChildren().addAll(scrollPane, screenStats);
+        StackPane.setMargin(screenStats, new Insets(0, 0, 50, 0));
         primaryStage.setMaximized(true);
-        primaryStage.setScene(new Scene(scrollPane, primaryStage.getWidth(), primaryStage.getHeight()));
+        primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
         primaryStage.show();
     }
 }

@@ -18,7 +18,7 @@ public class Board extends Canvas {
     }
 
     private void drawBoard(GameOfLife gameOfLife, GraphicsContext gc) {
-        double prevXPos = 0, prevYPos = 100;
+        double prevXPos = 0, prevYPos = 350;
 
         System.out.println("Career Path");
 
@@ -78,7 +78,7 @@ public class Board extends Canvas {
         drawPath(prevXPos, prevYPos, safp1, gc);
 
         prevXPos = 0;
-        prevYPos = 100 + Constants.HEXAGON_SIZE * 6;
+        prevYPos = 350 + Constants.HEXAGON_SIZE * 6;
 
         Path cap9 = gameOfLife.getCareerPath();
         drawPath(prevXPos, prevYPos, cap9, gc);
@@ -144,7 +144,7 @@ public class Board extends Canvas {
             else if(space.getType() == Constants.ORANGE_SPACE) color = Color.ORANGE;
             else if(space.getType() == Constants.GREEN_SPACE) color = Color.GREEN;
             else if(space.getType() == Constants.MAGENTA_SPACE) color = Color.MAGENTA;
-            drawHexagon(path.getUniqueName(), startX, startY, Constants.HEXAGON_SIZE, color, gc); // right
+            drawHexagon(space.getPlayers().toString(), startX, startY, Constants.HEXAGON_SIZE, color, gc); // right
         }
     }
 

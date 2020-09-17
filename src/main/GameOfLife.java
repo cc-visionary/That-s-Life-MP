@@ -51,8 +51,11 @@ public class GameOfLife {
         collegePath = paths[1];
 
         // generate Players
-//        players = Generator.generatePlayers(careerDeck, salaryDeck, careerPath, collegePath);
-//        this.nPlayers = players.length;
+        players = Generator.generatePlayers(careerDeck, salaryDeck, careerPath, collegePath);
+        this.nPlayers = players.length;
+        for(Player player : players)
+            player.getPath().getSpaces()[player.getLocation()].addPlayer(player);
+
 
         turn = 0;
         round = 1;
@@ -80,7 +83,11 @@ public class GameOfLife {
      */
     public void movePlayer(int rolledDice) {
         Player currentPlayer = getCurrentPlayer();
-        Space spaceLanded = null;
+        Space previousSpace = currentPlayer.getPath().getSpaces()[currentPlayer.getLocation()], spaceLanded = null;
+
+        // remove player from that space
+        if(previousSpace.getPlayers().contains(currentPlayer))
+            previousSpace.removePlayer(currentPlayer);
 
         for(int i = 0; i < rolledDice; i++) {
             currentPlayer.addLocation();
@@ -90,6 +97,9 @@ public class GameOfLife {
         }
 
         handleSpaceLanded(spaceLanded);
+
+        // add player to that space
+        spaceLanded.addPlayer(currentPlayer);
     }
 
     /**

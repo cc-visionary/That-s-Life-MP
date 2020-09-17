@@ -64,5 +64,5 @@ public class Constants {
 
     // Miscellaneous Config
     final public static double STARTING_MONEY = 200000;
-    final public static double HEXAGON_SIZE = 12.5;
+    final public static double HEXAGON_SIZE = 15;
 }
