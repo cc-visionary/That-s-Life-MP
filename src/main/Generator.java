@@ -1,5 +1,6 @@
 package main;
 
+import gui.GUI;
 import main.cards.ActionCard.*;
 import main.cards.BlueCard.*;
 import main.cards.Card;
@@ -36,20 +37,7 @@ public class Generator {
 
         ArrayList<Player> players = new ArrayList<Player>();
         for(int i = 0; i < nPlayers; i++) {
-            System.out.println("Choose Starting Path for " + "P" + (i + 1) + ":");
-            System.out.println("\t[1] Career Path");
-            System.out.println("\t[2] College Path");
-            int choice = InputUtil.scanInt("Choice: ", 1, 2);
-            switch(choice) {
-                case 1:
-                    CareerCard careerCard = (CareerCard) careerDeck.pickTopCard();
-                    SalaryCard salaryCard = (SalaryCard) salaryDeck.pickTopCard();
-                    players.add(new Player("P" + (i + 1), careerPath, careerCard, salaryCard));
-                    break;
-                case 2:
-                    players.add(new Player("P" + (i + 1), collegePath));
-                    break;
-            }
+            players.add(new Player("P" + (i + 1)));
         }
         return players.toArray(new Player[0]);
     }

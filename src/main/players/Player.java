@@ -1,5 +1,7 @@
 package main.players;
 import com.sun.xml.internal.bind.util.Which;
+import gui.choose.ChooseMove;
+import javafx.stage.Stage;
 import main.Constants;
 import main.cards.CareerCard.CareerCard;
 import main.cards.HouseCard.HouseCard;
@@ -31,15 +33,6 @@ final public class Player {
     private double balance = Constants.STARTING_MONEY, debt;
     private int nBankLoan = 0;
 
-    public Player(String name, Path careerPath, CareerCard careerCard, SalaryCard salaryCard) {
-        this.name = name;
-        this.path = careerPath;
-        this.careerCard = careerCard;
-        this.salaryCard = salaryCard;
-        this.playerCount++;
-        this.nthPlayer = this.playerCount;
-    }
-
     public Player(String name, CareerCard careerCard, SalaryCard salaryCard) {
         this.name = name;
         this.careerCard = careerCard;
@@ -48,53 +41,10 @@ final public class Player {
         this.nthPlayer = this.playerCount;
     }
 
-    public Player(String name, Path collegePath) {
+    public Player(String name) {
         this.name = name;
-        this.path = collegePath;
         this.playerCount++;
         this.nthPlayer = this.playerCount;
-        bankLoan(2);
-    }
-
-    /**
-     * Allows the Player to choose a move
-     *
-     * <p>Note: This returns a space only because the player can only end his/her turn
-     *       if and only if the dice was rolled.</p>
-     * @return Space where player has landed.
-     */
-    public int chooseMove() {
-        int dice = 0;
-        boolean turnEnded = false;
-        System.out.println(getName() + "'s turn");
-        while(!turnEnded) {
-            int maxChoice = 2;
-            System.out.println("Choose your move:");
-            System.out.println("\t[1] Roll Dice");
-            System.out.println("\t[2] View Stats");
-            if(this.debt > 0) {
-                System.out.println("\t[3] Pay Debt (" + this.debt + ")");
-                maxChoice++;
-            }
-            int choice = InputUtil.scanInt("Move:", 1, maxChoice);
-            switch(choice) {
-                case 1:
-                    turnEnded = true;
-                    dice = rollDice();
-                    break;
-                case 2:
-                    displayPlayerStats();
-                    break;
-                case 3:
-                    // Each payment is a multiple of 25000
-                    payDebt(Constants.PARTIAL);
-                    break;
-                default:
-                    System.out.println("Invalid move... (" + choice + ")");
-            }
-        }
-
-        return dice;
     }
 
     /**
@@ -190,6 +140,7 @@ final public class Player {
      */
     public void setPath(Path path) {
         this.path = path;
+        if(path.getName() == "College Path") bankLoan(2);
         this.location = 0;
     }
 

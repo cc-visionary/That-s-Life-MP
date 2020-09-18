@@ -1,9 +1,10 @@
 package main;
 
 import gui.board.ScreenStatsController;
+import gui.choose.ChooseMove;
+import gui.choose.ChoosePath;
 import main.cards.ActionCard.ActionCard;
 import main.cards.BlueCard.BlueCard;
-import main.cards.Card;
 import main.cards.CareerCard.CareerCard;
 import main.cards.HouseCard.HouseCard;
 import main.cards.SalaryCard.SalaryCard;
@@ -55,16 +56,12 @@ public class GameOfLife {
         // generate Players
         players = Generator.generatePlayers(careerDeck, salaryDeck, careerPath, collegePath);
         this.nPlayers = players.length;
-        for(Player player : players)
-            player.getPath().getSpaces()[player.getLocation()].addPlayer(player);
-
 
         turn = 0;
         round = 1;
 
-        // update screen stats
+        // screen stats
         this.screenStats = screenStats;
-        this.screenStats.updateStats(getCurrentPlayer());
     }
 
     public GameOfLife() {
@@ -83,8 +80,6 @@ public class GameOfLife {
         // generate Players
         players = Generator.generatePlayers(careerDeck, salaryDeck, careerPath, collegePath);
         this.nPlayers = players.length;
-        for(Player player : players)
-            player.getPath().getSpaces()[player.getLocation()].addPlayer(player);
 
 
         turn = 0;
@@ -97,7 +92,13 @@ public class GameOfLife {
      * doing Space actions, changing of Paths, etc.
      */
     public void nextPlayer() {
-        movePlayer(getCurrentPlayer().chooseMove());
+        // if player has no path, let's him choose one
+        // gui
+        if(getCurrentPlayer().getPath() == null) {
+            ChoosePath.choosePath(careerPath, collegePath, getCurrentPlayer(), careerDeck, salaryDeck);
+        }
+        this.screenStats.updateStats(getCurrentPlayer());
+        ChooseMove.chooseMove(this);
 
         turn++;
 
@@ -243,9 +244,8 @@ public class GameOfLife {
                     ((HaveBabySpace) space).haveABaby(getCurrentPlayer());
                 } else if(space.getName().equals(Constants.WHICH_PATH)) {
                     // this is the junction where Players can choose the next Path
-                    Path chosenPath = ((WhichPathSpace) currentPlayer.getPath().getJunction()).choosePath(currentPlayer.getPath());
-                    currentPlayer.setPath(chosenPath);
-                    movePlayer(currentPlayer.rollDice());
+                    ((WhichPathSpace) currentPlayer.getPath().getJunction()).choosePath(currentPlayer);
+                    ChooseMove.chooseMove(this);
                 }
             } else if(space.getType().equals(Constants.RETIREMENT_SPACE)) {
                 // Space where Player retires

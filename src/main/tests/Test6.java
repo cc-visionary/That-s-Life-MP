@@ -65,10 +65,10 @@ public class Test6 {
                 case 1:
                     CareerCard careerCard = (CareerCard) careerDeck.pickTopCard();
                     SalaryCard salaryCard = (SalaryCard) salaryDeck.pickTopCard();
-                    players.add(new Player("P" + (i + 1), careerPath, careerCard, salaryCard));
+//                    players.add(new Player("P" + (i + 1), careerPath, careerCard, salaryCard));
                     break;
                 case 2:
-                    players.add(new Player("P" + (i + 1), collegePath));
+//                    players.add(new Player("P" + (i + 1), collegePath));
                     break;
             }
         }
@@ -78,7 +78,7 @@ public class Test6 {
         while(!hasWinner) {
             Player currentPlayer = players.get(turn);
 
-            currentPlayer.chooseMove();
+//            currentPlayer.chooseMove();
 
             for(Player player : players) {
                 System.out.println(player);
