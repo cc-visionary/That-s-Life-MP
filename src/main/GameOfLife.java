@@ -1,5 +1,6 @@
 package main;
 
+import gui.board.ScreenStatsController;
 import main.cards.ActionCard.ActionCard;
 import main.cards.BlueCard.BlueCard;
 import main.cards.Card;
@@ -31,12 +32,41 @@ public class GameOfLife {
     private Path careerPath, collegePath;
     private Player players[];
     private int nPlayers, turn, round;
+    private ScreenStatsController screenStats;
 
 
     /**
      * All of the Game pieces will be Generated in the Board such as the
      * Deck(containing Card), Paths/Board, and Players.
      */
+    public GameOfLife(ScreenStatsController screenStats) {
+        // generate Decks
+        careerDeck = Generator.generateCareerDeck();
+        salaryDeck = Generator.generateSalaryDeck();
+        orangeDeck = Generator.generateOrangeDeck();
+        blueDeck = Generator.generateBlueDeck(nPlayers);
+        houseDeck = Generator.generateHouseDeck();
+
+        // generate Starting Paths
+        Path paths[] = Generator.generateBoard();
+        careerPath = paths[0];
+        collegePath = paths[1];
+
+        // generate Players
+        players = Generator.generatePlayers(careerDeck, salaryDeck, careerPath, collegePath);
+        this.nPlayers = players.length;
+        for(Player player : players)
+            player.getPath().getSpaces()[player.getLocation()].addPlayer(player);
+
+
+        turn = 0;
+        round = 1;
+
+        // update screen stats
+        this.screenStats = screenStats;
+        this.screenStats.updateStats(getCurrentPlayer());
+    }
+
     public GameOfLife() {
         // generate Decks
         careerDeck = Generator.generateCareerDeck();

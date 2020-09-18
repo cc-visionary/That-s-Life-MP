@@ -10,9 +10,8 @@ import java.util.ArrayList;
  */
 
 final public class Path {
-    private String type = "Path", name, uniqueName;
+    private String type = "Path", name, uniqueName, description;
     private Space spaces[];
-    private ArrayList<Player> players;
     private Path path1, path2;
 
     public Path(String name, String uniqueName, Space[] spaces, Path path1, Path path2) {
@@ -21,14 +20,28 @@ final public class Path {
         this.spaces = spaces;
         this.path1 = path1;
         this.path2 = path2;
-        this.players = new ArrayList<Player>();
+    }
+
+    public Path(String name, String uniqueName, Space[] spaces, Path path1, Path path2, String description) {
+        this.name = name;
+        this.uniqueName = uniqueName;
+        this.spaces = spaces;
+        this.path1 = path1;
+        this.path2 = path2;
+        this.description = description;
     }
 
     public Path(String name, String uniqueName, Space[] spaces) {
         this.name = name;
         this.uniqueName = uniqueName;
         this.spaces = spaces;
-        this.players = new ArrayList<Player>();
+    }
+
+    public Path(String name, String uniqueName, Space[] spaces, String description) {
+        this.name = name;
+        this.uniqueName = uniqueName;
+        this.spaces = spaces;
+        this.description = description;
     }
 
     public String getUniqueName() {
@@ -59,32 +72,16 @@ final public class Path {
         return spaces.length;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     /**
      * Gets the Junction located at the last space
      * @return the Which Path space
      */
     public Space getJunction() {
         return spaces[getNSpaces() - 1];
-    }
-
-    /**
-     * Add a player to the list of the players of the Path
-     * @param player the player to be added
-     */
-    public void addPlayer(Player player) {
-        this.players.add(player);
-    }
-
-    /**
-     * Removes a player from the list of the players of the Path
-     * @param player the player to be removed
-     */
-    public void removePlayer(Player player) {
-        this.players.remove(player);
-    }
-
-    public void displayPath() {
-
     }
 
     @Override

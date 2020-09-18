@@ -189,11 +189,7 @@ final public class Player {
      * @param path the path to be assigned to the player's path
      */
     public void setPath(Path path) {
-        if(this.path != null) {
-            this.path.removePlayer(this);
-        }
         this.path = path;
-        this.path.addPlayer(this);
         this.location = 0;
     }
 
