@@ -1,12 +1,11 @@
 package main;
 
-import gui.board.ScreenStatsController;
+import gui.stats.ScreenStatsController;
 import gui.choose.ChooseCard;
 import gui.choose.ChooseMove;
 import gui.choose.ChoosePath;
 import main.cards.ActionCard.ActionCard;
 import main.cards.BlueCard.BlueCard;
-import main.cards.Card;
 import main.cards.CareerCard.CareerCard;
 import main.cards.HouseCard.HouseCard;
 import main.cards.SalaryCard.SalaryCard;
@@ -99,9 +98,9 @@ public class GameOfLife {
             ChoosePath choosePath = new ChoosePath();
             choosePath.choosePath(careerPath, collegePath);
             Path chosenPath = choosePath.getChosenPath();
-            if(chosenPath.getName() == "College Path") {
-                getCurrentPlayer().bankLoan(2);
-            } else {
+
+            // @TODO only choose the career card which doesn't need a graduation since the player isn't graduated yet
+            if(chosenPath.getName() == "Career Path") {
                 getCurrentPlayer().setCareerCard((CareerCard) careerDeck.pickTopCard());
                 getCurrentPlayer().setSalaryCard((SalaryCard) salaryDeck.pickTopCard());
             }
@@ -283,7 +282,7 @@ public class GameOfLife {
             }
 
             // repay all loans to the bank
-            player.payDebt(Constants.ALL);
+            player.payDebt(player.getNBankLoan());
         }
 
         displayStats();

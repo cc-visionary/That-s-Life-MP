@@ -27,23 +27,24 @@ public class ChooseCard {
     private static Card chosenCard;
 
     public static void displayCard(Card card) {
-        Stage newStage = new Stage();
-        newStage.initStyle(StageStyle.UNDECORATED);
+        Stage stage = new Stage();
+        stage.initStyle(StageStyle.UNDECORATED);
 
         HBox hbox = new HBox();
+        hbox.setStyle("-fx-background-color: aliceblue; -fx-font-size: 16; -fx-border-width: 1; -fx-border-color: gray");
 
         Button cardButton = new Button();
         cardButton.setGraphic(handleCard(card));
         cardButton.setOnAction(e -> {
-            newStage.close();
+            stage.close();
         });
-        Tooltip tooltip = new Tooltip("Continue");
+        Tooltip tooltip = new Tooltip("click to continue");
         cardButton.setTooltip(tooltip);
 
         hbox.getChildren().add(cardButton);
-        newStage.setScene(new Scene(hbox));
+        stage.setScene(new Scene(hbox));
 
-        newStage.showAndWait();
+        stage.showAndWait();
     }
 
     /**
@@ -56,6 +57,7 @@ public class ChooseCard {
         stage.initStyle(StageStyle.UNDECORATED);
         HBox hbox = new HBox();
 
+        Tooltip card1Tooltip = new Tooltip("choose " + (card1.getName() != null ? card1.getName() + "(" + card1.getType() + ")" : card1.getType()));
         Button card1Button = new Button();
         card1Button.setGraphic(handleCard(card1));
         card1Button.setOnAction(e -> {
@@ -64,6 +66,7 @@ public class ChooseCard {
         });
 
 
+        Tooltip card2Tooltip = new Tooltip("choose " + (card2.getName() != null ? card2.getName() + "(" + card2.getType() + ")" : card2.getType()));
         Button card2Button = new Button();
         card2Button.setGraphic(handleCard(card2));
         card2Button.setOnAction(e -> {

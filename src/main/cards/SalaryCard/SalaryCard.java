@@ -1,5 +1,6 @@
 package main.cards.SalaryCard;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -72,19 +73,29 @@ final public class SalaryCard extends Card {
         cardImage.setFitHeight(Screen.getPrimary().getBounds().getMaxY() / 2);
         cardImage.setFitWidth(Screen.getPrimary().getBounds().getMaxX() / 5);
 
+        VBox formattedBox = new VBox();
+
+        VBox descriptionBox = new VBox();
+        for(String string : StringUtil.splitStringLength(getDescription(), 40)) {
+            Label description = new Label(string);
+            descriptionBox.getChildren().add(description);
+        }
+        descriptionBox.setAlignment(Pos.CENTER);
+
         VBox nameBox = new VBox();
-        Label type = new Label(getType());
+        Label cardName = new Label(getType());
         Label salary = new Label("Salary: $" + getSalary());
         Label tax = new Label("Tax: $" + getTax());
         Label payRaise = new Label("Pay Raise: " + getPayRaise());
-        Label description = new Label(getDescription());
+        nameBox.setAlignment(Pos.CENTER);
+        nameBox.setTranslateY(100);
+        nameBox.getChildren().addAll(cardName, salary, tax, payRaise);
 
-        nameBox.getChildren().addAll(type, salary, tax, payRaise);
-        nameBox.setAlignment(Pos.BOTTOM_CENTER);
+        formattedBox.getChildren().addAll(descriptionBox, nameBox);
+        formattedBox.setAlignment(Pos.CENTER);
 
-        stackPane.getChildren().addAll(cardImage, description, nameBox);
-        stackPane.setAlignment(nameBox, Pos.BOTTOM_CENTER);
-
+        stackPane.getChildren().addAll(cardImage, formattedBox);
+        formattedBox.setAlignment(Pos.CENTER);
 
         return stackPane;
     }

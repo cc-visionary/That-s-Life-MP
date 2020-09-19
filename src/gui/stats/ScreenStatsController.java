@@ -1,4 +1,4 @@
-package gui.board;
+package gui.stats;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

@@ -99,23 +99,12 @@ final public class Player {
 
     /**
      * Allows the Player to pay all of his/her debt
-     * @param method type of method for paying the debt (ALL/PARTIAL)
+     * @param times multiplier for the amount of times to be paid
      */
-    public void payDebt(String method) {
-        if(getNBankLoan() > 0) {
-            if(method.equals(Constants.ALL)) {
-                payBalance(25000 * getNBankLoan());
-                this.debt = 0;
-                this.nBankLoan = 0;
-            } else if(method.equals(Constants.PARTIAL)) {
-                int times = InputUtil.scanInt(String.format("How much of your debt would you want to Pay? (1-%d)", getNBankLoan()), 1, getNBankLoan());
-                payBalance(25000 * times);
-                this.debt -= 25000 * times;
-                this.nBankLoan -= times;
-            }
-        } else {
-            System.out.println(String.format("%s has no debt...", getName()));
-        }
+    public void payDebt(int times) {
+        payBalance(25000 * times);
+        this.debt -= 25000 * times;
+        this.nBankLoan -= times;
     }
 
     /**

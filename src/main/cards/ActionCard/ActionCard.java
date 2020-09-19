@@ -1,5 +1,6 @@
 package main.cards.ActionCard;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -46,19 +47,26 @@ public abstract class ActionCard extends Card {
         cardImage.setFitHeight(Screen.getPrimary().getBounds().getMaxY() / 2);
         cardImage.setFitWidth(Screen.getPrimary().getBounds().getMaxX() / 5);
 
+        VBox formattedBox = new VBox();
+
+        VBox descriptionBox = new VBox();
+        for(String string : StringUtil.splitStringLength(getDescription(), 80)) {
+            Label description = new Label(string);
+            descriptionBox.getChildren().add(description);
+        }
+        descriptionBox.setAlignment(Pos.CENTER);
+
         VBox nameBox = new VBox();
-        Label type = new Label(getType());
-        Label name = new Label(getName());
+        Label cardName = new Label(getName() + "(" + getType() + ")");
         Label amount = new Label("Amount: $" + getAmount());
-        Label description = new Label(getDescription());
+        nameBox.setAlignment(Pos.CENTER);
+        nameBox.setTranslateY(100);
+        nameBox.getChildren().addAll(cardName, amount);
 
-        nameBox.getChildren().addAll(type, name, amount);
-        nameBox.setAlignment(Pos.BOTTOM_CENTER);
+        formattedBox.getChildren().addAll(descriptionBox, nameBox);
+        formattedBox.setAlignment(Pos.CENTER);
 
-
-        stackPane.getChildren().addAll(cardImage, description, nameBox);
-        stackPane.setAlignment(nameBox, Pos.BOTTOM_CENTER);
-
+        stackPane.getChildren().addAll(cardImage, formattedBox);
 
         return stackPane;
     }

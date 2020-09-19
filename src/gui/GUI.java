@@ -1,18 +1,11 @@
 package gui;
 
 import gui.board.Board;
-import gui.choose.ChooseCard;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
-import javafx.stage.StageStyle;
 import main.Constants;
 import main.GameOfLife;
 
@@ -20,16 +13,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import main.cards.CareerCard.CareerCard;
-import main.cards.SalaryCard.SalaryCard;
-import main.decks.Deck;
-import main.paths.Path;
-import main.players.Player;
-import main.spaces.Space;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Optional;
 
 public class GUI extends Application {
 
@@ -43,7 +28,7 @@ public class GUI extends Application {
         StackPane root = new StackPane();
 
         // screen stats
-        FXMLLoader screenStatsLoader = new FXMLLoader(getClass().getResource("/gui/board/ScreenStats.fxml"));
+        FXMLLoader screenStatsLoader = new FXMLLoader(getClass().getResource("/gui/stats/ScreenStats.fxml"));
         Pane screenStats = (Pane)screenStatsLoader.load();
 
         // game of life instance
