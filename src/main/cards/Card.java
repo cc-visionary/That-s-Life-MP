@@ -1,5 +1,12 @@
 package main.cards;
 
+import gui.choose.ChoosePlayer;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import main.players.Player;
 import main.utilities.InputUtil;
 import main.utilities.StringUtil;
@@ -16,16 +23,19 @@ public abstract class Card {
     private String description;
     private Player owner;
     private Player[] otherPlayers;
+    private String imageURL;
 
-    public Card(String type, String name, String description) {
+    public Card(String type, String name, String description, String imageURL) {
         this.type = type;
         this.name = name;
         this.description = description;
+        this.imageURL = imageURL;
     }
 
-    public Card(String type, String description) {
+    public Card(String type, String description, String imageURL) {
         this.type = type;
         this.description = description;
+        this.imageURL = imageURL;
     }
 
     /**
@@ -63,20 +73,12 @@ public abstract class Card {
      */
     public Player chooseOtherPlayer() {
         Player chosenPlayer;
-        int choice;
 
         // if more than 1 other player exists, let the player who drew the card choose between them
         if(getOtherPlayers().length > 1) {
-            // loops and outputs the list of other players to choose from
-            System.out.println("Other Players:");
-            for(int i = 1; i <= getOtherPlayers().length; i++) {
-                System.out.println("[" + i + "] : " + getOtherPlayers()[i - 1].getName());
-            }
-
-            // accepts only inputs of 1-# of players
-            choice = InputUtil.scanInt("Choose the other player: ", 1, getOtherPlayers().length);
-
-            chosenPlayer = getOtherPlayers()[choice - 1];
+            ChoosePlayer choosePlayer = new ChoosePlayer();
+            choosePlayer.chooseOtherPlayers(getOtherPlayers());
+            chosenPlayer = choosePlayer.getChosenPlayer();
         } else if(getOtherPlayers().length == 1) { // if not, set the default chosen player as the other player indexed at 0
             chosenPlayer = getOtherPlayers()[0];
         } else {
@@ -108,6 +110,13 @@ public abstract class Card {
     }
 
     /**
+     * @return image url for the Card
+     */
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    /**
      * @return name of the Card
      */
     public String getName() {
@@ -122,24 +131,10 @@ public abstract class Card {
     }
 
     /**
-     * This method displays the card into a 12(height) x 25(width) unit layout
+     * Formats the Card into an image with corresponding texts
+     * @return StackPane containing the formatted image
      */
-    public void  displayCard() {
-        final int length = 23, descriptionHeight = 8;
-        String[] splittedString = StringUtil.splitStringLength(getDescription(), length).toArray(new String[0]);
-
-        System.out.println("╭───────────────────────╮");
-        System.out.println("│" + StringUtil.centerString(getType(), length)                  + "│");
-        System.out.println("├───────────────────────┤");
-        for(int i = 0; i < descriptionHeight; i++) {
-            if(i < splittedString.length) {
-                System.out.println("│" + StringUtil.centerString(splittedString[i], length)  + "│");
-            } else {
-                System.out.println("│" + StringUtil.centerString("", length)            + "│");
-            }
-        }
-        System.out.println("╰───────────────────────╯");
-    }
+    public abstract StackPane displayCard();
 
     @Override
     public String toString() {

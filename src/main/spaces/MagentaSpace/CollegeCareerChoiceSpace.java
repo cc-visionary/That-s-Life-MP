@@ -1,6 +1,8 @@
 package main.spaces.MagentaSpace;
 
+import gui.choose.ChooseCard;
 import main.Constants;
+import main.cards.Card;
 import main.cards.CareerCard.CareerCard;
 import main.cards.SalaryCard.SalaryCard;
 import main.decks.Deck;
@@ -21,12 +23,15 @@ final public class CollegeCareerChoiceSpace extends MagentaSpace {
     public CareerCard chooseCareerCard(Deck careerDeck) {
         CareerCard pickedCard;
         if(careerDeck.getName() == "Career Deck") {
-            int choice;
-            System.out.println("CareersCards to choose from:");
-            careerDeck.displayTopCards(2);
-            choice = InputUtil.scanInt("Choose Career Card:", 1, 2);
+            Card card1 = careerDeck.pickTopCard();
+            Card card2 = careerDeck.pickTopCard();
+            ;
+            pickedCard = (CareerCard) ChooseCard.choose2Cards(card1, card2);
 
-            pickedCard = (CareerCard) careerDeck.pickTopCard(choice - 1);
+            if(card1.equals(pickedCard)) careerDeck.addCard(card2);
+            else careerDeck.addCard(card1);
+
+            careerDeck.shuffle();
         } else {
             pickedCard = null;
             System.out.println("An incorrect deck(" + careerDeck.getName() + ") was passed.");
@@ -37,12 +42,15 @@ final public class CollegeCareerChoiceSpace extends MagentaSpace {
     public SalaryCard chooseSalaryCard(Deck salaryDeck) {
         SalaryCard pickedCard;
         if(salaryDeck.getName() == "Salary Deck") {
-            int choice;
-            System.out.println("SalaryCards to choose from:");
-            salaryDeck.displayTopCards(2);
-            choice = InputUtil.scanInt("Choose Salary Card:", 1, 2);
+            Card card1 = salaryDeck.pickTopCard();
+            Card card2 = salaryDeck.pickTopCard();
 
-            pickedCard = (SalaryCard) salaryDeck.pickTopCard(choice - 1);
+            pickedCard = (SalaryCard) ChooseCard.choose2Cards(card1, card2);
+
+            if(card1.equals(pickedCard)) salaryDeck.addCard(card2);
+            else salaryDeck.addCard(card1);
+
+            salaryDeck.shuffle();
         } else {
             pickedCard = null;
             System.out.println("An incorrect deck(" + salaryDeck.getName() + ") was passed.");

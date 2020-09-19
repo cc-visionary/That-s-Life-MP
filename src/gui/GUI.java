@@ -1,6 +1,7 @@
 package gui;
 
 import gui.board.Board;
+import gui.choose.ChooseCard;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -31,7 +32,6 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 public class GUI extends Application {
-    private static StackPane root;
 
     public static void main(String[] args) {
         launch(args);
@@ -40,7 +40,7 @@ public class GUI extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Game of Life");
-        root = new StackPane();
+        StackPane root = new StackPane();
 
         // screen stats
         FXMLLoader screenStatsLoader = new FXMLLoader(getClass().getResource("/gui/board/ScreenStats.fxml"));
@@ -49,17 +49,18 @@ public class GUI extends Application {
         // game of life instance
         GameOfLife gameOfLife = new GameOfLife(screenStatsLoader.getController());
 
-        // board
-        Board board = new Board(gameOfLife, Constants.PATH_SPACES * 7 * 2 * Constants.HEXAGON_SIZE, Screen.getPrimary().getBounds().getMaxY() - 150);
 
-        ScrollPane scrollPane = new ScrollPane(board);
-        root.getChildren().addAll(scrollPane, screenStats);
-        StackPane.setMargin(screenStats, new Insets(0, 0, 50, 0));
         primaryStage.setMaximized(true);
         primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
         primaryStage.show();
 
         while(!gameOfLife.hasWinner()) {
+            // board
+            Board board = new Board(gameOfLife, Constants.PATH_SPACES * 7 * 2 * Constants.HEXAGON_SIZE, Screen.getPrimary().getBounds().getMaxY() - 150);
+            ScrollPane scrollPane = new ScrollPane(board);
+            root.getChildren().clear();
+            root.getChildren().addAll(scrollPane, screenStats);
+            StackPane.setMargin(screenStats, new Insets(0, 0, 50, 0));
             gameOfLife.nextPlayer();
         }
     }

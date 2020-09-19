@@ -1,5 +1,11 @@
 package main.cards.SalaryCard;
 
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import main.Constants;
 import main.cards.Card;
 import main.utilities.StringUtil;
@@ -13,7 +19,7 @@ final public class SalaryCard extends Card {
     private double salary, tax;
     private int payRaise = 0;
     public SalaryCard(double salary) {
-        super(Constants.SALARY_CARD, "Salary Card contains salary and tax due.");
+        super(Constants.SALARY_CARD, "Salary Card contains salary and tax due.", "/images/Cards/Salary Card.png");
 
         this.salary = salary;
         this.tax = salary * 0.1; // the tax due is 10% of the salary
@@ -53,29 +59,34 @@ final public class SalaryCard extends Card {
         return payRaise;
     }
 
+
     /**
-     * This method displays the card into a 10(max height) x 25(width) unit layout
+     * Formats the Card into an image with corresponding texts
+     * @return StackPane containing the formatted image
      */
     @Override
-    public void  displayCard() {
-        final int length = 23, descriptionHeight = 5;
-        String[] splittedString = StringUtil.splitStringLength(getDescription(), length).toArray(new String[0]);
+    public StackPane displayCard() {
+        StackPane stackPane = new StackPane();
 
-        System.out.println("╭───────────────────────╮");
-        System.out.println("│" + StringUtil.centerString(getType(), length)                  + "│");
-        System.out.println("├───────────────────────┤");
-        for(int i = 0; i < descriptionHeight; i++) {
-            if(i < splittedString.length) {
-                System.out.println("│" + StringUtil.centerString(splittedString[i], length)  + "│");
-            } else {
-                System.out.println("│" + StringUtil.centerString("", length)            + "│");
-            }
-        }
-        System.out.println("├───────────────────────┤");
-        System.out.println("│" + StringUtil.centerString("Salary: " + getSalary(), length)      + "│");
-        System.out.println("│" + StringUtil.centerString("Tax: " + getTax(), length)            + "│");
-        System.out.println("│" + StringUtil.centerString("Pay Raise: " + getPayRaise(), length) + "│");
-        System.out.println("╰───────────────────────╯");
+        ImageView cardImage = new ImageView(getImageURL());
+        cardImage.setFitHeight(Screen.getPrimary().getBounds().getMaxY() / 2);
+        cardImage.setFitWidth(Screen.getPrimary().getBounds().getMaxX() / 5);
+
+        VBox nameBox = new VBox();
+        Label type = new Label(getType());
+        Label salary = new Label("Salary: $" + getSalary());
+        Label tax = new Label("Tax: $" + getTax());
+        Label payRaise = new Label("Pay Raise: " + getPayRaise());
+        Label description = new Label(getDescription());
+
+        nameBox.getChildren().addAll(type, salary, tax, payRaise);
+        nameBox.setAlignment(Pos.BOTTOM_CENTER);
+
+        stackPane.getChildren().addAll(cardImage, description, nameBox);
+        stackPane.setAlignment(nameBox, Pos.BOTTOM_CENTER);
+
+
+        return stackPane;
     }
 
     @Override

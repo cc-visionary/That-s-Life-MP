@@ -1,10 +1,12 @@
 package main;
 
 import gui.board.ScreenStatsController;
+import gui.choose.ChooseCard;
 import gui.choose.ChooseMove;
 import gui.choose.ChoosePath;
 import main.cards.ActionCard.ActionCard;
 import main.cards.BlueCard.BlueCard;
+import main.cards.Card;
 import main.cards.CareerCard.CareerCard;
 import main.cards.HouseCard.HouseCard;
 import main.cards.SalaryCard.SalaryCard;
@@ -92,10 +94,19 @@ public class GameOfLife {
      * doing Space actions, changing of Paths, etc.
      */
     public void nextPlayer() {
-        // if player has no path, let's him choose one
-        // gui
+        // if player has no path, let's him choose one through GUI
         if(getCurrentPlayer().getPath() == null) {
-            ChoosePath.choosePath(careerPath, collegePath, getCurrentPlayer(), careerDeck, salaryDeck);
+            ChoosePath choosePath = new ChoosePath();
+            choosePath.choosePath(careerPath, collegePath);
+            Path chosenPath = choosePath.getChosenPath();
+            if(chosenPath.getName() == "College Path") {
+                getCurrentPlayer().bankLoan(2);
+            } else {
+                getCurrentPlayer().setCareerCard((CareerCard) careerDeck.pickTopCard());
+                getCurrentPlayer().setSalaryCard((SalaryCard) salaryDeck.pickTopCard());
+            }
+            getCurrentPlayer().setPath(chosenPath);
+            getCurrentPlayer().getPath().getSpaces()[0].addPlayer(getCurrentPlayer());
         }
         this.screenStats.updateStats(getCurrentPlayer());
         ChooseMove.chooseMove(this);
@@ -146,7 +157,7 @@ public class GameOfLife {
                 BlueCard blueCard = ((BlueSpace) space).pickCard(getBlueDeck());
                 blueCard.setOwner(currentPlayer);
                 blueCard.setOtherPlayers(getOtherPlayers());
-                blueCard.displayCard();
+                ChooseCard.displayCard(blueCard);
                 blueCard.activate();
 
                 // put the card back to the BlueDeck
@@ -159,7 +170,7 @@ public class GameOfLife {
                 ActionCard actionCard = ((OrangeSpace) space).pickCard(getOrangeDeck());
                 actionCard.setOwner(currentPlayer);
                 actionCard.setOtherPlayers(getOtherPlayers());
-                actionCard.displayCard();
+                ChooseCard.displayCard(actionCard);
                 actionCard.activate();
             } else if(space.getType().equals(Constants.GREEN_SPACE)) {
                 if(space.getName().equals(Constants.PAY_DAY)) {

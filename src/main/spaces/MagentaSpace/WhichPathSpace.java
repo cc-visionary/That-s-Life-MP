@@ -23,9 +23,12 @@ final public class WhichPathSpace extends MagentaSpace {
      * @return        path chosen by the Player
      */
     public void choosePath(Player player) {
+        // remove the player from that path's space
+        player.getPath().getSpaces()[player.getLocation()].removePlayer(player);
         // if path 2 is not null, allow the user to choose between the paths
         if(player.getPath().getPath2() != null) {
-            ChoosePath.choosePath(player);
+            Path chosenPath = ChoosePath.choosePath(player.getPath().getPath1(), player.getPath().getPath2());
+            player.setPath(chosenPath);
         } else { // if not, automatically return the Path 1;
             player.setPath(player.getPath().getPath1());
         }

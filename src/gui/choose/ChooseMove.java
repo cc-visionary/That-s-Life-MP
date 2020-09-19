@@ -22,20 +22,14 @@ public class ChooseMove {
         vbox.setMaxHeight(Screen.getPrimary().getBounds().getMaxY() / 2);
 
         Button rollDice = new Button("Roll Dice");
-        rollDice.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameOfLife.movePlayer(gameOfLife.getCurrentPlayer().rollDice());
-                newStage.close();
-            }
+        rollDice.setOnAction(e -> {
+            gameOfLife.movePlayer(gameOfLife.getCurrentPlayer().rollDice());
+            newStage.close();
         });
 
         Button payDebt = new Button("Pay Debt");
-        payDebt.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                payDebt(gameOfLife.getCurrentPlayer());
-            }
+        payDebt.setOnAction(e -> {
+            payDebt(gameOfLife.getCurrentPlayer());
         });
 
         vbox.getChildren().addAll(rollDice);
@@ -48,5 +42,9 @@ public class ChooseMove {
     private static void payDebt(Player player) {
         Stage newStage = new Stage();
 
+        // slider - multiple of 2500
+        // button
+
+        newStage.showAndWait();
     }
 }

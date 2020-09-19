@@ -1,5 +1,11 @@
 package main.cards.BlueCard;
 
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import main.Constants;
 import main.cards.Card;
 import main.utilities.StringUtil;
@@ -16,7 +22,7 @@ public abstract class BlueCard extends Card {
     private String career;
 
     public BlueCard(String name, String description, String career) {
-        super(Constants.BLUE_CARD, name, "If player's Career is not the same with the Card's, " + description);
+        super(Constants.BLUE_CARD, name, "If player's Career is not the same with the Card's, " + description, "/images/Cards/Blue Card.png");
 
         this.career = career;
     }
@@ -84,27 +90,31 @@ public abstract class BlueCard extends Card {
     public abstract double getAmount();
 
     /**
-     * This method displays the card into a 14(max height) x 25(width) unit layout
+     * Formats the Card into an image with corresponding texts
+     * @return StackPane containing the formatted image
      */
     @Override
-    public void  displayCard() {
-        final int length = 23, descriptionHeight = 8;
-        String[] splittedString = StringUtil.splitStringLength(getDescription(), length).toArray(new String[0]);
+    public StackPane displayCard() {
+        StackPane stackPane = new StackPane();
 
-        System.out.println("╭───────────────────────╮");
-        System.out.println("│" + StringUtil.centerString(getType(), length)                  + "│");
-        System.out.println("│" + StringUtil.centerString("(" + getName() + ")", length) + "│");
-        System.out.println("├───────────────────────┤");
-        for(int i = 0; i < descriptionHeight; i++) {
-            if(i < splittedString.length) {
-                System.out.println("│" + StringUtil.centerString(splittedString[i], length)  + "│");
-            } else {
-                System.out.println("│" + StringUtil.centerString("", length)            + "│");
-            }
-        }
-        System.out.println("├───────────────────────┤");
-        System.out.println("│" + StringUtil.centerString("Career: " + getCareer(), length) + "│");
-        System.out.println("╰───────────────────────╯");
+        ImageView cardImage = new ImageView(getImageURL());
+        cardImage.setFitHeight(Screen.getPrimary().getBounds().getMaxY() / 2);
+        cardImage.setFitWidth(Screen.getPrimary().getBounds().getMaxX() / 5);
+
+        VBox nameBox = new VBox();
+        Label type = new Label(getType());
+        Label name = new Label(getName());
+        Label career = new Label("Career: " + getCareer());
+        Label description = new Label(getDescription());
+
+        nameBox.getChildren().addAll(type, name, career);
+        nameBox.setAlignment(Pos.BOTTOM_CENTER);
+
+        stackPane.getChildren().addAll(cardImage, description, nameBox);
+        stackPane.setAlignment(nameBox, Pos.BOTTOM_CENTER);
+
+
+        return stackPane;
     }
 
     @Override

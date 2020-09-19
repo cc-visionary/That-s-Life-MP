@@ -1,5 +1,11 @@
 package main.cards.CareerCard;
 
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import main.Constants;
 import main.cards.Card;
 import main.utilities.RandomUtil;
@@ -14,7 +20,7 @@ final public class CareerCard extends Card {
     private boolean requireCollegeDegree;
 
     public CareerCard(String name, String description, int minPayRaise, int maxPayRaise, boolean requireCollegeDegree) {
-        super(Constants.CAREER_CARD, name, description);
+        super(Constants.CAREER_CARD, name, description, "/images/Cards/Career Card.png");
 
         // randomly chooses the maxPayRaise from parameters minPayRaise - maxPayRaise
         this.maxPayRaise = RandomUtil.chooseRandomNumber(minPayRaise, maxPayRaise);
@@ -38,28 +44,32 @@ final public class CareerCard extends Card {
     }
 
     /**
-     * This method displays the card into a 10(max height) x 25(width) unit layout
+     * Formats the Card into an image with corresponding texts
+     * @return StackPane containing the formatted image
      */
     @Override
-    public void displayCard() {
-        final int length = 23, descriptionHeight = 5;
-        String[] splittedString = StringUtil.splitStringLength(getDescription(), length).toArray(new String[0]);
+    public StackPane displayCard() {
+        StackPane stackPane = new StackPane();
 
-        System.out.println("╭───────────────────────╮");
-        System.out.println("│" + StringUtil.centerString(getType(), length) + "│");
-        System.out.println("│" + StringUtil.centerString("(" + getName() + ")", length) + "│");
-        System.out.println("├───────────────────────┤");
-        for (int i = 0; i < descriptionHeight; i++) {
-            if (i < splittedString.length) {
-                System.out.println("│" + StringUtil.centerString(splittedString[i], length) + "│");
-            } else {
-                System.out.println("│" + StringUtil.centerString("", length) + "│");
-            }
-        }
-        System.out.println("├───────────────────────┤");
-        System.out.println("│" + StringUtil.centerString("Max Pay Raise: " +  getMaxPayRaise(), length) + "│");
-        System.out.println("│" + StringUtil.centerString("College Degree: " + (isRequireCollegeDegree() ? "Yes" : "No"), length) + "│");
-        System.out.println("╰───────────────────────╯");
+        ImageView cardImage = new ImageView(getImageURL());
+        cardImage.setFitHeight(Screen.getPrimary().getBounds().getMaxY() / 2);
+        cardImage.setFitWidth(Screen.getPrimary().getBounds().getMaxX() / 5);
+
+        VBox nameBox = new VBox();
+        Label type = new Label(getType());
+        Label name = new Label(getName());
+        Label maxPayRaise = new Label("Max Pay Raise: " + getMaxPayRaise());
+        Label collegeDegree = new Label("College Degree: " + (isRequireCollegeDegree() ? "Yes" : "No"));
+        Label description = new Label(getDescription());
+
+        nameBox.getChildren().addAll(type, name, maxPayRaise, collegeDegree);
+        nameBox.setAlignment(Pos.BOTTOM_CENTER);
+
+        stackPane.getChildren().addAll(cardImage, description, nameBox);
+        stackPane.setAlignment(nameBox, Pos.BOTTOM_CENTER);
+
+
+        return stackPane;
     }
 
     @Override

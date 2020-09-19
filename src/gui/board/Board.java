@@ -2,14 +2,13 @@ package gui.board;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import main.Constants;
 import main.GameOfLife;
 import main.paths.Path;
+import main.players.Player;
 import main.spaces.Space;
-import sun.plugin2.util.ColorUtil;
-
-import java.util.ArrayList;
 
 public class Board extends Canvas {
     public Board(GameOfLife gameOfLife, double width, double height) {
@@ -144,11 +143,11 @@ public class Board extends Canvas {
             else if(space.getType() == Constants.ORANGE_SPACE) color = Color.ORANGE;
             else if(space.getType() == Constants.GREEN_SPACE) color = Color.GREEN;
             else if(space.getType() == Constants.MAGENTA_SPACE) color = Color.MAGENTA;
-            drawHexagon(space.getPlayers().toString(), startX, startY, Constants.HEXAGON_SIZE, color, gc); // right
+            drawHexagon(space.getPlayers().toArray(new Player[0]), startX, startY, Constants.HEXAGON_SIZE, color, gc); // right
         }
     }
 
-    private void drawHexagon(String label, double xPos, double yPos, double size, Color stroke, GraphicsContext gc) {
+    private void drawHexagon(Player[] players, double xPos, double yPos, double size, Color stroke, GraphicsContext gc) {
         final double RADIUS = size / 2;
         gc.setStroke(stroke);
         gc.strokePolygon(new double[]{
@@ -166,6 +165,10 @@ public class Board extends Canvas {
                 yPos + size,   // bottom center
                 yPos + RADIUS  // bottom left
         }, 6);
-        gc.strokeText(label, xPos - 10, yPos);
+//        gc.strokeText(label, xPos - 10, yPos);
+        for(Player player : players) {
+            gc.drawImage(new Image("/images/character.png", size, size, false, true), xPos - size / 2, yPos - size / 2);
+            xPos += 20;
+        }
     }
 }
