@@ -1,5 +1,6 @@
 package main.cards.ActionCard;
 
+import main.GameOfLife;
 import main.players.Player;
 
 /**
@@ -19,7 +20,7 @@ final public class CollectBankCard extends ActionCard {
         // adds the amount to the balance of the person who drew the card
         getOwner().addBalance(getAmount());
 
-        System.out.println(getOwner().getName() + " received $" + getAmount() + " from the bank");
+        GameOfLife.addRoundStat(String.format("%s received $%.2f from the bank", getOwner().getName(), getAmount()));
     }
 
     @Override

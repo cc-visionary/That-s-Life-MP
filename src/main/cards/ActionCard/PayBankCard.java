@@ -1,5 +1,6 @@
 package main.cards.ActionCard;
 
+import main.GameOfLife;
 import main.players.Player;
 
 /**
@@ -19,7 +20,7 @@ final public class PayBankCard extends ActionCard {
         // deducts the amount indicated on the card to the player's balance
         getOwner().payBalance(getAmount());
 
-        System.out.println(getOwner().getName() + " paid $" + getAmount() + " to the bank");
+        GameOfLife.addRoundStat(String.format("%s paid $%.2f to the bank", getOwner().getName(), getAmount()));
     }
 
     @Override

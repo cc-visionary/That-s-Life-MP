@@ -124,7 +124,6 @@ public abstract class BlueCard extends Card {
         stackPane.getChildren().addAll(cardImage, formattedBox);
         formattedBox.setAlignment(Pos.CENTER);
 
-
         return stackPane;
     }
 

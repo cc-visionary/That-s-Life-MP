@@ -1,6 +1,6 @@
 package main;
 
-import gui.stats.ScreenStatsController;
+import gui.stats.ScreenStats.ScreenStatsController;
 import gui.choose.ChooseCard;
 import gui.choose.ChooseMove;
 import gui.choose.ChoosePath;
@@ -35,6 +35,7 @@ public class GameOfLife {
     private Player players[];
     private int nPlayers, turn, round;
     private ScreenStatsController screenStats;
+    private static ArrayList<String> roundStats;
 
 
     /**
@@ -63,6 +64,8 @@ public class GameOfLife {
 
         // screen stats
         this.screenStats = screenStats;
+
+        this.roundStats = new ArrayList<String>();
     }
 
     public GameOfLife() {
@@ -82,9 +85,10 @@ public class GameOfLife {
         players = Generator.generatePlayers(careerDeck, salaryDeck, careerPath, collegePath);
         this.nPlayers = players.length;
 
-
         turn = 0;
         round = 1;
+
+        this.roundStats = new ArrayList<String>();
     }
 
     /**
@@ -108,13 +112,16 @@ public class GameOfLife {
             getCurrentPlayer().getPath().getSpaces()[0].addPlayer(getCurrentPlayer());
         }
         this.screenStats.updateStats(getCurrentPlayer());
-        ChooseMove.chooseMove(this);
+        ChooseMove chooseMove = new ChooseMove();
+        chooseMove.chooseMove(this);
 
         turn++;
 
         if(turn == nPlayers) {
             turn = 0;
+            // view round stats
             round++;
+            roundStats.clear();
         }
     }
 
@@ -255,7 +262,8 @@ public class GameOfLife {
                 } else if(space.getName().equals(Constants.WHICH_PATH)) {
                     // this is the junction where Players can choose the next Path
                     ((WhichPathSpace) currentPlayer.getPath().getJunction()).choosePath(currentPlayer);
-                    ChooseMove.chooseMove(this);
+                    ChooseMove chooseMove = new ChooseMove();
+                    chooseMove.chooseMove(this);
                 }
             } else if(space.getType().equals(Constants.RETIREMENT_SPACE)) {
                 // Space where Player retires
@@ -285,7 +293,15 @@ public class GameOfLife {
             player.payDebt(player.getNBankLoan());
         }
 
-        displayStats();
+//        displayStats();
+    }
+
+    public static void addRoundStat(String stat) {
+        roundStats.add(stat);
+    }
+
+    public static String[] getRoundStats() {
+        return roundStats.toArray(new String[0]);
     }
 
     public void setTurn(int turn) {
@@ -379,17 +395,17 @@ public class GameOfLife {
         return false;
     }
 
-    public void displayStats() {
-        System.out.println("Round #" + getRound() + ":");
-        for(Player player : getAllPlayers()) player.displayPlayerStats();
-    }
-
-    public void displayWinner() {
-        for(Player player : players) {
-            if(player.isRetired()) {
-                System.out.println(player.getName() + " is the winner!");
-                player.displayPlayerStats();
-            }
-        }
-    }
+//    public void displayStats() {
+//        System.out.println("Round #" + getRound() + ":");
+//        for(Player player : getAllPlayers()) player.displayPlayerStats();
+//    }
+//
+//    public void displayWinner() {
+//        for(Player player : players) {
+//            if(player.isRetired()) {
+//                System.out.println(player.getName() + " is the winner!");
+//                player.displayPlayerStats();
+//            }
+//        }
+//    }
 }

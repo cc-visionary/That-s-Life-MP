@@ -10,6 +10,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -29,6 +30,7 @@ public class ChooseCard {
     public static void displayCard(Card card) {
         Stage stage = new Stage();
         stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
 
         HBox hbox = new HBox();
         hbox.setStyle("-fx-background-color: aliceblue; -fx-font-size: 16; -fx-border-width: 1; -fx-border-color: gray");
@@ -55,6 +57,7 @@ public class ChooseCard {
     public static Card choose2Cards(Card card1, Card card2) {
         Stage stage = new Stage();
         stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
         HBox hbox = new HBox();
 
         Tooltip card1Tooltip = new Tooltip("choose " + (card1.getName() != null ? card1.getName() + "(" + card1.getType() + ")" : card1.getType()));

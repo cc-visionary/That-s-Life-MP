@@ -3,6 +3,7 @@ import com.sun.xml.internal.bind.util.Which;
 import gui.choose.ChooseMove;
 import javafx.stage.Stage;
 import main.Constants;
+import main.GameOfLife;
 import main.cards.CareerCard.CareerCard;
 import main.cards.HouseCard.HouseCard;
 import main.cards.SalaryCard.SalaryCard;
@@ -92,7 +93,7 @@ final public class Player {
      * @param times the multiplier/number of times for the bank loan
      */
     public void bankLoan(int times) {
-        System.out.println(String.format("%s loaned $%d + %d interest = $%d from the bank", getName(), 20000 * times, 5000 * times, 25000 * times));
+        GameOfLife.addRoundStat(String.format("%s loaned $%d + %d interest = $%d from the bank", getName(), 20000 * times, 5000 * times, 25000 * times));
         this.debt += 25000 * times;
         this.nBankLoan += times;
     }
@@ -102,6 +103,7 @@ final public class Player {
      * @param times multiplier for the amount of times to be paid
      */
     public void payDebt(int times) {
+        GameOfLife.addRoundStat(String.format("%s paid %d to the bank to pay off the debt", getName(), 25000 * times));
         payBalance(25000 * times);
         this.debt -= 25000 * times;
         this.nBankLoan -= times;
@@ -112,6 +114,7 @@ final public class Player {
      * @param amount amount of babies to be added 1-3(single, twin, triplet)
      */
     public void addBaby(int amount) {
+        GameOfLife.addRoundStat(String.format("%s had %d new children", getName(), amount));
         this.nBabies += amount;
     }
 
@@ -120,6 +123,7 @@ final public class Player {
      * @param houseCard newly bought house by the player
      */
     public void setHouseCard(HouseCard houseCard) {
+        GameOfLife.addRoundStat(String.format("%s's house is now set to %s", getName(), houseCard.getName()));
         this.houseCard = houseCard;
     }
 
@@ -128,6 +132,7 @@ final public class Player {
      * @param path the path to be assigned to the player's path
      */
     public void setPath(Path path) {
+        GameOfLife.addRoundStat(String.format("%s's path is now set to %s", getName(), path.getName()));
         this.path = path;
         if(path.getName() == "College Path") bankLoan(2);
         this.location = 0;
@@ -138,6 +143,7 @@ final public class Player {
      * @param salaryCard SalaryCard to be assigned for the player
      */
     public void setSalaryCard(SalaryCard salaryCard) {
+        GameOfLife.addRoundStat(String.format("%s's salary card is now set to %s", getName(), salaryCard));
         this.salaryCard = salaryCard;
         this.salaryCard.setOwner(this);
     }
@@ -147,6 +153,7 @@ final public class Player {
      * @param careerCard CareerCard to be assigned for the player
      */
     public void setCareerCard(CareerCard careerCard) {
+        GameOfLife.addRoundStat(String.format("%s's career card is now set to %s", getName(), careerCard));
         this.careerCard = careerCard;
         this.careerCard.setOwner(this);
     }
@@ -156,6 +163,7 @@ final public class Player {
      * @param isMarried determines whether a Player is married or not
      */
     public void setIsMarried(boolean isMarried) {
+        GameOfLife.addRoundStat(String.format("%s is now %s", getName(), isMarried ? "married" : "not married"));
         this.isMarried = isMarried;
     }
 
@@ -164,6 +172,7 @@ final public class Player {
      * @param hasGraduated determines whether a Player is graduated or not
      */
     public void setHasGraduated(boolean hasGraduated) {
+        GameOfLife.addRoundStat(String.format("%s is now %s", getName(), hasGraduated ? "graduated" : "not graduated"));
         this.hasGraduated = hasGraduated;
     }
 
@@ -172,6 +181,7 @@ final public class Player {
      * @param isRetired value to be set to isRetired
      */
     public void setIsRetired(boolean isRetired) {
+        GameOfLife.addRoundStat(String.format("%s is now %s", getName(), isRetired ? "retired" : "not retired"));
         this.isRetired = isRetired;
     }
 
@@ -246,32 +256,6 @@ final public class Player {
      */
     public boolean hasReachedRetirement() {
         return false;
-    }
-
-    /**
-     * Displays the Player Stats such as
-     *  - Balance
-     *  - Debt
-     *  - SalaryCard
-     *  - CareerCard
-     *  - Current Path
-     */
-    public void displayPlayerStats() {
-        System.out.println("--------------------------------------------------");
-        System.out.println("\t Player " + getNthPlayer() + "'s [ " + getName() + " ] Stats");
-        System.out.println("--------------------------------------------------");
-        System.out.println("\tBalance: " + getBalance());
-        System.out.println("\tDebt   : " + getDebt());
-        System.out.println("\tSalary Card:" + (getSalaryCard() == null ? "None" : getSalaryCard()));
-        System.out.println("\tCareer Card:" + (getCareerCard() == null ? "None" : getCareerCard()));
-        System.out.println("\tHouse Card:" + (getHouseCard() == null ? "None" : getHouseCard()));
-        System.out.println("\tCurrent Path: " + (getPath() == null ? "None" : getPath().getName()));
-        System.out.println("\tLocation: " + getLocation());
-        System.out.println("\tNumber of Babies: " + getNBabies());
-        System.out.println("\tMarried: " + (isMarried() ? "Yes" : "No"));
-        System.out.println("\tGraduated: " + (isGraduated() ? "Yes" : "No"));
-        System.out.println("\tRetired: " + (isRetired() ? "Yes" : "No"));
-        System.out.println("--------------------------------------------------");
     }
 
     @Override

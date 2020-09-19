@@ -1,5 +1,6 @@
 package main.cards.ActionCard;
 
+import main.GameOfLife;
 import main.players.Player;
 
 /**
@@ -24,7 +25,7 @@ final public class CollectAllCard extends ActionCard {
         // then gives all those money to the player who drew the card
         getOwner().addBalance(getOtherPlayers().length * getAmount());
 
-        System.out.println(getOwner().getName() + " received $" + getAmount() + " from all the other players. ($" + getOtherPlayers().length * getAmount() + ")");
+        GameOfLife.addRoundStat(String.format("%s received $%.2f from all the other players ($%.2f)", getOwner().getName(), getAmount(), getOtherPlayers().length * getAmount()));
     }
 
     @Override

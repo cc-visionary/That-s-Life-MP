@@ -1,4 +1,4 @@
-package gui.stats;
+package gui.stats.ScreenStats;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

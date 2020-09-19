@@ -1,5 +1,6 @@
 package main.cards.ActionCard;
 
+import main.GameOfLife;
 import main.players.Player;
 
 /**
@@ -24,7 +25,7 @@ final public class PayAllCard extends ActionCard {
             otherPlayer.addBalance(getAmount());
         }
 
-        System.out.println(getOwner().getName() + " paid $" + getAmount() + " to all the other players($" + getOtherPlayers().length * getAmount() + ")");
+        GameOfLife.addRoundStat(String.format("%s paid $%.2f to all the other players ($%.2f)", getOwner().getName(), getAmount(), getOtherPlayers().length * getAmount()));
     }
 
     @Override

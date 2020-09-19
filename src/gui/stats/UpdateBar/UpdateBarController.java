@@ -1,4 +1,4 @@
-package gui.stats;
+package gui.stats.UpdateBar;
 
 public class UpdateBarController {
 }

@@ -11,6 +11,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -33,8 +34,9 @@ public class ChoosePath {
      * @param path2 path choice #2
      */
     public static Path choosePath(Path path1, Path path2) {
-        Stage newStage = new Stage();
-        newStage.initStyle(StageStyle.UNDECORATED);
+        Stage stage = new Stage();
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
 
         VBox vbox = new VBox();
         vbox.setStyle("-fx-background-color: aliceblue; -fx-font-size: 16; -fx-border-width: 1; -fx-border-color: gray");
@@ -77,7 +79,7 @@ public class ChoosePath {
             } else {
                 chosenPath = path2;
             }
-            newStage.close();
+            stage.close();
         });
         button.setMaxWidth(Screen.getPrimary().getBounds().getMaxX() / 4);
 
@@ -85,8 +87,8 @@ public class ChoosePath {
         vbox.setAlignment(Pos.CENTER);
         vbox.setPadding(new Insets(10));
 
-        newStage.setScene(new Scene(vbox));
-        newStage.showAndWait();
+        stage.setScene(new Scene(vbox));
+        stage.showAndWait();
         return getChosenPath();
     }
 
