@@ -11,9 +11,12 @@ public class ScreenStatsController {
     @FXML
     public void updateStats(Player currentPlayer) {
         turn.setText(currentPlayer.getName() + "'s turn");
-        career.setText("Career: " + currentPlayer.getCareerCard().getName());
-        salary.setText("Salary: $" + currentPlayer.getSalaryCard().getSalary());
-        path.setText("Path: " + currentPlayer.getPath().getName());
+        if(currentPlayer.getCareerCard() != null) career.setText("Career: " + currentPlayer.getCareerCard().getName());
+        else career.setText("Career: None");
+        if(currentPlayer.getSalaryCard() != null) salary.setText("Salary: $" + currentPlayer.getSalaryCard().getSalary());
+        else salary.setText("Salary: None");
+        if(currentPlayer.getPath() != null) path.setText("Path: " + currentPlayer.getPath().getName());
+        else path.setText("Path: None");
         balance.setText("Balance: $" + currentPlayer.getBalance());
     }
 }
