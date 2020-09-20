@@ -1,9 +1,18 @@
 package main;
 
+import gui.stats.RoundStats.RoundStatsController;
 import gui.stats.ScreenStats.ScreenStatsController;
 import gui.choose.ChooseCard;
 import gui.choose.ChooseMove;
 import gui.choose.ChoosePath;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import main.cards.ActionCard.ActionCard;
 import main.cards.BlueCard.BlueCard;
 import main.cards.CareerCard.CareerCard;
@@ -120,9 +129,30 @@ public class GameOfLife {
         if(turn == nPlayers) {
             turn = 0;
             // view round stats
+            openRoundStats();
             round++;
             roundStats.clear();
         }
+    }
+
+    public void openRoundStats() {
+        Stage stage = new Stage();
+        stage.initStyle(StageStyle.UTILITY);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Round Stats");
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/stats/RoundStats/RoundStats.fxml"));
+
+        try {
+            ScrollPane pane = fxmlLoader.load();
+            pane.setStyle("-fx-background-color: aliceblue; -fx-font-size: 16; -fx-border-width: 1; -fx-border-color: gray");
+            ((RoundStatsController) fxmlLoader.getController()).setList(getRoundStats());
+            stage.setScene(new Scene(pane));
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        stage.showAndWait();
     }
 
     /**
@@ -161,6 +191,7 @@ public class GameOfLife {
             if(space.getType().equals(Constants.BLUE_SPACE)) {
                 // picks an blue card and activate it for all the Players
                 BlueCard blueCard = ((BlueSpace) space).pickCard(getBlueDeck());
+                GameOfLife.addRoundStat(String.format("%s drew %s(%s)", getCurrentPlayer().getName(), blueCard.getName(), blueCard.getType()));
                 blueCard.setOwner(currentPlayer);
                 blueCard.setOtherPlayers(getOtherPlayers());
                 ChooseCard.displayCard(blueCard);
@@ -174,6 +205,7 @@ public class GameOfLife {
             } else if(space.getType().equals(Constants.ORANGE_SPACE)) {
                 // picks an action card and activate it for all the Players
                 ActionCard actionCard = ((OrangeSpace) space).pickCard(getOrangeDeck());
+                GameOfLife.addRoundStat(String.format("%s drew %s(%s)", getCurrentPlayer().getName(), actionCard.getName(), actionCard.getType()));
                 actionCard.setOwner(currentPlayer);
                 actionCard.setOtherPlayers(getOtherPlayers());
                 ChooseCard.displayCard(actionCard);

@@ -83,16 +83,6 @@ public class Deck {
     }
 
     /**
-     * Shows to top cards until the offset
-     * @param offset until which index it will show
-     */
-    public void displayTopCards(int offset) {
-        for(int i = 0; i <= offset; i++) {
-            System.out.println(String.format("\t[%d] %s", i + 1, cards.get(i)));
-        }
-    }
-
-    /**
      * Displaying the deck (for cheating purposes :P)
      */
     public void displayDeck() {

@@ -26,6 +26,5 @@ public class Test7 {
             gameOfLife.nextPlayer();
         }
         gameOfLife.endGame();
-        gameOfLife.displayWinner();
     }
 }

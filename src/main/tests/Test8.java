@@ -46,7 +46,6 @@ public class Test8 {
             blueDeck.shuffle();
 
             gameOfLife.setTurn(gameOfLife.getTurn() + 1);
-            gameOfLife.displayStats();
             if(gameOfLife.getTurn() == gameOfLife.getNPlayers()) {
                 gameOfLife.setTurn(0);
                 gameOfLife.setRound(gameOfLife.getRound() + 1);

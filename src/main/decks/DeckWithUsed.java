@@ -1,5 +1,6 @@
 package main.decks;
 
+import main.GameOfLife;
 import main.cards.Card;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class DeckWithUsed extends Deck {
         }
 
         Card card = getCards().get(0); // get the first indexed/top card
-        usedCards.add(card);           // add to used cards
+        addUsed(card);           // add to used cards
         getCards().remove(0);    // removes the card that was picked (top card)
         return card;
     }
@@ -65,5 +66,6 @@ public class DeckWithUsed extends Deck {
         }
 
         Collections.shuffle(usedCards);
+        GameOfLife.addRoundStat("Returned all the used cards to the " + getName() + " Deck");
     }
 }

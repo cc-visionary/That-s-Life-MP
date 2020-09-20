@@ -53,10 +53,6 @@ public class Test1 {
             players.add(new Player("P" + (i + 1), careerCard, salaryCard));
         }
 
-        for(Player player : players) {
-            player.displayPlayerStats();
-        }
-
         System.out.println("\n" + careerDeck);
         careerDeck.displayDeck();
         System.out.println("\n" + salaryDeck);

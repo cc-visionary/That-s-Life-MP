@@ -8,6 +8,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import main.Constants;
+import main.GameOfLife;
 import main.cards.Card;
 import main.utilities.StringUtil;
 import main.players.Player;
@@ -70,7 +71,7 @@ public abstract class BlueCard extends Card {
     public void activate() {
         if(isSameCareer(getOwner())) { // player receives 15000
             getOwner().addBalance(15000);
-            System.out.println(getOwner().getName() + " receives $15000");
+            GameOfLife.addRoundStat(getOwner().getName() + " receives $15000");
         } else {
             double amountToBePayed = getAmount();
 
@@ -79,11 +80,11 @@ public abstract class BlueCard extends Card {
                 for(Player otherPlayer : playersWithSameCareer) {
                     getOwner().payBalance(amountToBePayed);
                     otherPlayer.addBalance(amountToBePayed);
-                    System.out.println(getOwner().getName() + " paid $" + amountToBePayed + " to " + otherPlayer.getName());
+                    GameOfLife.addRoundStat(getOwner().getName() + " paid $" + amountToBePayed + " to " + otherPlayer.getName());
                 }
             } else { // player pays the bank
                 getOwner().payBalance(amountToBePayed);
-                System.out.println(getOwner().getName() + " paid $" + amountToBePayed + " to the bank.");
+                GameOfLife.addRoundStat(getOwner().getName() + " paid $" + amountToBePayed + " to the bank.");
             }
         }
     }
