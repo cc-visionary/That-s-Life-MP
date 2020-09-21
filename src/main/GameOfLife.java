@@ -5,11 +5,10 @@ import gui.stats.ScreenStats.ScreenStatsController;
 import gui.choose.ChooseCard;
 import gui.choose.ChooseMove;
 import gui.choose.ChoosePath;
-import javafx.fxml.FXML;
+import gui.stats.UpdateStats.UpdateStats;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -324,11 +323,10 @@ public class GameOfLife {
             // repay all loans to the bank
             player.payDebt(player.getNBankLoan());
         }
-
-//        displayStats();
     }
 
     public static void addRoundStat(String stat) {
+        UpdateStats.showUpdate(stat);
         roundStats.add(stat);
     }
 

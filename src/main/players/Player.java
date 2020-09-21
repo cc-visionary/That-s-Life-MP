@@ -55,7 +55,7 @@ final public class Player {
      */
     public int rollDice() {
         int rolledDice = RandomUtil.chooseRandomNumber(1, 10);
-        System.out.println(String.format("%s rolled %d!", getName(), rolledDice));
+        GameOfLife.addRoundStat(String.format("%s rolled %d!", getName(), rolledDice));
         return rolledDice;
     }
 

@@ -11,7 +11,9 @@ public class RoundStatsController {
     @FXML
     public void setList(String[] roundStats) {
         for(String roundStat : roundStats) {
-            list.getChildren().add(new Label(String.format("- %s", roundStat)));
+            Label label = new Label(String.format("- %s", roundStat));
+            label.setMaxHeight(Double.MAX_VALUE);
+            list.getChildren().add(label);
         }
     }
 }
