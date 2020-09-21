@@ -8,25 +8,25 @@
    <children>
       <Label fx:id="turn" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
          <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="Berlin Sans FB Bold" size="36.0" />
          </font></Label>
       <HBox alignment="BOTTOM_LEFT" prefHeight="50.0" prefWidth="200.0" spacing="100.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <children>
-            <Label fx:id="career">
+            <Label fx:id="career" maxWidth="1.7976931348623157E308">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Berlin Sans FB" size="24.0" />
                </font></Label>
-            <Label fx:id="salary">
+            <Label fx:id="salary" maxWidth="1.7976931348623157E308">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Berlin Sans FB" size="24.0" />
                </font></Label>
-            <Label fx:id="path">
+            <Label fx:id="path" maxWidth="1.7976931348623157E308">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Berlin Sans FB" size="24.0" />
                </font></Label>
-            <Label fx:id="balance">
+            <Label fx:id="balance" maxWidth="1.7976931348623157E308">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Berlin Sans FB Demi Bold" size="24.0" />
                </font></Label>
          </children></HBox>
    </children>

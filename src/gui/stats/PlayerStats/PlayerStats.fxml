@@ -3,6 +3,7 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <GridPane alignment="CENTER" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.stats.PlayerStats.PlayerStatsController">
   <columnConstraints>
@@ -25,75 +26,132 @@
       <Label text="Name:">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding></Label>
+         </padding>
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font></Label>
       <Label text="Balance:" GridPane.rowIndex="1">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding></Label>
+         </padding>
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font></Label>
       <Label text="Debt:" GridPane.rowIndex="2">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding></Label>
+         </padding>
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font></Label>
       <Label text="Path:" GridPane.rowIndex="3">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding></Label>
+         </padding>
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font></Label>
       <Label text="Career Card:" GridPane.rowIndex="4">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding></Label>
+         </padding>
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font></Label>
       <Label text="Salary Card:" GridPane.rowIndex="5">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding></Label>
+         </padding>
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font></Label>
       <Label text="House Card:" GridPane.rowIndex="6">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding></Label>
+         </padding>
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font></Label>
       <Label text="Graduated:" GridPane.rowIndex="7">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding></Label>
+         </padding>
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font></Label>
       <Label text="Married:" GridPane.rowIndex="8">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding></Label>
+         </padding>
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font></Label>
       <Label text="Children:" GridPane.rowIndex="9">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding></Label>
+         </padding>
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font></Label>
       <Label fx:id="name" GridPane.columnIndex="1">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding></Label>
+         </padding>
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font></Label>
       <Label fx:id="balance" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding></Label>
+         </padding>
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font></Label>
       <Label fx:id="debt" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding></Label>
+         </padding>
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font></Label>
       <Label fx:id="path" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding></Label>
+         </padding>
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font></Label>
       <Label fx:id="graduated" GridPane.columnIndex="1" GridPane.rowIndex="7">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding></Label>
+         </padding>
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font></Label>
       <Label fx:id="married" GridPane.columnIndex="1" GridPane.rowIndex="8">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding></Label>
+         </padding>
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font></Label>
       <Label fx:id="children" GridPane.columnIndex="1" GridPane.rowIndex="9">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding></Label>
+         </padding>
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font></Label>
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
          <children>
-            <Label fx:id="career" />
-            <Button fx:id="careerButton" mnemonicParsing="false" text="View" />
+            <Label fx:id="career">
+               <font>
+                  <Font name="Berlin Sans FB" size="18.0" />
+               </font></Label>
+            <Button fx:id="careerButton" mnemonicParsing="false" text="View">
+               <font>
+                  <Font name="Berlin Sans FB" size="14.0" />
+               </font></Button>
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -101,8 +159,14 @@
       </HBox>
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
          <children>
-            <Label fx:id="salary" />
-            <Button fx:id="salaryButton" mnemonicParsing="false" text="View" />
+            <Label fx:id="salary">
+               <font>
+                  <Font name="Berlin Sans FB" size="18.0" />
+               </font></Label>
+            <Button fx:id="salaryButton" mnemonicParsing="false" text="View">
+               <font>
+                  <Font name="Berlin Sans FB" size="14.0" />
+               </font></Button>
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -110,8 +174,14 @@
       </HBox>
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
          <children>
-            <Label fx:id="house" />
-            <Button fx:id="houseButton" mnemonicParsing="false" text="View" />
+            <Label fx:id="house">
+               <font>
+                  <Font name="Berlin Sans FB" size="18.0" />
+               </font></Label>
+            <Button fx:id="houseButton" mnemonicParsing="false" text="View">
+               <font>
+                  <Font name="Berlin Sans FB" size="14.0" />
+               </font></Button>
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

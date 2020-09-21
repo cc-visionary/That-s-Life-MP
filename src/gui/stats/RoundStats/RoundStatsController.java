@@ -12,7 +12,7 @@ public class RoundStatsController {
     public void setList(String[] roundStats) {
         for(String roundStat : roundStats) {
             Label label = new Label(String.format("- %s", roundStat));
-            label.setMaxHeight(Double.MAX_VALUE);
+            label.setMaxWidth(Double.MAX_VALUE);
             list.getChildren().add(label);
         }
     }

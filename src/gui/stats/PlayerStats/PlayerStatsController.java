@@ -1,18 +1,10 @@
 package gui.stats.PlayerStats;
 
-import gui.choose.ChooseCard;
+import gui.choose.ChooseCard.ChooseCard;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import main.players.Player;
-
-import java.io.IOException;
+import model.players.Player;
 
 public class PlayerStatsController {
     @FXML

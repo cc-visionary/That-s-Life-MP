@@ -4,11 +4,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import main.Constants;
-import main.GameOfLife;
-import main.paths.Path;
-import main.players.Player;
-import main.spaces.Space;
+import model.Constants;
+import gui.GameOfLife;
+import model.paths.Path;
+import model.players.Player;
+import model.spaces.Space;
 
 public class Board extends Canvas {
     public Board(GameOfLife gameOfLife, double width, double height) {

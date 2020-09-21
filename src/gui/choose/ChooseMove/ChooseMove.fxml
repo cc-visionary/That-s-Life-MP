@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="200.0" prefWidth="300.0" spacing="5.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.choose.ChooseMove.ChooseMoveController">
+   <children>
+      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Choose your move:">
+         <font>
+            <Font name="Berlin Sans FB" size="35.0" />
+         </font>
+      </Label>
+      <Button fx:id="rollDice" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Roll Dice">
+         <font>
+            <Font name="Britannic Bold" size="24.0" />
+         </font></Button>
+      <Button fx:id="viewPlayerStats" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="View Player Stats">
+         <font>
+            <Font name="Britannic Bold" size="24.0" />
+         </font></Button>
+      <Button fx:id="payDebt" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Pay Debt">
+         <font>
+            <Font name="Britannic Bold" size="24.0" />
+         </font></Button>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>

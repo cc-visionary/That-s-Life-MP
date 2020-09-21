@@ -2,7 +2,7 @@ package gui.stats.ScreenStats;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import main.players.Player;
+import model.players.Player;
 
 public class ScreenStatsController {
     @FXML
