@@ -1,4 +1,4 @@
-package model.utilities;
+package utilities;
 
 import model.cards.Card;
 import model.spaces.Space;

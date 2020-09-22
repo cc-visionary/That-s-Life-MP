@@ -1,7 +1,7 @@
 package model.spaces;
 
 import model.players.Player;
-import model.utilities.StringUtil;
+import utilities.StringUtil;
 
 import java.util.ArrayList;
 

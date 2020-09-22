@@ -1,5 +1,9 @@
 package model.spaces.MagentaSpace;
 
+import gui.choose.ChoosePath.ChoosePathController;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import model.Constants;
 import model.players.Player;
 
@@ -20,11 +24,19 @@ final public class WhichPathSpace extends MagentaSpace {
      */
     public void choosePath(Player player) {
         // remove the player from that path's space
-        player.getPath().getSpaces()[player.getLocation()].removePlayer(player);
+        player.getPath().getJunction().removePlayer(player);
         // if path 2 is not null, allow the user to choose between the paths
         if(player.getPath().getPath2() != null) {
-//            Path chosenPath = ChoosePath.choosePath(player.getPath().getPath1(), player.getPath().getPath2());
-//            player.setPath(chosenPath);
+            Stage stage = new Stage();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/choose/ChoosePath/ChoosePath.fxml"));
+            try {
+                stage.setScene(new Scene(fxmlLoader.load()));
+                ((ChoosePathController) fxmlLoader.getController()).setPaths(player, player.getPath().getPath1(), player.getPath().getPath2());
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+            stage.showAndWait();
         } else { // if not, automatically return the Path 1;
             player.setPath(player.getPath().getPath1());
         }

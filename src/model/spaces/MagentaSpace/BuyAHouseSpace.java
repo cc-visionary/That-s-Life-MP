@@ -4,7 +4,7 @@ import model.Constants;
 import model.cards.Card;
 import model.cards.HouseCard.HouseCard;
 import model.decks.Deck;
-import model.utilities.InputUtil;
+import utilities.InputUtil;
 
 /**
  * Represents the Magenta Space - Buy a House Space

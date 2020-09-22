@@ -1,8 +1,10 @@
 package gui.choose.ChoosePlayer;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.stage.Stage;
 import model.players.Player;
 
 import java.util.ArrayList;
@@ -14,7 +16,7 @@ public class ChoosePlayerController {
     @FXML
     private ComboBox playerSelection;
 
-    public ChoosePlayerController(Player[] otherPlayers) {
+    public void setPlayer(Player[] otherPlayers) {
         ArrayList<String> choices = new ArrayList<String>();
         for(Player player : otherPlayers) choices.add(player.getName() + " ($" + player.getBalance() + ")");
 
@@ -23,6 +25,7 @@ public class ChoosePlayerController {
 
         continueButton.setOnAction(e -> {
 //            otherPlayers[playerSelection.getSelectionModel().getSelectedIndex()]
+            ((Stage)((Node) e.getSource()).getScene().getWindow()).close();
         });
     }
 }

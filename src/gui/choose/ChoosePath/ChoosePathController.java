@@ -1,14 +1,16 @@
 package gui.choose.ChoosePath;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.stage.Stage;
 import model.paths.Path;
 import model.players.Player;
 import model.spaces.Space;
-import model.utilities.StringUtil;
+import utilities.StringUtil;
 
 import java.util.ArrayList;
 
@@ -17,7 +19,7 @@ public class ChoosePathController {
     private Label path1Description, path1Spaces, path2Description, path2Spaces;
 
     @FXML
-    private Tab path1, path2;
+    private Tab path1Tab, path2Tab;
 
     @FXML
     private TabPane tabPane;
@@ -25,12 +27,12 @@ public class ChoosePathController {
     @FXML
     private Button continueButton;
 
-    public ChoosePathController(Player player, Path path1, Path path2) {
-        this.path1.setText(path1.getName());
+    public void setPaths(Player player, Path path1, Path path2) {
+        path1Tab.setText(path1.getName());
         path1Description.setText(seperateDescription(path1.getDescription()));
         path1Spaces.setText(getUniqueSpaces(path1));
 
-        this.path2.setText(path2.getName());
+        path2Tab.setText(path2.getName());
         path2Description.setText(seperateDescription(path2.getDescription()));
         path2Spaces.setText(getUniqueSpaces(path2));
 
@@ -40,6 +42,7 @@ public class ChoosePathController {
             } else {
                 player.setPath(path2);
             }
+            ((Stage)((Node) e.getSource()).getScene().getWindow()).close();
         });
     }
 

@@ -1,4 +1,4 @@
-package model.utilities;
+package utilities;
 
 import java.util.ArrayList;
 
@@ -44,6 +44,7 @@ public class StringUtil {
     public static ArrayList<String> splitStringLength(String text, int len) {
         ArrayList<String> splittedString = new ArrayList<String>();
         String gatheredString = "";
+        if(text == null) text = "";
         int length = 0;
         for(String str : text.split(" ")) {
             // concatenate the curr string

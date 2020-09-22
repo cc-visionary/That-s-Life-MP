@@ -4,7 +4,7 @@ import model.Constants;
 import model.cards.CareerCard.CareerCard;
 import model.cards.SalaryCard.SalaryCard;
 import model.decks.Deck;
-import model.utilities.InputUtil;
+import utilities.InputUtil;
 
 /**
  * Represents the Magenta Space - Job Search Space

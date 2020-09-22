@@ -17,9 +17,9 @@ import model.spaces.MagentaSpace.*;
 import model.spaces.OrangeSpace.OrangeSpace;
 import model.spaces.RetirementSpace.RetirementSpace;
 import model.spaces.Space;
-import model.utilities.InputUtil;
-import model.utilities.IntUtil;
-import model.utilities.RandomUtil;
+import utilities.InputUtil;
+import utilities.IntUtil;
+import utilities.RandomUtil;
 
 import java.util.ArrayList;
 

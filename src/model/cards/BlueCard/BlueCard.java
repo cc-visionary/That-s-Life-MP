@@ -9,7 +9,7 @@ import javafx.stage.Screen;
 import model.Constants;
 import gui.GameOfLife;
 import model.cards.Card;
-import model.utilities.StringUtil;
+import utilities.StringUtil;
 import model.players.Player;
 
 import java.util.ArrayList;

@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import model.Constants;
 import model.cards.Card;
-import model.utilities.StringUtil;
+import utilities.StringUtil;
 
 /**
  * Represents the Action Card.

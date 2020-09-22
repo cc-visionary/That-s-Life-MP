@@ -1,9 +1,8 @@
 package gui;
 
 import gui.stats.RoundStats.RoundStatsController;
-import gui.stats.ScreenStats.ScreenStatsController;
+import gui.game.ScreenStats.ScreenStatsController;
 import gui.choose.ChooseCard.ChooseCard;
-import gui.choose.ChooseMove.ChooseMove;
 import gui.stats.UpdateStats.UpdateStats;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -28,7 +27,7 @@ import model.spaces.GreenSpace.PayRaiseSpace;
 import model.spaces.MagentaSpace.*;
 import model.spaces.OrangeSpace.OrangeSpace;
 import model.spaces.Space;
-import model.utilities.InputUtil;
+import utilities.InputUtil;
 
 import java.util.ArrayList;
 
@@ -50,9 +49,9 @@ public class GameOfLife {
      * All of the Game pieces will be Generated in the Board such as the
      * Deck(containing Card), Paths/Board, and Players.
      */
-    public GameOfLife(ScreenStatsController screenStats) {
+    public GameOfLife() {
         // screen stats
-        this.screenStats = screenStats;
+//        this.screenStats = screenStats;
 
         this.roundStats = new ArrayList<String>();
     }
@@ -76,6 +75,8 @@ public class GameOfLife {
 
         turn = 0;
         round = 1;
+
+        this.roundStats = new ArrayList<String>();
     }
 
     /**
@@ -86,9 +87,11 @@ public class GameOfLife {
     public void nextPlayer() {
         // if player has no path, let's him choose one through GUI
         if(getCurrentPlayer().getPath() == null) {
-            ChoosePath choosePath = new ChoosePath();
-            choosePath.choosePath(careerPath, collegePath);
-            Path chosenPath = choosePath.getChosenPath();
+//            ChoosePath choosePath = new ChoosePath();
+//            choosePath.choosePath(careerPath, collegePath);
+//            Path chosenPath = choosePath.getChosenPath();
+
+            Path chosenPath = collegePath;
 
             if(chosenPath.getName() == "Career Path") {
                 // only gets the Career which can be given to those players without College Degree
@@ -137,155 +140,6 @@ public class GameOfLife {
         }
 
         stage.showAndWait();
-    }
-
-    /**
-     * The amount of dice rolled by the Player
-     * @param rolledDice dice rolled
-     */
-    public void movePlayer(int rolledDice) {
-        Player currentPlayer = getCurrentPlayer();
-        Space previousSpace = currentPlayer.getPath().getSpaces()[currentPlayer.getLocation()], spaceLanded = null;
-
-        // remove player from that space
-        if(previousSpace.getPlayers().contains(currentPlayer))
-            previousSpace.removePlayer(currentPlayer);
-
-        for(int i = 0; i < rolledDice; i++) {
-            currentPlayer.addLocation();
-            spaceLanded = currentPlayer.getPath().getSpaces()[currentPlayer.getLocation()];
-            if(spaceLanded.getType().equals(Constants.MAGENTA_SPACE) || spaceLanded.getType().equals(Constants.RETIREMENT_SPACE)) break; // if player reaches the Magenta Space stop
-        }
-
-        handleSpaceLanded(spaceLanded);
-
-        spaceLanded.addPlayer(currentPlayer);
-    }
-
-    /**
-     * Handles the Actions to be done on where the space the Player landed
-     * @param space space where the currentPlayer landed
-     */
-    public void handleSpaceLanded(Space space) {
-//        System.out.println(String.format("You landed on %s - %s", space.getType(), space.getName()));
-        Player currentPlayer = getCurrentPlayer();
-        if(space != null) {
-            if(space.getType().equals(Constants.BLUE_SPACE)) {
-                // picks an blue card and activate it for all the Players
-                BlueCard blueCard = ((BlueSpace) space).pickCard(getBlueDeck());
-                GameOfLife.addRoundStat(String.format("%s drew %s(%s)", getCurrentPlayer().getName(), blueCard.getName(), blueCard.getType()));
-                blueCard.setOwner(currentPlayer);
-                blueCard.setOtherPlayers(getOtherPlayers());
-                ChooseCard.displayCard(blueCard);
-                blueCard.activate();
-
-                // put the card back to the BlueDeck
-                blueCard.setOwner(null);
-                blueCard.setOtherPlayers(null);
-                getBlueDeck().addCard(blueCard);
-                getBlueDeck().shuffle();
-            } else if(space.getType().equals(Constants.ORANGE_SPACE)) {
-                // picks an action card and activate it for all the Players
-                ActionCard actionCard = ((OrangeSpace) space).pickCard(getOrangeDeck());
-                GameOfLife.addRoundStat(String.format("%s drew %s(%s)", getCurrentPlayer().getName(), actionCard.getName(), actionCard.getType()));
-                actionCard.setOwner(currentPlayer);
-                actionCard.setOtherPlayers(getOtherPlayers());
-                ChooseCard.displayCard(actionCard);
-                actionCard.activate();
-            } else if(space.getType().equals(Constants.GREEN_SPACE)) {
-                if(space.getName().equals(Constants.PAY_DAY)) {
-                    // gives the salary to the player
-                    ((PayDaySpace) space).giveSalary(currentPlayer);
-                } else if(space.getName().equals(Constants.PAY_RAISE)) {
-                    // raises the salary of the player
-                    ((PayRaiseSpace) space).raiseSalary(currentPlayer);
-                }
-            } else if(space.getType().equals(Constants.MAGENTA_SPACE)) {
-                if(space.getName().equals(Constants.BUY_A_HOUSE)) {
-                    HouseCard houseCard = ((BuyAHouseSpace) space).pickCard(houseDeck);
-                    if(currentPlayer.getBalance() >= houseCard.getCost()) {
-                        // if balance is greater than the cost of the house,
-                        // the Player will automatically purchase it.
-                        System.out.println(String.format("%s successfully purchased %s for $%.2f", currentPlayer.getName(), houseCard.getName(), houseCard.getCost()));
-                        houseCard.setOwner(getCurrentPlayer());
-                        getCurrentPlayer().setHouseCard(houseCard);
-                    } else {
-                        // if not, then the player will be given an option to take a loan
-                        int choice = InputUtil.scanInt("Do you want to make a loan? (1-Yes, 2-No)", 1, 2);
-                        switch(choice) {
-                            case 1:
-                                // player makes a loan from the bank
-                                currentPlayer.bankLoan((int) Math.ceil((houseCard.getCost() - currentPlayer.getBalance()) / 20000));
-                                System.out.println(String.format("%s successfully purchased %s for $%.2f", currentPlayer.getName(), houseCard.getName(), houseCard.getCost()));
-                                houseCard.setOwner(getCurrentPlayer());
-                                getCurrentPlayer().setHouseCard(houseCard);
-                                break;
-                            case 2:
-                                // if player won't make a loan, add the card back to the Deck
-                                houseDeck.addCard(houseCard);
-                                houseDeck.shuffle();
-                                break;
-                        }
-                    }
-                } else if(space.getName().equals(Constants.JOB_SEARCH)) {
-                    CareerCard careerCard = ((JobSearchSpace) space).getCareerCard(getCareerDeck());
-                    SalaryCard salaryCard = ((JobSearchSpace) space).getSalaryCard(getSalaryDeck());
-                    if(careerCard != null) {
-                        // returns the Player's Career Card to the Deck
-                        if(currentPlayer.getCareerCard() != null) {
-                            careerDeck.addCard(currentPlayer.getCareerCard());
-                            careerDeck.shuffle();
-                        }
-                        // then set a new Career Card for the Player
-                        currentPlayer.setCareerCard(careerCard);
-                    }
-                    if(salaryCard != null) {
-                        // returns the Player's Salary Card to the Deck
-                        if(currentPlayer.getSalaryCard() != null) {
-                            salaryDeck.addCard(currentPlayer.getSalaryCard());
-                            salaryDeck.shuffle();
-                        }
-                        // then set a new Salary Card for the Player
-                        currentPlayer.setSalaryCard(salaryCard);
-                    }
-                } else if(space.getName().equals(Constants.COLLEGE_CARREER_CHOICE)) {
-                    CareerCard careerCard = ((CollegeCareerChoiceSpace) space).chooseCareerCard(getCareerDeck());
-                    SalaryCard salaryCard = ((CollegeCareerChoiceSpace) space).chooseSalaryCard(getSalaryDeck());
-
-                    // returns the Player's Career Card to the Deck
-                    if(currentPlayer.getCareerCard() != null) {
-                        careerDeck.addCard(currentPlayer.getCareerCard());
-                        careerDeck.shuffle();
-                    }
-                    // then set a new Career Card for the Player
-                    currentPlayer.setCareerCard(careerCard);
-
-                    // returns the Player's Salary Card to the Deck
-                    if(currentPlayer.getSalaryCard() != null) {
-                        salaryDeck.addCard(currentPlayer.getSalaryCard());
-                        salaryDeck.shuffle();
-                    }
-                    // then set a new Salary Card for the Player
-                    currentPlayer.setSalaryCard(salaryCard);
-                } else if(space.getName().equals(Constants.GET_MARRIED)) {
-                    // Player marries when landing in Get Married Space
-                    ((GetMarriedSpace) space).getMarried(getCurrentPlayer(), getOtherPlayers());
-                } else if(space.getName().equals("Have a Baby") || space.getName().equals("Have a Twin") || space.getName().equals("Have a Triplet")) {
-                    // Player haves a baby when landing on Have a Baby Space
-                    ((HaveBabySpace) space).haveABaby(getCurrentPlayer());
-                } else if(space.getName().equals(Constants.WHICH_PATH)) {
-                    // this is the junction where Players can choose the next Path
-                    ((WhichPathSpace) currentPlayer.getPath().getJunction()).choosePath(currentPlayer);
-                    ChooseMove chooseMove = new ChooseMove();
-                    chooseMove.chooseMove(this);
-                }
-            } else if(space.getType().equals(Constants.RETIREMENT_SPACE)) {
-                // Space where Player retires
-                getCurrentPlayer().setIsRetired(true);
-            }
-        } else {
-            System.out.println("Space is null...");
-        }
     }
 
     /**

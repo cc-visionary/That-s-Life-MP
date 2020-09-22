@@ -68,7 +68,8 @@ public abstract class Card {
 
         // if more than 1 other player exists, let the player who drew the card choose between them
         if(getOtherPlayers().length > 1) {
-            chosenPlayer = ChoosePlayer.chooseOtherPlayers(getOtherPlayers());
+//            chosenPlayer = ChoosePlayer.chooseOtherPlayers(getOtherPlayers());
+            chosenPlayer = null;
         } else if(getOtherPlayers().length == 1) { // if not, set the default chosen player as the other player indexed at 0
             chosenPlayer = getOtherPlayers()[0];
         } else {

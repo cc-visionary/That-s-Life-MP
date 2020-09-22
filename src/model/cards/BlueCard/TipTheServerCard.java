@@ -1,7 +1,7 @@
 package model.cards.BlueCard;
 
 import model.Constants;
-import model.utilities.RandomUtil;
+import utilities.RandomUtil;
 
 /**
  * Represents the Blue Card - Tip the Server Card

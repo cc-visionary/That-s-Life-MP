@@ -1,4 +1,4 @@
-package model.utilities;
+package utilities;
 
 /**
  * useful tools/classes for formatting int or Integer related tasks

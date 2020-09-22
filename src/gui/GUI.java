@@ -1,30 +1,27 @@
 package gui;
 
-import gui.board.Board;
-import gui.stats.ScreenStats.ScreenStatsController;
+import gui.choose.ChooseMove.ChooseMoveController;
+import gui.choose.ChoosePath.ChoosePathController;
+import gui.game.GameScreen.GameScreenController;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.scene.Node;
-import javafx.scene.control.*;
-import javafx.scene.layout.Pane;
-import javafx.stage.Screen;
-import model.Constants;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import model.Generator;
+import model.paths.Path;
+import model.players.Player;
 
-import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Main App
  */
 
 public class GUI extends Application {
-    private StackPane root;
-    private GameOfLife gameOfLife;
-
     public static void main(String[] args) {
         launch(args);
     }
@@ -32,64 +29,76 @@ public class GUI extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Game of Life");
-        root = new StackPane();
 
-
-
-        primaryStage.setMaximized(true);
-        primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
         primaryStage.show();
+
+        runGame(primaryStage);
     }
 
-    public void whenMenu() {
+    public void runGame(Stage primaryStage) {
+        GameOfLife gameOfLife = new GameOfLife();
+        gameOfLife.startGame();
 
-    }
+        FXMLLoader gameScreenLoader = new FXMLLoader(getClass().getResource("/gui/game/GameScreen/GameScreen.fxml"));
 
-    public void whenGame() throws IOException {
-        while(!gameOfLife.hasWinner()) {
-            // refreshes the board
-            Board board = new Board(gameOfLife, Constants.PATH_SPACES * 7 * 2 * Constants.HEXAGON_SIZE, Screen.getPrimary().getBounds().getMaxY() - 150);
-            ScrollPane scrollPane = new ScrollPane(board);
+        try {
+            StackPane root = gameScreenLoader.load();
+            Scene scene = new Scene(root);
 
-            // screen stats
-            FXMLLoader screenStatsLoader = new FXMLLoader(getClass().getResource("/gui/stats/ScreenStats/ScreenStats.fxml"));
-            Pane screenStats = (Pane)screenStatsLoader.load();
-            ScreenStatsController screenStatsController = screenStatsLoader.getController();
+            primaryStage.setScene(scene);
+            primaryStage.setMaximized(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-            // game of life instance
-            gameOfLife = new GameOfLife(screenStatsController);
-            root.getChildren().clear();
-            root.getChildren().addAll(scrollPane, screenStats);
-            StackPane.setMargin(screenStats, new Insets(0, 0, 50, 0));
-            gameOfLife.nextPlayer();
+        GameScreenController gameScreenController = gameScreenLoader.getController();
+
+        while (!gameOfLife.hasWinner()) {
+            gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), gameOfLife.getCurrentPlayer());
+
+            if(gameOfLife.getCurrentPlayer().getPath() == null) choosePath(gameOfLife.getCurrentPlayer(), gameOfLife.getCareerPath(), gameOfLife.getCollegePath(), gameScreenController);
+            displayChooseMove(gameOfLife, gameScreenController, this);
         }
     }
 
-    public void whenChoosingMove() {
+    public void displayChooseMove(GameOfLife gameOfLife, GameScreenController gameScreenController, GUI gui) {
+        Stage stage = new Stage();
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.WINDOW_MODAL);
 
+        FXMLLoader chooseMoveLoader = new FXMLLoader(getClass().getResource("/gui/choose/ChooseMove/ChooseMove.fxml"));
+
+        try {
+            Scene scene = new Scene(chooseMoveLoader.load());
+            stage.setScene(scene);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        ChooseMoveController chooseMoveController = chooseMoveLoader.getController();
+        chooseMoveController.setGameOfLife(gameOfLife, gameScreenController);
+
+        stage.showAndWait();
     }
 
-    public void whenChoosingPath() {
+    public void choosePath(Player player, Path path1, Path path2, GameScreenController gameScreenController) {
+        Stage stage = new Stage();
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
 
-    }
+        FXMLLoader choosePathLoader = new FXMLLoader(getClass().getResource("/gui/choose/ChoosePath/ChoosePath.fxml"));
 
-    public void whenChoosingCard() {
+        try {
+            Scene scene = new Scene(choosePathLoader.load());
+            stage.setScene(scene);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
 
-    }
+        ChoosePathController choosePathController = choosePathLoader.getController();
+        choosePathController.setPaths(player, path1, path2);
 
-    public void whenChoosingPlayer() {
-
-    }
-
-    public void whenViewingPlayerStats() {
-
-    }
-
-    public void whenViewingRoundStats() {
-
-    }
-
-    public void notify(String message) {
-
+        stage.showAndWait();
+        gameScreenController.refreshGameScreen(path2, path1, player);
     }
 }

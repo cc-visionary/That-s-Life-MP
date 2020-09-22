@@ -1,28 +1,46 @@
-package gui.board;
+package gui.game.GameScreen;
 
+import gui.game.ScreenStats.ScreenStatsController;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import model.Constants;
-import gui.GameOfLife;
 import model.paths.Path;
 import model.players.Player;
 import model.spaces.Space;
 
-public class Board extends Canvas {
-    public Board(GameOfLife gameOfLife, double width, double height) {
-        super(width, height);
-        drawBoard(gameOfLife, getGraphicsContext2D());
+public class GameScreenController {
+    @FXML
+    private Canvas board;
+
+    @FXML
+    private StackPane screenStats;
+
+    public void refreshGameScreen(Path collegePath, Path careerPath, Player player) {
+        board.setWidth(Constants.PATH_SPACES * 7 * 2 * Constants.HEXAGON_SIZE);
+        board.setHeight(Constants.HEXAGON_SIZE * 30);
+        screenStats.getChildren().clear();
+        board.getGraphicsContext2D().clearRect(0, 0, board.getWidth(), board.getHeight());
+        drawBoard(collegePath, careerPath, board.getGraphicsContext2D());
+        try {
+            FXMLLoader screenStatsLoader = new FXMLLoader(getClass().getResource("/gui/game/ScreenStats/ScreenStats.fxml"));
+            screenStats.getChildren().add(screenStatsLoader.load());
+            ((ScreenStatsController) screenStatsLoader.getController()).updateStats(player);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void drawBoard(GameOfLife gameOfLife, GraphicsContext gc) {
+    private void drawBoard(Path collegePath, Path careerPath, GraphicsContext gc) {
         double prevXPos = 0, prevYPos = 350;
 
-        System.out.println("Career Path");
-
+        // COLLEGE PATH
         // cop2
-        Path cop2 = gameOfLife.getCollegePath();
+        Path cop2 = collegePath;
         drawPath(prevXPos, prevYPos, cop2, gc);
 
         prevXPos += Constants.HEXAGON_SIZE * (Constants.PATH_SPACES * 2 - 1);
@@ -79,7 +97,8 @@ public class Board extends Canvas {
         prevXPos = 0;
         prevYPos = 350 + Constants.HEXAGON_SIZE * 6;
 
-        Path cap9 = gameOfLife.getCareerPath();
+        // CAREER PATH
+        Path cap9 = careerPath;
         drawPath(prevXPos, prevYPos, cap9, gc);
 
         prevXPos += Constants.HEXAGON_SIZE * (Constants.PATH_SPACES * 2 - 1);
@@ -136,6 +155,8 @@ public class Board extends Canvas {
     }
 
     private void drawPath(double startX, double startY, Path path, GraphicsContext gc) {
+        gc.setStroke(Color.BLACK);
+        gc.fillText(path.getName(), startX + (path.getNSpaces() / 2) * Constants.HEXAGON_SIZE, startY - Constants.HEXAGON_SIZE - 5);
         for(Space space : path.getSpaces()) {
             Color color = Color.BLACK;
             startX += Constants.HEXAGON_SIZE * 2;

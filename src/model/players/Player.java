@@ -6,7 +6,7 @@ import model.cards.HouseCard.HouseCard;
 import model.cards.SalaryCard.SalaryCard;
 import model.paths.Path;
 
-import model.utilities.RandomUtil;
+import utilities.RandomUtil;
 
 /**
  * Represents the Player

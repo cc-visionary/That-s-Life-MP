@@ -2,7 +2,7 @@ package model.spaces.MagentaSpace;
 
 import model.Constants;
 import model.players.Player;
-import model.utilities.RandomUtil;
+import utilities.RandomUtil;
 
 /**
  * Represents the Magenta Space - Get Married Space

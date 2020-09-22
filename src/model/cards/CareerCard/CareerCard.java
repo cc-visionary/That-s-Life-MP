@@ -8,8 +8,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import model.Constants;
 import model.cards.Card;
-import model.utilities.RandomUtil;
-import model.utilities.StringUtil;
+import utilities.RandomUtil;
+import utilities.StringUtil;
 
 /**
  * Represents the Career Card
