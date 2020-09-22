@@ -57,22 +57,18 @@ final public class CareerCard extends Card {
 
         VBox formattedBox = new VBox();
 
-        VBox descriptionBox = new VBox();
-        for(String string : StringUtil.splitStringLength(getDescription(), 40)) {
-            Label description = new Label(string);
-            descriptionBox.getChildren().add(description);
-        }
-        descriptionBox.setAlignment(Pos.CENTER);
+        Label description = new Label(StringUtil.splitStringIntoNewLine(getDescription(), 40));
+        description.setAlignment(Pos.CENTER);
 
         VBox nameBox = new VBox();
         Label cardName = new Label(getName() + "(" + getType() + ")");
         Label maxPayRaise = new Label("Max Pay Raise: " + getMaxPayRaise());
         Label collegeDegree = new Label("College Degree: " + (isRequireCollegeDegree() ? "Yes" : "No"));
         nameBox.setAlignment(Pos.CENTER);
-        nameBox.setTranslateY(100);
+        nameBox.setTranslateY(130 - 10 * StringUtil.splitStringLength(getDescription(), 40).size());
         nameBox.getChildren().addAll(cardName, maxPayRaise, collegeDegree);
 
-        formattedBox.getChildren().addAll(descriptionBox, nameBox);
+        formattedBox.getChildren().addAll(description, nameBox);
         formattedBox.setAlignment(Pos.CENTER);
 
         stackPane.getChildren().addAll(cardImage, formattedBox);
