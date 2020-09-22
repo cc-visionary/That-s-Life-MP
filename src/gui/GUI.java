@@ -1,7 +1,9 @@
 package gui;
 
+import gui.game.DisplayWinner.DisplayWinnerController;
 import gui.game.GameScreen.GameScreenController;
 import gui.modals.Modal;
+import gui.stats.GameStats.GameStatsController;
 import javafx.fxml.FXMLLoader;
 
 import javafx.application.Application;
@@ -83,8 +85,14 @@ public class GUI extends Application {
         gameOfLife.endGame();
 
         // detect who the winner was
+        try {
+            FXMLLoader diplayWinnerLoader = new FXMLLoader(getClass().getResource("/gui/game/DisplayWinner/DisplayWinner.fxml"));
+            primaryStage.setScene(new Scene(diplayWinnerLoader.load()));
+            ((DisplayWinnerController) diplayWinnerLoader.getController()).setWinner(gameOfLife);
+        } catch(Exception exception) {
+            exception.printStackTrace();
+        }
 
-        // display game stats
-//        primaryStage.setScene();
+
     }
 }
