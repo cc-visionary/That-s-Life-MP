@@ -92,7 +92,5 @@ public class GUI extends Application {
         } catch(Exception exception) {
             exception.printStackTrace();
         }
-
-
     }
 }

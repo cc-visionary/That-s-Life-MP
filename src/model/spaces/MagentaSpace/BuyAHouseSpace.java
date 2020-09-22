@@ -26,7 +26,10 @@ final public class BuyAHouseSpace extends MagentaSpace {
     public HouseCard pickCard(Deck houseDeck) {
         HouseCard pickedCard;
         if(houseDeck.getName() == "House Deck") {
+            // lets a Player choose a House through GUI
             pickedCard = new Modal().chooseHouse(houseDeck);
+            // removes the card
+            houseDeck.getCards().remove(pickedCard);
         } else {
             pickedCard = null;
             System.out.println("An incorrect deck was passed.");

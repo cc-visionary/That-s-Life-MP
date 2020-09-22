@@ -70,7 +70,7 @@ public class GameOfLife {
             }
 
             // repay all loans to the bank
-            player.payDebt(player.getNBankLoan());
+            if(player.getDebt() > 0) player.payDebt(player.getNBankLoan());
         }
     }
 

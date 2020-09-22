@@ -33,6 +33,7 @@ public class DisplayWinnerController {
             try {
                 FXMLLoader gameStatsLoader = new FXMLLoader(getClass().getResource("/gui/stats/GameStats/GameStats.fxml"));
                 stage.setScene(new Scene(gameStatsLoader.load()));
+                stage.setMaximized(true);
                 ((GameStatsController) gameStatsLoader.getController()).setData(gameOfLife);
             } catch(Exception exception) {
                 exception.printStackTrace();

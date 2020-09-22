@@ -27,6 +27,7 @@ public class GameStatsController {
         continueButton.setOnAction(e -> {
             Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 //            stage.setScene(new FXMLLoader(getClass().getResource("/gui/menu")));
+            stage.setMaximized(true);
         });
     }
 }

@@ -115,7 +115,7 @@ final public class Player {
      * @param houseCard newly bought house by the player
      */
     public void setHouseCard(HouseCard houseCard) {
-        GameOfLife.addRoundStat(String.format("%s's house is now set to %s", getName(), houseCard.getName()));
+        GameOfLife.addRoundStat(String.format("%s's house is now set to %s", getName(), houseCard != null ? houseCard.getName() : null));
         this.houseCard = houseCard;
     }
 
