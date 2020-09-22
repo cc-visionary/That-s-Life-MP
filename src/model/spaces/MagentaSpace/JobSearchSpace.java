@@ -1,5 +1,8 @@
 package model.spaces.MagentaSpace;
 
+import gui.modals.Modal;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import model.Constants;
 import model.cards.CareerCard.CareerCard;
 import model.cards.SalaryCard.SalaryCard;
@@ -22,12 +25,10 @@ final public class JobSearchSpace extends MagentaSpace {
      */
     public CareerCard getCareerCard(Deck careerDeck) {
         CareerCard careerCard = (CareerCard) careerDeck.pickTopCard();
-        System.out.println("CareerCard drawn:" + careerCard);
-        System.out.println("Choices: (1) Keep, (2) Discard");
-        int choice = InputUtil.scanInt("Enter choice:", 1, 2);
-
-        // if the Card is to be discarded, add it back to the deck and shuffle
-        if(choice == 2) {
+        new Modal().displayCard(careerCard);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to keep the Card?", ButtonType.NO, ButtonType.YES);
+        alert.showAndWait();
+        if(alert.getResult() == ButtonType.NO) {
             careerDeck.addCard(careerCard);
             careerDeck.shuffle();
             careerCard = null;
@@ -42,16 +43,16 @@ final public class JobSearchSpace extends MagentaSpace {
      */
     public SalaryCard getSalaryCard(Deck salaryDeck) {
         SalaryCard salaryCard = (SalaryCard) salaryDeck.pickTopCard();
-        System.out.println("SalaryCard drawn:" + salaryCard);
-        System.out.println("Choices: (1) Keep, (2) Discard");
-        int choice = InputUtil.scanInt("Enter choice:", 1, 2);
+        new Modal().displayCard(salaryCard);
 
-        // if the Card is to be discarded, add it back to the deck and shuffle
-        if(choice == 2) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to keep the Card?", ButtonType.NO, ButtonType.YES);
+        alert.showAndWait();
+        if(alert.getResult() == ButtonType.NO) {
             salaryDeck.addCard(salaryCard);
             salaryDeck.shuffle();
             salaryCard = null;
         }
+
         return salaryCard;
     }
 }
