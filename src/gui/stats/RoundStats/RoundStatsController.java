@@ -6,10 +6,15 @@ import javafx.scene.layout.VBox;
 
 public class RoundStatsController {
     @FXML
-    VBox list;
+    private VBox list;
 
     @FXML
-    public void setList(String[] roundStats) {
+    private Label roundLabel;
+
+    @FXML
+    public void setList(int round, String[] roundStats) {
+        roundLabel.setText("Round " + round + ":");
+
         for(String roundStat : roundStats) {
             Label label = new Label(String.format("- %s", roundStat));
             label.setMaxWidth(Double.MAX_VALUE);

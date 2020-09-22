@@ -19,7 +19,8 @@ public class GameOfLife {
     private DeckWithUsed orangeDeck;
     private Path careerPath, collegePath;
     private Player players[];
-    private int nPlayers, turn, round;
+    private int nPlayers, turn;
+    private static int round;
     private static ArrayList<String> roundStats;
 
     /**
@@ -76,6 +77,10 @@ public class GameOfLife {
     public static void addRoundStat(String stat) {
         UpdateStats.showUpdate(stat);
         roundStats.add(stat);
+    }
+
+    public static int getRound() {
+        return round;
     }
 
     public static ArrayList<String> getRoundStats() {
@@ -154,10 +159,6 @@ public class GameOfLife {
 
     public int getTurn() {
         return turn;
-    }
-
-    public int getRound() {
-        return round;
     }
 
     /**

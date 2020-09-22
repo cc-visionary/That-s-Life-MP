@@ -33,7 +33,7 @@ public class Modal {
         try {
             ScrollPane pane = fxmlLoader.load();
             pane.setStyle("-fx-background-color: aliceblue; -fx-font-size: 16; -fx-border-width: 1; -fx-border-color: gray");
-            ((RoundStatsController) fxmlLoader.getController()).setList(GameOfLife.getRoundStats().toArray(new String[0]));
+            ((RoundStatsController) fxmlLoader.getController()).setList(GameOfLife.getRound(),  GameOfLife.getRoundStats().toArray(new String[0]));
 
             // clears the round stats
             GameOfLife.getRoundStats().clear();

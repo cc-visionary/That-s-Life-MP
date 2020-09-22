@@ -26,10 +26,10 @@ final public class GetMarriedSpace extends MagentaSpace {
             int generatedNumber = RandomUtil.chooseRandomNumber(1, 100), amount;
             if(generatedNumber % 2 == 0) {
                 amount = 10000;
-                GameOfLife.addRoundStat("The generated number is " + generatedNumber + "(even) each Player will pay " + player + " $10000 for the wedding gift. ($" + otherPlayers.length * 10000 + ")");
+                GameOfLife.addRoundStat("The generated number is " + generatedNumber + "(even) each Player will pay " + player.getName() + " $10000 for the wedding gift. ($" + otherPlayers.length * 10000 + ")");
             } else {
                 amount = 5000;
-                GameOfLife.addRoundStat("The generated number is " + generatedNumber + "(odd) each Player will pay " + player + " $5000 for the wedding gift. ($" + otherPlayers.length * 5000 + ")");
+                GameOfLife.addRoundStat("The generated number is " + generatedNumber + "(odd) each Player will pay " + player.getName() + " $5000 for the wedding gift. ($" + otherPlayers.length * 5000 + ")");
             }
             // reduces the amount from the balance of the other players
             for(Player otherPlayer : otherPlayers) {

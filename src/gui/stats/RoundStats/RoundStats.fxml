@@ -9,7 +9,7 @@
    <content>
       <AnchorPane prefHeight="397.0" prefWidth="598.0">
          <children>
-            <Label text="Round Stats:" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Label fx:id="roundLabel" text="Round Stats:" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
                   <Font name="Berlin Sans FB" size="24.0" />
                </font>

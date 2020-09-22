@@ -63,7 +63,7 @@ public class GUI extends Application {
                         gameOfLife.getCareerDeck().addCard(careerCard);
                         careerCard = (CareerCard) gameOfLife.getCareerDeck().pickTopCard();
                     }
-                    gameOfLife.getCurrentPlayer().setCareerCard((CareerCard) gameOfLife.getCareerDeck().pickTopCard());
+                    gameOfLife.getCurrentPlayer().setCareerCard(careerCard);
                     gameOfLife.getCurrentPlayer().setSalaryCard((SalaryCard) gameOfLife.getSalaryDeck().pickTopCard());
                 }
                 gameOfLife.getCurrentPlayer().getPath().getSpaces()[0].addPlayer(gameOfLife.getCurrentPlayer());
@@ -72,6 +72,13 @@ public class GUI extends Application {
 
             // lets the player choose a move
             new Modal().displayChooseMove(gameOfLife, gameScreenController);
+
+            gameOfLife.setTurn(gameOfLife.getTurn() + 1);
+            if(gameOfLife.getTurn() == gameOfLife.getNPlayers()) {
+                new Modal().openRoundStats();
+                gameOfLife.setRound(gameOfLife.getRound() + 1);
+                gameOfLife.setTurn(0);
+            }
         }
         gameOfLife.endGame();
 

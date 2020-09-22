@@ -61,13 +61,6 @@ public class ChooseMoveController {
             handleSpaceLanded(gameOfLife, spaceLanded, gameScreenController);
             gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), gameOfLife.getCurrentPlayer());
 
-            gameOfLife.setTurn(gameOfLife.getTurn() + 1);
-            if(gameOfLife.getTurn() == gameOfLife.getAllPlayers().length) {
-                gameOfLife.setRound(gameOfLife.getRound() + 1);
-                gameOfLife.setTurn(0);
-                new Modal().openRoundStats();
-            }
-
             ((Stage)((Node) e.getSource()).getScene().getWindow()).close();
         });
 
@@ -232,8 +225,8 @@ public class ChooseMoveController {
                     ((WhichPathSpace) currentPlayer.getPath().getJunction()).choosePath(currentPlayer);
                     // refresh screen
                     gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), gameOfLife.getCurrentPlayer());
-                    // let's the player roll a dice again
-                    gameOfLife.setTurn(gameOfLife.getTurn() - 1);
+                    // let's the player take another turn
+                    new Modal().displayChooseMove(gameOfLife, gameScreenController);
                 }
             } else if(space.getType().equals(Constants.RETIREMENT_SPACE)) {
                 // Space where Player retires
