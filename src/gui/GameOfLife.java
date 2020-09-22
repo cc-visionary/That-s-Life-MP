@@ -94,18 +94,9 @@ public class GameOfLife {
             Path chosenPath = collegePath;
 
             if(chosenPath.getName() == "Career Path") {
-                // only gets the Career which can be given to those players without College Degree
-                CareerCard careerCard = (CareerCard) careerDeck.pickTopCard();
-                while(!careerCard.isRequireCollegeDegree()) {
-                    careerDeck.addCard(careerCard);
-                    careerCard = (CareerCard) careerDeck.pickTopCard();
-                }
-                getCurrentPlayer().setCareerCard((CareerCard) careerDeck.pickTopCard());
-                
-                getCurrentPlayer().setSalaryCard((SalaryCard) salaryDeck.pickTopCard());
+
             }
-            getCurrentPlayer().setPath(chosenPath);
-            getCurrentPlayer().getPath().getSpaces()[0].addPlayer(getCurrentPlayer());
+
         }
 //        this.screenStats.updateStats(getCurrentPlayer());
 //        ChooseMove chooseMove = new ChooseMove();

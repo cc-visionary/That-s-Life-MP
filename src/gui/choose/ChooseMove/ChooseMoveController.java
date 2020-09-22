@@ -36,6 +36,7 @@ public class ChooseMoveController {
     private Button rollDice, viewPlayerStats, payDebt;
 
     public void setGameOfLife(GameOfLife gameOfLife, GameScreenController gameScreenController) {
+        // let's the player roll a dice
         rollDice.setOnAction(e -> {
             Player currentPlayer = gameOfLife.getCurrentPlayer();
             int rolledDice = currentPlayer.rollDice();
@@ -64,6 +65,7 @@ public class ChooseMoveController {
             ((Stage)((Node) e.getSource()).getScene().getWindow()).close();
         });
 
+        // lets the player view his own stat
         viewPlayerStats.setOnAction(e -> {
             Stage playerStatsStage = new Stage();
             playerStatsStage.initStyle(StageStyle.UTILITY);
@@ -82,6 +84,7 @@ public class ChooseMoveController {
             playerStatsStage.show();
         });
 
+        // lets the player pay he's debt
         payDebt.setOnAction(e -> {
             Stage payDebtStage = new Stage();
             payDebtStage.initStyle(StageStyle.UTILITY);
@@ -191,6 +194,9 @@ public class ChooseMoveController {
                         currentPlayer.setSalaryCard(salaryCard);
                     }
                 } else if(space.getName().equals(Constants.COLLEGE_CARREER_CHOICE)) {
+                    // if the player is in College Path, he/she graduates on the College Career Space in a College Path
+                    if(currentPlayer.getPath().getName().equals("College Path")) currentPlayer.setHasGraduated(true);
+
                     CareerCard careerCard = ((CollegeCareerChoiceSpace) space).chooseCareerCard(gameOfLife.getCareerDeck());
                     SalaryCard salaryCard = ((CollegeCareerChoiceSpace) space).chooseSalaryCard(gameOfLife.getSalaryDeck());
 
@@ -209,9 +215,6 @@ public class ChooseMoveController {
                     }
                     // then set a new Salary Card for the Player
                     currentPlayer.setSalaryCard(salaryCard);
-
-                    // if the player is in College Path, he/she graduates on the College Career Space in a College Path
-                    if(currentPlayer.getPath().equals("College Path")) currentPlayer.setHasGraduated(true);
                 } else if(space.getName().equals(Constants.GET_MARRIED)) {
                     // Player marries when landing in Get Married Space
                     ((GetMarriedSpace) space).getMarried(gameOfLife.getCurrentPlayer(), gameOfLife.getOtherPlayers());

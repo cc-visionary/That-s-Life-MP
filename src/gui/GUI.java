@@ -12,6 +12,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Generator;
+import model.cards.CareerCard.CareerCard;
+import model.cards.SalaryCard.SalaryCard;
 import model.paths.Path;
 import model.players.Player;
 
@@ -41,6 +43,7 @@ public class GUI extends Application {
 
         FXMLLoader gameScreenLoader = new FXMLLoader(getClass().getResource("/gui/game/GameScreen/GameScreen.fxml"));
 
+        // set the scene to the Game's Screen
         try {
             StackPane root = gameScreenLoader.load();
             Scene scene = new Scene(root);
@@ -56,12 +59,30 @@ public class GUI extends Application {
         while (!gameOfLife.hasWinner()) {
             gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), gameOfLife.getCurrentPlayer());
 
-            if(gameOfLife.getCurrentPlayer().getPath() == null) choosePath(gameOfLife.getCurrentPlayer(), gameOfLife.getCareerPath(), gameOfLife.getCollegePath(), gameScreenController);
-            displayChooseMove(gameOfLife, gameScreenController, this);
+            // if player has no path, let him/her choose from the beginning paths
+            if(gameOfLife.getCurrentPlayer().getPath() == null) {
+                choosePath(gameOfLife.getCurrentPlayer(), gameOfLife.getCareerPath(), gameOfLife.getCollegePath(), gameScreenController);
+                // if the player started in Career Path, give 1 salary card and career card
+                if(gameOfLife.getCurrentPlayer().getPath().getName().equals("Career Path")) {
+                    // only gets the Career which can be given to those players without College Degree
+                    CareerCard careerCard = (CareerCard) gameOfLife.getCareerDeck().pickTopCard();
+                    while(!careerCard.isRequireCollegeDegree()) {
+                        gameOfLife.getCareerDeck().addCard(careerCard);
+                        careerCard = (CareerCard) gameOfLife.getCareerDeck().pickTopCard();
+                    }
+                    gameOfLife.getCurrentPlayer().setCareerCard((CareerCard) gameOfLife.getCareerDeck().pickTopCard());
+
+                    gameOfLife.getCurrentPlayer().setSalaryCard((SalaryCard) gameOfLife.getSalaryDeck().pickTopCard());
+                }
+                gameOfLife.getCurrentPlayer().getPath().getSpaces()[0].addPlayer(gameOfLife.getCurrentPlayer());
+                gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), gameOfLife.getCurrentPlayer());
+            }
+
+            displayChooseMove(gameOfLife, gameScreenController);
         }
     }
 
-    public void displayChooseMove(GameOfLife gameOfLife, GameScreenController gameScreenController, GUI gui) {
+    public void displayChooseMove(GameOfLife gameOfLife, GameScreenController gameScreenController) {
         Stage stage = new Stage();
         stage.initStyle(StageStyle.UNDECORATED);
         stage.initModality(Modality.WINDOW_MODAL);

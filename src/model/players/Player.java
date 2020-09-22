@@ -96,8 +96,8 @@ final public class Player {
      */
     public void payDebt(int times) {
         GameOfLife.addRoundStat(String.format("%s paid %d to the bank to pay off the debt", getName(), 25000 * times));
-        payBalance(25000 * times);
-        this.debt -= 25000 * times;
+        payBalance(2500 * times);
+        this.debt -= 2500 * times;
         this.nBankLoan -= times;
     }
 
