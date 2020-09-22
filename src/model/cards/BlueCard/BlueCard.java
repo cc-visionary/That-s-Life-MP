@@ -7,7 +7,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import model.Constants;
-import gui.GameOfLife;
+import model.GameOfLife;
 import model.cards.Card;
 import utilities.StringUtil;
 import model.players.Player;

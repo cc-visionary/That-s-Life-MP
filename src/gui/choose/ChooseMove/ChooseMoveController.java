@@ -1,12 +1,10 @@
 package gui.choose.ChooseMove;
 
-import gui.GameOfLife;
-import gui.choose.ChooseCard.ChooseCard;
+import model.GameOfLife;
 import gui.game.GameScreen.GameScreenController;
 import gui.game.PayDebt.PayDebtController;
+import gui.modals.Modal;
 import gui.stats.PlayerStats.PlayerStatsController;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -35,6 +33,11 @@ public class ChooseMoveController {
     @FXML
     private Button rollDice, viewPlayerStats, payDebt;
 
+    /**
+     * Set the values for the Choose Move options
+     * @param gameOfLife main model
+     * @param gameScreenController controller used to update screen stats
+     */
     public void setGameOfLife(GameOfLife gameOfLife, GameScreenController gameScreenController) {
         // let's the player roll a dice
         rollDice.setOnAction(e -> {
@@ -52,14 +55,17 @@ public class ChooseMoveController {
                 if(spaceLanded.getType().equals(Constants.MAGENTA_SPACE) || spaceLanded.getType().equals(Constants.RETIREMENT_SPACE)) break; // if player reaches the Magenta Space stop
             }
 
-            handleSpaceLanded(gameOfLife, spaceLanded, gameScreenController);
-
             spaceLanded.addPlayer(currentPlayer);
+            gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), gameOfLife.getCurrentPlayer());
+
+            handleSpaceLanded(gameOfLife, spaceLanded, gameScreenController);
+            gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), gameOfLife.getCurrentPlayer());
 
             gameOfLife.setTurn(gameOfLife.getTurn() + 1);
             if(gameOfLife.getTurn() == gameOfLife.getAllPlayers().length) {
                 gameOfLife.setRound(gameOfLife.getRound() + 1);
                 gameOfLife.setTurn(0);
+                new Modal().openRoundStats();
             }
 
             ((Stage)((Node) e.getSource()).getScene().getWindow()).close();
@@ -121,7 +127,7 @@ public class ChooseMoveController {
                 GameOfLife.addRoundStat(String.format("%s drew %s(%s)", gameOfLife.getCurrentPlayer().getName(), blueCard.getName(), blueCard.getType()));
                 blueCard.setOwner(currentPlayer);
                 blueCard.setOtherPlayers(gameOfLife.getOtherPlayers());
-                ChooseCard.displayCard(blueCard);
+                new Modal().displayCard(blueCard);
                 blueCard.activate();
 
                 // put the card back to the BlueDeck
@@ -135,7 +141,7 @@ public class ChooseMoveController {
                 GameOfLife.addRoundStat(String.format("%s drew %s(%s)", gameOfLife.getCurrentPlayer().getName(), actionCard.getName(), actionCard.getType()));
                 actionCard.setOwner(currentPlayer);
                 actionCard.setOtherPlayers(gameOfLife.getOtherPlayers());
-                ChooseCard.displayCard(actionCard);
+                new Modal().displayCard(actionCard);
                 actionCard.activate();
             } else if(space.getType().equals(Constants.GREEN_SPACE)) {
                 if(space.getName().equals(Constants.PAY_DAY)) {
@@ -237,4 +243,6 @@ public class ChooseMoveController {
             System.out.println("Space is null...");
         }
     }
+
+
 }

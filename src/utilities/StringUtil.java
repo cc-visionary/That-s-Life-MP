@@ -66,4 +66,10 @@ public class StringUtil {
 
         return splittedString;
     }
+
+    public static String splitStringIntoNewLine(String string, int len) {
+        String output = "";
+        for(String str : splitStringLength(string, len)) output += str + "\n";
+        return output;
+    }
 }

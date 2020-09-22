@@ -16,6 +16,8 @@ public class ChoosePlayerController {
     @FXML
     private ComboBox playerSelection;
 
+    private Player chosenPlayer;
+
     public void setPlayer(Player[] otherPlayers) {
         ArrayList<String> choices = new ArrayList<String>();
         for(Player player : otherPlayers) choices.add(player.getName() + " ($" + player.getBalance() + ")");
@@ -24,8 +26,12 @@ public class ChoosePlayerController {
         playerSelection.setValue(choices.get(0));
 
         continueButton.setOnAction(e -> {
-//            otherPlayers[playerSelection.getSelectionModel().getSelectedIndex()]
+            chosenPlayer = otherPlayers[playerSelection.getSelectionModel().getSelectedIndex()];
             ((Stage)((Node) e.getSource()).getScene().getWindow()).close();
         });
+    }
+
+    public Player getChosenPlayer() {
+        return chosenPlayer;
     }
 }

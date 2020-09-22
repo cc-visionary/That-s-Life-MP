@@ -1,6 +1,6 @@
 package model.spaces.MagentaSpace;
 
-import gui.choose.ChooseCard.ChooseCard;
+import gui.modals.Modal;
 import model.Constants;
 import model.cards.Card;
 import model.cards.CareerCard.CareerCard;
@@ -23,8 +23,8 @@ final public class CollegeCareerChoiceSpace extends MagentaSpace {
         if(careerDeck.getName() == "Career Deck") {
             Card card1 = careerDeck.pickTopCard();
             Card card2 = careerDeck.pickTopCard();
-            ;
-            pickedCard = (CareerCard) ChooseCard.choose2Cards(card1, card2);
+
+            pickedCard = (CareerCard) new Modal().chooseCard(card1, card2);
 
             if(card1.equals(pickedCard)) careerDeck.addCard(card2);
             else careerDeck.addCard(card1);
@@ -43,7 +43,7 @@ final public class CollegeCareerChoiceSpace extends MagentaSpace {
             Card card1 = salaryDeck.pickTopCard();
             Card card2 = salaryDeck.pickTopCard();
 
-            pickedCard = (SalaryCard) ChooseCard.choose2Cards(card1, card2);
+            pickedCard = (SalaryCard) new Modal().chooseCard(card1, card2);
 
             if(card1.equals(pickedCard)) salaryDeck.addCard(card2);
             else salaryDeck.addCard(card1);

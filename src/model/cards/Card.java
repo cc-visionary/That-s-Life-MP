@@ -1,5 +1,6 @@
 package model.cards;
 
+import gui.modals.Modal;
 import javafx.scene.layout.StackPane;
 import model.players.Player;
 
@@ -68,8 +69,7 @@ public abstract class Card {
 
         // if more than 1 other player exists, let the player who drew the card choose between them
         if(getOtherPlayers().length > 1) {
-//            chosenPlayer = ChoosePlayer.chooseOtherPlayers(getOtherPlayers());
-            chosenPlayer = null;
+            chosenPlayer = new Modal().choosePlayer(getOtherPlayers());
         } else if(getOtherPlayers().length == 1) { // if not, set the default chosen player as the other player indexed at 0
             chosenPlayer = getOtherPlayers()[0];
         } else {

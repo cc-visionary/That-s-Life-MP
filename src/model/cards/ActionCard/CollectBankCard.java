@@ -1,6 +1,6 @@
 package model.cards.ActionCard;
 
-import gui.GameOfLife;
+import model.GameOfLife;
 
 /**
  * Represents the Action Card which requires a Player to Collect money from the Bank

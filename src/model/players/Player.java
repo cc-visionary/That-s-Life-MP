@@ -1,6 +1,6 @@
 package model.players;
 import model.Constants;
-import gui.GameOfLife;
+import model.GameOfLife;
 import model.cards.CareerCard.CareerCard;
 import model.cards.HouseCard.HouseCard;
 import model.cards.SalaryCard.SalaryCard;

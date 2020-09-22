@@ -1,6 +1,6 @@
 package model.decks;
 
-import gui.GameOfLife;
+import model.GameOfLife;
 import model.cards.Card;
 
 import java.util.ArrayList;

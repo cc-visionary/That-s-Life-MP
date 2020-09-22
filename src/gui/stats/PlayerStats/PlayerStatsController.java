@@ -1,6 +1,6 @@
 package gui.stats.PlayerStats;
 
-import gui.choose.ChooseCard.ChooseCard;
+import gui.modals.Modal;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -28,19 +28,19 @@ public class PlayerStatsController {
 
         if(player.getCareerCard() != null) {
             careerButton.setOnAction(e -> {
-                ChooseCard.displayCard(player.getCareerCard());
+                new Modal().displayCard(player.getCareerCard());
             });
         } else careerButton.setDisable(true);
 
         if(player.getSalaryCard() != null) {
             salaryButton.setOnAction(e -> {
-                ChooseCard.displayCard(player.getSalaryCard());
+                new Modal().displayCard(player.getSalaryCard());
             });
         } else salaryButton.setDisable(true);
 
         if(player.getHouseCard() != null) {
             houseButton.setOnAction(e -> {
-                ChooseCard.displayCard(player.getHouseCard());
+                new Modal().displayCard(player.getHouseCard());
             });
         } else houseButton.setDisable(true);
     }

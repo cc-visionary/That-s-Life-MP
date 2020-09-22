@@ -1,6 +1,6 @@
 package model.cards.ActionCard;
 
-import gui.GameOfLife;
+import model.GameOfLife;
 import model.players.Player;
 
 /**
