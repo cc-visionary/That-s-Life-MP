@@ -1,0 +1,431 @@
+[33mcommit 63818fd1fd11a46e4643de9575a5df663c9a9ac9[m[33m ([m[1;36mHEAD -> [m[1;32mgui-app[m[33m, [m[1;31morigin/gui-app[m[33m)[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Wed Sep 23 09:48:31 2020 +0800
+
+    Added Card descriptions
+
+[33mcommit 8c8f1d12d7f32183ff041b2a5564795a4045f982[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Tue Sep 22 21:25:16 2020 +0800
+
+    Tested a fully working game up until the Game Stats
+
+[33mcommit 866cea0ebcd0ce9d2b2bf2ffbdd06c30f7c0d144[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Tue Sep 22 21:11:50 2020 +0800
+
+    Add asks the player for House and asks the player whether or not to keep or discard a drawn Card from JobSearchSpace
+
+[33mcommit 15b8f285248cdead43656b7d1b2f44ce06c7096d[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Tue Sep 22 20:47:42 2020 +0800
+
+    Added Display Winner and Game Stats at the end
+
+[33mcommit 4ad5bdff6cfe840e01147063235386edbed6cd0a[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Tue Sep 22 20:28:42 2020 +0800
+
+    Add round number in Round Stats then fixed removing player from Space when Path changes.
+
+[33mcommit 34e2d295512bf1e213c586dee18cc78f528e598c[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Tue Sep 22 19:56:16 2020 +0800
+
+    Fixed Cards display format
+
+[33mcommit 11d47e0522c4b8fc89a867e1e1fb167001bf0799[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Tue Sep 22 16:25:52 2020 +0800
+
+    Added Modals and completed converting the app into MVC
+
+[33mcommit b2a09575a6a55dd81ccaa2fd98f83eaf7dbe4825[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Tue Sep 22 13:59:42 2020 +0800
+
+    Give Career and Salary Card to Players who choose Career Path at the beginning
+
+[33mcommit 7231b765e8b6ad85c4a741272169b6b503c5bb76[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Tue Sep 22 13:39:28 2020 +0800
+
+    Made further work into converting the App into MVC structure
+
+[33mcommit 04e3839163e024a60689dc97ee2a3246839d021d[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Mon Sep 21 20:29:05 2020 +0800
+
+    Convert Choose View into MVC
+
+[33mcommit 3d36153ca985445331731c506e64f6a93c60d36c[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Mon Sep 21 10:32:17 2020 +0800
+
+    added update stats
+
+[33mcommit ee323fc94a2cdacdffa3675f7c38384c81da2a26[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Sun Sep 20 13:37:21 2020 +0800
+
+    Finished Round Stats GUI
+
+[33mcommit 893a212fd7d83e1e53ac044e39b1370c6ece9236[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Sat Sep 19 21:53:50 2020 +0800
+
+    Add stats data
+
+[33mcommit 08bf5981c058f5cc15e41e940c1f8ff1c9427551[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Sat Sep 19 17:19:57 2020 +0800
+
+    Finished Player to pay debt, and added classes for stats
+
+[33mcommit 2524294cd750fae39c772b9303cc9740469a803f[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Sat Sep 19 15:29:10 2020 +0800
+
+    Display Cards in GUI
+
+[33mcommit 25c66358d08f0d3d73ee91105c888e87f3d4fd10[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Sat Sep 19 08:03:46 2020 +0800
+
+    Fixed Null Paths, Spaces and Careers bug
+
+[33mcommit c1c0d1c969919a8a81783dd8ee1c77c7ab024365[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Fri Sep 18 21:16:13 2020 +0800
+
+    Now have a fully functional GUI game
+
+[33mcommit 513b76a092b84bf0842292058aae98f868be70da[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Fri Sep 18 14:41:07 2020 +0800
+
+    Screen Stats will now update per player's turn
+
+[33mcommit 20566bdb3a4c518d017708e7396f84862cf82d03[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Thu Sep 17 16:22:15 2020 +0800
+
+    Add Screen Stats
+
+[33mcommit fab999cea9cf34a91da2a9c6546eec0563667c81[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Thu Sep 17 12:03:35 2020 +0800
+
+    Added Color for the Board
+
+[33mcommit 5749496b99d3d1523642823ab17fa136345f5e0d[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Wed Sep 16 23:27:14 2020 +0800
+
+    Finished Generating the whole Board format
+
+[33mcommit 1689dbc36fb40d1d77843a3960f287c8ae32e70f[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Wed Sep 16 20:20:58 2020 +0800
+
+    Generate Board in GUI
+
+[33mcommit b1789ee77890bbad580db95b7a6fe67f86470698[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Tue Sep 15 18:59:55 2020 +0800
+
+    Changed the number of spaces in each Path to be fixed. but the spaces which will exist and the order is still random
+
+[33mcommit 0e0a60ec9d3b3a80d80bdc5e284c348a844c001c[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Tue Sep 15 15:31:00 2020 +0800
+
+    Documented the Hexagon
+
+[33mcommit 71a88a9c4577a261e73e43a99acabc55b621e9d7[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Tue Sep 15 15:29:19 2020 +0800
+
+    Draw Hexagon on Canvas
+
+[33mcommit 4f083ce848bbef0cfd57c4e6f6e4b24618b8f420[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Sun Sep 13 11:27:15 2020 +0800
+
+    Added DeckWithUsed Deck and tested successfully
+
+[33mcommit 3b8090cc44b0f461ae54756aa862b3113da24a8e[m[33m ([m[1;31morigin/command-line-app[m[33m, [m[1;32mcommand-line-app[m[33m)[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Mon Sep 7 23:20:01 2020 +0800
+
+    Add JavaDocs, UML, and Sequence of Path Schematics
+
+[33mcommit 25b5673d8617a1a63601a3a9111d79ca69f144df[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Mon Sep 7 23:06:14 2020 +0800
+
+    Produce JavaDocs
+
+[33mcommit d93691b8352e78a9ed0f835f2aaa0b2dc3ff9c17[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Mon Sep 7 22:46:56 2020 +0800
+
+    Added more constants and fixed misunderstood instructions in Blue Card, Salary Card and Magenta Space
+
+[33mcommit 8ea979a632ba7e415e323222c1921f6900a8af20[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Mon Sep 7 22:12:52 2020 +0800
+
+    Fixed Randomutil and Added IntUtil. Then Fixed Magenta Spaces to stop whenever it reaches a Magenta Space.
+
+[33mcommit 812c5a622e77663aa69f2973c3a6b527ea72fb41[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Mon Sep 7 20:53:44 2020 +0800
+
+    Added Test 8 and 9
+
+[33mcommit 3d141fa084283dd53a89da3a8f3646b10155d06e[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Mon Sep 7 15:46:44 2020 +0800
+
+    Fixed Player paying the Debts
+
+[33mcommit cb1f2cf9a0f009b693d53b6c23fbda178f0f993a[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Sun Sep 6 14:04:15 2020 +0800
+
+    Add Test7, Constants, and GameOfLifeClass
+
+[33mcommit c1d2e49a08f6c477bc6abbdf023d4c22b4eb8910[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Sat Sep 5 16:58:42 2020 +0800
+
+    Finished Test5 (traverse the different Paths) and Test6 (simulate Player movement throughout the Board)
+
+[33mcommit c4c29f2e1bc71e2414094952fa40efeacc835540[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Sat Sep 5 14:07:12 2020 +0800
+
+    Added Test 5 and 6, and also added generateHouseDeck
+
+[33mcommit b6eae8fc133ab052db377a67e81f2bdcddc70864[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Sat Sep 5 11:19:24 2020 +0800
+
+    Add Path Generation and Test Script 4
+
+[33mcommit 97895d7490a98dae35822909b3634c12ab1c4a4b[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Sat Sep 5 10:29:52 2020 +0800
+
+    Added Retirement Space and finalized Path and other spaces.
+
+[33mcommit 9e8c35feaf43c885759c91a74438cd3cae275add[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Tue Sep 1 04:14:41 2020 +0800
+
+    Minor fix on typo in Card class
+
+[33mcommit d6baa023aab56164b3b056654231f931b254a3b2[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Tue Sep 1 04:06:44 2020 +0800
+
+    Finalize MP Phase 1 Submission
+
+[33mcommit 326dfdb7428629c9c0a84bd652cafa9a6a7fa349[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Tue Sep 1 03:40:03 2020 +0800
+
+    Added Test 4 Scripts
+
+[33mcommit d4ade08c9218a325fb3e44b2076d25ae123388ac[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Tue Sep 1 03:11:54 2020 +0800
+
+    Finished Magenta Spaces and Documentation
+
+[33mcommit e1cb02137a68fa2d40f2d207f1d4589fbc32a0a1[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Mon Aug 31 17:13:41 2020 +0800
+
+    Added TestCase #2
+
+[33mcommit 46a9845a0a6af9f78f90bfa75cf524e058bf8043[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Mon Aug 31 16:53:08 2020 +0800
+
+    Added Owner and OtherPlayers attribute in Card Class
+
+[33mcommit 636bcb879cb17801308fc4fb732149c3feba3bc1[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Sun Aug 30 22:18:13 2020 +0800
+
+    Added Documentation
+
+[33mcommit 106db54d9621c90527d9f88cd35519ddf9114542[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Sun Aug 30 22:00:07 2020 +0800
+
+    Updated Spaces Documentation
+
+[33mcommit d9815897a1b9e596ac570727585f2d5bff5ca212[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Sun Aug 30 21:58:11 2020 +0800
+
+    Documented Cards
+
+[33mcommit 6aa532f724fad1eb04c172c69e9459c3d42a0e64[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Sun Aug 30 21:49:59 2020 +0800
+
+    Changed the Documentations for Generator + Utilities + Spaces + Path + Player
+
+[33mcommit 6ee8f12cdb145555722074bd0391a69ac46376c1[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Sun Aug 30 21:26:22 2020 +0800
+
+    Added docs for Deck + Path + Spaces
+
+[33mcommit 3b8c494fb7b2d43e2ee16e902f0b00fda4743911[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Sun Aug 30 12:45:35 2020 +0800
+
+    Added HouseCard and overwrite toString in certain classes
+
+[33mcommit d2b37b62c358931f2f421672f71361829d2799b7[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Fri Aug 28 22:20:26 2020 +0800
+
+    Completed Phase 1 Submission (players take turns to draw ActionCards)
+
+[33mcommit 68932a8e96c229ea6f05c7085bccdae8361156f6[m
+Author: CCVisionary <lim.christopher.go@gmail.com>
+Date:   Fri Aug 28 18:46:41 2020 +0800
+
+    Player creation
+
+[33mcommit b935a69f7309aa2fe9de9c69870987c7874f405f[m
+Author: CCVisionary <lim.christopher.go@gmail.com>
+Date:   Thu Aug 27 20:58:40 2020 +0800
+
+    Generate Players, each with autogenerated CareerCards and SalaryCards
+
+[33mcommit 5ab0de12d58674c6a9086058d18bafa6bc311b6d[m
+Author: CCVisionary <lim.christopher.go@gmail.com>
+Date:   Thu Aug 27 14:55:26 2020 +0800
+
+    Added a function generateBlueDeck
+
+[33mcommit 749955c2011f8a893d9d093f4a145f2f5a2ccac5[m
+Author: CCVisionary <lim.christopher.go@gmail.com>
+Date:   Thu Aug 27 13:58:33 2020 +0800
+
+    Add generateSalaryDeck function
+
+[33mcommit c8bc2ff037bffb24b1abd19fef19b748bc7c42ea[m
+Author: CCVisionary <lim.christopher.go@gmail.com>
+Date:   Thu Aug 27 13:25:52 2020 +0800
+
+    Add generateCareerDeck function
+
+[33mcommit d2062eb621fe35e7a106081f471a645055571fbf[m
+Author: CCVisionary <lim.christopher.go@gmail.com>
+Date:   Thu Aug 27 12:57:09 2020 +0800
+
+    Changed doAction function to activate function in ActionCards to be uniform with BlueCards
+
+[33mcommit 0d0885b024efb8851736438a066b72ce23f5542a[m
+Author: CCVisionary <lim.christopher.go@gmail.com>
+Date:   Thu Aug 27 12:55:06 2020 +0800
+
+    Modified the BlueCards to have a uniform activate function
+
+[33mcommit cb71091298509628e551d1b95190fb0873faf39f[m
+Author: CCVisionary <lim.christopher.go@gmail.com>
+Date:   Wed Aug 26 17:38:52 2020 +0800
+
+    Added RandomUtil.java, and function to randomly generate the OrangeDeck
+
+[33mcommit 74d07863f1d155ebf0858537a5f93ca6c51e53ab[m
+Author: CCVisionary <lim.christopher.go@gmail.com>
+Date:   Wed Aug 26 14:50:21 2020 +0800
+
+    Added ActionCard Subclasses to be more specific
+
+[33mcommit bebf9dae34365fc29920796cbf54e69776e44ef2[m
+Author: CCVisionary <lim.christopher.go@gmail.com>
+Date:   Wed Aug 26 13:40:46 2020 +0800
+
+    Finished creating the Deck Class
+
+[33mcommit de1faee3dbca20c10ae1f4d96cea409f92254ee6[m
+Author: CCVisionary <lim.christopher.go@gmail.com>
+Date:   Wed Aug 26 13:13:12 2020 +0800
+
+    Created Blue, Orange and Magenta Spaces
+
+[33mcommit cafec5105577343cd5ebc13409807c4c0339d493[m
+Author: CCVisionary <lim.christopher.go@gmail.com>
+Date:   Wed Aug 26 12:18:10 2020 +0800
+
+    Modified Space, Path and Player then Added GreenSpaces
+
+[33mcommit 7cbc62981426193234e2920ceacb16446f63c5af[m
+Author: CCVisionary <lim.christopher.go@gmail.com>
+Date:   Tue Aug 25 12:12:08 2020 +0800
+
+    Updated the Player Class by being more specific + with its methods
+
+[33mcommit 206816ce84389702c5262c865c49013af3f9745f[m
+Author: CCVisionary <lim.christopher.go@gmail.com>
+Date:   Tue Aug 25 11:36:23 2020 +0800
+
+    Add all the blue cards
+
+[33mcommit 3a8f48b2cd075718d8b4effbd26e39ad7cbc8237[m
+Author: CCVisionary <lim.christopher.go@gmail.com>
+Date:   Wed Aug 19 10:33:43 2020 +0800
+
+    Add Space Class
+
+[33mcommit 779ac9a5f92bd4a7b8f125b3d7ee5b6e444120cc[m
+Author: CCVisionary <lim.christopher.go@gmail.com>
+Date:   Tue Aug 18 22:16:00 2020 +0800
+
+    Finished the Career Card
+
+[33mcommit 665396f207940667ebdac3ad745e911983b6a2b3[m
+Author: CCVisionary <lim.christopher.go@gmail.com>
+Date:   Tue Aug 18 22:02:57 2020 +0800
+
+    Completed SalaryCard
+
+[33mcommit 63947efb837d6dcfc78e8b6c3f00a62c6d007b4f[m
+Author: CCVisionary <lim.christopher.go@gmail.com>
+Date:   Tue Aug 18 21:54:33 2020 +0800
+
+    Started ActionCard
+
+[33mcommit e9e62696dcb257c4ad12bba4df34a20b081e6b7e[m
+Author: CCVisionary <lim.christopher.go@gmail.com>
+Date:   Tue Aug 18 16:31:02 2020 +0800
+
+    Added StringUtil to center string and Added Blue Card with Test Run
+
+[33mcommit 64fe9f44d77abebbda26b0d5198858cda3d21f44[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Wed Aug 5 17:04:51 2020 +0800
+
+    Initialize Card, Path, and Space Classes, then add 'get number of players'
+
+[33mcommit 951eb640c4621994a7e2c2ebb7f1af31fc644e94[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Wed Aug 5 16:19:11 2020 +0800
+
+    Create Initial Player Class
+
+[33mcommit 3801720a4d210d3656a2f8b230224e87fbdf988f[m[33m ([m[1;32mmaster[m[33m)[m
+Author: Christopher Lim <lim.christopher.go@gmail.com>
+Date:   Mon Jul 27 23:26:03 2020 +0800
+
+    Initialize repository

@@ -3,7 +3,9 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -153,11 +155,16 @@ public class MenuController extends Application{
     }
 
     @FXML
-    public void onClickStart(){
+    public void onClickStart(ActionEvent event){
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FXMLLoader gameSettingLoader = new FXMLLoader(getClass().getResource("/gui/gameSettings/GameSettings.fxml"));
 
+//        stage.setScene(new Scene(some fxml));
+        stage.setMaximized(true);
     }
-    @FXML
-    public void onClickExit(){
 
+    @FXML
+    public void onClickExit(ActionEvent event){
+        ((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
     }
 }
