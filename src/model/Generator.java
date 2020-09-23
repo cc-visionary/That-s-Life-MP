@@ -49,33 +49,32 @@ public class Generator {
     public static DeckWithUsed generateOrangeDeck() {
         // Collect from the Bank (40% - 20 cards)
         Card[] collectBankCards = {
-                new CollectBankCard("Tax Refund", "You got a tax refund! Collect from the bank!", 1000),
-                new CollectBankCard("Tax Refund", "You got a tax refund! Collect from the bank!", 2000),
-                new CollectBankCard("Sell an Item", "You sold an item! Collect from the bank!", 1500),
-                new CollectBankCard("Bonus Payday", "You had a bonus payday! Collect from the bank!", 4000),
-                new CollectBankCard("Setup School", "The school you setup was successful! Collect from the bank!", 4500),
+                new CollectBankCard("Tax Refund", "You got a tax refund! Collect from the bank!", 5000),
+                new CollectBankCard("Sell an Item", "You sold an item! Collect from the bank!", 2500),
+                new CollectBankCard("Bonus Payday", "You had a bonus payday! Collect from the bank!", 7500),
+                new CollectBankCard("Setup School", "The school you setup was successful! Collect from the bank!", 7500),
                 new CollectBankCard("Write a Book", "The book you wrote became a best-seller! Collect from  the Bank!", 5000)
         };
 
         // Pay the Bank (40% - 20 cards)
         Card[] payBankCards = {
-                new PayBankCard("Buy an Item", "You bought an item! You need to pay the bank!", 2000),
-                new PayBankCard("Visit a Place", "You visited a place! You need to pay the bank!", 1000),
-                new PayBankCard("Hiking", "You went hiking! You enjoyed it, but now it's time to pay the bank!", 500),
-                new PayBankCard("Watch a Show", "You watched a show! You need to pay the bank!", 500),
-                new PayBankCard("Traffic Violation", "You crossed the while it was red on the traffic light. You need to pay the bank!", 500)
+                new PayBankCard("Buy an Item", "You bought an item! You need to pay the bank!", 5000),
+                new PayBankCard("Visit a Place", "You visited a place! You need to pay the bank!", 2500),
+                new PayBankCard("Hiking", "You went hiking! You enjoyed it, but now it's time to pay the bank!", 2500),
+                new PayBankCard("Watch a Show", "You watched a show! You need to pay the bank!", 2500),
+                new PayBankCard("Traffic Violation", "You crossed the while it was red on the traffic light. You need to pay the bank!", 5000)
         };
 
         // Pay the Player (10% - 5 cards)
         Card[] payPlayerCards = {
-                new PayPlayerCard("Lawsuit", "A Lawsuit has been filed on you! Pay the other player!", 4000),
-                new PayAllCard("Christmas Bonus", "It's Christmas time! Time for you to pay all the other players!", 1000)
+                new PayPlayerCard("Lawsuit", "A Lawsuit has been filed on you! Pay the other player!", 5000),
+                new PayAllCard("Christmas Bonus", "It's Christmas time! Time for you to pay all the other players!", 2500)
         };
 
         // Collect from Players (10% - 5 cards)
         Card[] collectPlayerCards = {
-                new CollectPlayerCard("File a Lawsuit", "You're lawsuit was successful! You'll receive money from the other player!", 4000),
-                new CollectAllCard("It's Your Birthday", "Happy Birthday! All the other players gave you money as a gift!", 1000)
+                new CollectPlayerCard("File a Lawsuit", "You're lawsuit was successful! You'll receive money from the other player!", 5000),
+                new CollectAllCard("It's Your Birthday", "Happy Birthday! All the other players gave you money as a gift!", 2500)
         };
 
         DeckWithUsed orangeDeck = new DeckWithUsed("Orange Deck");
@@ -103,11 +102,11 @@ public class Generator {
      */
     public static Deck generateCareerDeck() {
         Card[] careers = {
-                new CareerCard("Lawyer", "A lawyer who makes law to create order in the world.", 5, 8, true),
-                new CareerCard("Accountant", "", 4, 7, true),
-                new CareerCard("Comp. Consultant", "", 3, 7, true),
-                new CareerCard("Doctor", "", 5, 8, true),
-                new CareerCard("Server", "", 1, 4, false),
+                new CareerCard("Lawyer", "A licensed professional who advises and represents others in legal matters", 5, 8, true),
+                new CareerCard("Accountant", "A person who use numbers and financial statements to paint a picture of the health of a company, organization, or individual", 4, 7, true),
+                new CareerCard("Computer Consultant", "A person who helps companies use technology effectively to grow their businesses and solve problems", 3, 7, true),
+                new CareerCard("Doctor", "A qualified practitioner of medicine", 5, 8, true),
+                new CareerCard("Server", "A person whose job is to serve customers at their tables in a restaurant", 1, 4, false),
                 new CareerCard("Racecar Driver", "Broom Broom!", 2, 8, false),
                 new CareerCard("Athlete", "You're a Sporty person huh?", 1, 6, false)
         };
@@ -171,10 +170,10 @@ public class Generator {
         Deck houseDeck = new Deck("House Deck");
 
         // add house cards to the Deck
-        houseDeck.addCard(new HouseCard("Mansion", "", 50000));
-        houseDeck.addCard(new HouseCard("Penthouse", "", 25000));
-        houseDeck.addCard(new HouseCard("Condomenium", "", 10000));
-        houseDeck.addCard(new HouseCard("Normal House", "", 5000));
+        houseDeck.addCard(new HouseCard("Mansion", "An expensive and large dwelling house.", 50000));
+        houseDeck.addCard(new HouseCard("Penthouse", "An apartment or unit on the highest floor of an apartment building, condominium, or hotel.", 25000));
+        houseDeck.addCard(new HouseCard("Apartment", "A self-contained housing unit that occupies only part of a building", 10000));
+        houseDeck.addCard(new HouseCard("Normal House", "A single-unit residential building, which may range in complexity from a rudimentary hut to a complex, structure of wood, masonry, concrete or other material, outfitted with plumbing, electrical, and heating, ventilation, and air conditioning systems", 5000));
 
         return houseDeck;
     }

@@ -20,6 +20,13 @@ public class GameScreenController {
     @FXML
     private StackPane screenStats;
 
+    /**
+     * Refreshes the Game Screen where it will clear all the children of Screen Stats,
+     * and reassign the updated values then re-print the Board in the Canvas.
+     * @param collegePath starting college path
+     * @param careerPath  starting career path
+     * @param player      current player taking the turn
+     */
     public void refreshGameScreen(Path collegePath, Path careerPath, Player player) {
         board.setWidth(Constants.PATH_SPACES * 7 * 2 * Constants.HEXAGON_SIZE);
         board.setHeight(Constants.HEXAGON_SIZE * 30);
@@ -156,7 +163,7 @@ public class GameScreenController {
 
     private void drawPath(double startX, double startY, Path path, GraphicsContext gc) {
         gc.setStroke(Color.BLACK);
-        gc.fillText(path.getName(), startX + (path.getNSpaces() / 2) * Constants.HEXAGON_SIZE, startY - Constants.HEXAGON_SIZE - 5);
+        gc.fillText(path.getName(), startX + path.getNSpaces() * Constants.HEXAGON_SIZE, startY - Constants.HEXAGON_SIZE - 5);
         for(Space space : path.getSpaces()) {
             Color color = Color.BLACK;
             startX += Constants.HEXAGON_SIZE * 2;
@@ -186,10 +193,10 @@ public class GameScreenController {
                 yPos + size,   // bottom center
                 yPos + RADIUS  // bottom left
         }, 6);
-//        gc.strokeText(label, xPos - 10, yPos);
+        xPos -= (size / 2) * (players.length - 1) / 2;
         for(Player player : players) {
             gc.drawImage(new Image("/images/character.png", size, size, false, true), xPos - size / 2, yPos - size / 2);
-            xPos += 20;
+            xPos += size / 2;
         }
     }
 }

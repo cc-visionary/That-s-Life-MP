@@ -1,5 +1,6 @@
 package model.spaces.MagentaSpace;
 
+import gui.modals.Modal;
 import model.Constants;
 import model.cards.Card;
 import model.cards.HouseCard.HouseCard;
@@ -24,15 +25,11 @@ final public class BuyAHouseSpace extends MagentaSpace {
      */
     public HouseCard pickCard(Deck houseDeck) {
         HouseCard pickedCard;
-        int n = 1;
         if(houseDeck.getName() == "House Deck") {
-            System.out.println("List of Houses:");
-            for(Card card : houseDeck.getCards()) {
-                System.out.println("\t" + n + ":" + (HouseCard) card);
-                n++;
-            }
-            int choice = InputUtil.scanInt("Enter House:", 1, houseDeck.getNCards());
-            pickedCard = (HouseCard) houseDeck.pickTopCard(choice - 1);
+            // lets a Player choose a House through GUI
+            pickedCard = new Modal().chooseHouse(houseDeck);
+            // removes the card
+            houseDeck.getCards().remove(pickedCard);
         } else {
             pickedCard = null;
             System.out.println("An incorrect deck was passed.");
