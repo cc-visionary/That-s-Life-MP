@@ -195,7 +195,7 @@ public class GameScreenController {
         }, 6);
         xPos -= (size / 2) * (players.length - 1) / 2;
         for(Player player : players) {
-            gc.drawImage(new Image("/images/character.png", size, size, false, true), xPos - size / 2, yPos - size / 2);
+            gc.drawImage(new Image("/images/icons/character.png", size, size, false, true), xPos - size / 2, yPos - size / 2);
             xPos += size / 2;
         }
     }

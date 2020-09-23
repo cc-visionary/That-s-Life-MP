@@ -12,8 +12,11 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import model.Constants;
 import model.GameOfLife;
 import model.GameSettings;
 import model.cards.CareerCard.CareerCard;
@@ -33,6 +36,13 @@ public class GameSettingsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         gameSettings = new GameSettings();
+        Image prevIcon = new Image("/images/icons/previous.png");
+        Image nextIcon = new Image("/images/icons/next.png");
+        imButton.setGraphic(new ImageView(nextIcon));
+        dmButton.setGraphic(new ImageView(prevIcon));
+        ipButton.setGraphic(new ImageView(nextIcon));
+        dpButton.setGraphic(new ImageView(prevIcon));
+        dpButton.setDisable(true);
     }
 
     /**
@@ -112,9 +122,8 @@ public class GameSettingsController implements Initializable {
     public void incrementMoney(){
         gameSettings.setMoney(gameSettings.getMoney() + 50000);
         moneyLabel.setText(Integer.toString(gameSettings.getMoney()));
-        if(gameSettings.getMoney() == 1000000)
-            imButton.setDisable(true);
-        else dmButton.setDisable(false);
+        if(gameSettings.getMoney() >= Constants.MAX_MONEY) imButton.setDisable(true);
+        if(gameSettings.getMoney() > Constants.MIN_MONEY) dmButton.setDisable(false);
     }
 
     /**
@@ -124,9 +133,8 @@ public class GameSettingsController implements Initializable {
     public void decrementMoney(){
         gameSettings.setMoney(gameSettings.getMoney() - 50000);
         moneyLabel.setText(Integer.toString(gameSettings.getMoney()));
-        if(gameSettings.getMoney() == 150000)
-            dmButton.setDisable(true);
-        else imButton.setDisable(false);
+        if(gameSettings.getMoney() <= Constants.MIN_MONEY) dmButton.setDisable(true);
+        if(gameSettings.getMoney() < Constants.MAX_MONEY) imButton.setDisable(false);
     }
 
     /**
@@ -136,9 +144,8 @@ public class GameSettingsController implements Initializable {
     public void incrementPlayer(){
         gameSettings.setPlayer(gameSettings.getPlayer() + 1);
         playerLabel.setText(Integer.toString(gameSettings.getPlayer()));
-        if(gameSettings.getPlayer() == 3)
-            ipButton.setDisable(true);
-        else dpButton.setDisable(false);
+        if(gameSettings.getPlayer() >= Constants.MAX_PLAYER) ipButton.setDisable(true);
+        if(gameSettings.getPlayer() > Constants.MIN_PLAYER) dpButton.setDisable(false);
     }
 
     /**
@@ -148,9 +155,8 @@ public class GameSettingsController implements Initializable {
     public void decrementPlayer(){
         gameSettings.setPlayer(gameSettings.getPlayer() - 1);
         playerLabel.setText(Integer.toString(gameSettings.getPlayer()));
-        if(gameSettings.getPlayer() == 2)
-            dpButton.setDisable(true);
-        else ipButton.setDisable(false);
+        if(gameSettings.getPlayer() <= Constants.MIN_PLAYER) dpButton.setDisable(true);
+        if(gameSettings.getPlayer() < Constants.MAX_PLAYER) ipButton.setDisable(false);
     }
 
     /**

@@ -19,9 +19,9 @@
                   <Label text="Number of Players (2-3) : " textFill="WHITE" />
                   <HBox prefHeight="31.0" prefWidth="152.0" spacing="46.5">
                      <children>
-                        <Button fx:id="dpButton" mnemonicParsing="false" onAction="#decrementPlayer" text="-" />
+                        <Button fx:id="dpButton" mnemonicParsing="false" onAction="#decrementPlayer" />
                         <Label fx:id="playerLabel" prefHeight="17.0" prefWidth="0.0" text="2" textFill="WHITE" />
-                        <Button fx:id="ipButton" mnemonicParsing="false" onAction="#incrementPlayer" text="+" />
+                        <Button fx:id="ipButton" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#incrementPlayer" />
                      </children>
                   </HBox>
                </children>
@@ -31,9 +31,9 @@
                   <Label text="Starting Money :" textFill="#fffdfd" />
                   <HBox prefHeight="31.0" spacing="30.0">
                      <children>
-                        <Button fx:id="dmButton" mnemonicParsing="false" onAction="#decrementMoney" text="-" />
+                        <Button fx:id="dmButton" mnemonicParsing="false" onAction="#decrementMoney" />
                         <Label fx:id="moneyLabel" prefHeight="17.0" text="200000" textFill="WHITE" />
-                        <Button fx:id="imButton" mnemonicParsing="false" onAction="#incrementMoney" text="+" />
+                        <Button fx:id="imButton" mnemonicParsing="false" onAction="#incrementMoney" />
                      </children>
                   </HBox>
                </children>

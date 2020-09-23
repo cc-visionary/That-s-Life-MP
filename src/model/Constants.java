@@ -59,6 +59,9 @@ public class Constants {
     final public static int PATH_SPACES = 5;
 
     // Miscellaneous Config
-    final public static double STARTING_MONEY = 200000;
+    final public static int MIN_PLAYER = 2;
+    final public static int MAX_PLAYER = 3;
+    final public static double MIN_MONEY = 50000;
+    final public static double MAX_MONEY = 1000000;
     final public static double HEXAGON_SIZE = 20;
 }
