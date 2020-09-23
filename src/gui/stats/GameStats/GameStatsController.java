@@ -3,12 +3,13 @@ package gui.stats.GameStats;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import model.GameOfLife;
-import model.players.Player;
+import model.Players.Player;
 
 public class GameStatsController {
     @FXML
@@ -27,8 +28,7 @@ public class GameStatsController {
         continueButton.setOnAction(e -> {
             Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
             try {
-                stage.setScene(FXMLLoader.load(getClass().getResource("/gui/menu/Menu.fxml")));
-                stage.setMaximized(true);
+                stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/gui/Menu/Menu.fxml"))));
             } catch (Exception exception) {
                 exception.printStackTrace();
             }

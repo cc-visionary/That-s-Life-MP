@@ -4,7 +4,7 @@ import gui.modals.Modal;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import model.players.Player;
+import model.Players.Player;
 
 public class PlayerStatsController {
     @FXML

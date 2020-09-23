@@ -20,7 +20,7 @@ public class GUI extends Application {
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Game of Life");
 
-        primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/gui/menu/Menu.fxml"))));
+        primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/gui/Menu/Menu.fxml"))));
 
         primaryStage.show();
     }

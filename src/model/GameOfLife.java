@@ -1,11 +1,10 @@
 package model;
 
 import gui.stats.UpdateStats.UpdateStats;
-import model.Generator;
-import model.decks.Deck;
-import model.decks.DeckWithUsed;
-import model.paths.Path;
-import model.players.Player;
+import model.Decks.Deck;
+import model.Decks.DeckWithUsed;
+import model.Paths.Path;
+import model.Players.Player;
 
 import java.util.ArrayList;
 
@@ -128,7 +127,7 @@ public class GameOfLife {
      * @return the Player object who has the current turn
      */
     public Player getCurrentPlayer() {
-        return players[getTurn()];
+        return players[Math.max(getTurn(), 0)];
     }
 
     /**

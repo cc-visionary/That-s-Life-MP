@@ -1,13 +1,14 @@
 package gui.modals;
 
-import gui.choose.ChooseHouse.ChooseHouseController;
+import gui.modals.ChooseHouse.ChooseHouseController;
+import javafx.stage.Screen;
 import model.GameOfLife;
-import gui.choose.ChooseCard.ChooseCardController;
-import gui.choose.ChooseMove.ChooseMoveController;
-import gui.choose.ChoosePath.ChoosePathController;
-import gui.choose.ChoosePlayer.ChoosePlayerController;
-import gui.game.DisplayCard.DisplayCardController;
-import gui.game.GameScreen.GameScreenController;
+import gui.modals.ChooseCard.ChooseCardController;
+import gui.modals.ChooseMove.ChooseMoveController;
+import gui.modals.ChoosePath.ChoosePathController;
+import gui.modals.ChoosePlayer.ChoosePlayerController;
+import gui.modals.DisplayCard.DisplayCardController;
+import gui.GameScreen.GameScreenController;
 import gui.stats.RoundStats.RoundStatsController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,11 +16,11 @@ import javafx.scene.control.ScrollPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import model.cards.Card;
-import model.cards.HouseCard.HouseCard;
-import model.decks.Deck;
-import model.paths.Path;
-import model.players.Player;
+import model.Cards.Card;
+import model.Cards.HouseCard.HouseCard;
+import model.Decks.Deck;
+import model.Paths.Path;
+import model.Players.Player;
 
 public class Modal {
     /**
@@ -55,10 +56,12 @@ public class Modal {
      */
     public void displayChooseMove(GameOfLife gameOfLife, GameScreenController gameScreenController) {
         Stage stage = new Stage();
+        stage.setX(Screen.getPrimary().getBounds().getWidth() - Screen.getPrimary().getBounds().getWidth() / 4);
+        stage.setY(Screen.getPrimary().getBounds().getHeight() - Screen.getPrimary().getBounds().getHeight() / 4);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.initModality(Modality.WINDOW_MODAL);
 
-        FXMLLoader chooseMoveLoader = new FXMLLoader(getClass().getResource("/gui/choose/ChooseMove/ChooseMove.fxml"));
+        FXMLLoader chooseMoveLoader = new FXMLLoader(getClass().getResource("/gui/modals/ChooseMove/ChooseMove.fxml"));
 
         try {
             Scene scene = new Scene(chooseMoveLoader.load());
@@ -84,7 +87,7 @@ public class Modal {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.initModality(Modality.APPLICATION_MODAL);
 
-        FXMLLoader choosePathLoader = new FXMLLoader(getClass().getResource("/gui/choose/ChoosePath/ChoosePath.fxml"));
+        FXMLLoader choosePathLoader = new FXMLLoader(getClass().getResource("/gui/modals/ChoosePath/ChoosePath.fxml"));
 
         try {
             Scene scene = new Scene(choosePathLoader.load());
@@ -108,7 +111,7 @@ public class Modal {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.initModality(Modality.APPLICATION_MODAL);
 
-        FXMLLoader displayCardLoader = new FXMLLoader(getClass().getResource("/gui/game/DisplayCard/DisplayCard.fxml"));
+        FXMLLoader displayCardLoader = new FXMLLoader(getClass().getResource("/gui/modals/DisplayCard/DisplayCard.fxml"));
         try {
             Scene scene = new Scene(displayCardLoader.load());
             ((DisplayCardController) displayCardLoader.getController()).setCard(card);
@@ -130,7 +133,7 @@ public class Modal {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.initModality(Modality.APPLICATION_MODAL);
 
-        FXMLLoader choosePlayerLoader = new FXMLLoader(getClass().getResource("/gui/choose/ChoosePlayer/ChoosePlayer.fxml"));
+        FXMLLoader choosePlayerLoader = new FXMLLoader(getClass().getResource("/gui/modals/ChoosePlayer/ChoosePlayer.fxml"));
         try {
             Scene scene = new Scene(choosePlayerLoader.load());
             ((ChoosePlayerController) choosePlayerLoader.getController()).setPlayer(otherPlayers);
@@ -154,7 +157,7 @@ public class Modal {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.initModality(Modality.APPLICATION_MODAL);
 
-        FXMLLoader chooseCardLoader = new FXMLLoader(getClass().getResource("/gui/choose/ChooseCard/ChooseCard.fxml"));
+        FXMLLoader chooseCardLoader = new FXMLLoader(getClass().getResource("/gui/modals/ChooseCard/ChooseCard.fxml"));
         try {
             Scene scene = new Scene(chooseCardLoader.load());
             ((ChooseCardController) chooseCardLoader.getController()).setCards(card1, card2);
@@ -177,7 +180,7 @@ public class Modal {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.initModality(Modality.APPLICATION_MODAL);
 
-        FXMLLoader houseCardLoader = new FXMLLoader(getClass().getResource("/gui/choose/ChooseHouse/ChooseHouse.fxml"));
+        FXMLLoader houseCardLoader = new FXMLLoader(getClass().getResource("/gui/modals/ChooseHouse/ChooseHouse.fxml"));
         try {
             Scene scene = new Scene(houseCardLoader.load());
             ((ChooseHouseController) houseCardLoader.getController()).setValues(houseDeck);

@@ -1,7 +1,7 @@
 package utilities;
 
-import model.cards.Card;
-import model.spaces.Space;
+import model.Cards.Card;
+import model.Spaces.Space;
 
 import java.util.Random;
 
