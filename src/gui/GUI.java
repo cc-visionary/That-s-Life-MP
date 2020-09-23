@@ -21,7 +21,6 @@ public class GUI extends Application {
         primaryStage.setTitle("Game of Life");
 
         primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/gui/menu/Menu.fxml"))));
-        primaryStage.setMaximized(true);
 
         primaryStage.show();
     }

@@ -9,10 +9,13 @@
    <children>
       <VBox alignment="CENTER" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="400.0" fitWidth="403.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="400.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/logo.png" />
                </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
             </ImageView>
             <HBox alignment="CENTER">
                <children>

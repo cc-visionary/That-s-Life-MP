@@ -14,7 +14,6 @@ public class MenuController {
 
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/gui/gameSettings/GameSettings.fxml"))));
-            stage.setMaximized(true);
         } catch (Exception e) {
             e.printStackTrace();
         }
