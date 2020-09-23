@@ -47,10 +47,6 @@ public class Constants {
     final public static String GET_MARRIED = "Get Married";
     final public static String WHICH_PATH = "Which Path";
 
-    // methods
-    final public static String ALL = "All";
-    final public static String PARTIAL = "Partial";
-
     // orange deck
     final private static int totalOrangeCard = 50;
     final private static double collectBankProportion = 0.4, payBankProportion = 0.4, collectPlayerProportion = 0.1, payPlayerProportion = 0.1;
