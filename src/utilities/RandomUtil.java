@@ -23,18 +23,6 @@ public class RandomUtil {
     }
 
     /**
-     * Randomly chooses a Space from the set of spaces passed through the parameter
-     * @param spaces an array of Space objects to choose from
-     * @return        the randomly chosen Space
-     * @see           Space
-     */
-    public static Space chooseRandomSpace(Space[] spaces) {
-        Random randomizer = new Random();
-        int random_index = randomizer.nextInt(spaces.length);
-        return spaces[random_index];
-    }
-
-    /**
      * Choose a random value between lowerBound - upperBound
      * @param lowerBound the lowest value than could be randomly chosen
      * @param upperBound the highest value than could be chosen

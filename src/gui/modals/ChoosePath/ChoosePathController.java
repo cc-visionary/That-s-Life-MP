@@ -29,11 +29,11 @@ public class ChoosePathController {
 
     public void setPaths(Player player, Path path1, Path path2) {
         path1Tab.setText(path1.getName());
-        path1Description.setText(seperateDescription(path1.getDescription()));
+        path1Description.setText(StringUtil.splitStringIntoNewLine(path1.getDescription(), 40));
         path1Spaces.setText(getUniqueSpaces(path1));
 
         path2Tab.setText(path2.getName());
-        path2Description.setText(seperateDescription(path2.getDescription()));
+        path2Description.setText(StringUtil.splitStringIntoNewLine(path2.getDescription(), 40));
         path2Spaces.setText(getUniqueSpaces(path2));
 
         continueButton.setOnAction(e -> {
@@ -44,18 +44,6 @@ public class ChoosePathController {
             }
             ((Stage)((Node) e.getSource()).getScene().getWindow()).close();
         });
-    }
-
-    /**
-     * Seperate a description into multiple lines so that it won't overflow
-     * the label
-     * @param description to be splitted into multiple line
-     * @return description that was splitted inito multiple lines
-     */
-    private String seperateDescription(String description) {
-        String splittedString = "";
-        for(String string : StringUtil.splitStringLength(description, 40)) splittedString += string + "\n";
-        return splittedString;
     }
 
     /**

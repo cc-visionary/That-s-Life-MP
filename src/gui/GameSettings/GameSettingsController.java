@@ -106,10 +106,10 @@ public class GameSettingsController implements Initializable {
 
         // detect who the winner was
         try {
-            FXMLLoader diplayWinnerLoader = new FXMLLoader(getClass().getResource("/gui/modals/DisplayWinner/DisplayWinner.fxml"));
-            stage.setScene(new Scene(diplayWinnerLoader.load()));
+            FXMLLoader displayWinnerLoader = new FXMLLoader(getClass().getResource("/gui/modals/DisplayWinner/DisplayWinner.fxml"));
+            stage.setScene(new Scene(displayWinnerLoader.load()));
             stage.setMaximized(false);
-            ((DisplayWinnerController) diplayWinnerLoader.getController()).setWinner(gameOfLife);
+            ((DisplayWinnerController) displayWinnerLoader.getController()).setWinner(gameOfLife);
         } catch(Exception exception) {
             exception.printStackTrace();
         }

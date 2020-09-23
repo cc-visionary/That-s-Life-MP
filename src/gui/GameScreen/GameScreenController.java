@@ -33,7 +33,7 @@ public class GameScreenController {
      */
     public void refreshGameScreen(Path collegePath, Path careerPath, Player player) {
         System.out.println((player.getLocation() * (7 - getHeight(player.getPath()))) / (Constants.PATH_SPACES * 7.0));
-        scrollPane.setHvalue((player.getLocation() * (7 - getHeight(player.getPath()))) / (Constants.PATH_SPACES * 7.0));
+        scrollPane.setHvalue((player.getLocation() * (7 - getHeight(player.getPath()))) / (Constants.PATH_SPACES * 5.0));
         board.setWidth(Constants.PATH_SPACES * 7 * 2 * Constants.HEXAGON_SIZE);
         board.setHeight(Constants.HEXAGON_SIZE * 30);
         screenStats.getChildren().clear();
@@ -48,11 +48,22 @@ public class GameScreenController {
         }
     }
 
+    /**
+     * Return the height of a Path
+     * @param path path whose height will be returned
+     * @return     height of the path
+     */
     private int getHeight(Path path) {
         if(path == null) return 0;
         return Math.max(getHeight(path.getPath1()), getHeight(path.getPath2())) + 1;
     }
 
+    /**
+     * Draws the board where it combines all the paths together
+     * @param collegePath starting college path
+     * @param careerPath  starting career path
+     * @param gc          canvas' graphics context 2d
+     */
     private void drawBoard(Path collegePath, Path careerPath, GraphicsContext gc) {
         double prevXPos = 0, prevYPos = 350;
 
@@ -172,6 +183,13 @@ public class GameScreenController {
         drawPath(prevXPos, prevYPos, rp, gc);
     }
 
+    /**
+     * Draws the Path which contains spaces and connects the spaces to one another
+     * @param startX starting X position of the path
+     * @param startY starting Y position of the path
+     * @param path   Path class to be drawn
+     * @param gc     canvas' graphic context 2d
+     */
     private void drawPath(double startX, double startY, Path path, GraphicsContext gc) {
         gc.setStroke(Color.BLACK);
         gc.fillText(path.getName(), startX + path.getNSpaces() * Constants.HEXAGON_SIZE, startY - Constants.HEXAGON_SIZE - 5);
@@ -186,6 +204,15 @@ public class GameScreenController {
         }
     }
 
+    /**
+     * Draw a Hexagon
+     * @param players players in that space
+     * @param xPos    center x position of the hexagon
+     * @param yPos    center y position of the hexagon
+     * @param size    size of the hexagon
+     * @param stroke  color of the hexagon
+     * @param gc      canvas' graphics context 2D
+     */
     private void drawHexagon(Player[] players, double xPos, double yPos, double size, Color stroke, GraphicsContext gc) {
         final double RADIUS = size / 2;
         gc.setStroke(stroke);
