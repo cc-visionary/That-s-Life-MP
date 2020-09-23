@@ -31,7 +31,7 @@ public class GameOfLife {
         this.roundStats = new ArrayList<String>();
     }
 
-    public void startGame() {
+    public void startGame(int nPlayers, int startingMoney) {
         // generate Decks
         careerDeck = Generator.generateCareerDeck();
         salaryDeck = Generator.generateSalaryDeck();
@@ -45,8 +45,8 @@ public class GameOfLife {
         collegePath = paths[1];
 
         // generate Players
-        players = Generator.generatePlayers(careerDeck, salaryDeck, careerPath, collegePath);
-        this.nPlayers = players.length;
+        players = Generator.generatePlayers(nPlayers, startingMoney, careerDeck, salaryDeck, careerPath, collegePath);
+        this.nPlayers = nPlayers;
 
         turn = 0;
         round = 1;

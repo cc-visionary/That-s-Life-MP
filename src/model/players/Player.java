@@ -23,21 +23,14 @@ final public class Player {
     private HouseCard houseCard;
     private boolean isMarried = false, hasGraduated = false, isRetired = false;
     private int nBabies = 0;
-    private double balance = Constants.STARTING_MONEY, debt;
+    private double balance, debt;
     private int nBankLoan = 0;
 
-    public Player(String name, CareerCard careerCard, SalaryCard salaryCard) {
-        this.name = name;
-        this.careerCard = careerCard;
-        this.salaryCard = salaryCard;
-        this.playerCount++;
-        this.nthPlayer = this.playerCount;
-    }
-
-    public Player(String name) {
+    public Player(String name, int startingMoney) {
         this.name = name;
         this.playerCount++;
         this.nthPlayer = this.playerCount;
+        this.balance = startingMoney;
     }
 
     /**

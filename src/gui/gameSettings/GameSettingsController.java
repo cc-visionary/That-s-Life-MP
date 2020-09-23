@@ -1,11 +1,13 @@
 package gui.gameSettings;
 
+import com.sun.org.apache.xml.internal.security.Init;
 import gui.game.DisplayWinner.DisplayWinnerController;
 import gui.game.GameScreen.GameScreenController;
 import gui.modals.Modal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,18 +19,31 @@ import model.GameSettings;
 import model.cards.CareerCard.CareerCard;
 import model.cards.SalaryCard.SalaryCard;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 
-
-public class GameSettingsController {
+public class GameSettingsController implements Initializable {
     private GameSettings gameSettings;
+
     @FXML
-    Button imButton, dmButton, ipButton, dpButton;
+    private Button imButton, dmButton, ipButton, dpButton;
     @FXML
-    Label moneyLabel, playerLabel;
+    private Label moneyLabel, playerLabel;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        gameSettings = new GameSettings();
+    }
+
+    /**
+     * Start running the game
+     * Contains the Game Loop
+     * @param event event parameter
+     */
     @FXML
     public void runGame(ActionEvent event) {
         GameOfLife gameOfLife = new GameOfLife();
-        gameOfLife.startGame();
+        gameOfLife.startGame(gameSettings.getPlayer(), gameSettings.getMoney());
 
         FXMLLoader gameScreenLoader = new FXMLLoader(getClass().getResource("/gui/game/GameScreen/GameScreen.fxml"));
 
@@ -89,40 +104,68 @@ public class GameSettingsController {
             exception.printStackTrace();
         }
     }
+
+    /**
+     * Decrement the Starting Money
+     */
     @FXML
     public void incrementMoney(){
-        gameSettings.setMoney(gameSettings.getMoney()+50000);
+        gameSettings.setMoney(gameSettings.getMoney() + 50000);
+        moneyLabel.setText(Integer.toString(gameSettings.getMoney()));
         if(gameSettings.getMoney() == 1000000)
             imButton.setDisable(true);
         else dmButton.setDisable(false);
-        moneyLabel.setText(""+gameSettings.getMoney());
     }
+
+    /**
+     * Increment the Starting Money
+     */
     @FXML
     public void decrementMoney(){
-        gameSettings.setMoney(gameSettings.getMoney()-50000);
+        gameSettings.setMoney(gameSettings.getMoney() - 50000);
+        moneyLabel.setText(Integer.toString(gameSettings.getMoney()));
         if(gameSettings.getMoney() == 150000)
             dmButton.setDisable(true);
         else imButton.setDisable(false);
-        moneyLabel.setText(""+gameSettings.getMoney());
     }
+
+    /**
+     * Increment the amount of Player
+     */
     @FXML
     public void incrementPlayer(){
-        gameSettings.setPlayer(gameSettings.getPlayer()+1);
+        gameSettings.setPlayer(gameSettings.getPlayer() + 1);
+        playerLabel.setText(Integer.toString(gameSettings.getPlayer()));
         if(gameSettings.getPlayer() == 3)
             ipButton.setDisable(true);
         else dpButton.setDisable(false);
-        playerLabel.setText("" + gameSettings.getPlayer());
     }
+
+    /**
+     * Decrement the amount of Player
+     */
     @FXML
     public void decrementPlayer(){
-        gameSettings.setPlayer(gameSettings.getPlayer()+1);
+        gameSettings.setPlayer(gameSettings.getPlayer() - 1);
+        playerLabel.setText(Integer.toString(gameSettings.getPlayer()));
         if(gameSettings.getPlayer() == 2)
             dpButton.setDisable(true);
         else ipButton.setDisable(false);
-        playerLabel.setText("" + gameSettings.getPlayer());
     }
-    @FXML
-    public void backToMenu(){
 
+    /**
+     * Set scene back to menu
+     * @param event event parameter
+     */
+    @FXML
+    public void backToMenu(ActionEvent event){
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/gui/menu/Menu.fxml"))));
+            stage.setMaximized(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

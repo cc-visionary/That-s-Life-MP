@@ -29,13 +29,10 @@ import java.util.ArrayList;
 public class Generator {
     private static int careerPathCount = 0, collegePathCount = 0, changeChareerPathCount = 0, startAFamilyPathCount = 0;
 
-    public static Player[] generatePlayers(Deck careerDeck, Deck salaryDeck, Path careerPath, Path collegePath) {
-        // asks the user for the number of players (makes sures that the input is only integers {1, 2, 3})
-        int nPlayers = InputUtil.scanInt("Enter number of Players: ", 1, 3);
-
+    public static Player[] generatePlayers(int nPlayers, int startingMoney, Deck careerDeck, Deck salaryDeck, Path careerPath, Path collegePath) {
         ArrayList<Player> players = new ArrayList<Player>();
         for(int i = 0; i < nPlayers; i++) {
-            players.add(new Player("P" + (i + 1)));
+            players.add(new Player("P" + (i + 1), startingMoney));
         }
         return players.toArray(new Player[0]);
     }
