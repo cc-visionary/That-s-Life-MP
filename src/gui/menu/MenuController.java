@@ -1,4 +1,4 @@
-package gui;
+package gui.menu;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 import static javafx.application.Application.launch;
 
-public class MainController {
+public class MenuController extends Application{
     Stage window;
     Button button, button1, button2, button3, button4, button5, button6, button7;
     Scene scene, scene2;
@@ -152,4 +152,12 @@ public class MainController {
         layout2.getChildren().addAll(iv1, text1,text2, text3, text4, button2,button3, button4, button5, button6, button7);
     }
 
+    @FXML
+    public void onClickStart(){
+
+    }
+    @FXML
+    public void onClickExit(){
+
+    }
 }
