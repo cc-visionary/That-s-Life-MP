@@ -61,7 +61,8 @@ public class Constants {
     // Miscellaneous Config
     final public static int MIN_PLAYER = 2;
     final public static int MAX_PLAYER = 3;
-    final public static double MIN_MONEY = 50000;
-    final public static double MAX_MONEY = 1000000;
+    final public static int MONEY_INC = 25000;
+    final public static int MIN_MONEY = 50000;
+    final public static int MAX_MONEY = 1000000;
     final public static double HEXAGON_SIZE = 20;
 }

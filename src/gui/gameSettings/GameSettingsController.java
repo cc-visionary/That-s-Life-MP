@@ -120,7 +120,7 @@ public class GameSettingsController implements Initializable {
      */
     @FXML
     public void incrementMoney(){
-        gameSettings.setMoney(gameSettings.getMoney() + 50000);
+        gameSettings.setMoney(gameSettings.getMoney() + Constants.MONEY_INC);
         moneyLabel.setText(Integer.toString(gameSettings.getMoney()));
         if(gameSettings.getMoney() >= Constants.MAX_MONEY) imButton.setDisable(true);
         if(gameSettings.getMoney() > Constants.MIN_MONEY) dmButton.setDisable(false);
@@ -131,7 +131,7 @@ public class GameSettingsController implements Initializable {
      */
     @FXML
     public void decrementMoney(){
-        gameSettings.setMoney(gameSettings.getMoney() - 50000);
+        gameSettings.setMoney(gameSettings.getMoney() - Constants.MONEY_INC);
         moneyLabel.setText(Integer.toString(gameSettings.getMoney()));
         if(gameSettings.getMoney() <= Constants.MIN_MONEY) dmButton.setDisable(true);
         if(gameSettings.getMoney() < Constants.MAX_MONEY) imButton.setDisable(false);
