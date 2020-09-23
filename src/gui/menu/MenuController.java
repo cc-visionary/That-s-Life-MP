@@ -167,4 +167,5 @@ public class MenuController extends Application{
     public void onClickExit(ActionEvent event){
         ((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
     }
+
 }
