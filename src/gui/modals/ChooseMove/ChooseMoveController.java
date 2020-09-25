@@ -45,6 +45,8 @@ public class ChooseMoveController {
             int rolledDice = currentPlayer.rollDice();
             Space previousSpace = currentPlayer.getPath().getSpaces()[currentPlayer.getLocation()], spaceLanded = null;
 
+            System.out.println(currentPlayer.getLocation() + " + " + rolledDice);
+
             // remove player from that space
             if(previousSpace.getPlayers().contains(currentPlayer))
                 previousSpace.removePlayer(currentPlayer);

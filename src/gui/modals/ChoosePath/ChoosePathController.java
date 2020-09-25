@@ -37,11 +37,10 @@ public class ChoosePathController {
         path2Spaces.setText(getUniqueSpaces(path2));
 
         continueButton.setOnAction(e -> {
-            if(tabPane.getSelectionModel().getSelectedIndex() == 0) {
-                player.setPath(path1);
-            } else {
-                player.setPath(path2);
-            }
+            if(tabPane.getSelectionModel().getSelectedIndex() == 0) player.setPath(path1);
+            else player.setPath(path2);
+
+            player.getPath().getSpaces()[player.getLocation()].addPlayer(player);
             ((Stage)((Node) e.getSource()).getScene().getWindow()).close();
         });
     }

@@ -1,5 +1,3 @@
-package gui;
-
 import javafx.fxml.FXMLLoader;
 
 import javafx.application.Application;
