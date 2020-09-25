@@ -7,6 +7,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.GameOfLife;
 import model.Players.Player;
@@ -19,6 +21,8 @@ public class DisplayWinnerController {
     private Button continueButton;
 
     public void setWinner(GameOfLife gameOfLife) {
+        MediaPlayer mediaPlayer = new MediaPlayer(new Media(getClass().getResource("/audio/win.wav").toString()));
+        mediaPlayer.play();
         Player playerWinner = null;
         for(Player player : gameOfLife.getAllPlayers()) {
             if(player.isRetired()) {

@@ -14,6 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.Constants;
 import model.GameOfLife;
@@ -51,6 +53,9 @@ public class GameSettingsController implements Initializable {
      */
     @FXML
     public void runGame(ActionEvent event) {
+        MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("/audio/click.wav").toString()));
+        player.play();
+
         GameOfLife gameOfLife = new GameOfLife();
         gameOfLife.startGame(gameSettings.getPlayer(), gameSettings.getMoney());
 
@@ -119,6 +124,8 @@ public class GameSettingsController implements Initializable {
      */
     @FXML
     public void incrementMoney(){
+        MediaPlayer mediaPlayer = new MediaPlayer(new Media(getClass().getResource("/audio/beep.wav").toString()));
+        mediaPlayer.play();
         gameSettings.setMoney(gameSettings.getMoney() + Constants.MONEY_INC);
         moneyLabel.setText(Integer.toString(gameSettings.getMoney()));
         if(gameSettings.getMoney() >= Constants.MAX_MONEY) imButton.setDisable(true);
@@ -130,6 +137,8 @@ public class GameSettingsController implements Initializable {
      */
     @FXML
     public void decrementMoney(){
+        MediaPlayer mediaPlayer = new MediaPlayer(new Media(getClass().getResource("/audio/beep.wav").toString()));
+        mediaPlayer.play();
         gameSettings.setMoney(gameSettings.getMoney() - Constants.MONEY_INC);
         moneyLabel.setText(Integer.toString(gameSettings.getMoney()));
         if(gameSettings.getMoney() <= Constants.MIN_MONEY) dmButton.setDisable(true);
@@ -141,6 +150,8 @@ public class GameSettingsController implements Initializable {
      */
     @FXML
     public void incrementPlayer(){
+        MediaPlayer mediaPlayer = new MediaPlayer(new Media(getClass().getResource("/audio/beep.wav").toString()));
+        mediaPlayer.play();
         gameSettings.setPlayer(gameSettings.getPlayer() + 1);
         playerLabel.setText(Integer.toString(gameSettings.getPlayer()));
         if(gameSettings.getPlayer() >= Constants.MAX_PLAYER) ipButton.setDisable(true);
@@ -152,6 +163,8 @@ public class GameSettingsController implements Initializable {
      */
     @FXML
     public void decrementPlayer(){
+        MediaPlayer mediaPlayer = new MediaPlayer(new Media(getClass().getResource("/audio/beep.wav").toString()));
+        mediaPlayer.play();
         gameSettings.setPlayer(gameSettings.getPlayer() - 1);
         playerLabel.setText(Integer.toString(gameSettings.getPlayer()));
         if(gameSettings.getPlayer() <= Constants.MIN_PLAYER) dpButton.setDisable(true);
@@ -165,6 +178,9 @@ public class GameSettingsController implements Initializable {
     @FXML
     public void backToMenu(ActionEvent event){
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("/audio/click.wav").toString()));
+        player.play();
 
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/gui/Menu/Menu.fxml"))));
