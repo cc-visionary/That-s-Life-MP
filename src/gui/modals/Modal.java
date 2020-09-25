@@ -57,7 +57,6 @@ public class Modal {
     public void displayChooseMove(GameOfLife gameOfLife, GameScreenController gameScreenController) {
         Stage stage = new Stage();
         stage.setX(Screen.getPrimary().getBounds().getWidth() - Screen.getPrimary().getBounds().getWidth() / 4);
-        stage.setY(Screen.getPrimary().getBounds().getHeight() - Screen.getPrimary().getBounds().getHeight() / 4);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.initModality(Modality.WINDOW_MODAL);
 

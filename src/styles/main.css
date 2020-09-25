@@ -3,6 +3,11 @@
     -fx-alignment: CENTER;
     -fx-font-size: 16pt;
     -fx-font-family: "Montserrat";
+    -fx-text-fill: #1e56a0;
+}
+
+.label {
+    -fx-text-fill: #d6e4f0;
 }
 
 .button {
