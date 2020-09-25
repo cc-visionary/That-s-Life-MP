@@ -1,5 +1,8 @@
 package gui.modals.ChooseMove;
 
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import model.GameOfLife;
 import gui.GameScreen.GameScreenController;
 import gui.modals.PayDebt.PayDebtController;
@@ -41,6 +44,9 @@ public class ChooseMoveController {
     public void setGameOfLife(GameOfLife gameOfLife, GameScreenController gameScreenController) {
         // let's the player roll a dice
         rollDice.setOnAction(e -> {
+            MediaPlayer mediaPlayer = new MediaPlayer(new Media(getClass().getResource("/audio/click.wav").toString()));
+            mediaPlayer.play();
+
             Player currentPlayer = gameOfLife.getCurrentPlayer();
             int rolledDice = currentPlayer.rollDice();
             Space previousSpace = currentPlayer.getPath().getSpaces()[currentPlayer.getLocation()], spaceLanded = null;
@@ -66,6 +72,9 @@ public class ChooseMoveController {
 
         // lets the player view his own stat
         viewPlayerStats.setOnAction(e -> {
+            MediaPlayer mediaPlayer = new MediaPlayer(new Media(getClass().getResource("/audio/click.wav").toString()));
+            mediaPlayer.play();
+
             Stage playerStatsStage = new Stage();
             playerStatsStage.initStyle(StageStyle.UTILITY);
             playerStatsStage.initModality(Modality.APPLICATION_MODAL);
@@ -85,6 +94,9 @@ public class ChooseMoveController {
 
         // lets the player pay he's debt
         payDebt.setOnAction(e -> {
+            AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
+            audioPlayer.play();
+
             Stage payDebtStage = new Stage();
             payDebtStage.initStyle(StageStyle.UTILITY);
             payDebtStage.initModality(Modality.APPLICATION_MODAL);

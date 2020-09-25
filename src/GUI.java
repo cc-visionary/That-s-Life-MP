@@ -3,6 +3,7 @@ import javafx.fxml.FXMLLoader;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Screen;
@@ -32,15 +33,7 @@ public class GUI extends Application {
         });
 
         primaryStage.show();
-        MediaPlayer mediaPlayer = new MediaPlayer(new Media(getClass().getResource("/audio/main.wav").toString()));
-        mediaPlayer.setAutoPlay(true);
-        mediaPlayer.setVolume(0.9);
-
-        mediaPlayer.setOnEndOfMedia(new Runnable() {
-            @Override
-            public void run() {
-                mediaPlayer.seek(Duration.ZERO);
-            }
-        });
+        AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/lnttmo.mp3").toString()).getSource());
+        audioPlayer.play();
     }
 }

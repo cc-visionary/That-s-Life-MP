@@ -6,9 +6,9 @@
 
 <AnchorPane stylesheets="@../../../styles/modal.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.stats.GameStats.GameStatsController">
    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" />
+            <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" />
             <Button fx:id="continueButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Continue" />
          </children>
       </VBox>

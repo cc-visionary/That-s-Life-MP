@@ -4,6 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.Cards.Card;
 import model.Cards.HouseCard.HouseCard;
@@ -32,6 +35,9 @@ public class ChooseHouseController {
         choices.setValue(stringChoices.get(0));
 
         buyButton.setOnAction(e -> {
+            AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
+            audioPlayer.play();
+
             chosenHouse = (HouseCard) houseDeck.getCards().get(choices.getSelectionModel().getSelectedIndex());
             ((Stage) ((Node) e.getSource()).getScene().getWindow()).close();
         });

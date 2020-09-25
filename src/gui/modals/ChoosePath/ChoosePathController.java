@@ -7,6 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.Paths.Path;
 import model.Players.Player;
@@ -38,6 +41,9 @@ public class ChoosePathController {
         path2Spaces.setText(getUniqueSpaces(path2));
 
         continueButton.setOnAction(e -> {
+            AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
+            audioPlayer.play();
+
             if(tabPane.getSelectionModel().getSelectedIndex() == 0) player.setPath(path1);
             else player.setPath(path2);
 

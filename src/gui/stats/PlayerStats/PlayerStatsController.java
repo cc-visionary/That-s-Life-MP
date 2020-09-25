@@ -4,6 +4,8 @@ import gui.modals.Modal;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 import model.Players.Player;
 
 public class PlayerStatsController {
@@ -28,18 +30,27 @@ public class PlayerStatsController {
 
         if(player.getCareerCard() != null) {
             careerButton.setOnAction(e -> {
+                AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
+                audioPlayer.play();
+
                 new Modal().displayCard(player.getCareerCard());
             });
         } else careerButton.setDisable(true);
 
         if(player.getSalaryCard() != null) {
             salaryButton.setOnAction(e -> {
+                AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
+                audioPlayer.play();
+
                 new Modal().displayCard(player.getSalaryCard());
             });
         } else salaryButton.setDisable(true);
 
         if(player.getHouseCard() != null) {
             houseButton.setOnAction(e -> {
+                AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
+                audioPlayer.play();
+
                 new Modal().displayCard(player.getHouseCard());
             });
         } else houseButton.setDisable(true);

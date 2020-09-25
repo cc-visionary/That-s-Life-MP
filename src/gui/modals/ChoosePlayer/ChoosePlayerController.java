@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 import javafx.stage.Stage;
 import model.Players.Player;
 
@@ -26,6 +28,9 @@ public class ChoosePlayerController {
         playerSelection.setValue(choices.get(0));
 
         continueButton.setOnAction(e -> {
+            AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
+            audioPlayer.play();
+
             chosenPlayer = otherPlayers[playerSelection.getSelectionModel().getSelectedIndex()];
             ((Stage)((Node) e.getSource()).getScene().getWindow()).close();
         });

@@ -7,6 +7,9 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.Players.Player;
 
@@ -34,6 +37,9 @@ public class PayDebtController {
         });
 
         continueButton.setOnAction(e -> {
+            AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
+            audioPlayer.play();
+
             player.payDebt((int) slider.getValue() / 2500);
             ((Stage)((Node) e.getSource()).getScene().getWindow()).close();
         });

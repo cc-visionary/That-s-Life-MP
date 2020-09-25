@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -32,6 +33,9 @@ public class DisplayWinnerController {
         }
         winner.setText(playerWinner.getName() + " won!");
         continueButton.setOnAction(e -> {
+            AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
+            audioPlayer.play();
+
             // display game stats
             Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
             try {

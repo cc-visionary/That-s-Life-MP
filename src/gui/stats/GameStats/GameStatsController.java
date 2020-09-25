@@ -10,6 +10,8 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 import javafx.stage.Stage;
 import model.GameOfLife;
 import model.Players.Player;
@@ -41,6 +43,9 @@ public class GameStatsController {
         }
 
         continueButton.setOnAction(e -> {
+            AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
+            audioPlayer.play();
+
             Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
             try {
                 stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/gui/Menu/Menu.fxml"))));

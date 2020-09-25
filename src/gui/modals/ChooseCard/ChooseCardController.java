@@ -4,6 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.Cards.Card;
 
@@ -16,6 +19,9 @@ public class ChooseCardController {
     public void setCards(Card card1, Card card2) {
         // card1 stuff
         card1Button.setOnAction(e -> {
+            AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
+            audioPlayer.play();
+
             chosenCard = card1;
             ((Stage)((Node) e.getSource()).getScene().getWindow()).close();
         });
@@ -24,6 +30,9 @@ public class ChooseCardController {
 
         // card 2 stuff
         card2Button.setOnAction(e -> {
+            AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
+            audioPlayer.play();
+
             chosenCard = card2;
             ((Stage)((Node) e.getSource()).getScene().getWindow()).close();
         });
