@@ -26,11 +26,7 @@ public class GameOfLife {
      * All of the Game pieces will be Generated in the Board such as the
      * Deck(containing Card), Paths/Board, and Players.
      */
-    public GameOfLife() {
-        this.roundStats = new ArrayList<String>();
-    }
-
-    public void startGame(int nPlayers, int startingMoney) {
+    public GameOfLife(int nPlayers, int startingMoney) {
         // generate Decks
         careerDeck = Generator.generateCareerDeck();
         salaryDeck = Generator.generateSalaryDeck();
@@ -46,13 +42,13 @@ public class GameOfLife {
         // generate Players
         players = Generator.generatePlayers(nPlayers, startingMoney, careerDeck, salaryDeck, careerPath, collegePath);
         this.nPlayers = nPlayers;
+        System.out.println(players.length);
 
         turn = 0;
         round = 1;
 
         this.roundStats = new ArrayList<String>();
     }
-
     /**
      * Does all the things needed to be done to each Player when Game ends.
      * Then display each Player's Stats

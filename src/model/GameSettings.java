@@ -1,22 +1,22 @@
 package model;
 
 public class GameSettings {
-    private int player = 2;
-    private int money = 200000;
+    private int nPlayers = 2;
+    private int startingMoney = 200000;
 
-    public int getMoney() {
-        return money;
+    public int getStartingMoney() {
+        return startingMoney;
     }
 
-    public int getPlayer() {
-        return player;
+    public int getNPlayers() {
+        return nPlayers;
     }
 
-    public void setMoney(int money) {
-        this.money = money;
+    public void setMoney(int startingMoney) {
+        this.startingMoney = startingMoney;
     }
 
-    public void setPlayer(int player) {
-        this.player = player;
+    public void setNPlayers(int nPlayers) {
+        this.nPlayers = nPlayers;
     }
 }

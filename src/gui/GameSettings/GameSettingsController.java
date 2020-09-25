@@ -1,7 +1,7 @@
 package gui.GameSettings;
 
 import gui.modals.DisplayWinner.DisplayWinnerController;
-import gui.GameScreen.GameScreenController;
+import gui.Game.GameController;
 import gui.modals.Modal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +16,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.Constants;
 import model.GameOfLife;
@@ -57,67 +56,24 @@ public class GameSettingsController implements Initializable {
         AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
         audioPlayer.play();
 
-        GameOfLife gameOfLife = new GameOfLife();
-        gameOfLife.startGame(gameSettings.getPlayer(), gameSettings.getMoney());
-
-        FXMLLoader gameScreenLoader = new FXMLLoader(getClass().getResource("/gui/GameScreen/GameScreen.fxml"));
+        FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/gui/Game/Game.fxml"));
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
+        GameController gameController = new GameController(gameSettings.getNPlayers(), gameSettings.getStartingMoney(), stage);
+        gameLoader.setController(gameController);
+
         // set the scene to the Game's Screen
         try {
-            StackPane root = gameScreenLoader.load();
+            StackPane root = gameLoader.load();
             Scene scene = new Scene(root);
-
             stage.setScene(scene);
             stage.setMaximized(true);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        GameScreenController gameScreenController = gameScreenLoader.getController();
-
-        while (!gameOfLife.hasWinner()) {
-            gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), gameOfLife.getCurrentPlayer());
-
-            // if player has no path, let him/her choose from the beginning paths
-            if(gameOfLife.getCurrentPlayer().getPath() == null) {
-                new Modal().choosePath(gameOfLife.getCurrentPlayer(), gameOfLife.getCareerPath(), gameOfLife.getCollegePath());
-                // if the player started in Career Path, give 1 salary card and career card
-                if(gameOfLife.getCurrentPlayer().getPath().getName().equals("Career Path")) {
-                    // only gets the Career which can be given to those players without College Degree
-                    CareerCard careerCard = (CareerCard) gameOfLife.getCareerDeck().pickTopCard();
-                    while(careerCard.isRequireCollegeDegree()) {
-                        gameOfLife.getCareerDeck().addCard(careerCard);
-                        careerCard = (CareerCard) gameOfLife.getCareerDeck().pickTopCard();
-                    }
-                    gameOfLife.getCurrentPlayer().setCareerCard(careerCard);
-                    gameOfLife.getCurrentPlayer().setSalaryCard((SalaryCard) gameOfLife.getSalaryDeck().pickTopCard());
-                }
-                gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), gameOfLife.getCurrentPlayer());
-            }
-
-            // lets the player choose a move
-            new Modal().displayChooseMove(gameOfLife, gameScreenController);
-
-            gameOfLife.setTurn(gameOfLife.getTurn() + 1);
-            if(gameOfLife.getTurn() == gameOfLife.getNPlayers()) {
-                new Modal().openRoundStats();
-                gameOfLife.setRound(gameOfLife.getRound() + 1);
-                gameOfLife.setTurn(0);
-            }
-        }
-        gameOfLife.endGame();
-
-        // detect who the winner was
-        try {
-            FXMLLoader displayWinnerLoader = new FXMLLoader(getClass().getResource("/gui/modals/DisplayWinner/DisplayWinner.fxml"));
-            stage.setScene(new Scene(displayWinnerLoader.load()));
-            stage.setMaximized(false);
-            ((DisplayWinnerController) displayWinnerLoader.getController()).setWinner(gameOfLife);
-        } catch(Exception exception) {
-            exception.printStackTrace();
-        }
+        gameController.startGame();
     }
 
     /**
@@ -128,10 +84,10 @@ public class GameSettingsController implements Initializable {
         AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/small_click.wav").toString()).getSource());
         audioPlayer.play();
 
-        gameSettings.setMoney(gameSettings.getMoney() + Constants.MONEY_INC);
-        moneyLabel.setText(Integer.toString(gameSettings.getMoney()));
-        if(gameSettings.getMoney() >= Constants.MAX_MONEY) imButton.setDisable(true);
-        if(gameSettings.getMoney() > Constants.MIN_MONEY) dmButton.setDisable(false);
+        gameSettings.setMoney(gameSettings.getStartingMoney() + Constants.MONEY_INC);
+        moneyLabel.setText(Integer.toString(gameSettings.getStartingMoney()));
+        if(gameSettings.getStartingMoney() >= Constants.MAX_MONEY) imButton.setDisable(true);
+        if(gameSettings.getStartingMoney() > Constants.MIN_MONEY) dmButton.setDisable(false);
     }
 
     /**
@@ -142,10 +98,10 @@ public class GameSettingsController implements Initializable {
         AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/small_click.wav").toString()).getSource());
         audioPlayer.play();
 
-        gameSettings.setMoney(gameSettings.getMoney() - Constants.MONEY_INC);
-        moneyLabel.setText(Integer.toString(gameSettings.getMoney()));
-        if(gameSettings.getMoney() <= Constants.MIN_MONEY) dmButton.setDisable(true);
-        if(gameSettings.getMoney() < Constants.MAX_MONEY) imButton.setDisable(false);
+        gameSettings.setMoney(gameSettings.getStartingMoney() - Constants.MONEY_INC);
+        moneyLabel.setText(Integer.toString(gameSettings.getStartingMoney()));
+        if(gameSettings.getStartingMoney() <= Constants.MIN_MONEY) dmButton.setDisable(true);
+        if(gameSettings.getStartingMoney() < Constants.MAX_MONEY) imButton.setDisable(false);
     }
 
     /**
@@ -156,10 +112,10 @@ public class GameSettingsController implements Initializable {
         AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/small_click.wav").toString()).getSource());
         audioPlayer.play();
 
-        gameSettings.setPlayer(gameSettings.getPlayer() + 1);
-        playerLabel.setText(Integer.toString(gameSettings.getPlayer()));
-        if(gameSettings.getPlayer() >= Constants.MAX_PLAYER) ipButton.setDisable(true);
-        if(gameSettings.getPlayer() > Constants.MIN_PLAYER) dpButton.setDisable(false);
+        gameSettings.setNPlayers(gameSettings.getNPlayers() + 1);
+        playerLabel.setText(Integer.toString(gameSettings.getNPlayers()));
+        if(gameSettings.getNPlayers() >= Constants.MAX_PLAYER) ipButton.setDisable(true);
+        if(gameSettings.getNPlayers() > Constants.MIN_PLAYER) dpButton.setDisable(false);
     }
 
     /**
@@ -170,10 +126,10 @@ public class GameSettingsController implements Initializable {
         AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/small_click.wav").toString()).getSource());
         audioPlayer.play();
 
-        gameSettings.setPlayer(gameSettings.getPlayer() - 1);
-        playerLabel.setText(Integer.toString(gameSettings.getPlayer()));
-        if(gameSettings.getPlayer() <= Constants.MIN_PLAYER) dpButton.setDisable(true);
-        if(gameSettings.getPlayer() < Constants.MAX_PLAYER) ipButton.setDisable(false);
+        gameSettings.setNPlayers(gameSettings.getNPlayers() - 1);
+        playerLabel.setText(Integer.toString(gameSettings.getNPlayers()));
+        if(gameSettings.getNPlayers() <= Constants.MIN_PLAYER) dpButton.setDisable(true);
+        if(gameSettings.getNPlayers() < Constants.MAX_PLAYER) ipButton.setDisable(false);
     }
 
     /**

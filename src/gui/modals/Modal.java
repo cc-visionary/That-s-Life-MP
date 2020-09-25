@@ -10,7 +10,7 @@ import gui.modals.ChooseMove.ChooseMoveController;
 import gui.modals.ChoosePath.ChoosePathController;
 import gui.modals.ChoosePlayer.ChoosePlayerController;
 import gui.modals.DisplayCard.DisplayCardController;
-import gui.GameScreen.GameScreenController;
+import gui.Game.GameController;
 import gui.stats.RoundStats.RoundStatsController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -56,7 +56,7 @@ public class Modal {
      * @param gameOfLife           game of life model
      * @param gameScreenController screen controller to update the screen stats
      */
-    public void displayChooseMove(GameOfLife gameOfLife, GameScreenController gameScreenController) {
+    public void displayChooseMove(GameOfLife gameOfLife, GameController gameScreenController) {
         Stage stage = new Stage();
         stage.setX(Screen.getPrimary().getBounds().getWidth() - Screen.getPrimary().getBounds().getWidth() / 4);
         stage.initStyle(StageStyle.UNDECORATED);

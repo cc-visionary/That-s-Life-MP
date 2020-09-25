@@ -1,20 +1,31 @@
-package gui.GameScreen;
+package gui.Game;
 
 import gui.ScreenStats.ScreenStatsController;
+import gui.modals.DisplayWinner.DisplayWinnerController;
+import gui.modals.Modal;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import model.Cards.CareerCard.CareerCard;
+import model.Cards.SalaryCard.SalaryCard;
 import model.Constants;
+import model.GameOfLife;
 import model.Paths.Path;
 import model.Players.Player;
 import model.Spaces.Space;
 
-public class GameScreenController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class GameController {
     @FXML
     private ScrollPane scrollPane;
 
@@ -23,6 +34,67 @@ public class GameScreenController {
 
     @FXML
     private StackPane screenStats;
+
+    private int nPlayers, startingMoney;
+    private Stage stage;
+
+    public GameController(int nPlayers, int startingMoney, Stage stage) {
+        this.nPlayers = nPlayers;
+        this.startingMoney = startingMoney;
+        this.stage = stage;
+    }
+
+    /**
+     * This function contains the Game Loop
+     * Calling this function will start the Game
+     */
+    public void startGame() {
+        GameOfLife gameOfLife = new GameOfLife(nPlayers, startingMoney);
+
+        while (!gameOfLife.hasWinner()) {
+            System.out.println(gameOfLife.getTurn());
+            refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), gameOfLife.getCurrentPlayer());
+
+            // if player has no path, let him/her choose from the beginning paths
+            if(gameOfLife.getCurrentPlayer().getPath() == null) {
+                new Modal().choosePath(gameOfLife.getCurrentPlayer(), gameOfLife.getCareerPath(), gameOfLife.getCollegePath());
+                // if the player started in Career Path, give 1 salary card and career card
+                if(gameOfLife.getCurrentPlayer().getPath().getName().equals("Career Path")) {
+                    // only gets the Career which can be given to those players without College Degree
+                    CareerCard careerCard = (CareerCard) gameOfLife.getCareerDeck().pickTopCard();
+                    while(careerCard.isRequireCollegeDegree()) {
+                        gameOfLife.getCareerDeck().addCard(careerCard);
+                        careerCard = (CareerCard) gameOfLife.getCareerDeck().pickTopCard();
+                    }
+                    gameOfLife.getCurrentPlayer().setCareerCard(careerCard);
+                    gameOfLife.getCurrentPlayer().setSalaryCard((SalaryCard) gameOfLife.getSalaryDeck().pickTopCard());
+                }
+                refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), gameOfLife.getCurrentPlayer());
+            }
+
+
+            // lets the player choose a move
+            new Modal().displayChooseMove(gameOfLife, this);
+
+            gameOfLife.setTurn(gameOfLife.getTurn() + 1);
+            if(gameOfLife.getTurn() == gameOfLife.getNPlayers()) {
+                new Modal().openRoundStats();
+                gameOfLife.setRound(gameOfLife.getRound() + 1);
+                gameOfLife.setTurn(0);
+            }
+        }
+        gameOfLife.endGame();
+
+        // detect who the winner was
+        try {
+            FXMLLoader displayWinnerLoader = new FXMLLoader(getClass().getResource("/gui/modals/DisplayWinner/DisplayWinner.fxml"));
+            stage.setScene(new Scene(displayWinnerLoader.load()));
+            stage.setMaximized(false);
+            ((DisplayWinnerController) displayWinnerLoader.getController()).setWinner(gameOfLife);
+        } catch(Exception exception) {
+            exception.printStackTrace();
+        }
+    }
 
     /**
      * Refreshes the Game Screen where it will clear all the children of Screen Stats,

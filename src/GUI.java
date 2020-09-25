@@ -33,7 +33,7 @@ public class GUI extends Application {
         });
 
         primaryStage.show();
-        AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/lnttmo.mp3").toString()).getSource());
+        AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/theme.wav").toString()).getSource());
         audioPlayer.play();
     }
 }

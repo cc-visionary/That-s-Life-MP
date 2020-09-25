@@ -4,7 +4,7 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import model.GameOfLife;
-import gui.GameScreen.GameScreenController;
+import gui.Game.GameController;
 import gui.modals.PayDebt.PayDebtController;
 import gui.modals.Modal;
 import gui.stats.PlayerStats.PlayerStatsController;
@@ -41,7 +41,7 @@ public class ChooseMoveController {
      * @param gameOfLife main model
      * @param gameScreenController controller used to update screen stats
      */
-    public void setGameOfLife(GameOfLife gameOfLife, GameScreenController gameScreenController) {
+    public void setGameOfLife(GameOfLife gameOfLife, GameController gameScreenController) {
         // let's the player roll a dice
         rollDice.setOnAction(e -> {
             MediaPlayer mediaPlayer = new MediaPlayer(new Media(getClass().getResource("/audio/click.wav").toString()));
@@ -123,7 +123,7 @@ public class ChooseMoveController {
      * @param gameOfLife
      * @param space space where the currentPlayer landed
      */
-    public void handleSpaceLanded(GameOfLife gameOfLife, Space space, GameScreenController gameScreenController) {
+    public void handleSpaceLanded(GameOfLife gameOfLife, Space space, GameController gameScreenController) {
 //        System.out.println(String.format("You landed on %s - %s", space.getType(), space.getName()));
         Player currentPlayer = gameOfLife.getCurrentPlayer();
         if(space != null) {
