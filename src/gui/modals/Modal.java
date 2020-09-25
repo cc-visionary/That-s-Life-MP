@@ -1,6 +1,8 @@
 package gui.modals;
 
 import gui.modals.ChooseHouse.ChooseHouseController;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Screen;
 import model.GameOfLife;
 import gui.modals.ChooseCard.ChooseCardController;
@@ -190,5 +192,12 @@ public class Modal {
 
         stage.showAndWait();
         return ((ChooseHouseController) houseCardLoader.getController()).getChosenHouse();
+    }
+
+    public void showUpdate(String message) {
+        Alert update = new Alert(Alert.AlertType.NONE, message, ButtonType.CLOSE);
+        update.initModality(Modality.APPLICATION_MODAL);
+        update.setTitle("Update");
+        update.showAndWait();
     }
 }

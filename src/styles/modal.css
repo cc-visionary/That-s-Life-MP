@@ -5,6 +5,8 @@
     -fx-font-family: "Montserrat";
     -fx-text-fill: #1e56a0;
     -fx-border-color: BLACK;
+    -fx-border-radius: 2px;
+    -fx-background-radius: 2px;
 }
 
 .label {
@@ -25,4 +27,28 @@
     -fx-text-fill: #163172;
     -fx-alignment: CENTER;
     -fx-content-display: LEFT;
+}
+
+.slider .axis {
+    -fx-text-fill: #163172;
+    -fx-tick-label-fill: #d6e4f0;
+}
+
+.slider {
+    -fx-font-size: 8pt;
+}
+
+.scroll-pane > .viewport  { -fx-background-color: #1e56a0; }
+
+.tab {
+     -fx-background-color: #d6e4f0;
+     -fx-alignment: CENTER;
+     -fx-font-size: 12pt;
+     -fx-font-family: "Montserrat";
+     -fx-text-fill: #1e56a0;
+}
+
+.tab-content-area {
+    -fx-background-color: #1e56a0;
+    -fx-border-color: #d6e4f0;
 }

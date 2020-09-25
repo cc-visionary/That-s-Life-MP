@@ -1,6 +1,6 @@
 package model;
 
-import gui.stats.UpdateStats.UpdateStats;
+import gui.modals.Modal;
 import model.Decks.Deck;
 import model.Decks.DeckWithUsed;
 import model.Paths.Path;
@@ -74,7 +74,7 @@ public class GameOfLife {
     }
 
     public static void addRoundStat(String stat) {
-        UpdateStats.showUpdate(stat);
+        new Modal().showUpdate(stat);
         roundStats.add(stat);
     }
 

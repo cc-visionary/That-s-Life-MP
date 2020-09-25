@@ -102,6 +102,7 @@ public class ChooseMoveController {
 
             payDebtStage.showAndWait();
             gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), gameOfLife.getCurrentPlayer());
+            if(gameOfLife.getCurrentPlayer().getDebt() <= 0) payDebt.setDisable(true);
         });
 
         if(gameOfLife.getCurrentPlayer().getDebt() <= 0) payDebt.setDisable(true);

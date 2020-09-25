@@ -20,7 +20,7 @@
             <HBox alignment="CENTER">
                <children>
                   <Label text="Number of Players (2-3) : " textFill="WHITE" />
-                  <HBox prefHeight="31.0" prefWidth="152.0" spacing="46.5">
+                  <HBox prefHeight="31.0" prefWidth="152.0" spacing="65.0">
                      <children>
                         <Button fx:id="dpButton" mnemonicParsing="false" onAction="#decrementPlayer" />
                         <Label fx:id="playerLabel" prefHeight="17.0" prefWidth="0.0" text="2" textFill="WHITE" />
@@ -29,7 +29,7 @@
                   </HBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER" spacing="50.0">
+            <HBox alignment="CENTER" spacing="90.0">
                <children>
                   <Label text="Starting Money :" textFill="#fffdfd" />
                   <HBox prefHeight="31.0" spacing="30.0">
