@@ -1,8 +1,6 @@
 package gui.GameSettings;
 
-import gui.modals.DisplayWinner.DisplayWinnerController;
 import gui.Game.GameController;
-import gui.modals.Modal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,10 +16,7 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.stage.Stage;
 import model.Constants;
-import model.GameOfLife;
 import model.GameSettings;
-import model.Cards.CareerCard.CareerCard;
-import model.Cards.SalaryCard.SalaryCard;
 
 import java.net.URL;
 import java.util.ResourceBundle;

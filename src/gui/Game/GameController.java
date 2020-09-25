@@ -1,17 +1,19 @@
 package gui.Game;
 
 import gui.ScreenStats.ScreenStatsController;
-import gui.modals.DisplayWinner.DisplayWinnerController;
 import gui.modals.Modal;
+import gui.stats.GameStats.GameStatsController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Cards.CareerCard.CareerCard;
@@ -21,9 +23,6 @@ import model.GameOfLife;
 import model.Paths.Path;
 import model.Players.Player;
 import model.Spaces.Space;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class GameController {
     @FXML
@@ -55,21 +54,26 @@ public class GameController {
             System.out.println(gameOfLife.getTurn());
             refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), gameOfLife.getCurrentPlayer());
 
+            Player currentPlayer = gameOfLife.getCurrentPlayer();
+
+            // if player has no name, ask for user to input the name
+            if(currentPlayer.getName() == null) currentPlayer.setName(new Modal().askPlayerName());
+
             // if player has no path, let him/her choose from the beginning paths
-            if(gameOfLife.getCurrentPlayer().getPath() == null) {
-                new Modal().choosePath(gameOfLife.getCurrentPlayer(), gameOfLife.getCareerPath(), gameOfLife.getCollegePath());
+            if(currentPlayer.getPath() == null) {
+                new Modal().choosePath(currentPlayer, gameOfLife.getCareerPath(), gameOfLife.getCollegePath());
                 // if the player started in Career Path, give 1 salary card and career card
-                if(gameOfLife.getCurrentPlayer().getPath().getName().equals("Career Path")) {
+                if(currentPlayer.getPath().getName().equals("Career Path")) {
                     // only gets the Career which can be given to those players without College Degree
                     CareerCard careerCard = (CareerCard) gameOfLife.getCareerDeck().pickTopCard();
                     while(careerCard.isRequireCollegeDegree()) {
                         gameOfLife.getCareerDeck().addCard(careerCard);
                         careerCard = (CareerCard) gameOfLife.getCareerDeck().pickTopCard();
                     }
-                    gameOfLife.getCurrentPlayer().setCareerCard(careerCard);
-                    gameOfLife.getCurrentPlayer().setSalaryCard((SalaryCard) gameOfLife.getSalaryDeck().pickTopCard());
+                    currentPlayer.setCareerCard(careerCard);
+                    currentPlayer.setSalaryCard((SalaryCard) gameOfLife.getSalaryDeck().pickTopCard());
                 }
-                refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), gameOfLife.getCurrentPlayer());
+                refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), currentPlayer);
             }
 
 
@@ -84,12 +88,14 @@ public class GameController {
             }
         }
 
-        // detect who the winner was
+        // the game stats
+        AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
+        audioPlayer.play();
+
         try {
-            FXMLLoader displayWinnerLoader = new FXMLLoader(getClass().getResource("/gui/modals/DisplayWinner/DisplayWinner.fxml"));
-            stage.setScene(new Scene(displayWinnerLoader.load()));
-            stage.setMaximized(false);
-            ((DisplayWinnerController) displayWinnerLoader.getController()).setWinner(gameOfLife);
+            FXMLLoader gameStatsLoader = new FXMLLoader(getClass().getResource("/gui/stats/GameStats/GameStats.fxml"));
+            stage.setScene(new Scene(gameStatsLoader.load()));
+            ((GameStatsController) gameStatsLoader.getController()).setData(gameOfLife);
         } catch(Exception exception) {
             exception.printStackTrace();
         }

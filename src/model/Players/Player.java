@@ -109,6 +109,14 @@ final public class Player {
     }
 
     /**
+     * Set the name of the Player
+     * @param name name to be set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
      * Adds the parameter houseCard to the ArrayList(HouseCard) attribute of the Player
      * @param houseCard newly bought house by the player
      */

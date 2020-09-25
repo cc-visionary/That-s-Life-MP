@@ -200,4 +200,9 @@ public class Modal {
         update.setTitle("Update");
         update.showAndWait();
     }
+
+    public String askPlayerName() {
+        String name = "";
+        return name;
+    }
 }
