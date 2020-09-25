@@ -25,7 +25,7 @@ public class DisplayWinnerController {
         MediaPlayer mediaPlayer = new MediaPlayer(new Media(getClass().getResource("/audio/win.wav").toString()));
         mediaPlayer.play();
         Player playerWinner = null;
-        for(Player player : gameOfLife.getAllPlayers()) {
+        for(Player player : gameOfLife.getAllActivePlayers()) {
             if(player.isRetired()) {
                 playerWinner = player;
                 break;

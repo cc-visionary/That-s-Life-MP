@@ -29,6 +29,7 @@ import model.Spaces.GreenSpace.PayDaySpace;
 import model.Spaces.GreenSpace.PayRaiseSpace;
 import model.Spaces.MagentaSpace.*;
 import model.Spaces.OrangeSpace.OrangeSpace;
+import model.Spaces.RetirementSpace.RetirementSpace;
 import model.Spaces.Space;
 import utilities.InputUtil;
 
@@ -243,7 +244,8 @@ public class ChooseMoveController {
                 }
             } else if(space.getType().equals(Constants.RETIREMENT_SPACE)) {
                 // Space where Player retires
-                gameOfLife.getCurrentPlayer().setIsRetired(true);
+                ((RetirementSpace) space).retire(gameOfLife.getCurrentPlayer());
+                gameOfLife.retirePlayer(gameOfLife.getCurrentPlayer());
             }
         } else {
             System.out.println("Space is null...");

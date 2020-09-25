@@ -17,6 +17,6 @@ public class RetirementSpace extends Space {
      * @param player player to be retired
      */
     public void retire(Player player) {
-        player.setIsRetired(true);
+        player.retire();
     }
 }

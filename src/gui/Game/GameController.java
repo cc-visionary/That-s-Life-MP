@@ -51,7 +51,7 @@ public class GameController {
     public void startGame() {
         GameOfLife gameOfLife = new GameOfLife(nPlayers, startingMoney);
 
-        while (!gameOfLife.hasWinner()) {
+        while (!gameOfLife.hasEnded()) {
             System.out.println(gameOfLife.getTurn());
             refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), gameOfLife.getCurrentPlayer());
 
@@ -83,7 +83,6 @@ public class GameController {
                 gameOfLife.setTurn(0);
             }
         }
-        gameOfLife.endGame();
 
         // detect who the winner was
         try {

@@ -24,7 +24,7 @@ public class GameStatsController {
     private Button continueButton;
 
     public void setData(GameOfLife gameOfLife) {
-        for(Player player : gameOfLife.getAllPlayers()) {
+        for(Player player : gameOfLife.getAllRetiredPlayers()) {
             Tab tab = new Tab();
             tab.setText(player.getName());
             VBox vbox = new VBox();

@@ -28,12 +28,12 @@ import java.util.ArrayList;
 public class Generator {
     private static int careerPathCount = 0, collegePathCount = 0, changeChareerPathCount = 0, startAFamilyPathCount = 0;
 
-    public static Player[] generatePlayers(int nPlayers, int startingMoney, Deck careerDeck, Deck salaryDeck, Path careerPath, Path collegePath) {
+    public static ArrayList<Player> generatePlayers(int nPlayers, int startingMoney) {
         ArrayList<Player> players = new ArrayList<Player>();
         for(int i = 0; i < nPlayers; i++) {
-            players.add(new Player("P" + (i + 1), startingMoney));
+            players.add(new Player(startingMoney));
         }
-        return players.toArray(new Player[0]);
+        return players;
     }
 
     /**

@@ -32,6 +32,12 @@ final public class Player {
         this.balance = startingMoney;
     }
 
+    public Player(int startingMoney) {
+        this.playerCount++;
+        this.nthPlayer = this.playerCount;
+        this.balance = startingMoney;
+    }
+
     /**
      * Allows the use to roll and dice and generate a random number from 1-6
      * Moves the player  by the number of spaces
@@ -165,12 +171,22 @@ final public class Player {
     }
 
     /**
-     * Changes the value of whether the Player is retired or not
-     * @param isRetired value to be set to isRetired
+     * Retires the player and does all actions when player is retired
      */
-    public void setIsRetired(boolean isRetired) {
-        GameOfLife.addRoundStat(String.format("%s is now %s", getName(), isRetired ? "retired" : "not retired"));
-        this.isRetired = isRetired;
+    public void retire() {
+        GameOfLife.addRoundStat(String.format("%s is now retired", getName()));
+        this.isRetired = true;
+        // collect $10000 from the bank for each child
+        addBalance(getNBabies() * 10000);
+
+        // sell house to the bank
+        if(getHouseCard() != null) {
+            addBalance(getHouseCard().getCost());
+            setHouseCard(null);
+        }
+
+        // repay all loans to the bank
+        if(getDebt() > 0) payDebt(getNBankLoan());
     }
 
     /**

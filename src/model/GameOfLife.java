@@ -17,7 +17,8 @@ public class GameOfLife {
     private Deck careerDeck, salaryDeck, blueDeck, houseDeck;
     private DeckWithUsed orangeDeck;
     private Path careerPath, collegePath;
-    private Player players[];
+    private ArrayList<Player> activePlayers;
+    private ArrayList<Player> retiredPlayers;
     private int nPlayers, turn;
     private static int round;
     private static ArrayList<String> roundStats;
@@ -40,38 +41,40 @@ public class GameOfLife {
         collegePath = paths[1];
 
         // generate Players
-        players = Generator.generatePlayers(nPlayers, startingMoney, careerDeck, salaryDeck, careerPath, collegePath);
+        activePlayers = Generator.generatePlayers(nPlayers, startingMoney);
+        retiredPlayers = new ArrayList<Player>();
         this.nPlayers = nPlayers;
-        System.out.println(players.length);
 
         turn = 0;
         round = 1;
 
         this.roundStats = new ArrayList<String>();
     }
+
     /**
-     * Does all the things needed to be done to each Player when Game ends.
-     * Then display each Player's Stats
+     * Adds an Update for the Round Stats
+     * @param stat string update to be added
      */
-    public void endGame() {
-        for(Player player : getAllPlayers()) {
-            // collect $10000 from the bank for each child
-            player.addBalance(player.getNBabies() * 10000);
-
-            // sell house to the bank
-            if(player.getHouseCard() != null) {
-                player.addBalance(player.getHouseCard().getCost());
-                player.setHouseCard(null);
-            }
-
-            // repay all loans to the bank
-            if(player.getDebt() > 0) player.payDebt(player.getNBankLoan());
-        }
-    }
-
     public static void addRoundStat(String stat) {
         new Modal().showUpdate(stat);
         roundStats.add(stat);
+    }
+
+    /**
+     * Transfers a Player from active to retired
+     * @param player
+     */
+    public void retirePlayer(Player player) {
+        activePlayers.remove(player);
+        retiredPlayers.add(player);
+    }
+
+    public int getNActivePlayers() {
+        return activePlayers.size();
+    }
+
+    public int getNRetiredPlayers() {
+        return retiredPlayers.size();
     }
 
     public static int getRound() {
@@ -123,7 +126,7 @@ public class GameOfLife {
      * @return the Player object who has the current turn
      */
     public Player getCurrentPlayer() {
-        return players[Math.max(getTurn(), 0)];
+        return activePlayers.get(Math.max(getTurn(), 0));
     }
 
     /**
@@ -133,7 +136,7 @@ public class GameOfLife {
     public Player[] getOtherPlayers() {
         ArrayList<Player> otherPlayers = new ArrayList<Player>();
 
-        for(Player player : players) {
+        for(Player player : activePlayers) {
             if(!player.equals(getCurrentPlayer())) otherPlayers.add(player);
         }
 
@@ -144,8 +147,12 @@ public class GameOfLife {
      * All the Player in the BoardGame
      * @return all the player
      */
-    public Player[] getAllPlayers() {
-        return players;
+    public Player[] getAllActivePlayers() {
+        return activePlayers.toArray(new Player[0]);
+    }
+
+    public Player[] getAllRetiredPlayers() {
+        return retiredPlayers.toArray(new Player[0]);
     }
 
     public int getNPlayers() {
@@ -157,15 +164,12 @@ public class GameOfLife {
     }
 
     /**
-     * Determines whether or not there is already a winner in between all of the players
-     * @return boolean value true or false to determine if there is a winner or not
+     * Ends the game only if all the Players aren't active anymore
+     * meaning that all the Players are already retired.
+     *
+     * @return boolean value true or false to determine whether the game has ended or not
      */
-    public boolean hasWinner() {
-        for(Player player : players) {
-            if(player.isRetired()) {
-                return true;
-            }
-        }
-        return false;
+    public boolean hasEnded() {
+        return getNActivePlayers() == 0;
     }
 }
