@@ -123,6 +123,7 @@ final public class Player {
         this.path = path;
         if(path.getName() == "College Path") bankLoan(2);
         this.location = 0;
+        path.getSpaces()[0].addPlayer(this);
     }
 
     /**

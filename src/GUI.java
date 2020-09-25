@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 
 import javafx.application.Application;
@@ -20,6 +21,11 @@ public class GUI extends Application {
         primaryStage.setTitle("Game of Life");
 
         primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/gui/Menu/Menu.fxml"))));
+
+        // when primary stage is closed, all the other stage should also be closed.
+        primaryStage.setOnCloseRequest(e -> {
+            Platform.exit();
+        });
 
         primaryStage.show();
     }

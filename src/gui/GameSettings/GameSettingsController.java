@@ -88,7 +88,6 @@ public class GameSettingsController implements Initializable {
                     gameOfLife.getCurrentPlayer().setCareerCard(careerCard);
                     gameOfLife.getCurrentPlayer().setSalaryCard((SalaryCard) gameOfLife.getSalaryDeck().pickTopCard());
                 }
-                gameOfLife.getCurrentPlayer().getPath().getSpaces()[0].addPlayer(gameOfLife.getCurrentPlayer());
                 gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), gameOfLife.getCurrentPlayer());
             }
 

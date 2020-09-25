@@ -210,12 +210,12 @@ public class GameScreenController {
      * @param xPos    center x position of the hexagon
      * @param yPos    center y position of the hexagon
      * @param size    size of the hexagon
-     * @param stroke  color of the hexagon
+     * @param color  color of the hexagon
      * @param gc      canvas' graphics context 2D
      */
-    private void drawHexagon(Player[] players, double xPos, double yPos, double size, Color stroke, GraphicsContext gc) {
+    private void drawHexagon(Player[] players, double xPos, double yPos, double size, Color color, GraphicsContext gc) {
         final double RADIUS = size / 2;
-        gc.setStroke(stroke);
+        gc.setStroke(color);
         gc.strokePolygon(new double[]{
                 xPos - RADIUS * 2, // top left
                 xPos,              // top center
@@ -231,6 +231,22 @@ public class GameScreenController {
                 yPos + size,   // bottom center
                 yPos + RADIUS  // bottom left
         }, 6);
+//        gc.setFill(color);
+//        gc.fillPolygon(new double[]{
+//                xPos - RADIUS * 2, // top left
+//                xPos,              // top center
+//                xPos + RADIUS * 2, // top right
+//                xPos + RADIUS * 2, // bottom right
+//                xPos,              // bottom center
+//                xPos - RADIUS * 2  // bottom left
+//        }, new double[]{
+//                yPos - RADIUS, // top left
+//                yPos - size,   // top center
+//                yPos - RADIUS, // top right
+//                yPos + RADIUS, // bottom right
+//                yPos + size,   // bottom center
+//                yPos + RADIUS  // bottom left
+//        }, 6);
         xPos -= (size / 2) * (players.length - 1) / 2;
         for(Player player : players) {
             gc.drawImage(new Image("/images/icons/character.png", size, size, false, true), xPos - size / 2, yPos - size / 2);
