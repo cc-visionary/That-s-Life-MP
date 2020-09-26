@@ -25,11 +25,11 @@ final public class PayPlayerCard extends ActionCard {
         // transfer the deducted balance to the player chosen
         recipient.addBalance(getAmount());
 
-        GameOfLife.addRoundStat(String.format("%s paid $%.2f to %s", getOwner().getName(), getAmount(), recipient.getName()));
+        GameOfLife.addRoundStat(String.format("%s paid $%d to %s", getOwner().getName(), getAmount(), recipient.getName()));
     }
 
     @Override
     public String toString() {
-        return String.format("ActionCard{name=%s,amount=%.2f,transaction=PAY,recipient=PLAYER}", getName(), getAmount());
+        return String.format("ActionCard{name=%s,amount=%d,transaction=PAY,recipient=PLAYER}", getName(), getAmount());
     }
 }

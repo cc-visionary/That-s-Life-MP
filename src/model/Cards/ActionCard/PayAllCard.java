@@ -25,11 +25,11 @@ final public class PayAllCard extends ActionCard {
             otherPlayer.addBalance(getAmount());
         }
 
-        GameOfLife.addRoundStat(String.format("%s paid $%.2f to all the other players ($%.2f)", getOwner().getName(), getAmount(), getOtherPlayers().length * getAmount()));
+        GameOfLife.addRoundStat(String.format("%s paid $%d to all the other players ($%d)", getOwner().getName(), getAmount(), getOtherPlayers().length * getAmount()));
     }
 
     @Override
     public String toString() {
-        return String.format("ActionCard{name=%s,amount=%.2f,transaction=PAY,recipient=ALL}", getName(), getAmount());
+        return String.format("ActionCard{name=%s,amount=%d,transaction=PAY,recipient=ALL}", getName(), getAmount());
     }
 }

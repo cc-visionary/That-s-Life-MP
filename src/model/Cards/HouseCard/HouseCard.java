@@ -29,7 +29,7 @@ public class HouseCard extends Card {
 
     @Override
     public String toString() {
-        return String.format("HouseCard{name=%s,cost=%.2f}", getName(), getCost());
+        return String.format("HouseCard{name=%s,cost=%d}", getName(), getCost());
     }
 
     @Override

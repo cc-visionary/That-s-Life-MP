@@ -3,6 +3,7 @@ package gui.stats.GameStats;
 import gui.modals.Modal;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -31,12 +32,16 @@ public class GameStatsController {
         ArrayList<Player> retiredPlayers = new ArrayList<>();
         for(Player retiredPlayer : gameOfLife.getAllRetiredPlayers()) retiredPlayers.add(retiredPlayer);
 
-        retiredPlayers.sort((o1, o2) -> o1.getBalance() - o2.getBalance());
+        retiredPlayers.sort((o1, o2) -> o2.getBalance() - o1.getBalance());
 
         int place = 1;
         for(Player retiredPlayer : retiredPlayers) {
             HBox hBox = new HBox();
-            Label statsLabel = new Label(String.format("%d. %s (%d)", place, retiredPlayer.getName(), retiredPlayer.getBalance()));
+            hBox.setSpacing(20);
+
+            Label statsLabel = new Label(String.format("%d. %s (%d) %s", place, retiredPlayer.getName(), retiredPlayer.getBalance(), place == 1 ? "-> Winner!!" : "           "));
+            statsLabel.setAlignment(Pos.CENTER);
+
             Button viewStatsButton = new Button("View Player");
 
             viewStatsButton.setOnAction(e -> {

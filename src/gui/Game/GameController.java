@@ -83,7 +83,7 @@ public class GameController {
             new Modal().displayChooseMove(gameOfLife, this);
 
             gameOfLife.setTurn(gameOfLife.getTurn() + 1);
-            if(gameOfLife.getTurn() == gameOfLife.getNActivePlayers()) {
+            if(gameOfLife.getTurn() >= gameOfLife.getNActivePlayers()) {
                 new Modal().openRoundStats();
                 gameOfLife.setRound(gameOfLife.getRound() + 1);
                 gameOfLife.setTurn(0);
@@ -97,6 +97,7 @@ public class GameController {
         try {
             FXMLLoader gameStatsLoader = new FXMLLoader(getClass().getResource("/gui/stats/GameStats/GameStats.fxml"));
             stage.setScene(new Scene(gameStatsLoader.load()));
+            stage.setMaximized(false);
             ((GameStatsController) gameStatsLoader.getController()).setData(gameOfLife);
         } catch(Exception exception) {
             exception.printStackTrace();

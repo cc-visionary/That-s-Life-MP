@@ -129,6 +129,6 @@ public abstract class Card {
 
     @Override
     public String toString() {
-        return String.format("Card{type=%sname=%s}", getType(), getName());
+        return String.format("Card{type=%s,name=%s}", getType(), getName());
     }
 }

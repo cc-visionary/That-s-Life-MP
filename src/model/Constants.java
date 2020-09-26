@@ -56,7 +56,7 @@ public class Constants {
     final public static int nPayPlayer = totalOrangeCard - (nCollectBank + nPayBank + nCollectPlayer);
 
     // Path Spaces
-    final public static int PATH_SPACES = 5;
+    final public static int PATH_SPACES = 10;
 
     // Game Settings
     final public static int MIN_PLAYER = 2;

@@ -63,6 +63,8 @@ public class ChooseMoveController {
                 if(spaceLanded.getType().equals(Constants.MAGENTA_SPACE) || spaceLanded.getType().equals(Constants.RETIREMENT_SPACE)) break; // if player reaches the Magenta Space stop
             }
 
+            GameOfLife.addRoundStat(String.format("%s landed on %s", currentPlayer.getName(), String.format("%s%s", spaceLanded.getType(), spaceLanded.getName() != null ? "(" + spaceLanded.getName() + ")" : "")));
+
             spaceLanded.addPlayer(currentPlayer);
             gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), currentPlayer);
 
@@ -182,24 +184,28 @@ public class ChooseMoveController {
                     // if the player is in College Path, he/she graduates on the College Career Space in a College Path
                     if(currentPlayer.getPath().getName().equals("College Path")) currentPlayer.setHasGraduated(true);
 
-                    CareerCard careerCard = ((CollegeCareerChoiceSpace) space).chooseCareerCard(gameOfLife.getCareerDeck());
+                    CareerCard careerCard = ((CollegeCareerChoiceSpace) space).chooseCareerCard(gameOfLife.getCareerDeck(), currentPlayer.isGraduated());
                     SalaryCard salaryCard = ((CollegeCareerChoiceSpace) space).chooseSalaryCard(gameOfLife.getSalaryDeck());
 
-                    // returns the Player's Career Card to the Deck
-                    if(currentPlayer.getCareerCard() != null) {
-                        gameOfLife.getCareerDeck().addCard(currentPlayer.getCareerCard());
-                        gameOfLife.getCareerDeck().shuffle();
+                    if(careerCard != null) {
+                        // returns the Player's Career Card to the Deck
+                        if(currentPlayer.getCareerCard() != null) {
+                            gameOfLife.getCareerDeck().addCard(currentPlayer.getCareerCard());
+                            gameOfLife.getCareerDeck().shuffle();
+                        }
+                        // then set a new Career Card for the Player
+                        currentPlayer.setCareerCard(careerCard);
                     }
-                    // then set a new Career Card for the Player
-                    currentPlayer.setCareerCard(careerCard);
 
-                    // returns the Player's Salary Card to the Deck
-                    if(currentPlayer.getSalaryCard() != null) {
-                        gameOfLife.getSalaryDeck().addCard(currentPlayer.getSalaryCard());
-                        gameOfLife.getSalaryDeck().shuffle();
+                    if(salaryCard != null) {
+                        // returns the Player's Salary Card to the Deck
+                        if(currentPlayer.getSalaryCard() != null) {
+                            gameOfLife.getSalaryDeck().addCard(currentPlayer.getSalaryCard());
+                            gameOfLife.getSalaryDeck().shuffle();
+                        }
+                        // then set a new Salary Card for the Player
+                        currentPlayer.setSalaryCard(salaryCard);
                     }
-                    // then set a new Salary Card for the Player
-                    currentPlayer.setSalaryCard(salaryCard);
                 } else if(space.getName().equals(Constants.GET_MARRIED)) {
                     // Player marries when landing in Get Married Space
                     ((GetMarriedSpace) space).getMarried(currentPlayer, gameOfLife.getOtherPlayers());
@@ -214,15 +220,24 @@ public class ChooseMoveController {
                     Space newSpaceLanded = currentPlayer.getPath().getSpaces()[currentPlayer.getLocation()];
                     if(newSpaceLanded.getType().equals(Constants.MAGENTA_SPACE))
                         handleSpaceLanded(gameOfLife, newSpaceLanded, gameScreenController);
+                    else
+                        // if not, let's the player take another turn
+                        gameOfLife.setTurn(gameOfLife.getTurn() - 1);
                     // refresh screen
                     gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), currentPlayer);
-                    // let's the player take another turn
-                    gameOfLife.setTurn(gameOfLife.getTurn() - 1);
                 }
             } else if(space.getType().equals(Constants.RETIREMENT_SPACE)) {
                 // Space where Player retires
                 ((RetirementSpace) space).retire(currentPlayer);
                 gameOfLife.retirePlayer(currentPlayer);
+                if(currentPlayer.getCareerCard() != null) {
+                    gameOfLife.getCareerDeck().addCard(currentPlayer.getCareerCard());
+                    currentPlayer.setCareerCard(null);
+                }
+                if(currentPlayer.getSalaryCard() != null) {
+                    gameOfLife.getSalaryDeck().addCard(currentPlayer.getSalaryCard());
+                    currentPlayer.setSalaryCard(null);
+                }
             }
         } else {
             System.out.println("Space is null...");

@@ -1,3 +1,5 @@
+import com.sun.org.apache.xpath.internal.operations.Mod;
+import gui.modals.Modal;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 
@@ -31,6 +33,7 @@ public class App extends Application {
 
         primaryStage.show();
         AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/datasette.mp3").toString()).getSource());
+        audioPlayer.setCycleCount(AudioClip.INDEFINITE);
         audioPlayer.play();
     }
 }

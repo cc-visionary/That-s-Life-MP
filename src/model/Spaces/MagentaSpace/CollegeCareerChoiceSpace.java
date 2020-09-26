@@ -6,6 +6,7 @@ import model.Cards.Card;
 import model.Cards.CareerCard.CareerCard;
 import model.Cards.SalaryCard.SalaryCard;
 import model.Decks.Deck;
+import model.GameOfLife;
 
 /**
  * Represents the Magenta Space - College Career Choice Space
@@ -18,18 +19,68 @@ final public class CollegeCareerChoiceSpace extends MagentaSpace {
         super(Constants.COLLEGE_CARREER_CHOICE);
     }
 
-    public CareerCard chooseCareerCard(Deck careerDeck) {
+    /**
+     * Lets the player choose a CareerCard.
+     * If a player hasn't graduated yet, only give CareerCards to player that
+     * doesn't require a player to graduate first
+     * @param careerDeck Deck which contains the Career Cards
+     * @param graduated  determines whether the card to be returned has to have a graduation requirement or not
+     * @return           the chosen card
+     */
+    public CareerCard chooseCareerCard(Deck careerDeck, boolean graduated) {
         CareerCard pickedCard;
         if(careerDeck.getName() == "Career Deck") {
-            Card card1 = careerDeck.pickTopCard();
-            Card card2 = careerDeck.pickTopCard();
+            if(!graduated) {
+                int nCareerWithoutGraduation = 0;
+                for(Card card : careerDeck.getCards()) {
+                    if(!((CareerCard) card).isRequireCollegeDegree()) nCareerWithoutGraduation++;
+                }
+                if(nCareerWithoutGraduation >= 2) {
+                    Card card1 = null;
+                    Card card2 = null;
+                    // pick top card until card take is one which doesn't need a player to graduate
+                    do {
+                        if(card1 != null) careerDeck.addCard(card1);
+                        card1 = careerDeck.pickTopCard();
+                    } while (((CareerCard) card1).isRequireCollegeDegree());
 
-            pickedCard = (CareerCard) new Modal().chooseCard(card1, card2);
+                    // pick top card until card take is one which doesn't need a player to graduate
+                    do {
+                        if(card2 != null) careerDeck.addCard(card2);
+                        card2 = careerDeck.pickTopCard();
+                    } while (((CareerCard) card2).isRequireCollegeDegree());
 
-            if(card1.equals(pickedCard)) careerDeck.addCard(card2);
-            else careerDeck.addCard(card1);
+                    pickedCard = (CareerCard) new Modal().chooseCard(card1, card2);
 
-            careerDeck.shuffle();
+                    if(card1.equals(pickedCard)) careerDeck.addCard(card2);
+                    else careerDeck.addCard(card1);
+
+                    careerDeck.shuffle();
+                } else if(nCareerWithoutGraduation == 1) {
+                    Card card = null;
+                    // pick top card until card take is one which doesn't need a player to graduate
+                    do {
+                        if(card != null) careerDeck.addCard(card);
+                        card = careerDeck.pickTopCard();
+                    } while (((CareerCard) card).isRequireCollegeDegree());
+
+                    new Modal().displayCard(card);
+                    pickedCard = (CareerCard) card;
+                } else {
+                    pickedCard = null;
+                    GameOfLife.addRoundStat("There's no more Career Card which doesn't require a player to Graduate first.");
+                }
+            } else {
+                Card card1 = careerDeck.pickTopCard();
+                Card card2 = careerDeck.pickTopCard();
+
+                pickedCard = (CareerCard) new Modal().chooseCard(card1, card2);
+
+                if(card1.equals(pickedCard)) careerDeck.addCard(card2);
+                else careerDeck.addCard(card1);
+
+                careerDeck.shuffle();
+            }
         } else {
             pickedCard = null;
             System.out.println("An incorrect deck(" + careerDeck.getName() + ") was passed.");
@@ -37,6 +88,11 @@ final public class CollegeCareerChoiceSpace extends MagentaSpace {
         return pickedCard;
     }
 
+    /**
+     * Lets a Player choose a salary card from the Salary Deck
+     * @param salaryDeck Deck containing the salary Cards
+     * @return           the chosen Salary Card
+     */
     public SalaryCard chooseSalaryCard(Deck salaryDeck) {
         SalaryCard pickedCard;
         if(salaryDeck.getName() == "Salary Deck") {

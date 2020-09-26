@@ -228,7 +228,13 @@ public class Generator {
             // if random number matches the index, add a GetMarriedSpace
             if(randomNumber == i) spaces.add(new GetMarriedSpace());
                 // else add an OrangeSpace
-            else spaces.add(new OrangeSpace());
+            else {
+                if(RandomUtil.chooseRandomNumber(1, 2) == 1) {
+                    spaces.add(new OrangeSpace());
+                } else {
+                    spaces.add(RandomUtil.chooseRandomNumber(1, 2) == 1 ? new PayDaySpace() : new PayRaiseSpace(RandomUtil.chooseRandomNumber(1, 10) * 500));
+                }
+            }
         }
         spaces.add(new WhichPathSpace());
         return new Path("Career Path", "cap" + careerPathCount, spaces.toArray(new Space[0]), path1, path2);

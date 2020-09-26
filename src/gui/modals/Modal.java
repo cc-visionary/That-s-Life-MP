@@ -249,8 +249,9 @@ public class Modal {
 
     public void showUpdate(String message) {
         Alert update = new Alert(Alert.AlertType.NONE, message, ButtonType.CLOSE);
+        update.getDialogPane().getStylesheets().add("/styles/modal.css");
+        update.initStyle(StageStyle.UNDECORATED);
         update.initModality(Modality.APPLICATION_MODAL);
-        update.setTitle("Update");
 
         update.setOnCloseRequest(e -> {
             AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
@@ -262,10 +263,14 @@ public class Modal {
 
     public String askPlayerName() {
         TextInputDialog inputName = new TextInputDialog();
-        inputName.setTitle("Input Name");
+        inputName.getDialogPane().getStylesheets().add("/styles/modal.css");
+        inputName.initStyle(StageStyle.UNDECORATED);
+        inputName.initModality(Modality.APPLICATION_MODAL);
         inputName.setHeaderText(null);
         inputName.setGraphic(null);
         inputName.setContentText("Enter your name:");
+
+        inputName.getDialogPane().lookupButton(ButtonType.CANCEL).setDisable(true);
 
         inputName.setOnCloseRequest(e -> {
             AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
@@ -277,8 +282,10 @@ public class Modal {
     }
 
     public boolean askYesNo(String title, String question) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, title, ButtonType.NO, ButtonType.YES);
-        alert.setTitle(title);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, question, ButtonType.YES, ButtonType.NO);
+        alert.getDialogPane().getStylesheets().add("/styles/modal.css");
+        alert.initStyle(StageStyle.UNDECORATED);
+        alert.initModality(Modality.APPLICATION_MODAL);
         alert.setHeaderText(null);
         alert.setGraphic(null);
 

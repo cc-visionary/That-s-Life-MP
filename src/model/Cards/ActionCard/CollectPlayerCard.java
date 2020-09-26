@@ -25,11 +25,11 @@ final public class CollectPlayerCard extends ActionCard {
         // transfers the amount to the balance of one who drew the card
         getOwner().addBalance(getAmount());
 
-        GameOfLife.addRoundStat(String.format("%s received $%.2f from %s", getOwner().getName(), getAmount(), recipient.getName()));
+        GameOfLife.addRoundStat(String.format("%s received $%d from %s", getOwner().getName(), getAmount(), recipient.getName()));
     }
 
     @Override
     public String toString() {
-        return String.format("ActionCard{name=%s,amount=%.2f,transaction=COLLECT,recipient=PLAYER}", getName(), getAmount());
+        return String.format("ActionCard{name=%s,amount=%d,transaction=COLLECT,recipient=PLAYER}", getName(), getAmount());
     }
 }
