@@ -83,7 +83,7 @@ public class GameController {
             new Modal().displayChooseMove(gameOfLife, this);
 
             gameOfLife.setTurn(gameOfLife.getTurn() + 1);
-            if(gameOfLife.getTurn() == gameOfLife.getNPlayers()) {
+            if(gameOfLife.getTurn() == gameOfLife.getNActivePlayers()) {
                 new Modal().openRoundStats();
                 gameOfLife.setRound(gameOfLife.getRound() + 1);
                 gameOfLife.setTurn(0);

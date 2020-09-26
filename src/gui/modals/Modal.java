@@ -275,4 +275,15 @@ public class Modal {
         Optional<String> result = inputName.showAndWait();
         return result.get();
     }
+
+    public boolean askYesNo(String title, String question) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, title, ButtonType.NO, ButtonType.YES);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setGraphic(null);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        return result.get() == ButtonType.YES;
+    }
 }

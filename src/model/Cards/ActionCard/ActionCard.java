@@ -28,7 +28,7 @@ public abstract class ActionCard extends Card {
      * Returns the value of the amount
      * @return amount
      */
-    public double getAmount() {
+    public int getAmount() {
         return amount;
     }
 

@@ -1,5 +1,6 @@
 package gui.stats.GameStats;
 
+import gui.modals.Modal;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -34,7 +35,19 @@ public class GameStatsController {
 
         int place = 1;
         for(Player retiredPlayer : retiredPlayers) {
-            list.getChildren().add(new Label(String.format("%d. %s (%d)", place, retiredPlayer.getName(), retiredPlayer.getBalance())));
+            HBox hBox = new HBox();
+            Label statsLabel = new Label(String.format("%d. %s (%d)", place, retiredPlayer.getName(), retiredPlayer.getBalance()));
+            Button viewStatsButton = new Button("View Player");
+
+            viewStatsButton.setOnAction(e -> {
+                AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
+                audioPlayer.play();
+
+                new Modal().showPlayerStats(retiredPlayer);
+            });
+
+            hBox.getChildren().addAll(statsLabel, viewStatsButton);
+            list.getChildren().add(hBox);
             place++;
         }
 

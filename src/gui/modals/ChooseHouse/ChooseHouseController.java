@@ -28,7 +28,7 @@ public class ChooseHouseController {
 
         for(Card card : houseDeck.getCards()) {
             HouseCard houseCard = (HouseCard) card;
-            stringChoices.add(String.format("%s ($%.2f)", houseCard.getName(), houseCard.getCost()));
+            stringChoices.add(String.format("%s ($%d)", houseCard.getName(), houseCard.getCost()));
         }
 
         choices.getItems().addAll(stringChoices);

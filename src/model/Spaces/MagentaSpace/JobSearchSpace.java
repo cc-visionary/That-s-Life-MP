@@ -1,5 +1,6 @@
 package model.Spaces.MagentaSpace;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import gui.modals.Modal;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -25,9 +26,8 @@ final public class JobSearchSpace extends MagentaSpace {
     public CareerCard getCareerCard(Deck careerDeck) {
         CareerCard careerCard = (CareerCard) careerDeck.pickTopCard();
         new Modal().displayCard(careerCard);
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to keep the Card?", ButtonType.NO, ButtonType.YES);
-        alert.showAndWait();
-        if(alert.getResult() == ButtonType.NO) {
+        boolean result = new Modal().askYesNo("Keep Card", "Do you want to keep the Card?");
+        if(!result) {
             careerDeck.addCard(careerCard);
             careerDeck.shuffle();
             careerCard = null;
@@ -44,9 +44,8 @@ final public class JobSearchSpace extends MagentaSpace {
         SalaryCard salaryCard = (SalaryCard) salaryDeck.pickTopCard();
         new Modal().displayCard(salaryCard);
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to keep the Card?", ButtonType.NO, ButtonType.YES);
-        alert.showAndWait();
-        if(alert.getResult() == ButtonType.NO) {
+        boolean result = new Modal().askYesNo("Keep Card", "Do you want to keep the Card?");
+        if(!result) {
             salaryDeck.addCard(salaryCard);
             salaryDeck.shuffle();
             salaryCard = null;

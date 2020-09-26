@@ -72,7 +72,7 @@ public abstract class BlueCard extends Card {
             getOwner().addBalance(15000);
             GameOfLife.addRoundStat(getOwner().getName() + " receives $15000");
         } else {
-            double amountToBePayed = getAmount();
+            int amountToBePayed = getAmount();
 
             Player[] playersWithSameCareer = playersWithSameCareer(getOtherPlayers()).toArray(new Player[0]);
             if(playersWithSameCareer.length > 0) { // player pays all the players with the same career

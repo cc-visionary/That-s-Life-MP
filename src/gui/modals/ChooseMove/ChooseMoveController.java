@@ -43,12 +43,13 @@ public class ChooseMoveController {
      * @param gameScreenController controller used to update screen stats
      */
     public void setGameOfLife(GameOfLife gameOfLife, GameController gameScreenController) {
+        Player currentPlayer = gameOfLife.getCurrentPlayer();
+
         // let's the player roll a dice
         rollDice.setOnAction(e -> {
             MediaPlayer mediaPlayer = new MediaPlayer(new Media(getClass().getResource("/audio/click.wav").toString()));
             mediaPlayer.play();
 
-            Player currentPlayer = gameOfLife.getCurrentPlayer();
             int rolledDice = currentPlayer.rollDice();
             Space previousSpace = currentPlayer.getPath().getSpaces()[currentPlayer.getLocation()], spaceLanded = null;
 
@@ -63,10 +64,10 @@ public class ChooseMoveController {
             }
 
             spaceLanded.addPlayer(currentPlayer);
-            gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), gameOfLife.getCurrentPlayer());
+            gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), currentPlayer);
 
             handleSpaceLanded(gameOfLife, spaceLanded, gameScreenController);
-            gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), gameOfLife.getCurrentPlayer());
+            gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), currentPlayer);
 
             ((Stage)((Node) e.getSource()).getScene().getWindow()).close();
         });
@@ -84,12 +85,12 @@ public class ChooseMoveController {
             AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
             audioPlayer.play();
 
-            new Modal().payDebt(gameOfLife.getCurrentPlayer());
-            gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), gameOfLife.getCurrentPlayer());
-            if(gameOfLife.getCurrentPlayer().getDebt() <= 0) payDebt.setDisable(true);
+            new Modal().payDebt(currentPlayer);
+            gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), currentPlayer);
+            if(currentPlayer.getDebt() <= 0) payDebt.setDisable(true);
         });
 
-        if(gameOfLife.getCurrentPlayer().getDebt() <= 0) payDebt.setDisable(true);
+        if(currentPlayer.getDebt() <= 0) payDebt.setDisable(true);
     }
 
     /**
@@ -104,7 +105,7 @@ public class ChooseMoveController {
             if(space.getType().equals(Constants.BLUE_SPACE)) {
                 // picks an blue card and activate it for all the Players
                 BlueCard blueCard = ((BlueSpace) space).pickCard(gameOfLife.getBlueDeck());
-                GameOfLife.addRoundStat(String.format("%s drew %s(%s)", gameOfLife.getCurrentPlayer().getName(), blueCard.getName(), blueCard.getType()));
+                GameOfLife.addRoundStat(String.format("%s drew %s(%s)", currentPlayer.getName(), blueCard.getName(), blueCard.getType()));
                 blueCard.setOwner(currentPlayer);
                 blueCard.setOtherPlayers(gameOfLife.getOtherPlayers());
                 new Modal().displayCard(blueCard);
@@ -118,7 +119,7 @@ public class ChooseMoveController {
             } else if(space.getType().equals(Constants.ORANGE_SPACE)) {
                 // picks an action card and activate it for all the Players
                 ActionCard actionCard = ((OrangeSpace) space).pickCard(gameOfLife.getOrangeDeck());
-                GameOfLife.addRoundStat(String.format("%s drew %s(%s)", gameOfLife.getCurrentPlayer().getName(), actionCard.getName(), actionCard.getType()));
+                GameOfLife.addRoundStat(String.format("%s drew %s(%s)", currentPlayer.getName(), actionCard.getName(), actionCard.getType()));
                 actionCard.setOwner(currentPlayer);
                 actionCard.setOtherPlayers(gameOfLife.getOtherPlayers());
                 new Modal().displayCard(actionCard);
@@ -137,25 +138,23 @@ public class ChooseMoveController {
                     if(currentPlayer.getBalance() >= houseCard.getCost()) {
                         // if balance is greater than the cost of the house,
                         // the Player will automatically purchase it.
-                        System.out.println(String.format("%s successfully purchased %s for $%.2f", currentPlayer.getName(), houseCard.getName(), houseCard.getCost()));
-                        houseCard.setOwner(gameOfLife.getCurrentPlayer());
-                        gameOfLife.getCurrentPlayer().setHouseCard(houseCard);
+                        currentPlayer.payBalance(houseCard.getCost());
+                        GameOfLife.addRoundStat(String.format("%s successfully purchased %s for $%d", currentPlayer.getName(), houseCard.getName(), houseCard.getCost()));
+                        houseCard.setOwner(currentPlayer);
+                        currentPlayer.setHouseCard(houseCard);
                     } else {
                         // if not, then the player will be given an option to take a loan
-                        int choice = InputUtil.scanInt("Do you want to make a loan? (1-Yes, 2-No)", 1, 2);
-                        switch(choice) {
-                            case 1:
-                                // player makes a loan from the bank
-                                currentPlayer.bankLoan((int) Math.ceil((houseCard.getCost() - currentPlayer.getBalance()) / 20000));
-                                System.out.println(String.format("%s successfully purchased %s for $%.2f", currentPlayer.getName(), houseCard.getName(), houseCard.getCost()));
-                                houseCard.setOwner(gameOfLife.getCurrentPlayer());
-                                gameOfLife.getCurrentPlayer().setHouseCard(houseCard);
-                                break;
-                            case 2:
-                                // if player won't make a loan, add the card back to the Deck
-                                gameOfLife.getHouseDeck().addCard(houseCard);
-                                gameOfLife.getHouseDeck().shuffle();
-                                break;
+                        boolean choice = new Modal().askYesNo("Bank Loan", "Do you want to make a loan?");
+                        if(choice) {
+                            // player makes a loan from the bank
+                            currentPlayer.bankLoan((int) Math.ceil((houseCard.getCost() - currentPlayer.getBalance()) / 20000));
+                            System.out.println(String.format("%s successfully purchased %s for $%.2f", currentPlayer.getName(), houseCard.getName(), houseCard.getCost()));
+                            houseCard.setOwner(currentPlayer);
+                            currentPlayer.setHouseCard(houseCard);
+                        } else {
+                            // if player won't make a loan, add the card back to the Deck
+                            gameOfLife.getHouseDeck().addCard(houseCard);
+                            gameOfLife.getHouseDeck().shuffle();
                         }
                     }
                 } else if(space.getName().equals(Constants.JOB_SEARCH)) {
@@ -203,22 +202,27 @@ public class ChooseMoveController {
                     currentPlayer.setSalaryCard(salaryCard);
                 } else if(space.getName().equals(Constants.GET_MARRIED)) {
                     // Player marries when landing in Get Married Space
-                    ((GetMarriedSpace) space).getMarried(gameOfLife.getCurrentPlayer(), gameOfLife.getOtherPlayers());
+                    ((GetMarriedSpace) space).getMarried(currentPlayer, gameOfLife.getOtherPlayers());
                 } else if(space.getName().equals("Have a Baby") || space.getName().equals("Have a Twin") || space.getName().equals("Have a Triplet")) {
                     // Player haves a baby when landing on Have a Baby Space
-                    ((HaveBabySpace) space).haveABaby(gameOfLife.getCurrentPlayer());
+                    ((HaveBabySpace) space).haveABaby(currentPlayer);
                 } else if(space.getName().equals(Constants.WHICH_PATH)) {
                     // this is the junction where Players can choose the next Path
                     ((WhichPathSpace) currentPlayer.getPath().getJunction()).choosePath(currentPlayer);
+
+                    // handle space landed if the space is magenta
+                    Space newSpaceLanded = currentPlayer.getPath().getSpaces()[currentPlayer.getLocation()];
+                    if(newSpaceLanded.getType().equals(Constants.MAGENTA_SPACE))
+                        handleSpaceLanded(gameOfLife, newSpaceLanded, gameScreenController);
                     // refresh screen
-                    gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), gameOfLife.getCurrentPlayer());
+                    gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), currentPlayer);
                     // let's the player take another turn
                     gameOfLife.setTurn(gameOfLife.getTurn() - 1);
                 }
             } else if(space.getType().equals(Constants.RETIREMENT_SPACE)) {
                 // Space where Player retires
-                ((RetirementSpace) space).retire(gameOfLife.getCurrentPlayer());
-                gameOfLife.retirePlayer(gameOfLife.getCurrentPlayer());
+                ((RetirementSpace) space).retire(currentPlayer);
+                gameOfLife.retirePlayer(currentPlayer);
             }
         } else {
             System.out.println("Space is null...");

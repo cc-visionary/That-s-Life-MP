@@ -97,6 +97,6 @@ final public class SalaryCard extends Card {
 
     @Override
     public String toString() {
-        return String.format("SalaryCard{salary=%.2f,tax=%.2f,payRaise=%d}", salary, tax, payRaise);
+        return String.format("SalaryCard{salary=%d,tax=%d,payRaise=%d}", salary, tax, payRaise);
     }
 }

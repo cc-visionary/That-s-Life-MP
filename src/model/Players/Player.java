@@ -53,7 +53,7 @@ final public class Player {
      * Adds a parameter amount to the balance
      * @param amount amount to be added
      */
-    public void addBalance(double amount) {
+    public void addBalance(int amount) {
         this.balance += amount;
     }
 
@@ -62,7 +62,7 @@ final public class Player {
      * than the balance, you get a debt of amount - balance
      * @param amount amount to be deducted
      */
-    public void payBalance(double amount) {
+    public void payBalance(int amount) {
         if(amount > this.balance) {
             System.out.printf("The balance to be paid is greater than %s's current balance.\n", name);
             bankLoan((int) Math.ceil((amount - getBalance()) / 20000)); // add to debt from the bank
@@ -218,7 +218,7 @@ final public class Player {
     public int getBalance() {
         return balance;
     }
-    public double getDebt() {
+    public int getDebt() {
         return debt;
     }
     public Path getPath() {
