@@ -97,8 +97,8 @@ public class ChooseMoveController {
 
     /**
      * Handles the Actions to be done on where the space the Player landed
-     * @param gameOfLife
-     * @param space space where the currentPlayer landed
+     * @param gameOfLife  main model
+     * @param space       space where the currentPlayer landed
      */
     public void handleSpaceLanded(GameOfLife gameOfLife, Space space, GameController gameScreenController) {
 //        System.out.println(String.format("You landed on %s - %s", space.getType(), space.getName()));
@@ -182,7 +182,7 @@ public class ChooseMoveController {
                     }
                 } else if(space.getName().equals(Constants.COLLEGE_CARREER_CHOICE)) {
                     // if the player is in College Path, he/she graduates on the College Career Space in a College Path
-                    if(currentPlayer.getPath().getName().equals("College Path")) currentPlayer.setHasGraduated(true);
+                    if(currentPlayer.getPath().getName().equals("College Path")) currentPlayer.graduate();
 
                     CareerCard careerCard = ((CollegeCareerChoiceSpace) space).chooseCareerCard(gameOfLife.getCareerDeck(), currentPlayer.isGraduated());
                     SalaryCard salaryCard = ((CollegeCareerChoiceSpace) space).chooseSalaryCard(gameOfLife.getSalaryDeck());
@@ -228,16 +228,15 @@ public class ChooseMoveController {
                 }
             } else if(space.getType().equals(Constants.RETIREMENT_SPACE)) {
                 // Space where Player retires
+
+                // adds the Player's cards back to the Deck
+                if(currentPlayer.getSalaryCard() != null) gameOfLife.getSalaryDeck().addCard(currentPlayer.getSalaryCard());
+                if(currentPlayer.getCareerCard() != null) gameOfLife.getCareerDeck().addCard(currentPlayer.getCareerCard());
+                if(currentPlayer.getHouseCard() != null) gameOfLife.getHouseDeck().addCard(currentPlayer.getHouseCard());
+
+                // retire the player
                 ((RetirementSpace) space).retire(currentPlayer);
                 gameOfLife.retirePlayer(currentPlayer);
-                if(currentPlayer.getCareerCard() != null) {
-                    gameOfLife.getCareerDeck().addCard(currentPlayer.getCareerCard());
-                    currentPlayer.setCareerCard(null);
-                }
-                if(currentPlayer.getSalaryCard() != null) {
-                    gameOfLife.getSalaryDeck().addCard(currentPlayer.getSalaryCard());
-                    currentPlayer.setSalaryCard(null);
-                }
             }
         } else {
             System.out.println("Space is null...");

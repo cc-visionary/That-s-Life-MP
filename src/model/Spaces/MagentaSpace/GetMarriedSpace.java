@@ -38,7 +38,7 @@ final public class GetMarriedSpace extends MagentaSpace {
 
             // adds those amount to the balance of the Player who landed on the space
             player.addBalance(amount * otherPlayers.length);
-            player.setIsMarried(true);
+            player.marry();
         } else {
             System.out.println(player.getName() + " is already married! Nothing happens.");
         }

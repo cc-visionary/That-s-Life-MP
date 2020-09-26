@@ -147,7 +147,7 @@ final public class Player {
     public void setSalaryCard(SalaryCard salaryCard) {
         GameOfLife.addRoundStat(String.format("%s's salary card is now set to %s", getName(), salaryCard));
         this.salaryCard = salaryCard;
-        this.salaryCard.setOwner(this);
+        if(this.salaryCard != null) this.salaryCard.setOwner(this);
     }
 
     /**
@@ -157,25 +157,23 @@ final public class Player {
     public void setCareerCard(CareerCard careerCard) {
         GameOfLife.addRoundStat(String.format("%s's career card is now set to %s", getName(), careerCard));
         this.careerCard = careerCard;
-        this.careerCard.setOwner(this);
+        if(this.careerCard != null) this.careerCard.setOwner(this);
     }
 
     /**
-     * Changes the value of whether the Player is married or not
-     * @param isMarried determines whether a Player is married or not
+     * Marries the player
      */
-    public void setIsMarried(boolean isMarried) {
-        GameOfLife.addRoundStat(String.format("%s is now %s", getName(), isMarried ? "married" : "not married"));
-        this.isMarried = isMarried;
-    }
+    public void marry() {
+        GameOfLife.addRoundStat(String.format("%s is now Married", getName()));
+        isMarried = true;
+     }
 
     /**
-     * Changes the value of whether the Player has graduated or not
-     * @param hasGraduated determines whether a Player is graduated or not
+     * Graduates the Player
      */
-    public void setHasGraduated(boolean hasGraduated) {
-        GameOfLife.addRoundStat(String.format("%s is now %s", getName(), hasGraduated ? "graduated" : "not graduated"));
-        this.hasGraduated = hasGraduated;
+    public void graduate() {
+        GameOfLife.addRoundStat(String.format("%s is now Graduated", getName()));
+        hasGraduated = true;
     }
 
     /**
@@ -193,6 +191,9 @@ final public class Player {
             setHouseCard(null);
         }
 
+        removeCareerCard();
+        removeSalaryCard();
+
         // repay all loans to the bank
         if(getDebt() > 0) payDebt(getNBankLoan());
     }
@@ -201,14 +202,14 @@ final public class Player {
      * Assigns a null value to the current Salary Card of the Player
      */
     public void removeSalaryCard() {
-        this.salaryCard = null;
+        setSalaryCard(null);
     }
 
     /**
      * Assigns a null value to the current Career Card of the Player
      */
     public void removeCareerCard() {
-        this.careerCard = null;
+        setCareerCard(null);
     }
 
 
