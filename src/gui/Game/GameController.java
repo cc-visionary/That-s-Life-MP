@@ -57,7 +57,10 @@ public class GameController {
             Player currentPlayer = gameOfLife.getCurrentPlayer();
 
             // if player has no name, ask for user to input the name
-            if(currentPlayer.getName() == null) currentPlayer.setName(new Modal().askPlayerName());
+            if(currentPlayer.getName() == null) {
+                currentPlayer.setName(new Modal().askPlayerName());
+                refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), currentPlayer);
+            }
 
             // if player has no path, let him/her choose from the beginning paths
             if(currentPlayer.getPath() == null) {
@@ -75,7 +78,6 @@ public class GameController {
                 }
                 refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), currentPlayer);
             }
-
 
             // lets the player choose a move
             new Modal().displayChooseMove(gameOfLife, this);

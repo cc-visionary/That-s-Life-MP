@@ -76,21 +76,7 @@ public class ChooseMoveController {
             MediaPlayer mediaPlayer = new MediaPlayer(new Media(getClass().getResource("/audio/click.wav").toString()));
             mediaPlayer.play();
 
-            Stage playerStatsStage = new Stage();
-            playerStatsStage.initStyle(StageStyle.UTILITY);
-            playerStatsStage.initModality(Modality.APPLICATION_MODAL);
-
-            FXMLLoader playerStatsLoader = new FXMLLoader(getClass().getResource("/gui/stats/PlayerStats/PlayerStats.fxml"));
-
-            try {
-                Parent root = playerStatsLoader.load();
-                ((PlayerStatsController) playerStatsLoader.getController()).setStats(gameOfLife.getCurrentPlayer());
-                playerStatsStage.setScene(new Scene(root));
-            } catch(Exception exception) {
-                exception.printStackTrace();
-            }
-
-            playerStatsStage.show();
+            new Modal().showPlayerStats(gameOfLife.getCurrentPlayer());
         });
 
         // lets the player pay he's debt
@@ -98,20 +84,7 @@ public class ChooseMoveController {
             AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
             audioPlayer.play();
 
-            Stage payDebtStage = new Stage();
-            payDebtStage.initStyle(StageStyle.UTILITY);
-            payDebtStage.initModality(Modality.APPLICATION_MODAL);
-
-            FXMLLoader payDebtLoader = new FXMLLoader(getClass().getResource("/gui/modals/PayDebt/PayDebt.fxml"));
-            try {
-                Parent root = payDebtLoader.load();
-                ((PayDebtController) payDebtLoader.getController()).setPlayer(gameOfLife.getCurrentPlayer());
-                payDebtStage.setScene(new Scene(root));
-            } catch(Exception exception) {
-                exception.printStackTrace();
-            }
-
-            payDebtStage.showAndWait();
+            new Modal().payDebt(gameOfLife.getCurrentPlayer());
             gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), gameOfLife.getCurrentPlayer());
             if(gameOfLife.getCurrentPlayer().getDebt() <= 0) payDebt.setDisable(true);
         });
@@ -251,6 +224,4 @@ public class ChooseMoveController {
             System.out.println("Space is null...");
         }
     }
-
-
 }

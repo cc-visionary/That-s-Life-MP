@@ -1,8 +1,14 @@
 package gui.modals;
 
 import gui.modals.ChooseHouse.ChooseHouseController;
+import gui.modals.PayDebt.PayDebtController;
+import gui.stats.PlayerStats.PlayerStatsController;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 import javafx.stage.Screen;
 import model.GameOfLife;
 import gui.modals.ChooseCard.ChooseCardController;
@@ -23,6 +29,8 @@ import model.Cards.HouseCard.HouseCard;
 import model.Decks.Deck;
 import model.Paths.Path;
 import model.Players.Player;
+
+import java.util.Optional;
 
 public class Modal {
     /**
@@ -48,7 +56,52 @@ public class Modal {
             e.printStackTrace();
         }
 
+        stage.setOnCloseRequest(e -> {
+            AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
+            audioPlayer.play();
+        });
+
         stage.showAndWait();
+    }
+
+    public void showPlayerStats(Player player) {
+        Stage stage = new Stage();
+        stage.initStyle(StageStyle.UTILITY);
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        FXMLLoader playerStatsLoader = new FXMLLoader(getClass().getResource("/gui/stats/PlayerStats/PlayerStats.fxml"));
+
+        try {
+            Parent root = playerStatsLoader.load();
+            ((PlayerStatsController) playerStatsLoader.getController()).setStats(player);
+            stage.setScene(new Scene(root));
+        } catch(Exception exception) {
+            exception.printStackTrace();
+        }
+
+        stage.setOnCloseRequest(e -> {
+            AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
+            audioPlayer.play();
+        });
+
+        stage.show();
+    }
+
+    public void payDebt(Player player) {
+        Stage payDebtStage = new Stage();
+        payDebtStage.initStyle(StageStyle.UNDECORATED);
+        payDebtStage.initModality(Modality.APPLICATION_MODAL);
+
+        FXMLLoader payDebtLoader = new FXMLLoader(getClass().getResource("/gui/modals/PayDebt/PayDebt.fxml"));
+        try {
+            Parent root = payDebtLoader.load();
+            ((PayDebtController) payDebtLoader.getController()).setPlayer(player);
+            payDebtStage.setScene(new Scene(root));
+        } catch(Exception exception) {
+            exception.printStackTrace();
+        }
+
+        payDebtStage.showAndWait();
     }
 
     /**
@@ -198,11 +251,28 @@ public class Modal {
         Alert update = new Alert(Alert.AlertType.NONE, message, ButtonType.CLOSE);
         update.initModality(Modality.APPLICATION_MODAL);
         update.setTitle("Update");
+
+        update.setOnCloseRequest(e -> {
+            AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
+            audioPlayer.play();
+        });
+
         update.showAndWait();
     }
 
     public String askPlayerName() {
-        String name = "";
-        return name;
+        TextInputDialog inputName = new TextInputDialog();
+        inputName.setTitle("Input Name");
+        inputName.setHeaderText(null);
+        inputName.setGraphic(null);
+        inputName.setContentText("Enter your name:");
+
+        inputName.setOnCloseRequest(e -> {
+            AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
+            audioPlayer.play();
+        });
+
+        Optional<String> result = inputName.showAndWait();
+        return result.get();
     }
 }
