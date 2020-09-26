@@ -29,6 +29,8 @@ public class GameStatsController {
     private Button continueButton;
 
     public void setData(GameOfLife gameOfLife) {
+        new AudioClip(new Media(getClass().getResource("/audio/win.mp3").toString()).getSource()).play();
+
         ArrayList<Player> retiredPlayers = new ArrayList<>();
         for(Player retiredPlayer : gameOfLife.getAllRetiredPlayers()) retiredPlayers.add(retiredPlayer);
 
@@ -45,8 +47,7 @@ public class GameStatsController {
             Button viewStatsButton = new Button("View Player");
 
             viewStatsButton.setOnAction(e -> {
-                AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
-                audioPlayer.play();
+                new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource()).play();
 
                 new Modal().showPlayerStats(retiredPlayer);
             });
@@ -57,8 +58,7 @@ public class GameStatsController {
         }
 
         continueButton.setOnAction(e -> {
-            AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
-            audioPlayer.play();
+            new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource()).play();
 
             Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
             try {

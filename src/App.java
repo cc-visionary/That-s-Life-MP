@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.stage.Stage;
@@ -22,7 +23,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+        primaryStage.getIcons().add(new Image("/images/logo300x300.png"));
         primaryStage.setTitle("Game of Life");
+        AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/datasette.mp3").toString()).getSource());
+        audioPlayer.setCycleCount(AudioClip.INDEFINITE);
+        audioPlayer.play();
 
         primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/gui/Menu/Menu.fxml"))));
 
@@ -32,8 +37,5 @@ public class App extends Application {
         });
 
         primaryStage.show();
-        AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/datasette.mp3").toString()).getSource());
-        audioPlayer.setCycleCount(AudioClip.INDEFINITE);
-        audioPlayer.play();
     }
 }
