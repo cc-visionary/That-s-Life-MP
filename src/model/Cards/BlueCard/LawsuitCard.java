@@ -19,7 +19,7 @@ final public class LawsuitCard extends BlueCard {
      * @return multiplier * 10000
      */
     @Override
-    public double getAmount() {
+    public int getAmount() {
         return this.multiplier * 10000;
     }
 }

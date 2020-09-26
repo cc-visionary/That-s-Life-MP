@@ -22,7 +22,7 @@ final public class Player {
     private HouseCard houseCard;
     private boolean isMarried = false, hasGraduated = false, isRetired = false;
     private int nBabies = 0;
-    private double balance, debt;
+    private int balance, debt;
     private int nBankLoan = 0;
 
     public Player(String name, int startingMoney) {
@@ -215,7 +215,7 @@ final public class Player {
     public String getName() {
         return name;
     }
-    public double getBalance() {
+    public int getBalance() {
         return balance;
     }
     public double getDebt() {

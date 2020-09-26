@@ -16,30 +16,26 @@ import javafx.stage.Stage;
 import model.GameOfLife;
 import model.Players.Player;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class GameStatsController {
     @FXML
-    private TabPane tabPane;
+    private VBox list;
 
     @FXML
     private Button continueButton;
 
     public void setData(GameOfLife gameOfLife) {
-        for(Player player : gameOfLife.getAllRetiredPlayers()) {
-            Tab tab = new Tab();
-            tab.setText(player.getName());
-            VBox vbox = new VBox();
+        ArrayList<Player> retiredPlayers = new ArrayList<>();
+        for(Player retiredPlayer : gameOfLife.getAllRetiredPlayers()) retiredPlayers.add(retiredPlayer);
 
-            Label name = new Label(String.format("Name: %s", player.getName()));
-            Label money = new Label(String.format("Money: %.2f", player.getBalance()));
-            Label debt = new Label(String.format("Debt: %.2f", player.getDebt()));
-            Label noChildren = new Label(String.format("Number of Children: %d", player.getNBabies()));
-            Label hasGraduated = new Label(String.format("Graduated: %s", player.isGraduated() ? "Yes" : "No"));
-            Label isMarried = new Label(String.format("Married: %s", player.isMarried() ? "Yes" : "No"));
-            Label isRetired = new Label(String.format("Retired: %s", player.isRetired() ? "Yes" : "No"));
+        retiredPlayers.sort((o1, o2) -> o1.getBalance() - o2.getBalance());
 
-            vbox.getChildren().addAll(name, money, debt, noChildren, hasGraduated, isMarried, isRetired);
-            tab.setContent(vbox);
-            tabPane.getTabs().add(tab);
+        int place = 1;
+        for(Player retiredPlayer : retiredPlayers) {
+            list.getChildren().add(new Label(String.format("%d. %s (%d)", place, retiredPlayer.getName(), retiredPlayer.getBalance())));
+            place++;
         }
 
         continueButton.setOnAction(e -> {

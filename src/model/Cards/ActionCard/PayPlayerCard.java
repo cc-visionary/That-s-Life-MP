@@ -8,7 +8,7 @@ import model.Players.Player;
  */
 
 final public class PayPlayerCard extends ActionCard {
-    public PayPlayerCard(String name, String description, double amount) {
+    public PayPlayerCard(String name, String description, int amount) {
         super(name, description, amount);
     }
 

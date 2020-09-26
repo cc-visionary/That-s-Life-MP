@@ -17,7 +17,7 @@ final public class ComputerRepairCard extends BlueCard {
      * @return amount to be paid by the player
      */
     @Override
-    public double getAmount() {
+    public int getAmount() {
         int generatedNumber = RandomUtil.chooseRandomNumber(1, 10);
         if(generatedNumber % 2 == 0) {
             return 5000;

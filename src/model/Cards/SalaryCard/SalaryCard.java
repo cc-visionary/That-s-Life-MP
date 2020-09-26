@@ -16,13 +16,13 @@ import utilities.StringUtil;
  */
 
 final public class SalaryCard extends Card {
-    private double salary, tax;
+    private int salary, tax;
     private int payRaise = 0;
-    public SalaryCard(double salary) {
+    public SalaryCard(int salary) {
         super(Constants.SALARY_CARD, "Salary Card contains salary and tax due.", "/images/Cards/Salary Card.png");
 
         this.salary = salary;
-        this.tax = salary * 0.1; // the tax due is 10% of the salary
+        this.tax = salary / 10; // the tax due is 10% of the salary
     }
 
     /**
@@ -31,7 +31,7 @@ final public class SalaryCard extends Card {
      */
     public void increaseSalary(double amount) {
         salary += amount;
-        tax = salary * 0.1; // the tax due is 10% of the salary
+        tax = salary / 10; // the tax due is 10% of the salary
         payRaise++;
     }
 
@@ -39,7 +39,7 @@ final public class SalaryCard extends Card {
      * Returns the value of the salary
      * @return salary
      */
-    public double getSalary() {
+    public int getSalary() {
         return salary;
     }
 
@@ -47,7 +47,7 @@ final public class SalaryCard extends Card {
      * Returns the value of the tax
      * @return tax
      */
-    public double getTax() {
+    public int getTax() {
         return tax;
     }
 

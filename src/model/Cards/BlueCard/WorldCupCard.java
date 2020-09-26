@@ -20,7 +20,7 @@ final public class WorldCupCard extends BlueCard {
      * @return number of players * 5000
      */
     @Override
-    public double getAmount() {
+    public int getAmount() {
         return this.numOfPlayers * 5000;
     }
 }

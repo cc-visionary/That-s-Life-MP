@@ -18,8 +18,8 @@ import utilities.StringUtil;
  */
 
 public abstract class ActionCard extends Card {
-    private double amount;
-    public ActionCard(String name, String description, double amount) {
+    private int amount;
+    public ActionCard(String name, String description, int amount) {
         super(Constants.ACTION_CARD, name, description, "/images/Cards/Action Card.png");
         this.amount = amount;
     }

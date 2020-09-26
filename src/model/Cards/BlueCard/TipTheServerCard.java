@@ -17,7 +17,7 @@ final public class TipTheServerCard extends BlueCard {
      * @return the generated number * 1000
      */
     @Override
-    public double getAmount() {
+    public int getAmount() {
         int generatedNumber = RandomUtil.chooseRandomNumber(1, 15);
         return generatedNumber * 1000;
     }

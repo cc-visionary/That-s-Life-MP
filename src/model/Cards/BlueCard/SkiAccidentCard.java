@@ -16,7 +16,7 @@ final public class SkiAccidentCard extends BlueCard {
      * @return 10000
      */
     @Override
-    public double getAmount() {
+    public int getAmount() {
         return 10000;
     }
 }

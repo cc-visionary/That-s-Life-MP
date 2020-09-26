@@ -7,7 +7,7 @@ import model.GameOfLife;
  */
 
 final public class CollectBankCard extends ActionCard {
-    public CollectBankCard(String name, String description, double amount) {
+    public CollectBankCard(String name, String description, int amount) {
         super(name, description, amount);
     }
 

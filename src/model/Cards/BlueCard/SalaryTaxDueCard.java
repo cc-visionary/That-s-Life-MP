@@ -16,7 +16,7 @@ final public class SalaryTaxDueCard extends BlueCard {
      * @return amount to be paid by the player
      */
     @Override
-    public double getAmount() {
+    public int getAmount() {
          return getOwner().getSalaryCard().getTax();
     }
 }

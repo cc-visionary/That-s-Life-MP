@@ -88,7 +88,7 @@ public abstract class BlueCard extends Card {
         }
     }
 
-    public abstract double getAmount();
+    public abstract int getAmount();
 
     /**
      * Formats the Card into an image with corresponding texts

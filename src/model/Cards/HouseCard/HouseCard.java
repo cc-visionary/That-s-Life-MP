@@ -17,13 +17,13 @@ import utilities.StringUtil;
  */
 
 public class HouseCard extends Card {
-    private double cost;
-    public HouseCard(String name, String description, double cost) {
+    private int cost;
+    public HouseCard(String name, String description, int cost) {
         super(Constants.HOUSE_CARD, name, description, "/images/Cards/House Card.png");
         this.cost = cost;
     }
 
-    public double getCost() {
+    public int getCost() {
         return cost;
     }
 

@@ -8,7 +8,7 @@ import model.Players.Player;
  */
 
 final public class CollectAllCard extends ActionCard {
-    public CollectAllCard(String name, String description, double amount) {
+    public CollectAllCard(String name, String description, int amount) {
         super(name, description, amount);
     }
 
