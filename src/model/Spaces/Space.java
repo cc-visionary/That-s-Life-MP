@@ -60,16 +60,6 @@ public abstract class Space {
         return name;
     }
 
-    /**
-     * Display the space into a 3(height) x 6(width) unit
-     */
-    public void displaySpace() {
-        final int length = 5;
-        System.out.println("╭─────╮");
-        System.out.println("│" + StringUtil.centerString(getType().charAt(0)  + "", length) + "│");
-        System.out.println("╰─────╯");
-    }
-
     @Override
     public String toString() {
         return String.format("Space{type=%s,name=%s}", type, name);

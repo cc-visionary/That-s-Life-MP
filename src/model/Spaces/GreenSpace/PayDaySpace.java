@@ -1,6 +1,7 @@
 package model.Spaces.GreenSpace;
 
 import model.Constants;
+import model.GameOfLife;
 import model.Players.Player;
 
 /**
@@ -18,6 +19,7 @@ final public class PayDaySpace extends GreenSpace {
      * @param player Player to give salary to
      */
     public void giveSalary(Player player) {
+        GameOfLife.addRoundStat(String.format("%s received his salary ($%d)", player.getName(), player.getSalaryCard().getSalary()));
         player.addBalance(player.getSalaryCard().getSalary());
     }
 }

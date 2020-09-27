@@ -20,12 +20,12 @@ final public class PayAllCard extends ActionCard {
         // deducts the number of players * amount from the player who drew the card's balance
         getOwner().payBalance(getOtherPlayers().length * getAmount());
 
+        GameOfLife.addRoundStat(String.format("%s paid $%d to all the other players ($%d)", getOwner().getName(), getAmount(), getOtherPlayers().length * getAmount()));
+
         // then gives it to all the other players seperately
         for(Player otherPlayer : getOtherPlayers()) {
             otherPlayer.addBalance(getAmount());
         }
-
-        GameOfLife.addRoundStat(String.format("%s paid $%d to all the other players ($%d)", getOwner().getName(), getAmount(), getOtherPlayers().length * getAmount()));
     }
 
     @Override

@@ -25,6 +25,8 @@ public class App extends Application {
     public void start(Stage primaryStage) throws IOException {
         primaryStage.getIcons().add(new Image("/images/logo300x300.png"));
         primaryStage.setTitle("Game of Life");
+
+        // Plays the Game Music
         AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/datasette.mp3").toString()).getSource());
         audioPlayer.setCycleCount(AudioClip.INDEFINITE);
         audioPlayer.play();

@@ -1,5 +1,6 @@
 package model;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
 import model.Cards.ActionCard.*;
 import model.Cards.BlueCard.*;
 import model.Cards.Card;
@@ -236,8 +237,10 @@ public class Generator {
                 }
             }
         }
-        spaces.add(new WhichPathSpace());
-        return new Path("Career Path", "cap" + careerPathCount, spaces.toArray(new Space[0]), path1, path2);
+        if(path2 == null) spaces.add(new OrangeSpace());
+        else spaces.add(new WhichPathSpace());
+
+        return new Path("Career Path", "cap" + careerPathCount, spaces.toArray(new Space[0]), path1, path2, "Career Path is where you can improve your lifestyle by earning as much as possible, and as efficient as possible. Players will work hard here to be able achieve their both life and personal goals.");
     }
 
     /**
@@ -254,8 +257,9 @@ public class Generator {
             spaces.add(new OrangeSpace());
         }
         spaces.add(new CollegeCareerChoiceSpace());
-        spaces.add(new WhichPathSpace());
-        return new Path("College Path", "cop" + collegePathCount, spaces.toArray(new Space[0]), path1, path2);
+        if(path2 == null) spaces.add(new OrangeSpace());
+        else spaces.add(new WhichPathSpace());
+        return new Path("College Path", "cop" + collegePathCount, spaces.toArray(new Space[0]), path1, path2, "College Path is where Players go through so that they can get better jobs which will increase the likelihood of a better lifestyle.");
     }
 
     /**
@@ -301,8 +305,9 @@ public class Generator {
             }
         }
 
-        spaces.add(new WhichPathSpace());
-        return new Path("Change Career Path", "ccp" + changeChareerPathCount, spaces.toArray(new Space[0]), path1, path2);
+        if(path2 == null) spaces.add(new OrangeSpace());
+        else spaces.add(new WhichPathSpace());
+        return new Path("Change Career Path", "ccp" + changeChareerPathCount, spaces.toArray(new Space[0]), path1, path2, "Change a Career Path is where Players find more opportunities for vacant Jobs to gain even more money. Passing through here will surely grant you benefits and opportunities.");
     }
 
     /**
@@ -331,8 +336,9 @@ public class Generator {
             else spaces.add(new OrangeSpace());
         }
 
-        spaces.add(new WhichPathSpace());
-        return new Path("Start a Family Path", "safp" + startAFamilyPathCount, spaces.toArray(new Space[0]), path1, path2);
+        if(path2 == null) spaces.add(new OrangeSpace());
+        else spaces.add(new WhichPathSpace());
+        return new Path("Start a Family Path", "safp" + startAFamilyPathCount, spaces.toArray(new Space[0]), path1, path2, "Start a Family Path is where Players start their own family by buying a house and having kids. Through passing here, you'll always have your children to inherit your belongings.");
     }
 
     public static Path generateRetirementPath() {

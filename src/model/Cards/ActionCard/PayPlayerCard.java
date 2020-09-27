@@ -19,13 +19,13 @@ final public class PayPlayerCard extends ActionCard {
     public void activate() {
         Player recipient = chooseOtherPlayer();
 
+        GameOfLife.addRoundStat(String.format("%s paid $%d to %s", getOwner().getName(), getAmount(), recipient.getName()));
+
         // deducts from the player who drew the card
         getOwner().payBalance(getAmount());
 
         // transfer the deducted balance to the player chosen
         recipient.addBalance(getAmount());
-
-        GameOfLife.addRoundStat(String.format("%s paid $%d to %s", getOwner().getName(), getAmount(), recipient.getName()));
     }
 
     @Override

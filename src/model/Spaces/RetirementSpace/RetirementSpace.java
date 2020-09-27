@@ -7,7 +7,7 @@ import model.Spaces.Space;
 /**
  * Represents the RetirementSpace where reaching this will determine that a Player has won.
  */
-public class RetirementSpace extends Space {
+final public class RetirementSpace extends Space {
     public RetirementSpace() {
         super(Constants.RETIREMENT_SPACE);
     }

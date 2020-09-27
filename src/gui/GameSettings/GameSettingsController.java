@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
@@ -21,7 +22,8 @@ import model.GameSettings;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GameSettingsController implements Initializable {
+public class
+GameSettingsController implements Initializable {
     private GameSettings gameSettings;
 
     @FXML
@@ -60,7 +62,7 @@ public class GameSettingsController implements Initializable {
 
         // set the scene to the Game's Screen
         try {
-            StackPane root = gameLoader.load();
+            AnchorPane root = gameLoader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setMaximized(true);

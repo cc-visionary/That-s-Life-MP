@@ -24,6 +24,7 @@ final public class Player {
     private int nBabies = 0;
     private int balance, debt;
     private int nBankLoan = 0;
+    private boolean isCurrentPlayer = false;
 
     public Player(String name, int startingMoney) {
         this.name = name;
@@ -54,6 +55,7 @@ final public class Player {
      * @param amount amount to be added
      */
     public void addBalance(int amount) {
+        GameOfLife.addRoundStat(String.format("%s's balance was added by $%d", getName(), amount));
         this.balance += amount;
     }
 
@@ -66,7 +68,10 @@ final public class Player {
         if(amount > this.balance) {
             System.out.printf("The balance to be paid is greater than %s's current balance.\n", name);
             bankLoan((int) Math.ceil((amount - getBalance()) / 20000)); // add to debt from the bank
+            this.balance += (int) Math.ceil((amount - getBalance()) / 20000) * 20000;
+            GameOfLife.addRoundStat(String.format("%s automatically loaned $%d to the bank", getName(), ((int) Math.ceil((amount - getBalance()) / 20000) * 20000)));
         }
+        GameOfLife.addRoundStat(String.format("%s's balance was reduced by $%d", getName(), amount));
         this.balance -= amount;
     }
 
@@ -93,9 +98,9 @@ final public class Player {
      * @param times multiplier for the amount of times to be paid
      */
     public void payDebt(int times) {
-        GameOfLife.addRoundStat(String.format("%s paid %d to the bank to pay off the debt", getName(), 2500 * times));
-        payBalance(2500 * times);
-        this.debt -= 2500 * times;
+        GameOfLife.addRoundStat(String.format("%s paid %d to the bank to pay off the debt", getName(), 25000 * times));
+        payBalance(25000 * times);
+        this.debt -= 25000 * times;
         this.nBankLoan -= times;
     }
 
@@ -122,7 +127,9 @@ final public class Player {
      */
     public void setHouseCard(HouseCard houseCard) {
         GameOfLife.addRoundStat(String.format("%s's house is now set to %s", getName(), houseCard != null ? houseCard.getName() : null));
+        removeHouseCard();
         this.houseCard = houseCard;
+        if(this.houseCard != null) this.houseCard.setOwner(this);
     }
 
     /**
@@ -130,14 +137,15 @@ final public class Player {
      * @param path the path to be assigned to the player's path
      */
     public void setPath(Path path) {
-        GameOfLife.addRoundStat(String.format("%s's path is now set to %s", getName(), path.getName()));
+        GameOfLife.addRoundStat(String.format("%s's path is now set to %s", getName(), path == null ? path : path.getName()));
         if(this.path != null) {
+            this.path.getSpaces()[this.path.getNSpaces() - 1].removePlayer(this);
             this.path.getJunction().removePlayer(this);
         }
         this.path = path;
         if(path.getName() == "College Path") bankLoan(2);
         this.location = 0;
-        path.getSpaces()[0].addPlayer(this);
+        if(this.path != null) this.path.getSpaces()[0].addPlayer(this);
     }
 
     /**
@@ -146,6 +154,7 @@ final public class Player {
      */
     public void setSalaryCard(SalaryCard salaryCard) {
         GameOfLife.addRoundStat(String.format("%s's salary card is now set to %s", getName(), salaryCard));
+        removeSalaryCard();
         this.salaryCard = salaryCard;
         if(this.salaryCard != null) this.salaryCard.setOwner(this);
     }
@@ -156,8 +165,13 @@ final public class Player {
      */
     public void setCareerCard(CareerCard careerCard) {
         GameOfLife.addRoundStat(String.format("%s's career card is now set to %s", getName(), careerCard));
+        removeCareerCard();
         this.careerCard = careerCard;
         if(this.careerCard != null) this.careerCard.setOwner(this);
+    }
+
+    public void setLocation(int location) {
+        this.location = location;
     }
 
     /**
@@ -184,13 +198,10 @@ final public class Player {
         this.isRetired = true;
         // collect $10000 from the bank for each child
         addBalance(getNBabies() * 10000);
+        GameOfLife.addRoundStat(String.format("%s earned $%d from %d babies", getName(), getNBabies() * 10000, getNBabies()));
 
         // sell house to the bank
-        if(getHouseCard() != null) {
-            addBalance(getHouseCard().getCost());
-            setHouseCard(null);
-        }
-
+        removeHouseCard();
         removeCareerCard();
         removeSalaryCard();
 
@@ -199,19 +210,49 @@ final public class Player {
     }
 
     /**
-     * Assigns a null value to the current Salary Card of the Player
+     * Removes the House Card from the Player by assigning a nul
+     * value to the current House Card of the Player
      */
-    public void removeSalaryCard() {
-        setSalaryCard(null);
+    public void removeHouseCard() {
+        if(houseCard != null) {
+            addBalance(getHouseCard().getCost());
+            houseCard.setOwner(null);
+            houseCard = null;
+        }
     }
 
     /**
-     * Assigns a null value to the current Career Card of the Player
+     * Removes the Salary Card from the Player by assigning a null
+     * value to the current Salary Card of the Player
      */
-    public void removeCareerCard() {
-        setCareerCard(null);
+    public void removeSalaryCard() {
+        if(salaryCard != null) {
+            salaryCard.setOwner(null);
+            salaryCard = null;
+        }
     }
 
+    /**
+     * Removes the Career Card from the Player by assigning a null
+     * value to the current Career Card of the Player
+     */
+    public void removeCareerCard() {
+        if(careerCard != null) {
+            careerCard.setOwner(null);
+            careerCard = null;
+        }
+    }
+
+    /**
+     * Sets the player to be the current player
+     */
+    public void setCurrentPlayer(boolean isCurrentPlayer) {
+        this.isCurrentPlayer = isCurrentPlayer;
+    }
+
+    public boolean isCurrentPlayer() {
+        return isCurrentPlayer;
+    }
 
     public String getName() {
         return name;
@@ -237,9 +278,6 @@ final public class Player {
     public static int getPlayerCount() {
         return playerCount;
     }
-    public int getNthPlayer() {
-        return nthPlayer;
-    }
     public int getNBabies() {
         return nBabies;
     }
@@ -250,7 +288,6 @@ final public class Player {
     public int getNBankLoan() {
         return nBankLoan;
     }
-
     public boolean isGraduated() {
         return hasGraduated;
     }
@@ -259,16 +296,12 @@ final public class Player {
         return isMarried;
     }
 
-    public boolean isRetired() {
-        return isRetired;
-    }
-
     /**
      * Checks whether the player has reached retirement or not
      * @return boolean values (true/false)
      */
-    public boolean hasReachedRetirement() {
-        return false;
+    public boolean isRetired() {
+        return isRetired;
     }
 
     @Override

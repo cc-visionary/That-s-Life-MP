@@ -33,11 +33,11 @@ public class ChoosePathController {
 
     public void setPaths(Player player, Path path1, Path path2) {
         path1Tab.setText(path1.getName());
-        path1Description.setText(StringUtil.splitStringIntoNewLine(path1.getDescription(), 40));
+        path1Description.setText(StringUtil.splitStringIntoNewLine(path1.getDescription(), 200));
         path1Spaces.setText(getUniqueSpaces(path1));
 
         path2Tab.setText(path2.getName());
-        path2Description.setText(StringUtil.splitStringIntoNewLine(path2.getDescription(), 40));
+        path2Description.setText(StringUtil.splitStringIntoNewLine(path2.getDescription(), 200));
         path2Spaces.setText(getUniqueSpaces(path2));
 
         continueButton.setOnAction(e -> {

@@ -22,11 +22,12 @@ final public class CollectAllCard extends ActionCard {
             otherPlayer.payBalance(getAmount());
         }
 
+        GameOfLife.addRoundStat(String.format("%s received $%d from all the other players ($%d)", getOwner().getName(), getAmount(), getOtherPlayers().length * getAmount()));
+
         // then gives all those money to the player who drew the card
         getOwner().addBalance(getOtherPlayers().length * getAmount());
 
-        GameOfLife.addRoundStat(String.format("%s received $%d from all the other players ($%d)", getOwner().getName(), getAmount(), getOtherPlayers().length * getAmount()));
-    }
+        }
 
     @Override
     public String toString() {

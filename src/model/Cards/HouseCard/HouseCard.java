@@ -58,7 +58,6 @@ public class HouseCard extends Card {
         stackPane.getChildren().addAll(cardImage, formattedBox);
         formattedBox.setAlignment(Pos.CENTER);
 
-
         return stackPane;
     }
 }

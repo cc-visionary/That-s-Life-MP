@@ -43,8 +43,10 @@ public class GameStatsController {
 
             Label statsLabel = new Label(String.format("%d. %s (%d) %s", place, retiredPlayer.getName(), retiredPlayer.getBalance(), place == 1 ? "-> Winner!!" : "           "));
             statsLabel.setAlignment(Pos.CENTER);
+            statsLabel.setMaxWidth(400);
 
             Button viewStatsButton = new Button("View Player");
+            viewStatsButton.setMaxWidth(250);
 
             viewStatsButton.setOnAction(e -> {
                 new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource()).play();

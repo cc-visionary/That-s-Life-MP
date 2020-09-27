@@ -1,17 +1,15 @@
 package gui.Game;
 
-import gui.ScreenStats.ScreenStatsController;
 import gui.modals.Modal;
 import gui.stats.GameStats.GameStatsController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
-import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.paint.Color;
@@ -30,16 +28,14 @@ public class GameController {
 
     @FXML
     private Canvas board;
-
     @FXML
-    private StackPane screenStats;
+    private Label turnLabel, careerLabel, salaryLabel, pathLabel, balanceLabel;
 
-    private int nPlayers, startingMoney;
+    GameOfLife gameOfLife;
     private Stage stage;
 
     public GameController(int nPlayers, int startingMoney, Stage stage) {
-        this.nPlayers = nPlayers;
-        this.startingMoney = startingMoney;
+        this.gameOfLife = new GameOfLife(nPlayers, startingMoney);
         this.stage = stage;
     }
 
@@ -48,18 +44,16 @@ public class GameController {
      * Calling this function will start the Game
      */
     public void startGame() {
-        GameOfLife gameOfLife = new GameOfLife(nPlayers, startingMoney);
-
         while (!gameOfLife.hasEnded()) {
-            System.out.println(gameOfLife.getTurn());
-            refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), gameOfLife.getCurrentPlayer());
+            gameOfLife.getCurrentPlayer().setCurrentPlayer(true);
+            refreshGameScreen();
 
             Player currentPlayer = gameOfLife.getCurrentPlayer();
 
             // if player has no name, ask for user to input the name
             if(currentPlayer.getName() == null) {
                 currentPlayer.setName(new Modal().askPlayerName());
-                refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), currentPlayer);
+                refreshGameScreen();
             }
 
             // if player has no path, let him/her choose from the beginning paths
@@ -76,11 +70,14 @@ public class GameController {
                     currentPlayer.setCareerCard(careerCard);
                     currentPlayer.setSalaryCard((SalaryCard) gameOfLife.getSalaryDeck().pickTopCard());
                 }
-                refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), currentPlayer);
+                refreshGameScreen();
             }
 
             // lets the player choose a move
-            new Modal().displayChooseMove(gameOfLife, this);
+            if(gameOfLife.getNActivePlayers() != 0) {
+                new Modal().displayChooseMove(gameOfLife, this);
+                if(gameOfLife.getNActivePlayers() != 0) gameOfLife.getCurrentPlayer().setCurrentPlayer(false);
+            }
 
             gameOfLife.setTurn(gameOfLife.getTurn() + 1);
             if(gameOfLife.getTurn() >= gameOfLife.getNActivePlayers()) {
@@ -89,10 +86,6 @@ public class GameController {
                 gameOfLife.setTurn(0);
             }
         }
-
-        // the game stats
-        AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
-        audioPlayer.play();
 
         try {
             FXMLLoader gameStatsLoader = new FXMLLoader(getClass().getResource("/gui/stats/GameStats/GameStats.fxml"));
@@ -107,35 +100,29 @@ public class GameController {
     /**
      * Refreshes the Game Screen where it will clear all the children of Screen Stats,
      * and reassign the updated values then re-print the Board in the Canvas.
-     * @param collegePath starting college path
-     * @param careerPath  starting career path
-     * @param player      current player taking the turn
      */
-    public void refreshGameScreen(Path collegePath, Path careerPath, Player player) {
-        System.out.println((player.getLocation() * (7 - getHeight(player.getPath()))) / (Constants.PATH_SPACES * 7.0));
-        scrollPane.setHvalue((player.getLocation() * (7 - getHeight(player.getPath()))) / (Constants.PATH_SPACES * 5.0));
+    public void refreshGameScreen() {
         board.setWidth(Constants.PATH_SPACES * 7 * 2 * Constants.HEXAGON_SIZE);
+        scrollPane.setHmax(board.getWidth() / 2);
         board.setHeight(Constants.HEXAGON_SIZE * 30);
-        screenStats.getChildren().clear();
+        updateStats(gameOfLife.getCurrentPlayer());
         board.getGraphicsContext2D().clearRect(0, 0, board.getWidth(), board.getHeight());
-        drawBoard(collegePath, careerPath, board.getGraphicsContext2D());
-        try {
-            FXMLLoader screenStatsLoader = new FXMLLoader(getClass().getResource("/gui/ScreenStats/ScreenStats.fxml"));
-            screenStats.getChildren().add(screenStatsLoader.load());
-            ((ScreenStatsController) screenStatsLoader.getController()).updateStats(player);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
+        drawBoard(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), board.getGraphicsContext2D());
     }
 
     /**
-     * Return the height of a Path
-     * @param path path whose height will be returned
-     * @return     height of the path
+     * Update the stats of the Screen
+     * @param currentPlayer
      */
-    private int getHeight(Path path) {
-        if(path == null) return 0;
-        return Math.max(getHeight(path.getPath1()), getHeight(path.getPath2())) + 1;
+    public void updateStats(Player currentPlayer) {
+        turnLabel.setText(currentPlayer.getName() + "'s turn");
+        if(currentPlayer.getCareerCard() != null) careerLabel.setText(String.format("Career: %s", currentPlayer.getCareerCard().getName()));
+        else careerLabel.setText("Career: None");
+        if(currentPlayer.getSalaryCard() != null) salaryLabel.setText(String.format("Salary: $%d", currentPlayer.getSalaryCard().getSalary()));
+        else salaryLabel.setText("Salary: None");
+        if(currentPlayer.getPath() != null) pathLabel.setText(String.format("Path: %s", currentPlayer.getPath().getName()));
+        else pathLabel.setText("Path: None");
+        balanceLabel.setText(String.format("Balance: $%d", currentPlayer.getBalance()));
     }
 
     /**
@@ -145,7 +132,7 @@ public class GameController {
      * @param gc          canvas' graphics context 2d
      */
     private void drawBoard(Path collegePath, Path careerPath, GraphicsContext gc) {
-        double prevXPos = 0, prevYPos = 350;
+        double prevXPos = 0, prevYPos = board.getHeight() / 2 - Constants.HEXAGON_SIZE * 3;
 
         // COLLEGE PATH
         // cop2
@@ -204,7 +191,7 @@ public class GameController {
         drawPath(prevXPos, prevYPos, safp1, gc);
 
         prevXPos = 0;
-        prevYPos = 350 + Constants.HEXAGON_SIZE * 6;
+        prevYPos = board.getHeight() / 2 - Constants.HEXAGON_SIZE * 3 + Constants.HEXAGON_SIZE * 6;
 
         // CAREER PATH
         Path cap9 = careerPath;
@@ -329,7 +316,10 @@ public class GameController {
 //        }, 6);
         xPos -= (size / 2) * (players.length - 1) / 2;
         for(Player player : players) {
-            gc.drawImage(new Image("/images/icons/character.png", size, size, false, true), xPos - size / 2, yPos - size / 2);
+            if(player.isCurrentPlayer()) {
+                scrollPane.setHvalue(xPos - stage.getWidth() / 2);
+                gc.drawImage(new Image("/images/icons/current character.png", size, size, false, true), xPos - size / 2, yPos - size / 2);
+            } else gc.drawImage(new Image("/images/icons/character.png", size, size, false, true), xPos - size / 2, yPos - size / 2);
             xPos += size / 2;
         }
     }

@@ -3,10 +3,13 @@ package gui.modals;
 import gui.modals.ChooseHouse.ChooseHouseController;
 import gui.modals.PayDebt.PayDebtController;
 import gui.stats.PlayerStats.PlayerStatsController;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.stage.Screen;
@@ -52,6 +55,12 @@ public class Modal {
             // clears the round stats
             GameOfLife.getRoundStats().clear();
             stage.setScene(new Scene(pane));
+
+            pane.addEventHandler(KeyEvent.KEY_PRESSED, ev -> {
+                if(ev.getCode() == KeyCode.ESCAPE || ev.getCode() == KeyCode.ENTER) {
+                    stage.close();
+                }
+            });
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -74,7 +83,14 @@ public class Modal {
         try {
             Parent root = playerStatsLoader.load();
             ((PlayerStatsController) playerStatsLoader.getController()).setStats(player);
+
             stage.setScene(new Scene(root));
+
+            root.addEventHandler(KeyEvent.KEY_PRESSED, ev -> {
+                if(ev.getCode() == KeyCode.ESCAPE || ev.getCode() == KeyCode.ENTER) {
+                    stage.close();
+                }
+            });
         } catch(Exception exception) {
             exception.printStackTrace();
         }
@@ -248,7 +264,7 @@ public class Modal {
     }
 
     public void showUpdate(String message) {
-        Alert update = new Alert(Alert.AlertType.NONE, message, ButtonType.CLOSE);
+        Alert update = new Alert(Alert.AlertType.NONE, message, ButtonType.OK);
         update.getDialogPane().getStylesheets().add("/styles/modal.css");
         update.initStyle(StageStyle.UNDECORATED);
         update.initModality(Modality.APPLICATION_MODAL);

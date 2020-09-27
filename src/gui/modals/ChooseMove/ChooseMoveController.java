@@ -33,6 +33,10 @@ import model.Spaces.RetirementSpace.RetirementSpace;
 import model.Spaces.Space;
 import utilities.InputUtil;
 
+/**
+ * Allows the player to choose a move
+ */
+
 public class ChooseMoveController {
     @FXML
     private Button rollDice, viewPlayerStats, payDebt;
@@ -51,7 +55,7 @@ public class ChooseMoveController {
             mediaPlayer.play();
 
             int rolledDice = currentPlayer.rollDice();
-            Space previousSpace = currentPlayer.getPath().getSpaces()[currentPlayer.getLocation()], spaceLanded = null;
+            Space previousSpace = currentPlayer.getPath().getSpaces()[Math.max(currentPlayer.getLocation(), 0)], spaceLanded = null;
 
             // remove player from that space
             if(previousSpace.getPlayers().contains(currentPlayer))
@@ -60,16 +64,28 @@ public class ChooseMoveController {
             for(int i = 0; i < rolledDice; i++) {
                 currentPlayer.addLocation();
                 spaceLanded = currentPlayer.getPath().getSpaces()[currentPlayer.getLocation()];
+                // the not equal to retirement space simply means that if the space landed is at retirement space,
+                // we don't set the path anymore even if its at the last index of the Path
+                if(currentPlayer.getPath().getNSpaces() - 1 == currentPlayer.getLocation() && !spaceLanded.getType().equals(Constants.RETIREMENT_SPACE)) {
+                    if(currentPlayer.getPath().getPath2() == null) {
+                        spaceLanded.removePlayer(currentPlayer);
+                        currentPlayer.setPath(currentPlayer.getPath().getPath1());
+
+                        Space newSpaceLanded = currentPlayer.getPath().getSpaces()[currentPlayer.getLocation()];
+                        newSpaceLanded.removePlayer(currentPlayer);
+                        currentPlayer.setLocation(-1);
+                    }
+                }
                 if(spaceLanded.getType().equals(Constants.MAGENTA_SPACE) || spaceLanded.getType().equals(Constants.RETIREMENT_SPACE)) break; // if player reaches the Magenta Space stop
             }
 
             GameOfLife.addRoundStat(String.format("%s landed on %s", currentPlayer.getName(), String.format("%s%s", spaceLanded.getType(), spaceLanded.getName() != null ? "(" + spaceLanded.getName() + ")" : "")));
 
             spaceLanded.addPlayer(currentPlayer);
-            gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), currentPlayer);
+            gameScreenController.refreshGameScreen();
 
             handleSpaceLanded(gameOfLife, spaceLanded, gameScreenController);
-            gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), currentPlayer);
+            if(gameOfLife.getNActivePlayers() != 0) gameScreenController.refreshGameScreen();
 
             ((Stage)((Node) e.getSource()).getScene().getWindow()).close();
         });
@@ -88,7 +104,7 @@ public class ChooseMoveController {
             audioPlayer.play();
 
             new Modal().payDebt(currentPlayer);
-            gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), currentPlayer);
+            gameScreenController.refreshGameScreen();
             if(currentPlayer.getDebt() <= 0) payDebt.setDisable(true);
         });
 
@@ -224,7 +240,7 @@ public class ChooseMoveController {
                         // if not, let's the player take another turn
                         gameOfLife.setTurn(gameOfLife.getTurn() - 1);
                     // refresh screen
-                    gameScreenController.refreshGameScreen(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), currentPlayer);
+                    gameScreenController.refreshGameScreen();
                 }
             } else if(space.getType().equals(Constants.RETIREMENT_SPACE)) {
                 // Space where Player retires

@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import model.Constants;
 import model.Cards.Card;
+import model.GameOfLife;
 import utilities.StringUtil;
 
 /**
@@ -18,6 +19,7 @@ import utilities.StringUtil;
 final public class SalaryCard extends Card {
     private int salary, tax;
     private int payRaise = 0;
+
     public SalaryCard(int salary) {
         super(Constants.SALARY_CARD, "Salary Card contains salary and tax due.", "/images/Cards/Salary Card.png");
 
@@ -26,7 +28,7 @@ final public class SalaryCard extends Card {
     }
 
     /**
-     * Increases the salary by a parameter amount and increments the payraise
+     * Increases the salary by a parameter amount and increments the pay raise
      * @param amount amount to increase the salary
      */
     public void increaseSalary(double amount) {

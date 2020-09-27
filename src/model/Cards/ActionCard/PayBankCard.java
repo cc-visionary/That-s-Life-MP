@@ -16,10 +16,10 @@ final public class PayBankCard extends ActionCard {
      */
     @Override
     public void activate() {
+        GameOfLife.addRoundStat(String.format("%s paid $%d to the bank", getOwner().getName(), getAmount()));
+
         // deducts the amount indicated on the card to the player's balance
         getOwner().payBalance(getAmount());
-
-        GameOfLife.addRoundStat(String.format("%s paid $%d to the bank", getOwner().getName(), getAmount()));
     }
 
     @Override

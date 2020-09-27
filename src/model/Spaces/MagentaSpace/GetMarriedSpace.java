@@ -40,7 +40,7 @@ final public class GetMarriedSpace extends MagentaSpace {
             player.addBalance(amount * otherPlayers.length);
             player.marry();
         } else {
-            System.out.println(player.getName() + " is already married! Nothing happens.");
+            GameOfLife.addRoundStat(player.getName() + " is already married! Nothing happens.");
         }
     }
 }

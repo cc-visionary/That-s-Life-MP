@@ -1,5 +1,6 @@
 # ignore files
 *.iml
+*.class
 
 # ignore folders
 out/

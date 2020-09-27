@@ -40,7 +40,7 @@ public class PayDebtController {
             AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
             audioPlayer.play();
 
-            player.payDebt((int) slider.getValue() / 2500);
+            player.payDebt((int) slider.getValue() / 25000);
             ((Stage)((Node) e.getSource()).getScene().getWindow()).close();
         });
     }

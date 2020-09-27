@@ -69,21 +69,21 @@ public abstract class BlueCard extends Card {
      */
     public void activate() {
         if(isSameCareer(getOwner())) { // player receives 15000
-            getOwner().addBalance(15000);
             GameOfLife.addRoundStat(getOwner().getName() + " receives $15000");
+            getOwner().addBalance(15000);
         } else {
             int amountToBePayed = getAmount();
 
             Player[] playersWithSameCareer = playersWithSameCareer(getOtherPlayers()).toArray(new Player[0]);
             if(playersWithSameCareer.length > 0) { // player pays all the players with the same career
                 for(Player otherPlayer : playersWithSameCareer) {
+                    GameOfLife.addRoundStat(getOwner().getName() + " paid $" + amountToBePayed + " to " + otherPlayer.getName());
                     getOwner().payBalance(amountToBePayed);
                     otherPlayer.addBalance(amountToBePayed);
-                    GameOfLife.addRoundStat(getOwner().getName() + " paid $" + amountToBePayed + " to " + otherPlayer.getName());
                 }
             } else { // player pays the bank
-                getOwner().payBalance(amountToBePayed);
                 GameOfLife.addRoundStat(getOwner().getName() + " paid $" + amountToBePayed + " to the bank.");
+                getOwner().payBalance(amountToBePayed);
             }
         }
     }

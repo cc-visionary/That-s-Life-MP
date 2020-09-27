@@ -54,23 +54,6 @@ public class Deck {
     }
 
     /**
-     * Returns the Card which is on the top of the deck or the card at index 0
-     * then removes it from the deck.
-     * @param offset the offset/index
-     * @return the card on the top of the deck with offset
-     */
-    public Card pickTopCard(int offset) {
-        if(hasCard()) {
-            Card card = cards.get(offset); // get the first indexed/top card
-            cards.remove(offset);    // removes the card that was picked (top card)
-            return card;
-        } else {
-            System.out.println("No more card to pick... Deck is Empty.");
-        }
-        return null;
-    }
-
-    /**
      * Shuffles the cards in the deck by using Collections.shuffle()
      */
     public void shuffle() {
@@ -79,15 +62,6 @@ public class Deck {
 
     public boolean hasCard() {
         return cards.size() > 0;
-    }
-
-    /**
-     * Displaying the deck (for cheating purposes :P)
-     */
-    public void displayDeck() {
-        for(int i = 0; i < cards.size(); i++) {
-            System.out.println(i + 1 + ": " + cards.get(i));
-        }
     }
 
     @Override

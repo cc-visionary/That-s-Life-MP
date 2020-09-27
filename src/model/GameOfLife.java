@@ -19,7 +19,7 @@ public class GameOfLife {
     private Path careerPath, collegePath;
     private ArrayList<Player> activePlayers;
     private ArrayList<Player> retiredPlayers;
-    private int nPlayers, turn;
+    private int turn;
     private static int round;
     private static ArrayList<String> roundStats;
 
@@ -43,7 +43,6 @@ public class GameOfLife {
         // generate Players
         activePlayers = Generator.generatePlayers(nPlayers, startingMoney);
         retiredPlayers = new ArrayList<Player>();
-        this.nPlayers = nPlayers;
 
         turn = 0;
         round = 1;
@@ -62,9 +61,10 @@ public class GameOfLife {
 
     /**
      * Transfers a Player from active to retired
-     * @param player
+     * @param player to be transfered
      */
     public void retirePlayer(Player player) {
+        if(getTurn() > getNActivePlayers()) setTurn(getNActivePlayers());
         activePlayers.remove(player);
         retiredPlayers.add(player);
     }
@@ -126,6 +126,7 @@ public class GameOfLife {
      * @return the Player object who has the current turn
      */
     public Player getCurrentPlayer() {
+        if(Math.max(getTurn(), 0) > getNActivePlayers() - 1) return activePlayers.get(getNActivePlayers() - 1);
         return activePlayers.get(Math.max(getTurn(), 0));
     }
 
@@ -144,19 +145,19 @@ public class GameOfLife {
     }
 
     /**
-     * All the Player in the BoardGame
-     * @return all the player
+     * All the Active Player in the BoardGame
+     * @return active players
      */
     public Player[] getAllActivePlayers() {
         return activePlayers.toArray(new Player[0]);
     }
 
+    /**
+     * All the Retired Players
+     * @return retired players
+     */
     public Player[] getAllRetiredPlayers() {
         return retiredPlayers.toArray(new Player[0]);
-    }
-
-    public int getNPlayers() {
-        return nPlayers;
     }
 
     public int getTurn() {
