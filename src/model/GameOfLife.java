@@ -53,7 +53,7 @@ public class GameOfLife {
      * @param stat string update to be added
      */
     public static void addRoundStat(String stat) {
-//        new Modal().showUpdate(stat);
+        new Modal().showUpdate(stat);
         System.out.println(stat);
         roundStats.add(stat);
     }
@@ -82,7 +82,7 @@ public class GameOfLife {
     public void addTurn() {
         setTurn(getTurn() + 1);
         if(getTurn() >= getNActivePlayers()) {
-//            new Modal().openRoundStats();
+            new Modal().openRoundStats();
             setRound(getRound() + 1);
             setTurn(0);
         }
