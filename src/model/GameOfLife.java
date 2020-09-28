@@ -67,6 +67,8 @@ public class GameOfLife {
     public void retirePlayer(Player player) {
         activePlayers.remove(player);
         retiredPlayers.add(player);
+        // so that the next player won't be skipped if the previous player has retired
+        setTurn(getTurn() - 1);
     }
 
 

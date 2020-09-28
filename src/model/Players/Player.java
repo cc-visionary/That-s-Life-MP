@@ -5,6 +5,7 @@ import model.Cards.HouseCard.HouseCard;
 import model.Cards.SalaryCard.SalaryCard;
 import model.Paths.Path;
 
+import model.Spaces.Space;
 import utilities.RandomUtil;
 
 /**
@@ -139,7 +140,7 @@ final public class Player {
     public void setPath(Path path) {
         GameOfLife.addRoundStat(String.format("%s's path is now set to %s", getName(), path == null ? path : path.getName()));
         if(this.path != null) {
-            this.path.getSpaces()[this.path.getNSpaces() - 1].removePlayer(this);
+            for(Space space : this.path.getSpaces()) space.removePlayer(this);
             this.path.getJunction().removePlayer(this);
         }
         this.path = path;

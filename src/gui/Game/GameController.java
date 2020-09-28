@@ -97,8 +97,8 @@ public class GameController {
 
         try {
             FXMLLoader gameStatsLoader = new FXMLLoader(getClass().getResource("/gui/stats/GameStats/GameStats.fxml"));
-            stage.setScene(new Scene(gameStatsLoader.load()));
             stage.setMaximized(false);
+            stage.setScene(new Scene(gameStatsLoader.load()));
             ((GameStatsController) gameStatsLoader.getController()).setData(gameOfLife);
         } catch(Exception exception) {
             exception.printStackTrace();
@@ -111,7 +111,7 @@ public class GameController {
      */
     public void refreshGameScreen() {
         board.setWidth(Constants.PATH_SPACES * 7 * 2 * Constants.HEXAGON_SIZE);
-        scrollPane.setHmax(board.getWidth() / 2);
+//        scrollPane.setHmax(board.getWidth() / 2);
         board.setHeight(Constants.HEXAGON_SIZE * 30);
         updateStats();
         board.getGraphicsContext2D().clearRect(0, 0, board.getWidth(), board.getHeight());
@@ -323,9 +323,10 @@ public class GameController {
         xPos -= (size / 2) * (players.length - 1) / 2;
         for(Player player : players) {
             if(player.isCurrentPlayer()) {
-                scrollPane.setHvalue(xPos - stage.getWidth() / 2);
+                scrollPane.setHvalue(xPos / board.getWidth() - 0.03);
                 gc.drawImage(new Image("/images/icons/current character.png", size, size, false, true), xPos - size / 2, yPos - size / 2);
             } else gc.drawImage(new Image("/images/icons/character.png", size, size, false, true), xPos - size / 2, yPos - size / 2);
+            gc.fillText("P" + player.getNthPlayer(), xPos - 4, yPos - size / 1.25);
             xPos += size / 2;
         }
     }
