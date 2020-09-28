@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" spacing="5.0" stylesheets="@../../../styles/modal.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.modals.ChoosePlayer.ChoosePlayerController">
+   <children>
+      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Choose a Player">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="playerSelection" maxWidth="1.7976931348623157E308" prefWidth="150.0" promptText="Select a Player" />
+      <Button fx:id="continueButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Continue" />
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>
