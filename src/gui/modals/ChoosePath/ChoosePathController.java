@@ -1,6 +1,7 @@
 package gui.modals.ChoosePath;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,13 +15,15 @@ import model.Players.Player;
 import model.Spaces.Space;
 import utilities.StringUtil;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 /**
  * Controls the Choose Path UI (ChoosePath.fxml)
  */
 
-public class ChoosePathController {
+public class ChoosePathController implements Initializable {
     @FXML
     private Label path1Description, path1Spaces, path2Description, path2Spaces;
 
@@ -33,7 +36,17 @@ public class ChoosePathController {
     @FXML
     private Button continueButton;
 
-    public void setPaths(Player player, Path path1, Path path2) {
+    private Player player;
+    private Path path1, path2;
+
+    public ChoosePathController(Player player, Path path1, Path path2) {
+        this.player = player;
+        this.path1 = path1;
+        this.path2 = path2;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         path1Tab.setText(path1.getName());
         path1Description.setText(StringUtil.splitStringIntoNewLine(path1.getDescription(), 200));
         path1Spaces.setText(getUniqueSpaces(path1));

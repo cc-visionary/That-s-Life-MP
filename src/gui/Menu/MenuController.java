@@ -1,5 +1,6 @@
 package gui.Menu;
 
+import gui.GameSettings.GameSettingsController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,8 +22,12 @@ public class MenuController {
         AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
         audioPlayer.play();
 
+        FXMLLoader gameSettingsLoader = new FXMLLoader(getClass().getResource("/gui/GameSettings/GameSettings.fxml"));
+        GameSettingsController gameSettingsController = new GameSettingsController();
+        gameSettingsLoader.setController(gameSettingsController);
+
         try {
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/gui/GameSettings/GameSettings.fxml"))));
+            stage.setScene(new Scene(gameSettingsLoader.load()));
         } catch (Exception e) {
             e.printStackTrace();
         }

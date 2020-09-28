@@ -1,6 +1,7 @@
 package gui.modals.ChooseHouse;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -11,13 +12,15 @@ import model.Cards.Card;
 import model.Cards.HouseCard.HouseCard;
 import model.Decks.Deck;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 /**
  * Controls the Choose House UI (ChooseHouse.fxml)
  */
 
-public class ChooseHouseController {
+public class ChooseHouseController implements Initializable {
     @FXML
     private ComboBox choices;
 
@@ -26,7 +29,14 @@ public class ChooseHouseController {
 
     private HouseCard chosenHouse;
 
-    public void setValues(Deck houseDeck) {
+    private Deck houseDeck;
+
+    public ChooseHouseController(Deck houseDeck) {
+        this.houseDeck = houseDeck;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         ArrayList<String> stringChoices = new ArrayList<String>();
 
         for(Card card : houseDeck.getCards()) {

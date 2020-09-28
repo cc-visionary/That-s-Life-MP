@@ -3,7 +3,6 @@ package gui.modals;
 import gui.modals.ChooseHouse.ChooseHouseController;
 import gui.modals.PayDebt.PayDebtController;
 import gui.stats.PlayerStats.PlayerStatsController;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -50,11 +49,11 @@ public class Modal {
         stage.setTitle("Round Stats");
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/stats/RoundStats/RoundStats.fxml"));
+        RoundStatsController roundStatsController = new RoundStatsController(GameOfLife.getRound(),  GameOfLife.getRoundStats().toArray(new String[0]));
+        fxmlLoader.setController(roundStatsController);
 
         try {
             ScrollPane pane = fxmlLoader.load();
-            pane.setStyle("-fx-background-color: aliceblue; -fx-font-size: 16; -fx-border-width: 1; -fx-border-color: gray");
-            ((RoundStatsController) fxmlLoader.getController()).setList(GameOfLife.getRound(),  GameOfLife.getRoundStats().toArray(new String[0]));
 
             // clears the round stats
             GameOfLife.getRoundStats().clear();
@@ -83,10 +82,11 @@ public class Modal {
         stage.initModality(Modality.APPLICATION_MODAL);
 
         FXMLLoader playerStatsLoader = new FXMLLoader(getClass().getResource("/gui/stats/PlayerStats/PlayerStats.fxml"));
+        PlayerStatsController playerStatsController = new PlayerStatsController(player);
+        playerStatsLoader.setController(playerStatsController);
 
         try {
             Parent root = playerStatsLoader.load();
-            ((PlayerStatsController) playerStatsLoader.getController()).setStats(player);
 
             stage.setScene(new Scene(root));
 
@@ -113,10 +113,11 @@ public class Modal {
         payDebtStage.initModality(Modality.APPLICATION_MODAL);
 
         FXMLLoader payDebtLoader = new FXMLLoader(getClass().getResource("/gui/modals/PayDebt/PayDebt.fxml"));
+        PayDebtController payDebtController = new PayDebtController(player);
+        payDebtLoader.setController(payDebtController);
+
         try {
-            Parent root = payDebtLoader.load();
-            ((PayDebtController) payDebtLoader.getController()).setPlayer(player);
-            payDebtStage.setScene(new Scene(root));
+            payDebtStage.setScene(new Scene(payDebtLoader.load()));
         } catch(Exception exception) {
             exception.printStackTrace();
         }
@@ -136,6 +137,8 @@ public class Modal {
         stage.initModality(Modality.WINDOW_MODAL);
 
         FXMLLoader chooseMoveLoader = new FXMLLoader(getClass().getResource("/gui/modals/ChooseMove/ChooseMove.fxml"));
+        ChooseMoveController chooseMoveController = new ChooseMoveController(gameOfLife, gameScreenController);
+        chooseMoveLoader.setController(chooseMoveController);
 
         try {
             Scene scene = new Scene(chooseMoveLoader.load());
@@ -143,9 +146,6 @@ public class Modal {
         } catch(Exception e) {
             e.printStackTrace();
         }
-
-        ChooseMoveController chooseMoveController = chooseMoveLoader.getController();
-        chooseMoveController.setGameOfLife(gameOfLife, gameScreenController);
 
         stage.showAndWait();
     }
@@ -162,16 +162,14 @@ public class Modal {
         stage.initModality(Modality.APPLICATION_MODAL);
 
         FXMLLoader choosePathLoader = new FXMLLoader(getClass().getResource("/gui/modals/ChoosePath/ChoosePath.fxml"));
+        ChoosePathController choosePathController = new ChoosePathController(player, path1, path2);
+        choosePathLoader.setController(choosePathController);
 
         try {
-            Scene scene = new Scene(choosePathLoader.load());
-            stage.setScene(scene);
+            stage.setScene(new Scene(choosePathLoader.load()));
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        ChoosePathController choosePathController = choosePathLoader.getController();
-        choosePathController.setPaths(player, path1, path2);
 
         stage.showAndWait();
     }
@@ -186,9 +184,11 @@ public class Modal {
         stage.initModality(Modality.APPLICATION_MODAL);
 
         FXMLLoader displayCardLoader = new FXMLLoader(getClass().getResource("/gui/modals/DisplayCard/DisplayCard.fxml"));
+        DisplayCardController displayCardController = new DisplayCardController(card);
+        displayCardLoader.setController(displayCardController);
+
         try {
             Scene scene = new Scene(displayCardLoader.load());
-            ((DisplayCardController) displayCardLoader.getController()).setCard(card);
             stage.setScene(scene);
         } catch (Exception e) {
             e.printStackTrace();
@@ -208,9 +208,11 @@ public class Modal {
         stage.initModality(Modality.APPLICATION_MODAL);
 
         FXMLLoader choosePlayerLoader = new FXMLLoader(getClass().getResource("/gui/modals/ChoosePlayer/ChoosePlayer.fxml"));
+        ChoosePlayerController choosePlayerController = new ChoosePlayerController(otherPlayers);
+        choosePlayerLoader.setController(choosePlayerController);
+
         try {
             Scene scene = new Scene(choosePlayerLoader.load());
-            ((ChoosePlayerController) choosePlayerLoader.getController()).setPlayer(otherPlayers);
             stage.setScene(scene);
         } catch (Exception e) {
             e.printStackTrace();
@@ -232,16 +234,18 @@ public class Modal {
         stage.initModality(Modality.APPLICATION_MODAL);
 
         FXMLLoader chooseCardLoader = new FXMLLoader(getClass().getResource("/gui/modals/ChooseCard/ChooseCard.fxml"));
+        ChooseCardController chooseCardController = new ChooseCardController(card1, card2);
+        chooseCardLoader.setController(chooseCardController);
+
         try {
             Scene scene = new Scene(chooseCardLoader.load());
-            ((ChooseCardController) chooseCardLoader.getController()).setCards(card1, card2);
             stage.setScene(scene);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         stage.showAndWait();
-        return ((ChooseCardController) chooseCardLoader.getController()).getChosenCard();
+        return chooseCardController.getChosenCard();
     }
 
     /**
@@ -255,9 +259,11 @@ public class Modal {
         stage.initModality(Modality.APPLICATION_MODAL);
 
         FXMLLoader houseCardLoader = new FXMLLoader(getClass().getResource("/gui/modals/ChooseHouse/ChooseHouse.fxml"));
+        ChooseHouseController chooseHouseController = new ChooseHouseController(houseDeck);
+        houseCardLoader.setController(chooseHouseController);
+
         try {
             Scene scene = new Scene(houseCardLoader.load());
-            ((ChooseHouseController) houseCardLoader.getController()).setValues(houseDeck);
             stage.setScene(scene);
         } catch (Exception e) {
             e.printStackTrace();

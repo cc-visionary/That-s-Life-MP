@@ -1,8 +1,11 @@
 package gui.stats.GameStats;
 
+import gui.Game.GameController;
+import gui.Menu.MenuController;
 import gui.modals.Modal;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -16,20 +19,29 @@ import javafx.stage.Stage;
 import model.GameOfLife;
 import model.Players.Player;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 /**
  * Controls the Game Stats UI (GameStats.fxml)
  */
 
-public class GameStatsController {
+public class GameStatsController implements Initializable {
     @FXML
     private VBox list;
 
     @FXML
     private Button continueButton;
 
-    public void setData(GameOfLife gameOfLife) {
+    private GameOfLife gameOfLife;
+
+    public GameStatsController(GameOfLife gameOfLife) {
+        this.gameOfLife = gameOfLife;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         new AudioClip(new Media(getClass().getResource("/audio/win.mp3").toString()).getSource()).play();
 
         ArrayList<Player> retiredPlayers = new ArrayList<>();
@@ -64,8 +76,13 @@ public class GameStatsController {
             new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource()).play();
 
             Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+
+            FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/gui/Menu/Menu.fxml"));
+            MenuController menuController = new MenuController();
+            menuLoader.setController(menuController);
+
             try {
-                stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/gui/Menu/Menu.fxml"))));
+                stage.setScene(new Scene(menuLoader.load()));
             } catch (Exception exception) {
                 exception.printStackTrace();
             }

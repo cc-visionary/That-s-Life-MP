@@ -1,5 +1,6 @@
 package gui.modals.ChooseMove;
 
+import javafx.fxml.Initializable;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -25,20 +26,32 @@ import model.Spaces.OrangeSpace.OrangeSpace;
 import model.Spaces.RetirementSpace.RetirementSpace;
 import model.Spaces.Space;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 /**
  * Controls the Choose Move UI (ChooseMove.fxml)
  */
 
-public class ChooseMoveController {
+public class ChooseMoveController implements Initializable {
     @FXML
     private Button rollDice, viewPlayerStats, payDebt;
+
+    private GameOfLife gameOfLife;
+    private GameController gameController;
 
     /**
      * Set the values for the Choose Move options
      * @param gameOfLife main model
-     * @param gameScreenController controller used to update screen stats
+     * @param gameController controller used to update screen stats
      */
-    public void setGameOfLife(GameOfLife gameOfLife, GameController gameScreenController) {
+    public ChooseMoveController(GameOfLife gameOfLife, GameController gameController) {
+        this.gameOfLife = gameOfLife;
+        this.gameController = gameController;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         Player currentPlayer = gameOfLife.getCurrentPlayer();
 
         // let's the player roll a dice
@@ -74,10 +87,10 @@ public class ChooseMoveController {
             GameOfLife.addRoundStat(String.format("%s landed on %s", currentPlayer.getName(), String.format("%s%s", spaceLanded.getType(), spaceLanded.getName() != null ? "(" + spaceLanded.getName() + ")" : "")));
 
             spaceLanded.addPlayer(currentPlayer);
-            gameScreenController.refreshGameScreen();
+            gameController.refreshGameScreen();
 
-            handleSpaceLanded(gameOfLife, spaceLanded, gameScreenController);
-            if(gameOfLife.getNActivePlayers() != 0) gameScreenController.refreshGameScreen();
+            handleSpaceLanded(gameOfLife, spaceLanded, gameController);
+            if(gameOfLife.getNActivePlayers() != 0) gameController.refreshGameScreen();
 
             ((Stage)((Node) e.getSource()).getScene().getWindow()).close();
         });
@@ -96,7 +109,7 @@ public class ChooseMoveController {
             audioPlayer.play();
 
             new Modal().payDebt(currentPlayer);
-            gameScreenController.refreshGameScreen();
+            gameController.refreshGameScreen();
             if(currentPlayer.getDebt() <= 0) payDebt.setDisable(true);
         });
 

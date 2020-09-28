@@ -1,4 +1,5 @@
 import com.sun.org.apache.xpath.internal.operations.Mod;
+import gui.Menu.MenuController;
 import gui.modals.Modal;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -41,7 +42,11 @@ public class App extends Application {
         audioPlayer.setCycleCount(AudioClip.INDEFINITE);
         audioPlayer.play();
 
-        primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/gui/Menu/Menu.fxml"))));
+        FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/gui/Menu/Menu.fxml"));
+        MenuController menuController = new MenuController();
+        menuLoader.setController(menuController);
+
+        primaryStage.setScene(new Scene(menuLoader.load()));
 
         // when primary stage is closed, all the other stage should also be closed.
         primaryStage.setOnCloseRequest(confirmCloseEventHandler);

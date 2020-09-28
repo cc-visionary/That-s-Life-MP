@@ -97,9 +97,11 @@ public class GameController {
 
         try {
             FXMLLoader gameStatsLoader = new FXMLLoader(getClass().getResource("/gui/stats/GameStats/GameStats.fxml"));
+            GameStatsController gameStatsController = new GameStatsController(gameOfLife);
+            gameStatsLoader.setController(gameStatsController);
+
             stage.setMaximized(false);
             stage.setScene(new Scene(gameStatsLoader.load()));
-            ((GameStatsController) gameStatsLoader.getController()).setData(gameOfLife);
         } catch(Exception exception) {
             exception.printStackTrace();
         }

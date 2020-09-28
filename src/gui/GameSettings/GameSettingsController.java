@@ -1,6 +1,7 @@
 package gui.GameSettings;
 
 import gui.Game.GameController;
+import gui.Menu.MenuController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -56,10 +57,9 @@ GameSettingsController implements Initializable {
         AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
         audioPlayer.play();
 
-        FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/gui/Game/Game.fxml"));
-
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
+        FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/gui/Game/Game.fxml"));
         GameController gameController = new GameController(gameSettings.getNPlayers(), gameSettings.getStartingMoney(), stage);
         gameLoader.setController(gameController);
 
@@ -143,8 +143,12 @@ GameSettingsController implements Initializable {
         AudioClip audioPlayer = new AudioClip(new Media(getClass().getResource("/audio/click.wav").toString()).getSource());
         audioPlayer.play();
 
+        FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/gui/Menu/Menu.fxml"));
+        MenuController menuController = new MenuController();
+        menuLoader.setController(menuController);
+
         try {
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/gui/Menu/Menu.fxml"))));
+            stage.setScene(new Scene(menuLoader.load()));
         } catch (Exception e) {
             e.printStackTrace();
         }
