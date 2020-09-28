@@ -6,13 +6,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.Cards.Card;
 import model.Cards.HouseCard.HouseCard;
 import model.Decks.Deck;
 
 import java.util.ArrayList;
+
+/**
+ * Controls the Choose House UI (ChooseHouse.fxml)
+ */
 
 public class ChooseHouseController {
     @FXML

@@ -21,7 +21,7 @@ public class GameOfLife {
     private ArrayList<Player> retiredPlayers;
     private int turn;
     private static int round;
-    private static ArrayList<String> roundStats;
+    private static ArrayList<String> roundStats = new ArrayList<String>();
 
     /**
      * All of the Game pieces will be Generated in the Board such as the
@@ -46,8 +46,6 @@ public class GameOfLife {
 
         turn = 0;
         round = 1;
-
-        this.roundStats = new ArrayList<String>();
     }
 
     /**
@@ -56,6 +54,7 @@ public class GameOfLife {
      */
     public static void addRoundStat(String stat) {
         new Modal().showUpdate(stat);
+        System.out.println(stat);
         roundStats.add(stat);
     }
 
@@ -64,9 +63,37 @@ public class GameOfLife {
      * @param player to be transfered
      */
     public void retirePlayer(Player player) {
-        if(getTurn() > getNActivePlayers()) setTurn(getNActivePlayers());
         activePlayers.remove(player);
         retiredPlayers.add(player);
+    }
+
+
+    /**
+     * Changes the value of the turn
+     * @param turn value to be assign
+     */
+    public void setTurn(int turn) {
+        this.turn = turn;
+    }
+
+    /**
+     * Adds a turn and handles if turn >= number of active players
+     */
+    public void addTurn() {
+        setTurn(getTurn() + 1);
+        if(getTurn() >= getNActivePlayers()) {
+            new Modal().openRoundStats();
+            setRound(getRound() + 1);
+            setTurn(0);
+        }
+    }
+
+    /**
+     * Changes the value of the round
+     * @param round value to be assign
+     */
+    public void setRound(int round) {
+        this.round = round;
     }
 
     public int getNActivePlayers() {
@@ -83,14 +110,6 @@ public class GameOfLife {
 
     public static ArrayList<String> getRoundStats() {
         return roundStats;
-    }
-
-    public void setTurn(int turn) {
-        this.turn = turn;
-    }
-
-    public void setRound(int round) {
-        this.round = round;
     }
 
     public Deck getSalaryDeck() {

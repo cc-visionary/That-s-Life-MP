@@ -6,9 +6,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.Cards.Card;
+
+
+/**
+ * Controls the Choose Move UI (ChooseMove.fxml)
+ */
 
 public class DisplayCardController {
     @FXML

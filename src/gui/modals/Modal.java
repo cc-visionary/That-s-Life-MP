@@ -35,6 +35,10 @@ import model.Players.Player;
 
 import java.util.Optional;
 
+/**
+ * Contains methods to create stage for dialogs to update and get inputs from user.
+ */
+
 public class Modal {
     /**
      * Opens a Round Stats GUI and shows the Round Statistics

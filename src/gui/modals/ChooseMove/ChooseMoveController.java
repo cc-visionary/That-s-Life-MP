@@ -5,18 +5,11 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import model.GameOfLife;
 import gui.Game.GameController;
-import gui.modals.PayDebt.PayDebtController;
 import gui.modals.Modal;
-import gui.stats.PlayerStats.PlayerStatsController;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import model.Constants;
 import model.Cards.ActionCard.ActionCard;
 import model.Cards.BlueCard.BlueCard;
@@ -31,10 +24,9 @@ import model.Spaces.MagentaSpace.*;
 import model.Spaces.OrangeSpace.OrangeSpace;
 import model.Spaces.RetirementSpace.RetirementSpace;
 import model.Spaces.Space;
-import utilities.InputUtil;
 
 /**
- * Allows the player to choose a move
+ * Controls the Choose Move UI (ChooseMove.fxml)
  */
 
 public class ChooseMoveController {

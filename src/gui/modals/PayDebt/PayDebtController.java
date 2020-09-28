@@ -9,9 +9,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.Players.Player;
+
+/**
+ * Controls the Pay Debt UI (PayDebt.fxml)
+ */
 
 public class PayDebtController {
     @FXML

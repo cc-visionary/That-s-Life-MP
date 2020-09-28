@@ -12,7 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.stage.Stage;
@@ -21,6 +20,10 @@ import model.GameSettings;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+/**
+ * Contains all the methods for controlling the Game Settings UI (GameSettings.fxml)
+ */
 
 public class
 GameSettingsController implements Initializable {

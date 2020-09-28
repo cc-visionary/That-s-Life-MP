@@ -5,6 +5,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * Controls the Round Stats UI (RoundStats.fxml)
+ */
+
 public class RoundStatsController {
     @FXML
     private ScrollPane scrollPane;
