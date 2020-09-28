@@ -1,6 +1,5 @@
 package model;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
 import model.Cards.ActionCard.*;
 import model.Cards.BlueCard.*;
 import model.Cards.Card;

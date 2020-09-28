@@ -22,17 +22,15 @@ import model.Spaces.Space;
 
 /**
  * Controls the Game UI (Game.fxml) through the use of methods.
- * <p>
- *     Important Functions to look at:
- *     <ol>
- *         <li>startGame()</li>
- *         <li>refreshGameScreen()</li>
- *         <li>updateStats()</li>
- *         <li>drawBoard()</li>
- *         <li>drawPath()</li>
- *         <li>drawHexagon()</li>
- *     </ol>
- * </p>
+ * <p> Important Functions to look at:</p>
+ * <ol>
+ *     <li>startGame()</li>
+ *     <li>refreshGameScreen()</li>
+ *     <li>updateStats()</li>
+ *     <li>drawBoard()</li>
+ *     <li>drawPath()</li>
+ *     <li>drawHexagon()</li>
+ * </ol>
  */
 
 public class GameController {

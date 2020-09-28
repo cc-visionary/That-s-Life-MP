@@ -1,4 +1,3 @@
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import gui.Menu.MenuController;
 import gui.modals.Modal;
 import javafx.application.Platform;
@@ -21,7 +20,13 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
- * Main App
+ * <p>Main App to control everything</p>
+ * <p>Allows the user to do the following:</p>
+ * <ol>
+ *     <li>Start Game where Player will be redirected to the Game Settings</li>
+ *     <li>Exit the Game</li>
+ * </ol>
+ *
  */
 
 public class App extends Application {

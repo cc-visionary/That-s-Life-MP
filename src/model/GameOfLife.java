@@ -81,7 +81,7 @@ public class GameOfLife {
     }
 
     /**
-     * Adds a turn and handles if turn >= number of active players
+     * Adds a turn and handles if turn greater than equal number of active players
      */
     public void addTurn() {
         setTurn(getTurn() + 1);

@@ -1,9 +1,6 @@
 package model.Spaces.MagentaSpace;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import gui.modals.Modal;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import model.Constants;
 import model.Cards.CareerCard.CareerCard;
 import model.Cards.SalaryCard.SalaryCard;
