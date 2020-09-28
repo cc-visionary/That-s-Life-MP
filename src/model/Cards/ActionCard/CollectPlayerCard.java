@@ -19,15 +19,16 @@ final public class CollectPlayerCard extends ActionCard {
     public void activate() {
         Player recipient = chooseOtherPlayer();
 
-        GameOfLife.addRoundStat(String.format("%s received $%d from %s", getOwner().getName(), getAmount(), recipient.getName()));
+        if(recipient != null) {
+            GameOfLife.addRoundStat(String.format("%s received $%d from %s", getOwner().getName(), getAmount(), recipient.getName()));
 
-        // deducts the amount from balance of the chosen player
-        recipient.payBalance(getAmount());
+            // deducts the amount from balance of the chosen player
+            recipient.payBalance(getAmount());
 
-        // transfers the amount to the balance of one who drew the card
-        getOwner().addBalance(getAmount());
-
+            // transfers the amount to the balance of one who drew the card
+            getOwner().addBalance(getAmount());
         }
+    }
 
     @Override
     public String toString() {
