@@ -10,8 +10,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
-import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Cards.CareerCard.CareerCard;
@@ -21,6 +19,21 @@ import model.GameOfLife;
 import model.Paths.Path;
 import model.Players.Player;
 import model.Spaces.Space;
+
+/**
+ * Controls the Game UI (Game.fxml) through the use of methods.
+ * <p>
+ *     Important Functions to look at:
+ *     <ol>
+ *         <li>startGame()</li>
+ *         <li>refreshGameScreen()</li>
+ *         <li>updateStats()</li>
+ *         <li>drawBoard()</li>
+ *         <li>drawPath()</li>
+ *         <li>drawHexagon()</li>
+ *     </ol>
+ * </p>
+ */
 
 public class GameController {
     @FXML
@@ -79,12 +92,7 @@ public class GameController {
                 if(gameOfLife.getNActivePlayers() != 0) gameOfLife.getCurrentPlayer().setCurrentPlayer(false);
             }
 
-            gameOfLife.setTurn(gameOfLife.getTurn() + 1);
-            if(gameOfLife.getTurn() >= gameOfLife.getNActivePlayers()) {
-                new Modal().openRoundStats();
-                gameOfLife.setRound(gameOfLife.getRound() + 1);
-                gameOfLife.setTurn(0);
-            }
+            gameOfLife.addTurn();
         }
 
         try {

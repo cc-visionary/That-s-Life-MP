@@ -64,6 +64,13 @@ public class Deck {
         return cards.size() > 0;
     }
 
+    public void displayDeck() {
+        System.out.println("\nDisplaying " + getName() + " Deck");
+        for(Card card : getCards()) {
+            System.out.println(card);
+        }
+    }
+
     @Override
     public String toString() {
         return String.format("Deck{name=%s,nCards=%d}", name, cards.size());

@@ -143,7 +143,7 @@ final public class Player {
             this.path.getJunction().removePlayer(this);
         }
         this.path = path;
-        if(path.getName() == "College Path") bankLoan(2);
+        if(path != null && path.getName() == "College Path") bankLoan(2);
         this.location = 0;
         if(this.path != null) this.path.getSpaces()[0].addPlayer(this);
     }
@@ -257,6 +257,9 @@ final public class Player {
     public String getName() {
         return name;
     }
+    public int getNthPlayer() {
+        return nthPlayer;
+    }
     public int getBalance() {
         return balance;
     }
@@ -306,6 +309,6 @@ final public class Player {
 
     @Override
     public String toString() {
-        return String.format("Player{name=%s,balance=%.2f,debt=%.2f}", name, balance, debt);
+        return String.format("Player{name=%s, path=%s,balance=%d,debt=%d}", name, path.getName(), balance, debt);
     }
 }

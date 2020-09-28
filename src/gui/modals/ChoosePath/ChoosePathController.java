@@ -6,10 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.Paths.Path;
 import model.Players.Player;
@@ -17,6 +15,10 @@ import model.Spaces.Space;
 import utilities.StringUtil;
 
 import java.util.ArrayList;
+
+/**
+ * Controls the Choose Path UI (ChoosePath.fxml)
+ */
 
 public class ChoosePathController {
     @FXML

@@ -11,6 +11,10 @@ import model.Players.Player;
 
 import java.util.ArrayList;
 
+/**
+ * Controls the Choose Player UI (ChoosePlayer.fxml)
+ */
+
 public class ChoosePlayerController {
     @FXML
     private Button continueButton;

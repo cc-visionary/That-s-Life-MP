@@ -8,6 +8,10 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import model.Players.Player;
 
+/**
+ * Controls the Player Stats UI (PlayerStats.fxml)
+ */
+
 public class PlayerStatsController {
     @FXML
     private Label name, balance, debt, path, career, salary, house, graduated, married, children;

@@ -7,10 +7,11 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
-import java.io.File;
+/**
+ * Contains methods to control the Menu UI (Menu.fxml)
+ */
 
 public class MenuController {
     @FXML

@@ -8,8 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
@@ -19,7 +17,10 @@ import model.GameOfLife;
 import model.Players.Player;
 
 import java.util.ArrayList;
-import java.util.Collections;
+
+/**
+ * Controls the Game Stats UI (GameStats.fxml)
+ */
 
 public class GameStatsController {
     @FXML
