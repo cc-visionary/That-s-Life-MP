@@ -17,7 +17,6 @@ final public class WhichPathSpace extends MagentaSpace {
     /**
      * Junction where the Player can choose between 2 Paths
      * @param player  player who landed on the junction
-     * @return        path chosen by the Player
      */
     public void choosePath(Player player) {
         // if path 2 is not null, allow the user to choose between the paths

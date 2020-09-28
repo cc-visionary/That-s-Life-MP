@@ -113,38 +113,36 @@ public class GameController {
         board.setWidth(Constants.PATH_SPACES * 7 * 2 * Constants.HEXAGON_SIZE);
         scrollPane.setHmax(board.getWidth() / 2);
         board.setHeight(Constants.HEXAGON_SIZE * 30);
-        updateStats(gameOfLife.getCurrentPlayer());
+        updateStats();
         board.getGraphicsContext2D().clearRect(0, 0, board.getWidth(), board.getHeight());
-        drawBoard(gameOfLife.getCollegePath(), gameOfLife.getCareerPath(), board.getGraphicsContext2D());
+        drawBoard();
     }
 
     /**
      * Update the stats of the Screen
-     * @param currentPlayer
      */
-    public void updateStats(Player currentPlayer) {
-        turnLabel.setText(currentPlayer.getName() + "'s turn");
-        if(currentPlayer.getCareerCard() != null) careerLabel.setText(String.format("Career: %s", currentPlayer.getCareerCard().getName()));
+    public void updateStats() {
+        turnLabel.setText(gameOfLife.getCurrentPlayer().getName() + "'s turn");
+        if(gameOfLife.getCurrentPlayer().getCareerCard() != null) careerLabel.setText(String.format("Career: %s", gameOfLife.getCurrentPlayer().getCareerCard().getName()));
         else careerLabel.setText("Career: None");
-        if(currentPlayer.getSalaryCard() != null) salaryLabel.setText(String.format("Salary: $%d", currentPlayer.getSalaryCard().getSalary()));
+        if(gameOfLife.getCurrentPlayer().getSalaryCard() != null) salaryLabel.setText(String.format("Salary: $%d", gameOfLife.getCurrentPlayer().getSalaryCard().getSalary()));
         else salaryLabel.setText("Salary: None");
-        if(currentPlayer.getPath() != null) pathLabel.setText(String.format("Path: %s", currentPlayer.getPath().getName()));
+        if(gameOfLife.getCurrentPlayer().getPath() != null) pathLabel.setText(String.format("Path: %s", gameOfLife.getCurrentPlayer().getPath().getName()));
         else pathLabel.setText("Path: None");
-        balanceLabel.setText(String.format("Balance: $%d", currentPlayer.getBalance()));
+        balanceLabel.setText(String.format("Balance: $%d", gameOfLife.getCurrentPlayer().getBalance()));
     }
 
     /**
      * Draws the board where it combines all the paths together
-     * @param collegePath starting college path
-     * @param careerPath  starting career path
-     * @param gc          canvas' graphics context 2d
      */
-    private void drawBoard(Path collegePath, Path careerPath, GraphicsContext gc) {
+    private void drawBoard() {
         double prevXPos = 0, prevYPos = board.getHeight() / 2 - Constants.HEXAGON_SIZE * 3;
+
+        GraphicsContext gc = board.getGraphicsContext2D();
 
         // COLLEGE PATH
         // cop2
-        Path cop2 = collegePath;
+        Path cop2 = gameOfLife.getCollegePath();
         drawPath(prevXPos, prevYPos, cop2, gc);
 
         prevXPos += Constants.HEXAGON_SIZE * (Constants.PATH_SPACES * 2 - 1);
@@ -202,7 +200,7 @@ public class GameController {
         prevYPos = board.getHeight() / 2 - Constants.HEXAGON_SIZE * 3 + Constants.HEXAGON_SIZE * 6;
 
         // CAREER PATH
-        Path cap9 = careerPath;
+        Path cap9 = gameOfLife.getCareerPath();
         drawPath(prevXPos, prevYPos, cap9, gc);
 
         prevXPos += Constants.HEXAGON_SIZE * (Constants.PATH_SPACES * 2 - 1);

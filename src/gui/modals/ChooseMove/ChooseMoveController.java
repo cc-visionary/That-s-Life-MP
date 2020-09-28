@@ -105,8 +105,9 @@ public class ChooseMoveController {
 
     /**
      * Handles the Actions to be done on where the space the Player landed
-     * @param gameOfLife  main model
-     * @param space       space where the currentPlayer landed
+     * @param gameOfLife           main model
+     * @param space                space where the currentPlayer landed
+     * @param gameScreenController controller to control the screen
      */
     public void handleSpaceLanded(GameOfLife gameOfLife, Space space, GameController gameScreenController) {
 //        System.out.println(String.format("You landed on %s - %s", space.getType(), space.getName()));

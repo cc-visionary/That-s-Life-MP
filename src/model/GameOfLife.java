@@ -26,6 +26,8 @@ public class GameOfLife {
     /**
      * All of the Game pieces will be Generated in the Board such as the
      * Deck(containing Card), Paths/Board, and Players.
+     * @param nPlayers       number of players for the game
+     * @param startingMoney  starting money for each players in the game
      */
     public GameOfLife(int nPlayers, int startingMoney) {
         // generate Decks

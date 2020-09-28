@@ -245,6 +245,7 @@ final public class Player {
 
     /**
      * Sets the player to be the current player
+     * @param isCurrentPlayer value which determine if player is the current player or not
      */
     public void setCurrentPlayer(boolean isCurrentPlayer) {
         this.isCurrentPlayer = isCurrentPlayer;

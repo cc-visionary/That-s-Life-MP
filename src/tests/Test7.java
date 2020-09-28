@@ -23,8 +23,8 @@ import utilities.InputUtil;
  *
  * @see GameOfLife
  *
- * @note Make sure to uncomment model.GameOfLife.addTurn()'s new Modal().showRoundStats
- * @note Make sure to uncomment model.GameOfLife.addRoundStats()'s new Modal().showUpdates
+ * <p>note: Make sure to uncomment model.GameOfLife.addTurn()'s new Modal().showRoundStats</p>
+ * <p>note: Make sure to uncomment model.GameOfLife.addRoundStats()'s new Modal().showUpdates</p>
  *
  * @since 09/05/2020
  */
